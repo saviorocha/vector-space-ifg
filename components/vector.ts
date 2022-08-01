@@ -4,11 +4,11 @@ class Vector {
   name: string;
   array: number[]
 
-  constructor(x: number, y: number, name: string) {
-    this.x = x;
-    this.y = y;
+  constructor(array:number[], name: string = "v") {
+    this.array = array;
+    this.x = array[0];
+    this.y = array[1];
     this.name = name;
-    this.array = [x, y];
   }
 }
 
