@@ -2,12 +2,12 @@ import { Matrix, matrix, multiply, typeOf } from "mathjs";
 import Vector from "./vector";
 
 class Transformation {
-  e1: number[];
-  e2: number[];
-  matrixTransformation: Matrix;
-  name: string;
+  private e1: number[];
+  private e2: number[];
+  private matrixTransformation: Matrix;
+  private name: string;
 
-  constructor(e1: number[], e2: number[]) {
+  constructor(e1: number[] = [1, 0], e2: number[] = [0, 1]) {
     this.e1 = e1;
     this.e2 = e2;
     this.matrixTransformation = matrix([e1, e2]);
