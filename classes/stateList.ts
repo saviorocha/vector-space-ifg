@@ -42,6 +42,10 @@ class StateList {
     return this.head;
   }
 
+  /**
+   * Returns the node at a given position
+   * @param index 
+   */
   getAt(index: number): StateNode | null {
     let counter = 0;
     let node: StateNode | null = this.head;

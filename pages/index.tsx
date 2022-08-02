@@ -1,10 +1,11 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext, useContext, useMemo } from "react";
 import Vector from "../classes/vector";
-import styles from "../styles/Home.module.css";
 import Transformation from "../classes/transformation";
 import StateNode from "../classes/stateNode";
 import StateList from "../classes/stateList";
+import TestContextComponent from "../components/testecontext";
+import { useListContext } from "../context";
 
 const Home: NextPage = () => {
   const [vector1, setVector1] = useState(new Vector([1, 1]));
@@ -12,27 +13,28 @@ const Home: NextPage = () => {
   const [vector3, setVector3] = useState(new Vector([3, 3]));
   const [vector4, setVector4] = useState(new Vector([4, 4]));
   const [transformation, setTransformation] = useState(new Transformation());
+  const [state1, setState1] = useState(new StateNode([vector1], transformation));
+  const [state2, setState2] = useState(new StateNode([vector2], transformation));
+  const [state3, setState3] = useState(new StateNode([vector3], transformation));
+
+  const { list, setList } = useListContext();
 
   useEffect(() => {
-    const state1 = new StateNode([vector1], transformation);
-    const state2 = new StateNode([vector2], transformation);
-    const state3 = new StateNode([vector3], transformation);
-    const stateList = new StateList(state1);
-    // console.log("state1", state1);
+    list.insertHead(state1);
 
     state1._next = state2;
     state2._next = state3;
-    const node = stateList.getAt(1);
-  
-    if (node) {
-      node._next = new StateNode([vector4], transformation);
-    }
-    console.log("stateList: ", stateList);
+    const node = list.getAt(1);
 
-    // console.log("transformation: ", transformation.applyTransformation(vector));
-  }, []);
-
-  return <div className={styles.container}>Página inicial</div>;
+    // prettier-ignore
+    if (node) { node._next = new StateNode([vector4], transformation); }
+    console.log("Home; list[0]: ", list.getAt(0));
+  }, [list]);
+  return (
+    <>
+      <TestContextComponent />
+    </>
+  );
 };
 
 export default Home;
