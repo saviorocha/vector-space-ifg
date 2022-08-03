@@ -8,7 +8,7 @@ import {
 import StateList from "../classes/stateList";
 import StateNode from "../classes/stateNode";
 import Transformation from "../classes/transformation";
-import { IContextList } from "../compiler/types";
+import { IContextList } from "../interfaces/interfaces";
 
 const ListContext = createContext<IContextList>({} as IContextList);
 
