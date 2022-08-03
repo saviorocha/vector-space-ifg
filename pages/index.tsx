@@ -8,31 +8,53 @@ import TestContextComponent from "../components/testecontext";
 import { useListContext } from "../context";
 
 const Home: NextPage = () => {
-  const [vector1, setVector1] = useState(new Vector([1, 1]));
-  const [vector2, setVector2] = useState(new Vector([2, 2]));
-  const [vector3, setVector3] = useState(new Vector([3, 3]));
-  const [vector4, setVector4] = useState(new Vector([4, 4]));
-  const [transformation, setTransformation] = useState(new Transformation());
-  const [state1, setState1] = useState(new StateNode([vector1], transformation));
-  const [state2, setState2] = useState(new StateNode([vector2], transformation));
-  const [state3, setState3] = useState(new StateNode([vector3], transformation));
+  const [vector1, setVector1] = useState(() => new Vector([1, 1]));
+  // const [vector2, setVector2] = useState(() => new Vector([2, 2]));
+  // const [vector3, setVector3] = useState(() => new Vector([3, 3]));
+  // const [vector4, setVector4] = useState(() => new Vector([4, 4]));
+
+  const [transformation, setTransformation] = useState(
+    () => new Transformation([1, 1], [1, 1])
+  );
+
+  const [state1, setState1] = useState(() => new StateNode());
+  // const [state2, setState2] = useState(() => new StateNode(transformation));
+  // const [state3, setState3] = useState(
+  //   new StateNode(transformation)
+  // );
+  // const [state4, setState4] = useState(
+  //   new StateNode(transformation)
+  // );
 
   const { list, setList } = useListContext();
 
   useEffect(() => {
-    list.insertHead(state1);
+    // const stateJson = JSON.parse(JSON.stringify(new StateNode(transformation)));
 
-    state1._next = state2;
-    state2._next = state3;
-    const node = list.getAt(1);
+    // console.log("state2", state2);
+
+    if (list.head) {
+      state1.vectors = [vector1];
+      
+      let newstate =  state1;
+      for (let i = 0; i < 2; i++) {
+        newstate._next = new StateNode(transformation, newstate);
+        newstate = newstate._next;
+      } 
+      list.head = state1;
+    }
+    // list.insertTail(new StateNode(transformation, state1._next._next));
+    // prettier-ignore
+    // if (list.getAt(0))  { list.getAt(0)._next = state1; }
 
     // prettier-ignore
-    if (node) { node._next = new StateNode([vector4], transformation); }
-    console.log("Home; list[0]: ", list.getAt(0));
-  }, [list]);
+    // const node = list.getAt(1);
+    // if (node) { node._next = new StateNode([vector4], transformation); }
+  }, []);
   return (
     <>
-      <TestContextComponent />
+      <div>olá</div>
+      {/* <TestContextComponent /> */}
     </>
   );
 };
