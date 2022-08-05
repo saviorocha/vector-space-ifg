@@ -2,16 +2,16 @@ class Vector {
   private x: number;
   private y: number;
   private name: string;
-  private _array: number[];
+  private _array: [number, number];
 
-  constructor(array: number[], name: string = "v") {
+  constructor(array: [number, number], name: string = "v") {
     this._array = array;
     this.x = array[0];
     this.y = array[1];
     this.name = name;
   }
 
-  get array(): number[] {
+  get array(): [number, number] {
     return this._array;
   }
 
@@ -19,10 +19,10 @@ class Vector {
    * Returns a object to be used in the d3 plot
    * @returns object
    */
-  d3VectorFormat = () => {
+  d3VectorFormat = (): VectorData[] => {
     return [
-      { pos1: 0, pos2: 0 },
-      { pos1: this.x, pos2: this.y },
+      { coord1: 0, coord2: 0 },
+      { coord1: this.x, coord2: this.y },
     ];
   };
 }

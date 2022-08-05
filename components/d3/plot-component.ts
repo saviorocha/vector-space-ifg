@@ -1,24 +1,24 @@
 import * as d3 from "d3";
-import StateNode from "../../classes/stateNode";
-import Vector from "../../classes/vector";
+import { Axis, AxisDomain, AxisScale, Line, ScaleLinear, Selection, ZoomBehavior } from "d3";
 class PlotComponent {
+  // svg;
   svg;
-  x;
-  y;
-  xAxis;
-  yAxis;
-  vectorData;
-  // vectorData: Vector[];
+  vectors: VectorData[][];
+
+  // @ts-ignore
+  x: ScaleLinear<number, number>;
+  // @ts-ignore
+  y: ScaleLinear<number, number>;
+  xAxis: any;
+  yAxis: any;
 
   constructor(
     refComponent: null | HTMLDivElement,
     dimensions: Dimesion,
-    vectorData
-    // vectorData: Vector[]
+    vectors: VectorData[][]
   ) {
-    // constructor(refComponent, { data1, margin, width, height }) {
     const { margin, width, height } = dimensions;
-    this.vectorData = vectorData;
+    this.vectors = vectors;
 
     this.svg = d3
       .select(refComponent)
@@ -27,12 +27,11 @@ class PlotComponent {
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
+
     this.createAxis(width, height);
-    this.createChart(this.vectorData);
+    this.createChart();
     this.createZoom(width, height, margin);
     this.createVector();
-    // this.panAxes(margin);
-    // this.
   }
 
   createAxis = (width: number, height: number) => {
@@ -53,39 +52,39 @@ class PlotComponent {
   };
 
   createChart = () => {
-    const maxX = d3.max(this.vectorData, function (data) {
-      return data.coord1;
-    });
-    const minX = d3.min(this.vectorData, function (data) {
-      return data.coord1;
-    });
-    const maxY = d3.max(this.vectorData, function (data) {
-      return data.coord2;
-    });
-    const minY = d3.min(this.vectorData, function (data) {
-      return data.coord2;
-    });
-
     const defaultMax = 5;
     const defaultMin = -5;
+    const maxX = d3.max(this.vectors, function (data) {
+      return data[1].coord1;
+    });
+    const minX = d3.min(this.vectors, function (data) {
+      return data[1].coord1;
+    });
+    const maxY = d3.max(this.vectors, function (data) {
+      return data[1].coord2;
+    });
+    const minY = d3.min(this.vectors, function (data) {
+      return data[1].coord2;
+    });
 
+    // WARNING: currently not working when the vector coordinate is bigger than the domain's default values
     // Create the X axis:
-    this.x.domain([
-      minX < defaultMin ? minX : defaultMin,
-      maxX > defaultMax ? maxX : defaultMax,
+    this.x!.domain([
+      minX && minX < defaultMin ? minX : defaultMin,
+      maxX && maxX > defaultMax ? maxX : defaultMax,
     ]);
     this.svg.selectAll("#myXaxis").transition().duration(3000).call(this.xAxis);
     // create the Y axis
-    this.y.domain([
-      minY < defaultMin ? minY : defaultMin,
-      maxY > defaultMax ? maxY : defaultMax,
+    this.y!.domain([
+      minY && minY < defaultMin ? minY : defaultMin,
+      maxY && maxY > defaultMax ? maxY : defaultMax,
     ]);
     this.svg.selectAll("#myYaxis").transition().duration(3000).call(this.yAxis);
   };
 
-  createZoom = (width: number, height: number, margin: object) => {
+  createZoom = (width: number, height: number, margin: Margin) => {
     // Set the zoom and Pan features: how much you can zoom, on which part, and what to do when there is a zoom
-    const zoom = d3
+    const zoom: ZoomBehavior<any, unknown> = d3
       .zoom()
       .scaleExtent([0.5, 20]) // This control how much you can unzoom (x0.5) and zoom (x20)
       .extent([
@@ -110,13 +109,13 @@ class PlotComponent {
   };
 
   // A function that updates the chart when the user zoom and thus new boundaries are available
-  handleVectorZoom = (event) => {
+  handleVectorZoom = (event: any) => {
     // recover the new scale
     const newX = event.transform.rescaleX(this.x);
     const newY = event.transform.rescaleY(this.y);
 
-    let xDomain = [-180, 0, 180, 360];
-    xDomain = xDomain.map((n) => {
+    let newDomain = [-180, 0, 180, 360];
+    newDomain = newDomain.map((n) => {
       return event.transform.k * n;
     });
 
@@ -131,36 +130,39 @@ class PlotComponent {
     });
 
     // scales used to be able to move the axes along with the vectors
-    const xAxisScale = d3.scaleLinear().domain(xDomain).range(xRange);
-    const yAxisScale = d3.scaleLinear().domain(xDomain).range(yRange);
+    const xAxisScale = d3.scaleLinear().domain(newDomain).range(xRange);
+    const yAxisScale = d3.scaleLinear().domain(newDomain).range(yRange);
 
     // update axes with these new boundaries
     this.svg
       .selectAll("#myXaxis")
       .attr("transform", `translate(0, ${xAxisScale(event.transform.y)})`)
-      .call(d3.axisBottom(newX));
+      .call(d3.axisBottom(newX) as any);
     this.svg
       .selectAll("#myYaxis")
       .attr("transform", `translate(${yAxisScale(event.transform.x)}, 0)`)
-      .call(d3.axisLeft(newY));
+      .call(d3.axisLeft(newY) as any);
 
     // update vector position
     this.createLine(newX, newY);
   };
 
-  createLine = (x, y) => {
+  createLine = (
+    x: ScaleLinear<number, number>,
+    y: ScaleLinear<number, number>
+  ) => {
     // console.log("line", line.x);
     this.svg
       .selectAll(".lineVector")
-      .data(this.vectorData, function (data) {
-        return data.coord1;
+      .data(this.vectors, function (data: any) {
+        return data.coord1; 
       })
       .join("path")
       .attr("class", "lineVector")
       .attr(
         "d",
         d3
-          .line()
+          .line<any>()
           .x(function (data) {
             return x(data.coord1);
           })
@@ -178,13 +180,13 @@ class PlotComponent {
 
   // adds the vector's arrow to the line element
   createVector = () => {
-    let def = this.svg.append("defs");
-    def = def.append("marker");
-    def = def
+    let def = this.svg
+      .append("defs")
+      .append("marker")
       .attr("id", "arrow")
       .attr("markerUnits", "strokeWidth")
       .attr("markerWidth", "12")
-      .attr("markerHeight", "12")
+      .attr("markerHeight", "10")
       .attr("viewBox", "0 0 12 12")
       .attr("refX", "6")
       .attr("refY", "6")

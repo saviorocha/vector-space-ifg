@@ -1,10 +1,17 @@
 type Dimesion = {
-  margin: { top: number, right: number, bottom: number, left: number };
+  margin: Margin;
   width: number;
   height: number;
 };
 
-// type VectorFormat = {
-//     { coord1: number, coord2: number },
-//     { coord1: number, coord2: number },
-// }
+type Margin = {
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+};
+
+type VectorData = {
+  coord1: number;
+  coord2: number;
+};
