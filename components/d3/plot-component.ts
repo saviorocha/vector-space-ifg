@@ -1,66 +1,69 @@
 import * as d3 from "d3";
+import StateNode from "../../classes/stateNode";
+import Vector from "../../classes/vector";
 class PlotComponent {
   svg;
-  refComponent;
   x;
   y;
   xAxis;
   yAxis;
-  data;
-  width;
-  height;
-  margin;
+  vectorData;
+  // vectorData: Vector[];
 
-  constructor(refComponent, { data1, margin, width, height }) {
-    this.margin = margin;
-    this.refComponent = refComponent;
-    this.data = data1;
-    this.width = width;
-    this.height = height;
+  constructor(
+    refComponent: null | HTMLDivElement,
+    dimensions: Dimesion,
+    vectorData
+    // vectorData: Vector[]
+  ) {
+    // constructor(refComponent, { data1, margin, width, height }) {
+    const { margin, width, height } = dimensions;
+    this.vectorData = vectorData;
+
     this.svg = d3
       .select(refComponent)
       .append("svg:svg")
-      .attr("width", this.width + this.margin.left + this.margin.right)
-      .attr("height", this.height + this.margin.top + this.margin.bottom)
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
       .append("g")
-      .attr("transform", `translate(${this.margin.left},${this.margin.top})`);
-    this.createAxis();
-    this.createChart(data1, this.margin);
-    this.createZoom();
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+    this.createAxis(width, height);
+    this.createChart(this.vectorData);
+    this.createZoom(width, height, margin);
     this.createVector();
     // this.panAxes(margin);
     // this.
   }
 
-  createAxis = () => {
+  createAxis = (width: number, height: number) => {
     // Initialise a X axis:
-    this.x = d3.scaleLinear().range([0, this.width]);
+    this.x = d3.scaleLinear().range([0, width]);
     this.xAxis = d3.axisBottom(this.x);
     this.svg
       .append("g")
-      .attr("transform", `translate(0, ${this.height / 2})`)
+      .attr("transform", `translate(0, ${height / 2})`)
       .attr("id", "myXaxis");
     // Initialize an Y axis
-    this.y = d3.scaleLinear().range([this.height, 0]);
+    this.y = d3.scaleLinear().range([height, 0]);
     this.yAxis = d3.axisLeft(this.y);
     this.svg
       .append("g")
-      .attr("transform", `translate(${this.width / 2}, 0)`)
+      .attr("transform", `translate(${width / 2}, 0)`)
       .attr("id", "myYaxis");
   };
 
-  createChart = (data) => {
-    const maxX = d3.max(data, function (d) {
-      return d.ser1;
+  createChart = () => {
+    const maxX = d3.max(this.vectorData, function (data) {
+      return data.coord1;
     });
-    const minX = d3.min(data, function (d) {
-      return d.ser1;
+    const minX = d3.min(this.vectorData, function (data) {
+      return data.coord1;
     });
-    const maxY = d3.max(data, function (d) {
-      return d.ser2;
+    const maxY = d3.max(this.vectorData, function (data) {
+      return data.coord2;
     });
-    const minY = d3.min(data, function (d) {
-      return d.ser2;
+    const minY = d3.min(this.vectorData, function (data) {
+      return data.coord2;
     });
 
     const defaultMax = 5;
@@ -72,7 +75,6 @@ class PlotComponent {
       maxX > defaultMax ? maxX : defaultMax,
     ]);
     this.svg.selectAll("#myXaxis").transition().duration(3000).call(this.xAxis);
-    // console.log("xAxis", this.zoomTest);
     // create the Y axis
     this.y.domain([
       minY < defaultMin ? minY : defaultMin,
@@ -81,14 +83,14 @@ class PlotComponent {
     this.svg.selectAll("#myYaxis").transition().duration(3000).call(this.yAxis);
   };
 
-  createZoom = () => {
+  createZoom = (width: number, height: number, margin: object) => {
     // Set the zoom and Pan features: how much you can zoom, on which part, and what to do when there is a zoom
     const zoom = d3
       .zoom()
       .scaleExtent([0.5, 20]) // This control how much you can unzoom (x0.5) and zoom (x20)
       .extent([
         [0, 0],
-        [this.width, this.height],
+        [width, height],
       ])
       .on("zoom", this.handleVectorZoom);
 
@@ -99,11 +101,11 @@ class PlotComponent {
     // This add an invisible rect on top of the chart area. This rect can recover pointer events: necessary to understand when the user zoom
     this.svg
       .append("rect")
-      .attr("width", this.width)
-      .attr("height", this.height)
+      .attr("width", width)
+      .attr("height", height)
       .style("fill", "none")
       .style("pointer-events", "all")
-      .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
       .call(zoom);
   };
 
@@ -147,23 +149,25 @@ class PlotComponent {
   };
 
   createLine = (x, y) => {
-    const line = d3
-      .line()
-      .x(function (d) {
-        return x(d.ser1);
-      })
-      .y(function (d) {
-        return y(d.ser2);
-      });
     // console.log("line", line.x);
     this.svg
       .selectAll(".lineVector")
-      .data([this.data], function (d) {
-        return d.ser1;
+      .data(this.vectorData, function (data) {
+        return data.coord1;
       })
       .join("path")
       .attr("class", "lineVector")
-      .attr("d", line)
+      .attr(
+        "d",
+        d3
+          .line()
+          .x(function (data) {
+            return x(data.coord1);
+          })
+          .y(function (data) {
+            return y(data.coord2);
+          })
+      )
       // clip-path: everything outside this area won't be drawn
       .attr("clip-path", "url(#chart-area)")
       .attr("fill", "none")
@@ -188,7 +192,7 @@ class PlotComponent {
     def
       .append("path")
       .attr("d", "M2,2 L10,6 L2,10 L6,6 L2,2")
-      .style("fill", "teal");
+      .style("fill", "steelblue");
   };
 }
 
