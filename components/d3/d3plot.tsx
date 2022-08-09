@@ -1,17 +1,14 @@
 import * as d3 from "d3";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { useListContext } from "../../context";
+import { IPlotProps } from "../../interfaces/interfaces";
 import PlotComponent from "./plot-component";
 
 let vector;
-const D3Plot: FunctionComponent = ({ stateVectors }) => {
-  const marginValues: Margin = { top: 10, right: 30, bottom: 30, left: 50 };
-  const dimensions: Dimesion = {
-    margin: marginValues,
-    width: 460 - marginValues.left - marginValues.right,
-    height: 400 - marginValues.top - marginValues.bottom,
-  };
-
+const D3Plot: FunctionComponent<IPlotProps> = ({
+  stateVectors,
+  plotDimensions,
+}) => {
   const refElement = useRef<null | HTMLDivElement>(null);
   const [d3Component, setD3Component] = useState<PlotComponent>(
     {} as PlotComponent
@@ -21,16 +18,13 @@ const D3Plot: FunctionComponent = ({ stateVectors }) => {
   useEffect(initD3, [list]);
 
   function initD3() {
-    // console.log("lista d3plot: ", list);
-    // console.log("vetores: ", list.head?.vectors);
-
     const div = d3.select(refElement.current);
     const node = stateVectors.map((vec) => {
       return vec?.d3VectorFormat()!;
     });
 
-    setD3Component(new PlotComponent(refElement.current, dimensions, node));
-    
+    setD3Component(new PlotComponent(refElement.current, plotDimensions, node));
+
     // cleanup to remove duplicate SVG
     return () => {
       div.selectAll("*").remove();

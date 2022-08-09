@@ -4,4 +4,8 @@ interface IContextList {
   setList: Dispatch<SetStateAction<StateList>>;
 }
 
-interface IPlotProps {}
+interface IPlotProps {
+  stateVectors: Vector[];
+  plotDimensions: Dimesion;
+}
+

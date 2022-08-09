@@ -1,15 +1,14 @@
 import StateNode from "./stateNode";
+import Vector from "./vector";
 
 /**
  * Created based on the post: https://codeburst.io/linked-lists-in-javascript-es6-code-part-1-6dd349c3dcc3
  */
 class StateList {
   head: StateNode | null;
-  private _size: number;
 
   constructor(head: StateNode | null = null) {
     this.head = head;
-    this._size = 0;
   }
 
   /**
@@ -71,25 +70,20 @@ class StateList {
     return null;
   }
 
-  get size(): number {
-    return this._size;
-  }
-
-  set size(_size) {
-    this._size = _size;
-  }
-
-  toArray() {
+  toArray(): Vector[][] {
     let nextNode = this.head;
-    const listArr = [];
-    for (let i = 0; i < this._size; i++) {
+    let listArr = [];
+    let i = 0;
+    while (nextNode) {
       listArr[i] = [
         ...nextNode?.vectors,
         nextNode.transformation.e1Vector,
         nextNode.transformation.e2Vector,
       ];
       nextNode = nextNode?._next;
+      i++;
     }
+
     return listArr;
   }
 }
