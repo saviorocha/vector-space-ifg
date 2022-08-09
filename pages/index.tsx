@@ -4,8 +4,8 @@ import Vector from "../classes/vector";
 import Transformation from "../classes/transformation";
 import StateNode from "../classes/stateNode";
 import StateList from "../classes/stateList";
-import TestContextComponent from "../components/testecontext";
-import { useListContext } from "../context";
+import { ListContextProvider, useListContext } from "../context";
+import TesteGrafico from "./testegrafico";
 
 const Home: NextPage = () => {
   const [vector1, setVector1] = useState(() => new Vector([1, 1]));
@@ -35,8 +35,19 @@ const Home: NextPage = () => {
     // state1 = state2;
     // console.log("state1; useeffect", state1);
     // console.log("state2; useeffect", state2);
+    // console.log(list);
     
+    // if (list.head) {
+    //   state1.vectors = [vector1];
 
+    //   let newstate = state1;
+    //   for (let i = 0; i < 2; i++) {
+    //     newstate._next = new StateNode(transformation, newstate);
+    //     newstate = newstate._next;
+    //   }
+    //   list.head = state1;
+    // }
+    
     // const stateJson = JSON.parse(JSON.stringify(new StateNode(transformation)));
     // list.insertTail(new StateNode(transformation, state1._next._next));
     // prettier-ignore
@@ -47,20 +58,21 @@ const Home: NextPage = () => {
   }, []);
 
   function handleOnClick() {
-    if (list.head) {
-      state1.vectors = [vector1];
+    // if (list.head) {
+    //   state1.vectors = [vector1];
 
-      let newstate = state1;
-      for (let i = 0; i < 2; i++) {
-        newstate._next = new StateNode(transformation, newstate);
-        newstate = newstate._next;
-      }
-      list.head = state1;
-    }
-    console.log("list; onclick", list);
+    //   let newstate = state1;
+    //   for (let i = 0; i < 2; i++) {
+    //     newstate._next = new StateNode(transformation, newstate);
+    //     newstate = newstate._next;
+    //   }
+    //   list.head = state1;
+    // }
+    // console.log("list; onclick", list);
   }
   return (
     <>
+  
       <div>olá</div>
       <button onClick={handleOnClick}>mudar state</button>
       {/* <TestContextComponent /> */}

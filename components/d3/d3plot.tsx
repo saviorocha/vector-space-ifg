@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
-import PlotComponent from "./plot-component";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { useListContext } from "../../context";
-import Vector from "../../classes/vector";
+import PlotComponent from "./plot-component";
 
 let vector;
-const D3Plot = () => {
-  const marginValues = { top: 10, right: 30, bottom: 30, left: 50 };
+const D3Plot: FunctionComponent = ({ stateVectors }) => {
+  const marginValues: Margin = { top: 10, right: 30, bottom: 30, left: 50 };
   const dimensions: Dimesion = {
     margin: marginValues,
     width: 460 - marginValues.left - marginValues.right,
@@ -17,21 +16,22 @@ const D3Plot = () => {
   const [d3Component, setD3Component] = useState<PlotComponent>(
     {} as PlotComponent
   );
-  const { list, setList } = useListContext();
+  const { list } = useListContext();
 
-  useEffect(initD3, []);
+  useEffect(initD3, [list]);
 
   function initD3() {
+    // console.log("lista d3plot: ", list);
+    // console.log("vetores: ", list.head?.vectors);
+
     const div = d3.select(refElement.current);
-    const node = [
-      ...list.head?.vectors!,
-      list.head?.transformation.e1Vector,
-      list.head?.transformation.e2Vector,
-    ].map((vec) => {
+    const node = stateVectors.map((vec) => {
       return vec?.d3VectorFormat()!;
     });
 
     setD3Component(new PlotComponent(refElement.current, dimensions, node));
+    
+    // cleanup to remove duplicate SVG
     return () => {
       div.selectAll("*").remove();
     };

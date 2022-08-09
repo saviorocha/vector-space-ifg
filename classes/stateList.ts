@@ -5,9 +5,11 @@ import StateNode from "./stateNode";
  */
 class StateList {
   head: StateNode | null;
+  private _size: number;
 
   constructor(head: StateNode | null = null) {
     this.head = head;
+    this._size = 0;
   }
 
   /**
@@ -69,7 +71,27 @@ class StateList {
     return null;
   }
 
-  updateHead() {}
+  get size(): number {
+    return this._size;
+  }
+
+  set size(_size) {
+    this._size = _size;
+  }
+
+  toArray() {
+    let nextNode = this.head;
+    const listArr = [];
+    for (let i = 0; i < this._size; i++) {
+      listArr[i] = [
+        ...nextNode?.vectors,
+        nextNode.transformation.e1Vector,
+        nextNode.transformation.e2Vector,
+      ];
+      nextNode = nextNode?._next;
+    }
+    return listArr;
+  }
 }
 
 export default StateList;

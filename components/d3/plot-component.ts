@@ -67,7 +67,6 @@ class PlotComponent {
       return data[1].coord2;
     });
 
-    // WARNING: currently not working when the vector coordinate is bigger than the domain's default values
     // Create the X axis:
     this.x!.domain([
       minX && minX < defaultMin ? minX : defaultMin,

@@ -3,11 +3,10 @@ import {
   FunctionComponent,
   useContext,
   useMemo,
-  useState,
+  useState
 } from "react";
 import StateList from "../classes/stateList";
 import StateNode from "../classes/stateNode";
-import Transformation from "../classes/transformation";
 import { IContextList } from "../interfaces/interfaces";
 
 const ListContext = createContext<IContextList>({} as IContextList);
