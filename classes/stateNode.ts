@@ -43,6 +43,14 @@ class StateNode {
   // set next(_next: StateNode | null) {
   //   this._next = _next;
   // }
+
+  // get previous(): StateNode | null {
+  //   return this._previous;
+  // }
+
+  // set previous(_previous: StateNode | null) {
+  //   this._previous = _previous;
+  // }
 }
 
 export default StateNode;

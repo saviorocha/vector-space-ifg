@@ -5,9 +5,9 @@ import Vector from "./vector";
  * Created based on the post: https://codeburst.io/linked-lists-in-javascript-es6-code-part-1-6dd349c3dcc3
  */
 class StateList {
-  head: StateNode | null;
+  head: StateNode;
 
-  constructor(head: StateNode | null = null) {
+  constructor(head: StateNode) {
     this.head = head;
   }
 
@@ -16,7 +16,7 @@ class StateList {
    * @param newNode
    * @returns head
    */
-  insertHead(newNode: StateNode): StateNode | null {
+  insertHead(newNode: StateNode): StateNode {
     newNode._next = this.head;
     if (this.head) {
       this.head._next = null;
@@ -32,7 +32,7 @@ class StateList {
    * @param newNode
    * @returns head
    */
-  insertTail(newNode: StateNode): StateNode | null {
+  insertTail(newNode: StateNode): StateNode {
     // if the list is empty, the head will point to the new node
     if (!this.head) {
       this.head = newNode;
@@ -71,20 +71,50 @@ class StateList {
   }
 
   toArray(): Vector[][] {
-    let nextNode = this.head;
+    let nextNode: StateNode | null = this.head;
     let listArr = [];
     let i = 0;
     while (nextNode) {
       listArr[i] = [
-        ...nextNode?.vectors,
+        ...nextNode.vectors,
         nextNode.transformation.e1Vector,
         nextNode.transformation.e2Vector,
       ];
-      nextNode = nextNode?._next;
+      nextNode = nextNode._next;
       i++;
     }
 
     return listArr;
+  }
+
+  updateVectors(vector: Vector) {
+    let newHead = this.head;
+    newHead.vectors.push(vector);
+
+    let currentNode: StateNode | null = newHead;
+    let nextNode = currentNode._next;
+
+    // prettier-ignore
+    console.log(
+      "currentNode", currentNode,
+      "nextNode", nextNode,
+      "newHead", newHead
+    );
+
+    if (!currentNode) {
+      return;
+    }
+
+    while (nextNode) {
+      currentNode._next = new StateNode(
+        currentNode._next!.transformation,
+        currentNode
+      );
+
+      currentNode = currentNode?._next;
+      nextNode = currentNode._next;
+    }
+    this.head = newHead;
   }
 }
 
