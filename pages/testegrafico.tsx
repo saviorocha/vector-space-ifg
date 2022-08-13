@@ -95,6 +95,7 @@ const TesteGrafico = () => {
 
   useEffect(() => {
     console.log("current list:", list);
+    // setStateVecArr(list.toArray())
   }, [list]);
   useEffect(() => {
     console.log("stateVecArr:", stateVecArr);
