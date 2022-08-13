@@ -1,5 +1,3 @@
-import { useState } from "react";
-import StateList from "../classes/stateList";
 import StateNode from "../classes/stateNode";
 import Transformation from "../classes/transformation";
 import Vector from "../classes/vector";
@@ -9,19 +7,23 @@ const useList = () => {
   const { list, setList } = useListContext();
   //   const [head, setHead] = useState(list.head)
 
-  const addVector = (vector: Vector) => {
-    list.updateVectors(vector);
-    return list;
+  const addVector = (vector: Vector): StateNode => {
+    let newHead = list.head;
+    newHead.vectors.push(vector);
+    list.updateNodes()
+
+    return newHead;
   };
 
   const addTransformation = (
     transformation: Transformation,
-    previousTransformationName: string
-  ) => {
+    previousTransformationName: string = list.getTail().transformation.name
+  ): StateNode => {
+
     const previousState = getStateByName(previousTransformationName);
 
     if (!previousState) {
-      return new StateList(list.head);
+      return list.head;
     }
 
     let newState = new StateNode(transformation, previousState);
@@ -35,18 +37,18 @@ const useList = () => {
       previousState._next = newState;
       nextState._previous = newState;
     }
-    return new StateList(list.head);
+    return list.head;
   };
 
-  const removeVector = (vectorName: string) => {
+  const removeVector = (vectorName: string): StateNode => {
     const newHead = list.head;
     newHead.vectors = newHead.vectors.filter((vec) => {
       return vec.name !== vectorName;
     });
-    return new StateList(newHead);
+    return newHead;
   };
 
-  const removeTransformation = (transformationName: string) => {
+  const removeTransformation = (transformationName: string): StateNode => {
     const newHead = list.head;
     const stateToRemove = getStateByName(transformationName);
 
@@ -56,9 +58,9 @@ const useList = () => {
     if (next) next._previous = previous;
     if (previous) previous._next = next;
 
-    return new StateList(newHead);
+    return newHead;
   };
-  
+
   const getStateByName = (transformationName: string): StateNode | null => {
     let currentState: StateNode | null = list.head;
     let transStateName = currentState.transformation.name;

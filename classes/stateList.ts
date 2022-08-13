@@ -83,38 +83,34 @@ class StateList {
       nextNode = nextNode._next;
       i++;
     }
-
     return listArr;
   }
 
-  updateVectors(vector: Vector) {
-    let newHead = this.head;
-    newHead.vectors.push(vector);
-
-    let currentNode: StateNode | null = newHead;
-    let nextNode = currentNode._next;
-
-    // prettier-ignore
-    console.log(
-      "currentNode", currentNode,
-      "nextNode", nextNode,
-      "newHead", newHead
-    );
-
+  updateNodes() {
+    let currentNode: StateNode | null = this.head._next;
+    
     if (!currentNode) {
       return;
     }
 
-    while (nextNode) {
-      currentNode._next = new StateNode(
-        currentNode._next!.transformation,
-        currentNode
-      );
-
-      currentNode = currentNode?._next;
-      nextNode = currentNode._next;
+    while (currentNode) {
+      currentNode.vectors = currentNode.updateVectors();
+      currentNode = currentNode._next;
     }
-    this.head = newHead;
+
+    return this.head;
+  }
+
+  getTail(): StateNode {
+    if (!this.head._next) {
+      return this.head;
+    }
+
+    let tail = this.head;
+    while (tail._next) {
+      tail = tail._next;
+    }
+    return tail;
   }
 }
 

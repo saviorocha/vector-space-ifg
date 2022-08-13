@@ -14,11 +14,7 @@ class StateNode {
     this._previous = _previous;
     this._transformation = _transformation;
 
-    this._vectors = this._previous
-      ? this._previous?._vectors.map((vec) => {
-          return this._transformation.applyTransformation(vec);
-        })
-      : [];
+    this._vectors = this.updateVectors();
     this._next = null;
   }
 
@@ -31,9 +27,15 @@ class StateNode {
   }
 
   set vectors(_vectors: Vector[]) {
-    if (!this._previous) {
-      this._vectors = _vectors;
-    }
+    this._vectors = _vectors;
+  }
+
+  updateVectors() {
+    return this._previous
+      ? this._previous._vectors.map((vec) => {
+          return this._transformation.applyTransformation(vec);
+        })
+      : [];
   }
 
   // get next(): StateNode | null {
