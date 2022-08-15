@@ -19,6 +19,8 @@ const D3Plot: FunctionComponent<IPlotProps> = ({
 
   function initD3() {
     const div = d3.select(refElement.current);
+    // console.log("stateVectors", stateVectors);
+    
     const node = stateVectors.map((vec) => {
       return vec?.d3VectorFormat()!;
     });

@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
 import { useEffect, useState, createContext, useContext, useMemo } from "react";
-import Vector from "../classes/vector";
-import Transformation from "../classes/transformation";
-import StateNode from "../classes/stateNode";
-import StateList from "../classes/stateList";
-import { ListContextProvider, useListContext } from "../context";
+import Vector from "../../classes/vector";
+import Transformation from "../../classes/transformation";
+import StateNode from "../../classes/stateNode";
+import StateList from "../../classes/stateList";
+import { ListContextProvider, useListContext } from "../../context";
 import TesteGrafico from "./testegrafico";
 
 const Home: NextPage = () => {
