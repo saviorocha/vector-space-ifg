@@ -1,17 +1,54 @@
 import { InlineMath, BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
+import { useState } from "react";
+import RenderTex from "../../components/tex/renderTex";
 const TesteLatex = () => {
+  const [expression, setExpression] = useState(
+    "T\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}"
+  );
+  const [showTex, setShowTex] = useState(true);
   const inlineFormula = "\\cos (2\\theta) = \\cos^2 \\theta - \\sin^2 \\theta";
   const blockFormula = `\\frac{n!}{k!(n-k)!} = \\binom{n}{k}`;
+
+  const handleOnChange = (event: any) => {
+    setExpression(event.target.value);
+  };
+
+  const handleKey = (event: any) => {
+    if (event.key === "Enter") {
+      setExpression(event.target.value);
+      setShowTex(true);
+    }
+  };
+
+  const handleDoubleClick = (event: any) => {
+    if (event.detail === 2) {
+      setShowTex(false);
+    }
+  };
+
   return (
     <div style={{ padding: 50 }}>
+      <RenderTex />
+      <hr />
       <div>
+        {showTex ? (
+          <p onClick={handleDoubleClick}>
+            <InlineMath math={expression} />
+          </p>
+        ) : (
+          <textarea
+            onKeyDown={handleKey}
+            onChange={handleOnChange}
+            value={expression}
+          />
+        )}
         <p>
           Inline formula:{" "}
           <InlineMath
             math={inlineFormula}
             errorColor={"#cc0000"}
-            renderError={(error) => {
+            renderError={(error:any) => {
               return <b>Fail: {error.name}</b>;
             }}
           />
