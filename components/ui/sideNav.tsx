@@ -4,10 +4,8 @@ import { Box, ChevronDown } from "react-feather";
 const SideNav = () => {
   return (
     <div
-      className="
-        w-60 h-full shadow-md bg-gray-100 border-r border-gray-300 px-1 absolute
-        dark:bg-darklight dark:border-black
-      "
+      className="w-60 h-full shadow-md bg-gray-100 border-r border-gray-300 px-1 top-0 fixed"
+      // dark:bg-darklight dark:border-black
     >
       <ul className="relative">
         <li className="relative m-1 py-1">

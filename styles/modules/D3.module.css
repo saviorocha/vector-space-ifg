@@ -1,0 +1,22 @@
+section.plot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 480px;
+  height: 420px;
+
+  margin: auto 20rem;
+  /* padding-left: 10px;
+  padding-right: 10px; */
+
+  background-color: rgb(252, 252, 252);
+  border: 1px solid rgb(250, 250, 250);
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0.25em rgb(220, 220, 220);
+}
+
+section.plot svg {
+  /* margin-top: 0px; */
+}
+

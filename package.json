@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@anatoliygatt/dark-mode-toggle": "^1.0.0",
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
     "@types/d3": "^7.4.0",
     "@types/mathjs": "^9.4.2",
     "d3": "^7.6.1",

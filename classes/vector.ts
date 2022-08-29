@@ -5,7 +5,7 @@ class Vector {
   private _array: [number, number];
   private color: string;
 
-  constructor(array: [number, number], _name: string = "v", color: string = "") {
+  constructor(array: [number, number], _name: string = "v1", color: string = "") {
     this._array = array;
     this.x = array[0];
     this.y = array[1];

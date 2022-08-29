@@ -3,6 +3,7 @@ import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { useListContext } from "../../context";
 import { IPlotProps } from "../../interfaces/interfaces";
 import PlotComponent from "./plot-component";
+import styles from "../../styles/modules/D3.module.css";
 
 let vector;
 const D3Plot: FunctionComponent<IPlotProps> = ({
@@ -18,7 +19,7 @@ const D3Plot: FunctionComponent<IPlotProps> = ({
   useEffect(initD3, [list]);
 
   function initD3() {
-    const div = d3.select(refElement.current);
+    const section = d3.select(refElement.current);
     // console.log("stateVectors", stateVectors);
     
     const node = stateVectors.map((vec) => {
@@ -29,11 +30,11 @@ const D3Plot: FunctionComponent<IPlotProps> = ({
 
     // cleanup to remove duplicate SVG
     return () => {
-      div.selectAll("*").remove();
+      section.selectAll("*").remove();
     };
   }
 
-  return <div ref={refElement}></div>;
+  return <section className={styles.plot} id="d3-plane" ref={refElement}></section>;
 };
 
 export default D3Plot;
