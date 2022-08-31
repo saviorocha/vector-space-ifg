@@ -1,6 +1,6 @@
 import React from "react";
 
-const BottomNav = () => {
+const BottomBar = () => {
   return (
     <div
       className="
@@ -22,4 +22,4 @@ const BottomNav = () => {
   );
 };
 
-export default BottomNav;
+export default BottomBar;

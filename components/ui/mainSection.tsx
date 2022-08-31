@@ -1,23 +1,17 @@
-import React, { useEffect, useState } from "react";
-import {
-  ZoomIn,
-  Settings,
-  Grid,
-  Hash,
-  ArrowRight,
-  ArrowLeft,
-  Trash,
-} from "react-feather";
-import Vector from "../../classes/vector";
-import { useListContext } from "../../context";
-import styles from "../../styles/modules/editpage.module.css";
-import D3Plot from "../d3/d3plot";
 import { DarkModeToggle } from "@anatoliygatt/dark-mode-toggle";
-import RoundButtons from "./roundButton";
-import useList from "../../hooks/useList";
-import Transformation from "../../classes/transformation";
+import { useEffect, useState } from "react";
+import {
+  ArrowLeft, ChevronsRight, Grid,
+  Hash, Settings, Trash
+} from "react-feather";
 import StateList from "../../classes/stateList";
 import StateNode from "../../classes/stateNode";
+import Transformation from "../../classes/transformation";
+import Vector from "../../classes/vector";
+import { useListContext } from "../../context";
+import useList from "../../hooks/useList";
+import styles from "../../styles/modules/editpage.module.css";
+import D3Plot from "../d3/d3plot";
 
 const MainSection = () => {
   const { list, setList } = useListContext();
@@ -35,14 +29,13 @@ const MainSection = () => {
   };
 
   useEffect(() => {
-    const newHead = addTransformation(new Transformation([2, 0], [0, 2]));
-    const newList = new StateList(newHead);
-    console.log("newList", newList);
-    setList(newList);
-    setStateVecArr(list.toArray());
+    // const newHead = addTransformation(new Transformation([2, 0], [0, 2]));
+    // const newList = new StateList(newHead);
+    // console.log("newList", newList);
+    // setList(newList);
+    // setStateVecArr(list.toArray());
   }, []);
 
-  
   function handleResetList(event: any) {
     event.preventDefault();
     setList(new StateList(new StateNode(undefined, null)));
@@ -117,12 +110,12 @@ const MainSection = () => {
 
       <button
         className="
-            fixed rounded-full h-10 w-10 mr-4 right-0
-            flex items-center justify-center 
-            bg-gray-50 bg-opacity-75 border border-gray-400 
+          fixed rounded-full h-10 w-10 mr-4 right-0
+          flex items-center justify-center 
+          bg-gray-50 bg-opacity-75 border border-gray-400 
         "
       >
-        <ArrowRight className="text-gray-700" />
+        <ChevronsRight className="text-gray-700" />
       </button>
 
       <div
@@ -135,13 +128,13 @@ const MainSection = () => {
         }}
       >
         <button
-        onClick={handleResetList}
+          onClick={handleResetList}
           className="
-              absolute rounded-full h-12 w-12 
-              flex items-center justify-center 
-              border border-gray-400 bg-gray-50
-              bottom-0 right-0
-            "
+            absolute rounded-full h-12 w-12 
+            flex items-center justify-center 
+            border border-gray-400 bg-gray-50
+            bottom-0 right-0
+          "
         >
           <Trash className="text-gray-700" />
         </button>

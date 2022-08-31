@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, ChevronDown } from "react-feather";
+import { ArrowLeft, Box, ChevronDown } from "react-feather";
 
 const SideNav = () => {
   return (
@@ -8,6 +8,17 @@ const SideNav = () => {
       // dark:bg-darklight dark:border-black
     >
       <ul className="relative">
+        <li className="relative m-1 py-1">
+          <button
+            className="
+              fixed rounded-full h-10 w-10 mr-4 right-0
+              flex items-center justify-center 
+              bg-gray-50 bg-opacity-75 border border-gray-400 
+            "
+          >
+            <ArrowLeft className="text-gray-700" />
+          </button>
+        </li>
         <li className="relative m-1 py-1">
           <a
             className="

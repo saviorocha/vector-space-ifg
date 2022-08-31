@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
-import Vector from "../classes/vector";
-import BottomNav from "../components/ui/bottomNav";
+import { useState } from "react";
+import BottomBar from "../components/ui/bottomBar";
 import MainSection from "../components/ui/mainSection";
-import SideNav from "../components/ui/sideNav";
-import { useListContext } from "../context";
+import SideBar from "../components/ui/sideBar";
 
 const EditPlanePage = () => {
-
+  const [sidebarOpen, setSideBarOpen] = useState(false);
+  const handleViewSidebar = () => {
+    setSideBarOpen(!sidebarOpen);
+  };
   return (
     <>
-      <SideNav />
+      <SideBar />
       <MainSection />
-      <BottomNav />
+      <BottomBar  />
     </>
   );
 };
