@@ -29,31 +29,10 @@ const TesteLatex = () => {
 
   return (
     <div style={{ padding: 50 }}>
-      <RenderTex />
+      <RenderTex mathExpression={"T\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}"} />
       <hr />
       <div>
-        {showTex ? (
-          <p onClick={handleDoubleClick}>
-            <InlineMath math={expression} />
-          </p>
-        ) : (
-          <textarea
-            onKeyDown={handleKey}
-            onChange={handleOnChange}
-            value={expression}
-          />
-        )}
-        <p>
-          Inline formula:{" "}
-          <InlineMath
-            math={inlineFormula}
-            errorColor={"#cc0000"}
-            renderError={(error:any) => {
-              return <b>Fail: {error.name}</b>;
-            }}
-          />
-        </p>
-        <hr></hr>
+        <hr />
         <p>Block formula:</p>
         <BlockMath math={blockFormula} errorColor={"#cc0000"} /> <hr />
         <BlockMath>{String.raw`\frac{\text{m}}{\text{s}^2}`}</BlockMath> <hr />

@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { ArrowLeft, Box, ChevronDown } from "react-feather";
-import style from "../../styles/modules/sidebar.module.css";
 
 const SideBar = () => {
   const sideBarRef = useRef(null);
@@ -17,7 +16,7 @@ const SideBar = () => {
   return (
     <>
       
-      <div
+      <nav
         // className={sidebarClass}
         ref={sideBarRef}
         className="
@@ -47,7 +46,7 @@ const SideBar = () => {
               className="
                 flex items-center text-sm py-4 px-6 h-12 
                 bg-gray-50 border border-gray-400 shadow-md 
-                overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded-lg
+                overflow-hidden whitespace-nowrap rounded-lg
                 hover:text-gray-900 hover:bg-gray-200 transition duration-300 ease-in-out cursor-pointer
               "
             >
@@ -60,7 +59,7 @@ const SideBar = () => {
               className="
                 flex items-center text-sm py-4 px-6 h-12 
                 bg-gray-50 border border-gray-400 shadow-md 
-                overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded-lg
+                overflow-hidden  whitespace-nowrap rounded-lg
                 hover:text-gray-900 hover:bg-gray-200 transition duration-300 ease-in-out cursor-pointer
               "
             >
@@ -72,7 +71,7 @@ const SideBar = () => {
               <li className="relative">
                 <a
                   href="#!"
-                  className="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
+                  className="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden  whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
                 >
                   Transformação Padrão
                 </a>
@@ -80,7 +79,7 @@ const SideBar = () => {
               <li className="relative">
                 <a
                   href="#!"
-                  className="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
+                  className="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden  whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
                 >
                   Reflexão
                 </a>
@@ -88,7 +87,7 @@ const SideBar = () => {
               <li className="relative">
                 <a
                   href="#!"
-                  className="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
+                  className="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden  whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
                 >
                   Cisalhamento
                 </a>
@@ -96,7 +95,7 @@ const SideBar = () => {
               <li className="relative">
                 <a
                   href="#!"
-                  className="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
+                  className="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden  whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
                 >
                   Contração
                 </a>
@@ -104,7 +103,7 @@ const SideBar = () => {
               <li className="relative">
                 <a
                   href="#!"
-                  className="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
+                  className="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden  whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
                 >
                   Expansão
                 </a>
@@ -116,7 +115,7 @@ const SideBar = () => {
               className="
               flex items-center text-sm py-4 px-6 h-12 
               bg-gray-50 border border-gray-400 shadow-md 
-              overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded-lg
+              overflow-hidden  whitespace-nowrap rounded-lg
               hover:text-gray-900 hover:bg-gray-200 transition duration-300 ease-in-out cursor-pointer
             "
             >
@@ -125,7 +124,7 @@ const SideBar = () => {
             </a>
           </li>
         </ul>
-      </div>
+      </nav>
       <button
         className="
           rounded-full h-10 w-10 m-4 z-50
