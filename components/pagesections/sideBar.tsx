@@ -1,20 +1,9 @@
+import { FunctionComponent, useRef } from "react";
 import { Box, ChevronDown } from "react-feather";
+import { ISideBarProps } from "../../interfaces/interfaces";
 import BarItem from "../ui/barItem";
 
-const SideBar = ({sideBarStyle, sideBarRef}) => {
-  // const sideBarRef = useRef(null);
-  // const [isOpen, setIsOpen] = useState(true);
-
-  // const toggleSideBar = (event: any) => {
-  //   event.preventDefault();
-  //   if (isOpen) {
-  //     sideBarRef.current.style.width = "0px";
-  //   } else {
-  //     sideBarRef.current.style.width = "250px";
-  //   }
-  //   setIsOpen(!isOpen);
-  // };
-
+const SideBar: FunctionComponent<ISideBarProps> = ({sideBarStyle, sideBarRef}) => {
   return (
     <nav
       // className={sidebarClass}
@@ -29,11 +18,11 @@ const SideBar = ({sideBarStyle, sideBarRef}) => {
       <ul className="relative">
         <BarItem
           title={"Inserir Vetor"}
-          Icon={<Box />}
+          icon={<Box />}
         />
         <BarItem
           title={"Inserir Transformações"}
-          Icon={<ChevronDown />}
+          icon={<ChevronDown />}
           subItems={[
             "Transformação Padrão",
             "Reflexão",
@@ -44,7 +33,7 @@ const SideBar = ({sideBarStyle, sideBarRef}) => {
         />
         <BarItem
           title={"Executar Transformações"}
-          Icon={<Box />}
+          icon={<Box />}
         />
       </ul>
     </nav>

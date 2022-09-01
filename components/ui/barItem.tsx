@@ -1,6 +1,7 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
+import { IBarItemProps } from "../../interfaces/interfaces";
 
-const BarItem = ({ title, icon, subItems = [] }: any) => {
+const BarItem:FunctionComponent<IBarItemProps> = ({ title, icon, subItems = [] }) => {
   return (
     <li className="relative m-1 py-1">
       <a
@@ -22,7 +23,11 @@ const BarItem = ({ title, icon, subItems = [] }: any) => {
                 <a
                   key={i}
                   href="#!"
-                  className="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden  whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
+                  className="
+                    text-xs py-4 pl-12 pr-6 h-6 
+                    flex items-center whitespace-nowrap overflow-hidden rounded 
+                    hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out
+                  "
                 >
                   {title}
                 </a>

@@ -1,5 +1,5 @@
-import { DarkModeToggle } from "@anatoliygatt/dark-mode-toggle";
-import { useEffect, useState } from "react";
+import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
+import { FunctionComponent, useEffect, useState } from "react";
 import {
   ChevronsLeft,
   ChevronsRight,
@@ -13,15 +13,20 @@ import StateList from "../../classes/stateList";
 import StateNode from "../../classes/stateNode";
 import Vector from "../../classes/vector";
 import { useListContext } from "../../context";
+import { IMainSectionProps } from "../../interfaces/interfaces";
 import styles from "../../styles/modules/editpage.module.css";
 import D3Plot from "../d3/d3plot";
 import RoundButton from "../ui/roundButton";
 import TransitionButton from "../ui/transitionButton";
 
-const MainSection = ({mainStyle, mainRef}) => {
+
+const MainSection: FunctionComponent<IMainSectionProps> = ({
+  mainStyle,
+  mainRef,
+}) => {
   const { list, setList } = useListContext();
 
-  const [mode, setMode] = useState("dark");
+  const [mode, setMode] = useState<Mode>("dark");
   const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
 
   const marginValues: Margin = { top: 10, right: 30, bottom: 30, left: 50 };

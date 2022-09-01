@@ -1,18 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import { LegacyRef, useRef, useState } from "react";
 import { ArrowLeft } from "react-feather";
 import { Transition } from "react-transition-group";
 import BottomBar from "../components/pagesections/bottomBar";
 import MainSection from "../components/pagesections/mainSection";
 import SideBar from "../components/pagesections/sideBar";
 
-const mainTransitionStyles = {
+const mainTransitionStyles: any = {
   entering: { marginLeft: "0px" },
   entered: { marginLeft: "250px" },
   exiting: { marginLeft: "250px" },
   exited: { marginLeft: "0px" },
 };
 
-const sideBarTransitionStyles = {
+const sideBarTransitionStyles: any = {
   entering: { width: "0px" },
   entered: { width: "250px" },
   exiting: { width: "250px" },
@@ -21,13 +21,8 @@ const sideBarTransitionStyles = {
 
 const EditPlanePage = () => {
   const [toggleSideBar, setToggleSideBar] = useState(false);
-  const mainRef = useRef(null);
-  const sideBarRef = useRef(null);
-
-  // useEffect(() => {
-  //   console.log("editmainRef", mainRef);
-  //   console.log("editsideBarRef", sideBarRef);
-  // }, [mainRef, sideBarRef]);
+  const mainRef = useRef<LegacyRef<HTMLElement> | undefined>(null);
+  const sideBarRef = useRef<LegacyRef<HTMLElement> | undefined>(null);
 
   return (
     <>
