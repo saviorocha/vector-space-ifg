@@ -1,16 +1,14 @@
 import React from "react";
 
-const RoundButton = ({ children }: any) => {
+const RoundButton = ({ Icon, left="", right="", top="", bottom="" }) => {
   return (
     <button
-      className="
-              absolute rounded-full h-12 w-12 
-              flex items-center justify-center 
-              border border-gray-400 bg-gray-50
-              bottom-0 right-0
-            "
+      className={`absolute rounded-full h-10 w-10 ${left} ${right} ${top} ${bottom}
+        flex items-center justify-center 
+        bg-gray-50 bg-opacity-75 border border-gray-200 
+      `}
     >
-      {children}
+      <Icon />
     </button>
   );
 };

@@ -13,11 +13,12 @@ const BottomBar = () => {
       "
     >
       <section
+        id="information-box"
         className="
           w-7/12 h-4/5 rounded-md
           flex flex-row
-          bg-white shadow-md
-          border border-gray-400
+          bg-white border border-gray-400
+          text-sm shadow-md
         "
       >
         <aside

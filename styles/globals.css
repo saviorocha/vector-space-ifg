@@ -10,6 +10,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     font-size: 1em;
   color: #2c2c2c;
+  position: relative;
     /* height: 100%; */
 }
  
