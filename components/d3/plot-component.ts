@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { Axis, AxisDomain, AxisScale, Line, ScaleLinear, Selection, ZoomBehavior } from "d3";
+import { ScaleLinear, ZoomBehavior } from "d3";
 class PlotComponent {
   svg;
   vectors: VectorData[][];
@@ -81,7 +81,7 @@ class PlotComponent {
   };
 
   createZoom = (width: number, height: number, margin: Margin) => {
-    // Set the zoom and Pan features: how much you can zoom, on which part, and what to do when there is a zoom
+    // Sets the zoom and Pan features: how much you can zoom, on which part, and what to do when there is a zoom
     const zoom: ZoomBehavior<any, unknown> = d3
       .zoom()
       .scaleExtent([0.5, 20]) // This control how much you can unzoom (x0.5) and zoom (x20)
@@ -106,7 +106,7 @@ class PlotComponent {
       .call(zoom);
   };
 
-  // A function that updates the chart when the user zoom and thus new boundaries are available
+  // Function that updates the chart when the user zoom and thus new boundaries are available
   handleVectorZoom = (event: any) => {
     // recover the new scale
     const newX = event.transform.rescaleX(this.x);

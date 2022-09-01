@@ -15,10 +15,10 @@ import Vector from "../../classes/vector";
 import { useListContext } from "../../context";
 import styles from "../../styles/modules/editpage.module.css";
 import D3Plot from "../d3/d3plot";
-import RoundButton from "./roundButton";
-import TransitionButton from "./transitionButton";
+import RoundButton from "../ui/roundButton";
+import TransitionButton from "../ui/transitionButton";
 
-const MainSection = () => {
+const MainSection = ({mainStyle, mainRef}) => {
   const { list, setList } = useListContext();
 
   const [mode, setMode] = useState("dark");
@@ -34,7 +34,7 @@ const MainSection = () => {
   useEffect(() => {
     // const newHead = addTransformation(new Transformation([2, 0], [0, 2]));
     // const newList = new StateList(newHead);
-    // console.log("newList", newList);
+    // console.log("mainRef", mainRef);
     // setList(newList);
     // setStateVecArr(list.toArray());
   }, []);
@@ -49,6 +49,8 @@ const MainSection = () => {
     <main
       className="container mx-auto flex justify-center items-center absolute top-0 right-0"
       id={styles.plot}
+      style={mainStyle}
+      ref={mainRef}
     >
       <RoundButton
         Icon={() => <Menu className="text-gray-700" />}

@@ -1,18 +1,69 @@
-import { useState } from "react";
-import BottomBar from "../components/ui/bottomBar";
-import MainSection from "../components/ui/mainSection";
-import SideBar from "../components/ui/sideBar";
+import { useEffect, useRef, useState } from "react";
+import { ArrowLeft } from "react-feather";
+import { Transition } from "react-transition-group";
+import BottomBar from "../components/pagesections/bottomBar";
+import MainSection from "../components/pagesections/mainSection";
+import SideBar from "../components/pagesections/sideBar";
+
+const mainTransitionStyles = {
+  entering: { marginLeft: "0px" },
+  entered: { marginLeft: "250px" },
+  exiting: { marginLeft: "250px" },
+  exited: { marginLeft: "0px" },
+};
+
+const sideBarTransitionStyles = {
+  entering: { width: "0px" },
+  entered: { width: "250px" },
+  exiting: { width: "250px" },
+  exited: { width: "0px" },
+};
 
 const EditPlanePage = () => {
-  const [sidebarOpen, setSideBarOpen] = useState(false);
-  const handleViewSidebar = () => {
-    setSideBarOpen(!sidebarOpen);
-  };
+  const [toggleSideBar, setToggleSideBar] = useState(false);
+  const mainRef = useRef(null);
+  const sideBarRef = useRef(null);
+
+  // useEffect(() => {
+  //   console.log("editmainRef", mainRef);
+  //   console.log("editsideBarRef", sideBarRef);
+  // }, [mainRef, sideBarRef]);
+
   return (
     <>
-      <SideBar />
-      <MainSection />
-      <BottomBar  />
+      <Transition in={toggleSideBar} timeout={400}>
+        {(state) => (
+          <SideBar
+            sideBarStyle={{
+              transition: "0.5s",
+              ...sideBarTransitionStyles[state],
+            }}
+            sideBarRef={sideBarRef}
+          />
+        )}
+      </Transition>
+      <Transition in={toggleSideBar} timeout={400}>
+        {(state) => (
+          <MainSection
+            mainStyle={{
+              transition: "0.5s",
+              ...mainTransitionStyles[state],
+            }}
+            mainRef={mainRef}
+          />
+        )}
+      </Transition>
+      <button
+        className="
+          absolute rounded-full h-10 w-10 m-4 z-50
+          flex items-center justify-center
+          bg-gray-50 bg-opacity-75 border border-gray-400
+        "
+        onClick={() => setToggleSideBar(!toggleSideBar)}
+      >
+        <ArrowLeft className="text-gray-700" />
+      </button>
+      <BottomBar />
     </>
   );
 };

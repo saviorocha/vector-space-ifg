@@ -1,6 +1,6 @@
 import React from "react";
 
-const BarItem = ({ title, Icon, subItems = [] }) => {
+const BarItem = ({ title, icon, subItems = [] }: any) => {
   return (
     <li className="relative m-1 py-1">
       <a
@@ -11,7 +11,7 @@ const BarItem = ({ title, Icon, subItems = [] }) => {
           hover:text-gray-900 hover:bg-gray-200 transition duration-300 ease-in-out cursor-pointer
         "
       >
-        <Icon />
+        {icon}
         <span>{title}</span>
       </a>
       {subItems ? (
