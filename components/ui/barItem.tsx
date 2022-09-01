@@ -1,7 +1,12 @@
 import React, { FunctionComponent } from "react";
 import { IBarItemProps } from "../../interfaces/interfaces";
 
-const BarItem:FunctionComponent<IBarItemProps> = ({ title, icon, subItems = [] }) => {
+const BarItem: FunctionComponent<IBarItemProps> = ({
+  title,
+  leftIcon,
+  subItems = [],
+  rightIcon = null,
+}) => {
   return (
     <li className="relative m-1 py-1">
       <a
@@ -12,8 +17,9 @@ const BarItem:FunctionComponent<IBarItemProps> = ({ title, icon, subItems = [] }
           hover:text-gray-900 hover:bg-gray-200 transition duration-300 ease-in-out cursor-pointer
         "
       >
-        {icon}
+        {leftIcon}
         <span>{title}</span>
+        {rightIcon}
       </a>
       {subItems ? (
         <ul className="relative accordion-collapse collapse">

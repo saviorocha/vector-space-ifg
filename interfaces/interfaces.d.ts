@@ -11,6 +11,7 @@ interface IPlotProps {
 }
 
 interface IMainSectionProps {
+  children: ReactNode;
   mainStyle: CSSProperties | string;
   mainRef: LegacyRef<HTMLElement> | undefined;
 }
@@ -22,6 +23,24 @@ interface ISideBarProps {
 
 interface IBarItemProps {
   title: string;
-  icon: ReactElement;
+  leftIcon: ReactElement;
+  rightIcon?: ReactElement|null;
   subItems?: string[];
+}
+
+interface IRoundButton {
+  icon: ReactElement;
+  left?: string;
+  right?: string;
+  top?: string;
+  bottom?: string;
+  handleOnClick?:  React.MouseEventHandler<HTMLButtonElement> | undefined;
+}
+
+interface ITransitionButtonProps {
+  children: ReactNode, 
+  icon: ReactElement, 
+  sectionStyle: CSSProperties | string, 
+  buttonStyle: CSSProperties | string,
+
 }

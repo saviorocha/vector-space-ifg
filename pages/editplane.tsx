@@ -13,10 +13,10 @@ const mainTransitionStyles: any = {
 };
 
 const sideBarTransitionStyles: any = {
-  entering: { width: "0px" },
+  entering: { width: "0px", padding: "0px" },
   entered: { width: "250px" },
   exiting: { width: "250px" },
-  exited: { width: "0px" },
+  exited: { width: "0px", padding: "0px" },
 };
 
 const EditPlanePage = () => {
@@ -45,19 +45,20 @@ const EditPlanePage = () => {
               ...mainTransitionStyles[state],
             }}
             mainRef={mainRef}
-          />
+          >
+            <button
+              className="
+                absolute rounded-full h-10 w-10 left-0 top-0 
+                flex items-center justify-center 
+                bg-gray-50 bg-opacity-75 border border-gray-200 
+              "
+              onClick={() => setToggleSideBar(!toggleSideBar)}
+            >
+              <ArrowLeft className="text-gray-700" />
+            </button>
+          </MainSection>
         )}
       </Transition>
-      <button
-        className="
-          absolute rounded-full h-10 w-10 m-4 z-50
-          flex items-center justify-center
-          bg-gray-50 bg-opacity-75 border border-gray-400
-        "
-        onClick={() => setToggleSideBar(!toggleSideBar)}
-      >
-        <ArrowLeft className="text-gray-700" />
-      </button>
       <BottomBar />
     </>
   );

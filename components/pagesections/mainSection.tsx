@@ -23,6 +23,7 @@ import TransitionButton from "../ui/transitionButton";
 const MainSection: FunctionComponent<IMainSectionProps> = ({
   mainStyle,
   mainRef,
+  children
 }) => {
   const { list, setList } = useListContext();
 
@@ -51,23 +52,21 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
   }
 
   return (
+    <>
+    
     <main
       className="container mx-auto flex justify-center items-center absolute top-0 right-0"
       id={styles.plot}
       style={mainStyle}
       ref={mainRef}
     >
+      {children}
       <RoundButton
-        Icon={() => <Menu className="text-gray-700" />}
-        left="left-0"
-        top="top-0"
-      />
-      <RoundButton
-        Icon={() => <ChevronsLeft className="text-gray-700" />}
+        icon={<ChevronsLeft className="text-gray-700" />}
         left="left-0"
       />
       <RoundButton
-        Icon={() => <ChevronsRight className="text-gray-700" />}
+        icon={<ChevronsRight className="text-gray-700" />}
         right="right-0"
       />
       <div
@@ -79,6 +78,17 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
           zIndex: "60",
         }}
       >
+        <button
+          onClick={handleResetList}
+          className="
+            absolute rounded-full h-12 w-12 
+            flex items-center justify-center 
+             bg-gray-50 bg-opacity-75 border border-gray-200 
+            bottom-0 right-0
+          "
+        >
+          <Trash className="text-gray-700" />
+        </button>
         <button
           onClick={handleResetList}
           className="
@@ -131,6 +141,9 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
         </ul>
       </TransitionButton>
     </main>
+    
+    </>
+
   );
 };
 
