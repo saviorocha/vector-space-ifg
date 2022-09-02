@@ -1,13 +1,18 @@
 import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
+import { style } from "d3";
 import { FunctionComponent, useEffect, useState } from "react";
 import {
+  ArrowDown,
   ChevronsLeft,
   ChevronsRight,
   Grid,
   Hash,
   Menu,
+  Play,
   Settings,
   Trash,
+  ZoomIn,
+  ZoomOut,
 } from "react-feather";
 import StateList from "../../classes/stateList";
 import StateNode from "../../classes/stateNode";
@@ -19,14 +24,12 @@ import D3Plot from "../d3/d3plot";
 import RoundButton from "../ui/roundButton";
 import TransitionButton from "../ui/transitionButton";
 
-
 const MainSection: FunctionComponent<IMainSectionProps> = ({
   mainStyle,
   mainRef,
-  children
+  children,
 }) => {
   const { list, setList } = useListContext();
-
   const [mode, setMode] = useState<Mode>("dark");
   const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
 
@@ -52,98 +55,115 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
   }
 
   return (
-    <>
-    
     <main
-      className="container mx-auto flex justify-center items-center absolute top-0 right-0"
-      id={styles.plot}
+      className="
+        container mx-auto absolute top-0 right-0 h-3/4
+        flex justify-center items-center
+      "
+      id={styles.main}
       style={mainStyle}
       ref={mainRef}
     >
-      {children}
-      <RoundButton
-        icon={<ChevronsLeft className="text-gray-700" />}
-        left="left-0"
-      />
-      <RoundButton
-        icon={<ChevronsRight className="text-gray-700" />}
-        right="right-0"
-      />
-      <div
-        id="buttons"
-        className="w-24 h-24 fixed"
-        style={{
-          bottom: "8px",
-          right: "9px",
-          zIndex: "60",
-        }}
+      <section
+        id={styles.leftsection}
+        className="
+          h-full flex items-center justify-around flex-col
+        "
       >
-        <button
-          onClick={handleResetList}
-          className="
-            absolute rounded-full h-12 w-12 
-            flex items-center justify-center 
-             bg-gray-50 bg-opacity-75 border border-gray-200 
-            bottom-0 right-0
-          "
-        >
-          <Trash className="text-gray-700" />
-        </button>
-        <button
-          onClick={handleResetList}
-          className="
-            absolute rounded-full h-12 w-12 
-            flex items-center justify-center 
-             bg-gray-50 bg-opacity-75 border border-gray-200 
-            bottom-0 right-0
-          "
-        >
-          <Trash className="text-gray-700" />
-        </button>
-      </div>
-      {stateVecArr.map((vec, i) => {
-        return (
-          <D3Plot key={i} stateVectors={vec} plotDimensions={dimensions} />
-        );
-      })}
-      <TransitionButton
-        icon={<Settings className="text-gray-700 w-7 h-7" />}
-        sectionStyle={styles.settings}
-        buttonStyle="fixed top-0 right-0 mr-6 mt-6"
-      >
-        <ul className="mt-3 ">
-          <li className="flex items-center justify-start ml-2 p-1 ">
-            <DarkModeToggle
-              mode={mode}
-              size="sm"
-              inactiveTrackColor="#e2e8f0"
-              inactiveTrackColorOnHover="#f8fafc"
-              inactiveTrackColorOnActive="#cbd5e1"
-              activeTrackColor="#334155"
-              activeTrackColorOnHover="#1e293b"
-              activeTrackColorOnActive="#0f172a"
-              inactiveThumbColor="#1e293b"
-              activeThumbColor="#e2e8f0"
-              onChange={(mode) => {
-                setMode(mode);
-              }}
-            />
-            Tema
-          </li>
-          <li className="flex items-center justify-start ml-2 p-1 ">
-            <Grid />
-            Grid
-          </li>
-          <li className="flex items-center justify-start ml-2 p-1 ">
-            <Hash />
-            Mostrar números
-          </li>
-        </ul>
-      </TransitionButton>
-    </main>
-    
-    </>
+        {children}
+        <RoundButton
+          icon={<ChevronsLeft className="text-gray-700" />}
+          left="left-0"
+        />
+        <RoundButton
+          icon={<ArrowDown className="text-gray-700" />}
+          left="left-0"
+        />
+      </section>
 
+      <section
+        id={styles.middlesection}
+        className="
+          h-full flex items-center justify-center
+        "
+      >
+        {stateVecArr.map((vec, i) => {
+          return (
+            <D3Plot key={i} stateVectors={vec} plotDimensions={dimensions} />
+          );
+        })}
+      </section>
+
+      <section
+        id={styles.rightsection}
+        className="
+          h-full flex items-center justify-between flex-col
+        "
+      >
+        <TransitionButton
+          icon={<Settings className="text-gray-700 w-7 h-7" />}
+          sectionStyle={styles.settings}
+          buttonStyle="z-10"
+        >
+          <ul className="mt-3 ">
+            <li className="flex items-center justify-start ml-2 p-1 ">
+              <DarkModeToggle
+                mode={mode}
+                size="sm"
+                inactiveTrackColor="#e2e8f0"
+                inactiveTrackColorOnHover="#f8fafc"
+                inactiveTrackColorOnActive="#cbd5e1"
+                activeTrackColor="#334155"
+                activeTrackColorOnHover="#1e293b"
+                activeTrackColorOnActive="#0f172a"
+                inactiveThumbColor="#1e293b"
+                activeThumbColor="#e2e8f0"
+                onChange={(mode) => {
+                  setMode(mode);
+                }}
+              />
+              Tema
+            </li>
+            <li className="flex items-center justify-start ml-2 p-1 ">
+              <Grid />
+              Grid
+            </li>
+            <li className="flex items-center justify-start ml-2 p-1 ">
+              <Hash />
+              Mostrar números
+            </li>
+          </ul>
+        </TransitionButton>
+        <RoundButton
+          icon={<ChevronsRight className="text-gray-700" />}
+          right="right-0"
+        />
+        <div id="bottom-buttons" className="flex items-center justify-center flex-col">
+          <RoundButton
+            icon={<ZoomIn className="text-gray-700" />}
+            right="right-0"
+          />
+          <RoundButton
+            icon={<ZoomOut className="text-gray-700" />}
+            right="right-0"
+          />
+          <RoundButton
+            icon={<Play className="text-gray-700" />}
+            right="right-0"
+          />
+          {/* <button
+            onClick={handleResetList}
+            className="
+              rounded-full h-12 w-12 
+              
+              bg-gray-50 bg-opacity-75 border border-gray-200 
+            "
+          >
+            <Trash className="text-gray-700" />
+          </button> */}
+        </div>
+      </section>
+    </main>
   );
 };
 

@@ -25,7 +25,7 @@ const EditPlanePage = () => {
   const sideBarRef = useRef<LegacyRef<HTMLElement> | undefined>(null);
 
   return (
-    <>
+    <div className="h-screen">
       <Transition in={toggleSideBar} timeout={400}>
         {(state) => (
           <SideBar
@@ -48,7 +48,7 @@ const EditPlanePage = () => {
           >
             <button
               className="
-                absolute rounded-full h-10 w-10 left-0 top-0 
+                rounded-full h-10 w-10 left-0 top-0 
                 flex items-center justify-center 
                 bg-gray-50 bg-opacity-75 border border-gray-200 
               "
@@ -60,7 +60,7 @@ const EditPlanePage = () => {
         )}
       </Transition>
       <BottomBar />
-    </>
+    </div>
   );
 };
 

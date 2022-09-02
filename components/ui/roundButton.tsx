@@ -11,7 +11,7 @@ const RoundButton: FunctionComponent<IRoundButton> = ({
 }) => {
   return (
     <button
-      className={`absolute rounded-full h-10 w-10 ${left} ${right} ${top} ${bottom}
+      className={`rounded-full h-10 w-10 ${left} ${right} ${top} ${bottom}
         flex items-center justify-center 
         bg-gray-50 bg-opacity-75 border border-gray-200 
       `}

@@ -39,6 +39,33 @@ const SidebarTeste = () => {
           this content to the right.
         </p>
       </div>
+      <div
+        style={{
+          display: "flex",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+            }}
+          >
+            <ul
+              style={{
+                display: "flex",
+              }}
+            >
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
