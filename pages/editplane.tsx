@@ -1,21 +1,24 @@
+import { Tooltip } from "@mui/material";
 import { LegacyRef, useRef, useState } from "react";
-import { ArrowLeft } from "react-feather";
+import { ArrowLeft, ChevronLeft } from "react-feather";
 import { Transition } from "react-transition-group";
 import BottomBar from "../components/pagesections/bottomBar";
 import MainSection from "../components/pagesections/mainSection";
 import SideBar from "../components/pagesections/sideBar";
 
+// transition properties of the main component
 const mainTransitionStyles: any = {
-  entering: { marginLeft: "0px" },
-  entered: { marginLeft: "250px" },
-  exiting: { marginLeft: "250px" },
-  exited: { marginLeft: "0px" },
+  entering: { width: "100%" },
+  entered: { width: "80%" },
+  exiting: { width: "80%" },
+  exited: { width: "100%" },
 };
 
+// transition properties of the sidebar component
 const sideBarTransitionStyles: any = {
   entering: { width: "0px", padding: "0px" },
-  entered: { width: "250px" },
-  exiting: { width: "250px" },
+  entered: { width: "20%" },
+  exiting: { width: "20%" },
   exited: { width: "0px", padding: "0px" },
 };
 
@@ -48,13 +51,13 @@ const EditPlanePage = () => {
           >
             <button
               className="
-                rounded-full h-10 w-10 left-0 top-0 
-                flex items-center justify-center 
+                rounded-full h-10 w-10
+                flex items-center justify-center z-10
                 bg-gray-50 bg-opacity-75 border border-gray-200 
               "
               onClick={() => setToggleSideBar(!toggleSideBar)}
             >
-              <ArrowLeft className="text-gray-700" />
+              <ChevronLeft className="text-gray-700" />
             </button>
           </MainSection>
         )}

@@ -1,9 +1,12 @@
-import { FunctionComponent, useRef } from "react";
+import { FunctionComponent } from "react";
 import { Box, ChevronDown, Type } from "react-feather";
 import { ISideBarProps } from "../../interfaces/interfaces";
 import BarItem from "../ui/barItem";
 
-const SideBar: FunctionComponent<ISideBarProps> = ({sideBarStyle, sideBarRef}) => {
+const SideBar: FunctionComponent<ISideBarProps> = ({
+  sideBarStyle,
+  sideBarRef,
+}) => {
   return (
     <nav
       // className={sidebarClass}
@@ -16,10 +19,7 @@ const SideBar: FunctionComponent<ISideBarProps> = ({sideBarStyle, sideBarRef}) =
       // dark:bg-darklight dark:border-black
     >
       <ul className="relative">
-        <BarItem
-          title={"Inserir Vetor"}
-          leftIcon={<Box />}
-        />
+        <BarItem title={"Inserir Vetor"} leftIcon={<Box />} />
         <BarItem
           title={"Inserir Transformações"}
           leftIcon={<Type />}
@@ -32,13 +32,9 @@ const SideBar: FunctionComponent<ISideBarProps> = ({sideBarStyle, sideBarRef}) =
             "Expansão",
           ]}
         />
-        <BarItem
-          title={"Executar Transformações"}
-          leftIcon={<Box />}
-        />
+        <BarItem title={"Executar Transformações"} leftIcon={<Box />} />
       </ul>
     </nav>
-    
   );
 };
 
