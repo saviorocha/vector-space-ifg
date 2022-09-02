@@ -10,8 +10,9 @@
   },
   "dependencies": {
     "@anatoliygatt/dark-mode-toggle": "^1.0.0",
-    "@emotion/react": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/material": "^5.10.3",
     "@types/d3": "^7.4.0",
     "@types/mathjs": "^9.4.2",
     "d3": "^7.6.1",
@@ -19,14 +20,13 @@
     "lodash": "^4.17.21",
     "mathjax": "^3.2.2",
     "mathjs": "^11.0.1",
-    "next": "12.2.3",
+    "next": "^12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-feather": "^2.0.10",
     "react-katex": "^3.0.1",
     "react-simple-keyboard": "^3.4.187",
-    "react-transition-group": "^4.4.5",
-    "rsuite": "^5.17.0"
+    "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
     "@types/node": "18.6.3",

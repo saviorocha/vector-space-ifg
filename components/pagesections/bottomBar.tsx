@@ -1,4 +1,4 @@
-import React from "react";
+import { Tooltip } from "@mui/material";
 import RenderTex from "../tex/renderTex";
 
 const BottomBar = () => {
@@ -31,20 +31,22 @@ const BottomBar = () => {
           <div>
             <RenderTex
               mathExpression={"T_1\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}"}
+              title="Transformação de R2 em R2"
             />
             <RenderTex
               mathExpression={String.raw`
               T_{1}(\mathbf{a,b}) = \begin{bmatrix}
-              -k & 0\\
-              0 & k
-         \end{bmatrix}\begin{bmatrix}
-              a\\
-              b
-         \end{bmatrix}=\begin{bmatrix}
-              -ka\\
-              kb
-         \end{bmatrix}
+                -k & 0\\
+                0 & k
+              \end{bmatrix}\begin{bmatrix}
+                a\\
+                b
+              \end{bmatrix}=\begin{bmatrix}
+                -ka\\
+                kb
+              \end{bmatrix}
             `}
+              title="Matriz de transformação"
             />
           </div>
         </aside>
@@ -52,9 +54,18 @@ const BottomBar = () => {
         <aside className="w-1/2 h-full flex flex-col justify-around items-center">
           <p>Vetores</p>
           <div>
-            <RenderTex mathExpression={"T_1(v_1)=(1,1)"} />
-            <RenderTex mathExpression={"T_1(e_1)=(1,1)"} />
-            <RenderTex mathExpression={"T_1(e_2)=(1,1)"} />
+            <RenderTex
+              mathExpression={"T_1(v_1)=(1,1)"}
+              title="Vetor resultante da aplicação da transformação T"
+            />
+            <RenderTex
+              mathExpression={"T_1(e_1)=(1,1)"}
+              title="Vetor resultante da aplicação da transformação T"
+            />
+            <RenderTex
+              mathExpression={"T_1(e_2)=(1,1)"}
+              title="Vetor resultante da aplicação da transformação T"
+            />
           </div>
         </aside>
       </section>

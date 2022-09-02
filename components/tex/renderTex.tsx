@@ -1,14 +1,15 @@
 import { InlineMath, BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { useEffect, useState } from "react";
+import { Tooltip } from "@mui/material";
 
-const RenderTex = ({mathExpression}) => {
+const RenderTex = ({ mathExpression, title }) => {
   const [expression, setExpression] = useState("");
   const [showTex, setShowTex] = useState(true);
 
-  useEffect(()=> {
+  useEffect(() => {
     setExpression(mathExpression);
-  },[])
+  }, []);
 
   const handleOnChange = (event: any) => {
     setExpression(event.target.value);
@@ -27,20 +28,27 @@ const RenderTex = ({mathExpression}) => {
     }
   };
   return (
-    <div>
-      {showTex ? (
-        <p onClick={handleDoubleClick}>
-          <InlineMath math={expression} />
-        </p>
-      ) : (
-        <textarea
-          onKeyDown={handleKey}
-          onChange={handleOnChange}
-          value={expression}
-        />
-      )}
-    </div>
+    <Tooltip title={title} placement="top">
+      <p>
+        <InlineMath math={expression} />
+      </p>
+    </Tooltip>
   );
+  // return (
+  //   <div>
+  //     {showTex ? (
+  //       <p onClick={handleDoubleClick}>
+  //         <InlineMath math={expression} />
+  //       </p>
+  //     ) : (
+  //       <textarea
+  //         onKeyDown={handleKey}
+  //         onChange={handleOnChange}
+  //         value={expression}
+  //       />
+  //     )}
+  //   </div>
+  // );
 };
 
 export default RenderTex;
