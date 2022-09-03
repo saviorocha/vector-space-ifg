@@ -42,5 +42,5 @@ interface ITransitionButtonProps {
   icon: ReactElement, 
   sectionStyle: CSSProperties | string, 
   buttonStyle: CSSProperties | string,
-
+  transitionStyles: any,
 }

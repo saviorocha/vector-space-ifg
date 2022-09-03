@@ -4,6 +4,7 @@ import {
   ArrowDown,
   ChevronsLeft,
   ChevronsRight,
+  Globe,
   Grid,
   Hash,
   Play,
@@ -95,6 +96,12 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
             icon={<Settings className="text-gray-700 w-7 h-7" />}
             sectionStyle={styles.settings}
             buttonStyle="z-10"
+            transitionStyles={{
+              entering: { opacity: 0 },
+              entered: { opacity: 1 },
+              exiting: { opacity: 1 },
+              exited: { opacity: 0 },
+            }}
           >
             <ul className="mt-3 ">
               <li className="flex items-center justify-start ml-2 p-1 ">
@@ -116,7 +123,7 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
                 Tema
               </li>
               <li className="flex items-center justify-start ml-2 p-1 ">
-                <Grid />
+                <Globe />
                 Grid
               </li>
               <li className="flex items-center justify-start ml-2 p-1 ">

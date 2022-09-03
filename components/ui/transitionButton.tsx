@@ -2,12 +2,6 @@ import { FunctionComponent, useState } from "react";
 import { Transition } from "react-transition-group";
 import { ITransitionButtonProps } from "../../interfaces/interfaces";
 
-const transitionStyles: any = {
-  entering: { opacity: 0 },
-  entered: { opacity: 1 },
-  exiting: { opacity: 1 },
-  exited: { opacity: 0 },
-};
 /**
  * sectionStyle: must have a transition property!
  */
@@ -16,6 +10,7 @@ const TransitionButton: FunctionComponent<ITransitionButtonProps> = ({
   icon,
   sectionStyle,
   buttonStyle,
+  transitionStyles,
 }) => {
   const [isActive, setIsActive] = useState(false);
 

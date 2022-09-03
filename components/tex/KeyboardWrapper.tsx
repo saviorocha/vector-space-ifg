@@ -5,7 +5,9 @@ import "katex/dist/katex.min.css";
 
 interface IProps {
   onChange: (input: string) => void;
+  // @ts-ignore
   keyboardRef: MutableRefObject<Keyboard>;
+
 }
 
 const KeyboardWrapper: FunctionComponent<IProps> = ({
@@ -26,16 +28,21 @@ const KeyboardWrapper: FunctionComponent<IProps> = ({
       layoutName={layoutName}
       onChange={onChange}
       onKeyPress={onKeyPress}
-      onRender={() => console.log("Rendered")}
+      // onRender={() => console.log("Rendered")}
       layout={{
         default: [
+          "1 2 3 × □² □³",
+          "4 5 6 / yˣ π",
+          "7 8 9 - √ log",
+          "{shift} teste",
+        ],
+        shift: [
           "` 2 2 3 4 5 6 7 8 9 0 - = {bksp}",
           "{tab} q w e r t y u i o p [ ] \\",
           "{lock} a s d f g h j k l ; ' {enter}",
           "{shift} z x c v b n m , . / {shift}",
           ".com @ {space}",
         ],
-        shift: ["teste b c d", "{shift}"],
       }}
     />
   );

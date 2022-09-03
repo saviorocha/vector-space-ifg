@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { Box, ChevronDown, Type } from "react-feather";
+import { Box, ChevronDown, Play, Type } from "react-feather";
 import { ISideBarProps } from "../../interfaces/interfaces";
 import BarItem from "../ui/barItem";
 
@@ -32,7 +32,7 @@ const SideBar: FunctionComponent<ISideBarProps> = ({
             "Expansão",
           ]}
         />
-        <BarItem title={"Executar Transformações"} leftIcon={<Box />} />
+        <BarItem title={"Executar Transformações"} leftIcon={<Play />} />
       </ul>
     </nav>
   );
