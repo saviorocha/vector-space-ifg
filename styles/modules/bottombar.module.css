@@ -5,7 +5,7 @@
   height: 9rem;
   border: 1px solid #494f52;
   box-shadow: 0 0 0.25em rgb(220, 220, 220);
-  background-color: rgb(30, 32, 34);
+  background-color: rgba(243, 244, 246);
   border-top-left-radius: 1.5rem;
   border-top-right-radius: 1.5rem;
   transition: height 300ms ease-in-out;

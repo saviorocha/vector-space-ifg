@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { Box, ChevronDown, Play, Type } from "react-feather";
 import { ISideBarProps } from "../../interfaces/interfaces";
-import BarItem from "../ui/barItem";
+import BarItem from "../ui/BarItem";
 
 const SideBar: FunctionComponent<ISideBarProps> = ({
   sideBarStyle,

@@ -1,7 +1,7 @@
 import { InlineMath, BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { useState } from "react";
-import RenderTex from "../../components/tex/renderTex";
+import RenderTex from "../../components/tex/RenderTex";
 const TesteLatex = () => {
   const [expression, setExpression] = useState(
     "T\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}"

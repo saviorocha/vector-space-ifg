@@ -16,9 +16,9 @@ import Vector from "../../classes/vector";
 import { useListContext } from "../../context";
 import { IMainSectionProps } from "../../interfaces/interfaces";
 import styles from "../../styles/modules/editpage.module.css";
-import D3Plot from "../d3/d3plot";
-import RoundButton from "../ui/roundButton";
-import TransitionButton from "../ui/transitionButton";
+import D3Plot from "../d3/D3plot";
+import RoundButton from "../ui/RoundButton";
+import TransitionButton from "../ui/TransitionButton";
 
 const MainSection: FunctionComponent<IMainSectionProps> = ({
   mainStyle,

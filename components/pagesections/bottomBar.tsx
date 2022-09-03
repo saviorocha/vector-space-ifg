@@ -2,15 +2,15 @@ import { useState } from "react";
 import { Globe, Hash, Plus, Settings } from "react-feather";
 import { Transition } from "react-transition-group";
 import styles from "../../styles/modules/bottombar.module.css";
-import KeyboardIcon from "../icons/keyboardIcon";
-import RenderTex from "../tex/renderTex";
-import TransitionButton from "../ui/transitionButton";
-import VirtualKeyboard from "../ui/virtualKeyboard";
+import KeyboardIcon from "../icons/KeyboardIcon";
+import RenderTex from "../tex/RenderTex";
+import TransitionButton from "../ui/TransitionButton"
+import VirtualKeyboard from "../ui/VirtualKeyboard";
 
 const navTransitionStyles = {
   entering: { height: "9rem" },
-  entered: { height: "35rem" },
-  exiting: { height: "35rem" },
+  entered: { height: "30rem" },
+  exiting: { height: "30rem" },
   exited: { height: "9rem" },
 };
 

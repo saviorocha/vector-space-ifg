@@ -4,8 +4,8 @@ import { ArrowLeft, ChevronLeft } from "react-feather";
 import { Transition } from "react-transition-group";
 import BottomBar from "../components/pagesections/bottomBar";
 import MainSection from "../components/pagesections/mainSection";
-import SideBar from "../components/pagesections/sideBar";
-import VirtualKeyboard from "../components/ui/virtualKeyboard";
+import SideBar from "../components/pagesections/SideBar";
+import VirtualKeyboard from "../components/ui/VirtualKeyboard";
 
 // transition properties of the main component
 const mainTransitionStyles: any = {
