@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/d3/plot-component.ts", "context/TesteContext.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/d3/plotComponent.ts", "context/TesteContext.jsx"],
   "exclude": ["node_modules"]
 }

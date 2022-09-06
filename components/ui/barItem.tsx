@@ -6,6 +6,7 @@ const BarItem: FunctionComponent<IBarItemProps> = ({
   leftIcon,
   subItems = [],
   rightIcon = null,
+  handleOnClick = undefined,
 }) => {
   return (
     <li className="relative m-1 py-1">
@@ -16,6 +17,7 @@ const BarItem: FunctionComponent<IBarItemProps> = ({
           overflow-hidden whitespace-nowrap rounded-lg
           hover:text-gray-900 hover:bg-gray-200 transition duration-300 ease-in-out cursor-pointer
         "
+        onClick={handleOnClick}
       >
         {leftIcon}
         <span>{title}</span>

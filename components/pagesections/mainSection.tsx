@@ -1,16 +1,13 @@
 import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
 import { FunctionComponent, useEffect, useState } from "react";
 import {
-  ArrowDown,
   ChevronsLeft,
   ChevronsRight,
-  Globe,
-  Grid,
-  Hash,
+  Globe, Hash,
   Play,
   Settings,
   ZoomIn,
-  ZoomOut,
+  ZoomOut
 } from "react-feather";
 import Vector from "../../classes/vector";
 import { useListContext } from "../../context";

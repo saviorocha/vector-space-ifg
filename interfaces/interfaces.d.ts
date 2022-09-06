@@ -26,6 +26,7 @@ interface IBarItemProps {
   leftIcon: ReactElement;
   rightIcon?: ReactElement|null;
   subItems?: string[];
+  handleOnClick?: React.MouseEventHandler<HTMLAnchorElement> | undefined;
 }
 
 interface IRoundButton {

@@ -3,6 +3,7 @@ import { ScaleLinear, ZoomBehavior } from "d3";
 class PlotComponent {
   svg;
   vectors: VectorData[][];
+  margin: Margin;
 
   // @ts-ignore
   x: ScaleLinear<number, number>;
@@ -18,6 +19,7 @@ class PlotComponent {
   ) {
     const { margin, width, height } = dimensions;
     this.vectors = vectors;
+    this.margin = margin;
 
     this.svg = d3
       .select(refComponent)
@@ -25,10 +27,11 @@ class PlotComponent {
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
+      .attr("id", "plane")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
     this.createAxis(width, height);
-    this.createChart();
+    this.createChart(width, height);
     this.createZoom(width, height, margin);
     this.createVector();
   }
@@ -50,7 +53,7 @@ class PlotComponent {
       .attr("id", "myYaxis");
   };
 
-  createChart = () => {
+  createChart = (width, height) => {
     const defaultMax = 5;
     const defaultMin = -5;
     const maxX = d3.max(this.vectors, function (data) {
@@ -67,21 +70,66 @@ class PlotComponent {
     });
 
     // Create the X axis:
-    this.x!.domain([
+    this.x.domain([
       minX && minX < defaultMin ? minX : defaultMin,
       maxX && maxX > defaultMax ? maxX : defaultMax,
     ]);
     this.svg.selectAll("#myXaxis").transition().duration(3000).call(this.xAxis);
     // create the Y axis
-    this.y!.domain([
+    this.y.domain([
       minY && minY < defaultMin ? minY : defaultMin,
       maxY && maxY > defaultMax ? maxY : defaultMax,
     ]);
     this.svg.selectAll("#myYaxis").transition().duration(3000).call(this.yAxis);
+
+    // d3.select("#plane")
+    //   .append("rect")
+    //   .attr("id", "clicktest")
+    //   .attr("width", width)
+    //   .attr("height", height)
+    //   .attr("fill", "none")
+    //   .style("pointer-events", "all")
+    //   .attr("transform", "translate(0,0)")
+    //   .on("click", this.clickTest);
   };
 
+  clickTest = (event) => {
+    // console.log("x(1)", x(1));
+    // console.log("y(1)", y(1));
+
+    // (doesn't change with resize!)
+    // domínioX: width
+    // domínioY: height
+
+    // rangeX: xAxis.scale().range()
+    // rangeY: yAxis.scale().range()
+    const clickX = d3.scaleLinear().domain([0, 380]).range([-5, 5]);
+    const clickY = d3.scaleLinear().domain([0, 360]).range([5, -5]);
+    // const clickX = d3.scaleLinear().domain([0, this.height]).range();
+    // console.log("pointerx", d3.pointer(event)[0]);
+    // console.log("pointery", d3.pointer(event)[1]);
+    // console.log("xaxis", this.yAxis.scale().domain())
+    // console.log("transformedx", clickX(d3.pointer(event)[0]));
+    // console.log("transformedy", clickY(d3.pointer(event)[1]));
+    this.vectors.push([
+      { coord1: 0, coord2: 0 },
+      {
+        coord1: clickX(d3.pointer(event)[0]),
+        coord2: clickY(d3.pointer(event)[1]),
+      },
+    ]);
+    this.createLine(this.x, this.y);
+    // console.log("pointerx", x.invert(d3.pointer(event)[0]));
+    // console.log("pointery", y.invert(d3.pointer(event)[1]));
+    // console.log("layerx", event.layerX);
+    // console.log("layerx invert", x.invert(event.layerX));
+    // console.log("event", event);
+    // console.log("x is " + x.invert(d3.pointer(this)[0]));
+    // console.log("y is " + y.invert(e.pageY));
+  };
+
+  // Sets the zoom and pan features: how much you can zoom, on which part, and what to do when there is a zoom
   createZoom = (width: number, height: number, margin: Margin) => {
-    // Sets the zoom and Pan features: how much you can zoom, on which part, and what to do when there is a zoom
     const zoom: ZoomBehavior<any, unknown> = d3
       .zoom()
       .scaleExtent([0.5, 20]) // This control how much you can unzoom (x0.5) and zoom (x20)
@@ -91,13 +139,12 @@ class PlotComponent {
       ])
       .on("zoom", this.handleVectorZoom);
 
-    let x = this.x;
-    let y = this.y;
     this.createLine(this.x, this.y);
 
     // This add an invisible rect on top of the chart area. This rect can recover pointer events: necessary to understand when the user zoom
     this.svg
       .append("rect")
+      .attr("id","zoom-rect")
       .attr("width", width)
       .attr("height", height)
       .style("fill", "none")
@@ -153,7 +200,7 @@ class PlotComponent {
     this.svg
       .selectAll(".lineVector")
       .data(this.vectors, function (data: any) {
-        return data.coord1; 
+        return data.coord1;
       })
       .join("path")
       .attr("class", "lineVector")
