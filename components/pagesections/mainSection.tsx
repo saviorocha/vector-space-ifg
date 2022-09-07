@@ -3,11 +3,12 @@ import { FunctionComponent, useEffect, useState } from "react";
 import {
   ChevronsLeft,
   ChevronsRight,
-  Globe, Hash,
+  Globe,
+  Hash,
   Play,
   Settings,
   ZoomIn,
-  ZoomOut
+  ZoomOut,
 } from "react-feather";
 import Vector from "../../classes/vector";
 import { useListContext } from "../../context";
@@ -22,9 +23,9 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
   mainRef,
   children,
 }) => {
-  const { list, setList } = useListContext();
+  const { list, stateVecArr } = useListContext();
   const [mode, setMode] = useState<Mode>("dark");
-  const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
+  // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
 
   const marginValues: Margin = { top: 10, right: 30, bottom: 30, left: 50 };
   const dimensions: Dimesion = {
@@ -33,31 +34,36 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
     height: 400 - marginValues.top - marginValues.bottom,
   };
 
+
   useEffect(() => {
     // const newHead = addTransformation(new Transformation([2, 0], [0, 2]));
     // const newList = new StateList(newHead);
     // console.log("mainRef", mainRef);
     // setList(newList);
     // setStateVecArr(list.toArray());
-  }, []);
+    // console.log("lista mudou no main")
+    // console.log("mainsectionArr", stateVecArr);
+    // console.log("mainsectionList", list);
+  }, [list]);
+
+  useEffect(() => {
+    // console.log("mainsectionArr", stateVecArr);
+  }, [stateVecArr]);
 
   return (
     <>
-      
       <main
         className="
-        mx-auto absolute h-3/4 right-0
-        flex justify-center items-center
-      "
+          mx-auto absolute h-3/4 right-0
+          flex justify-center items-center
+        "
         id={styles.main}
         style={mainStyle}
         ref={mainRef}
       >
         <section
           id={styles.leftsection}
-          className="
-          h-full flex items-center justify-around flex-col
-        "
+          className="h-full flex items-center justify-around flex-col"
         >
           {children}
           <RoundButton
@@ -72,22 +78,18 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
 
         <section
           id={styles.middlesection}
-          className="
-          h-full flex items-center justify-center
-        "
+          className="h-full flex items-center justify-center"
         >
           {stateVecArr.map((vec, i) => {
             return (
-              <D3Plot key={i} stateVectors={vec} plotDimensions={dimensions} />
+              <D3Plot key={i} stateVectors={vec} plotDimensions={dimensions} index={i} />
             );
           })}
         </section>
 
         <section
           id={styles.rightsection}
-          className="
-          h-full flex items-center justify-between flex-col
-        "
+          className="h-full flex items-center justify-between flex-col"
         >
           <TransitionButton
             icon={<Settings className="text-gray-700 w-7 h-7" />}

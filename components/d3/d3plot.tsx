@@ -7,22 +7,21 @@ import styles from "../../styles/modules/D3.module.css";
 
 let vector;
 const D3Plot: FunctionComponent<IPlotProps> = ({
-  stateVectors,
   plotDimensions,
+  index
 }) => {
   const refElement = useRef<null | HTMLDivElement>(null);
   const [d3Component, setD3Component] = useState<PlotComponent>(
     {} as PlotComponent
   );
-  const { list } = useListContext();
+  const { stateVecArr } = useListContext();
 
-  useEffect(initD3, [list]);
-
+  useEffect(initD3, [stateVecArr]);
+  
   function initD3() {
     const section = d3.select(refElement.current);
-    // console.log("stateVectors", stateVectors);
-    
-    const node = stateVectors.map((vec) => {
+
+    const node = stateVecArr[index].map((vec) => {
       return vec.d3VectorFormat();
     });
 
@@ -34,7 +33,9 @@ const D3Plot: FunctionComponent<IPlotProps> = ({
     };
   }
 
-  return <section className={styles.plot} id="d3-plane" ref={refElement}></section>;
+  return (
+    <section className={styles.plot} id="d3-plane" ref={refElement}></section>
+  );
 };
 
 export default D3Plot;

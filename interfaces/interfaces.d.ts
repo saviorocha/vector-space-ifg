@@ -3,11 +3,14 @@ import StateList from "../classes/stateList";
 interface IContextList {
   list: StateList;
   setList: Dispatch<SetStateAction<StateList>>;
+  stateVecArr: Vector[][];
+  setStateVecArr: Dispatch<SetStateAction<Vector[][]>>;
 }
 
 interface IPlotProps {
-  stateVectors: Vector[];
+  stateVectors?: Vector[];
   plotDimensions: Dimesion;
+  index: number;
 }
 
 interface IMainSectionProps {

@@ -3,19 +3,23 @@ import {
   FunctionComponent,
   useContext,
   useMemo,
-  useState
+  useState,
 } from "react";
 import StateList from "../classes/stateList";
 import StateNode from "../classes/stateNode";
+import Vector from "../classes/vector";
 import { IContextList } from "../interfaces/interfaces";
 
 const ListContext = createContext<IContextList>({} as IContextList);
 
 const ListContextProvider: FunctionComponent<any> = ({ children }) => {
-  const [list, setList] = useState(
-    new StateList(new StateNode())
+  const [list, setList] = useState(new StateList(new StateNode()));
+  const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
+
+  const providerList = useMemo(
+    () => ({ list, setList, stateVecArr, setStateVecArr }),
+    [list, setList, stateVecArr, setStateVecArr]
   );
-  const providerList = useMemo(() => ({ list, setList }), [list, setList]);
 
   return (
     <ListContext.Provider value={providerList}>{children}</ListContext.Provider>

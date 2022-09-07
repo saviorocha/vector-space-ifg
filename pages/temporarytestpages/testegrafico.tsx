@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import StateList from "../classes/stateList";
-import StateNode from "../classes/stateNode";
-import Transformation from "../classes/transformation";
-import Vector from "../classes/vector";
-import D3Plot from "../components/d3/d3plot";
-import { useListContext } from "../context";
+import StateList from "../../classes/stateList";
+import StateNode from "../../classes/stateNode";
+import Transformation from "../../classes/transformation";
+import Vector from "../../classes/vector";
+import D3Plot from "../../components/d3/D3plot";
+import { useListContext } from "../../context";
 
 const TesteGrafico = () => {
   const { list, setList } = useListContext();

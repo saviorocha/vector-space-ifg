@@ -1,11 +1,9 @@
-import { Tooltip } from "@mui/material";
 import { LegacyRef, useRef, useState } from "react";
-import { ArrowLeft, ChevronLeft } from "react-feather";
+import { ChevronLeft } from "react-feather";
 import { Transition } from "react-transition-group";
-import BottomBar from "../components/pagesections/bottomBar";
-import MainSection from "../components/pagesections/mainSection";
+import BottomBar from "../components/pagesections/BottomBar";
+import MainSection from "../components/pagesections/MainSection";
 import SideBar from "../components/pagesections/SideBar";
-import VirtualKeyboard from "../components/ui/VirtualKeyboard";
 
 // transition properties of the main component
 const mainTransitionStyles: any = {
@@ -64,7 +62,6 @@ const EditPlanePage = () => {
         )}
       </Transition>
       <BottomBar />
-
     </div>
   );
 };
