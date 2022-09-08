@@ -33,8 +33,14 @@ class PlotComponent {
       .attr("transform", `translate(${margin.left},${margin.top})`);
     this.createAxis(width, height);
     this.createChart();
-    this.addEvents(eventsArr);
-    // this.createZoom(width, height, margin);
+
+    // that's not the way I wanted to deal with events
+    // but it's the solution I've got so far (￢_￢;)
+    if (eventsArr.length) {
+      this.addEvents(eventsArr);
+    } else {
+      this.createZoom(width, height, margin);
+    }
     // @ts-ignore
     this.createLine(this.x, this.y);
     this.createVector();
@@ -91,7 +97,7 @@ class PlotComponent {
     for (let i = 0; i < eventsArr.length; i++) {
       eventsArr[i]();
     }
-  }
+  };
 
   // Sets the zoom and pan features: how much you can zoom, on which part, and what to do when there is a zoom
   createZoom = (width: number, height: number, margin: Margin) => {

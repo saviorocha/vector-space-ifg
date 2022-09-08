@@ -10,7 +10,7 @@ const SideBar: FunctionComponent<ISideBarProps> = ({
   sideBarRef,
 }) => {
   const { setEvents } = useD3Context();
-  const { addVectorOnClick, addZoom } = useEvents();
+  const { addVectorOnClick } = useEvents();
 
   return (
     <nav
@@ -27,7 +27,7 @@ const SideBar: FunctionComponent<ISideBarProps> = ({
         <BarItem
           title={"Movimentar"}
           leftIcon={<MousePointer />}
-          handleOnClick={() => setEvents([addZoom])}
+          handleOnClick={() => setEvents([])}
         />
         <BarItem
           title={"Inserir Vetor"}
