@@ -1,31 +1,31 @@
 import * as d3 from "d3";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
-import { useListContext } from "../../context";
+import { useD3Context, useListContext } from "../../context";
 import { IPlotProps } from "../../interfaces/interfaces";
 import PlotComponent from "./plotComponent";
 import styles from "../../styles/modules/D3.module.css";
 
-let vector;
-const D3Plot: FunctionComponent<IPlotProps> = ({
-  plotDimensions,
-  index
-}) => {
+const D3Plot: FunctionComponent<IPlotProps> = ({ index }) => {
   const refElement = useRef<null | HTMLDivElement>(null);
   const [d3Component, setD3Component] = useState<PlotComponent>(
     {} as PlotComponent
   );
+
+  const { dimension, events } = useD3Context();
   const { stateVecArr } = useListContext();
 
-  useEffect(initD3, [stateVecArr]);
-  
+  useEffect(initD3, [stateVecArr, events]);
+
   function initD3() {
     const section = d3.select(refElement.current);
 
-    const node = stateVecArr[index].map((vec) => {
+    const vectors = stateVecArr[index].map((vec) => {
       return vec.d3VectorFormat();
     });
 
-    setD3Component(new PlotComponent(refElement.current, plotDimensions, node));
+    setD3Component(
+      new PlotComponent(refElement.current, dimension, vectors, events)
+    );
 
     // cleanup to remove duplicate SVG
     return () => {

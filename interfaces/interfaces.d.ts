@@ -7,9 +7,17 @@ interface IContextList {
   setStateVecArr: Dispatch<SetStateAction<Vector[][]>>;
 }
 
+interface IContextD3 {
+  dimension: Dimesion;
+  setDimension: Dispatch<SetStateAction<Dimesion>>;
+  margin: Margin;
+  setMargin: Dispatch<SetStateAction<Margin>>;
+  events: EventFunction[]|[];
+  setEvents: Dispatch<SetStateAction<EventFunction[]|[]>>;
+}
+
 interface IPlotProps {
   stateVectors?: Vector[];
-  plotDimensions: Dimesion;
   index: number;
 }
 
@@ -27,7 +35,7 @@ interface ISideBarProps {
 interface IBarItemProps {
   title: string;
   leftIcon: ReactElement;
-  rightIcon?: ReactElement|null;
+  rightIcon?: ReactElement | null;
   subItems?: string[];
   handleOnClick?: React.MouseEventHandler<HTMLAnchorElement> | undefined;
 }
@@ -38,13 +46,13 @@ interface IRoundButton {
   right?: string;
   top?: string;
   bottom?: string;
-  handleOnClick?:  React.MouseEventHandler<HTMLButtonElement> | undefined;
+  handleOnClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
 interface ITransitionButtonProps {
-  children: ReactNode, 
-  icon: ReactElement, 
-  sectionStyle: CSSProperties | string, 
-  buttonStyle: CSSProperties | string,
-  transitionStyles: any,
+  children: ReactNode;
+  icon: ReactElement;
+  sectionStyle: CSSProperties | string;
+  buttonStyle: CSSProperties | string;
+  transitionStyles: any;
 }

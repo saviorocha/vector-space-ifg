@@ -15,3 +15,5 @@ type VectorData = {
   coord1: number;
   coord2: number;
 };
+
+type EventFunction = () => any;
