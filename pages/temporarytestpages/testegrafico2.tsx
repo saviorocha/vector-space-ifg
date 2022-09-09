@@ -102,7 +102,7 @@ const TesteGrafico2 = () => {
       </form>
       {stateVecArr.map((vec, i) => {
         return (
-          <D3Plot key={i} stateVectors={vec} plotDimensions={dimensions} />
+          <D3Plot key={i} index={i} />
         );
       })}
     </>

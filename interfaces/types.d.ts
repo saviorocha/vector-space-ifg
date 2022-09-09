@@ -16,4 +16,14 @@ type VectorData = {
   coord2: number;
 };
 
+// type VectorData = {
+//   coordinates: {
+//     coord1: number;
+//     coord2: number;
+//   }[];
+
+//   color: string;
+//   name: string;
+// };
+
 type EventFunction = () => any;

@@ -12,12 +12,11 @@ interface IContextD3 {
   setDimension: Dispatch<SetStateAction<Dimesion>>;
   margin: Margin;
   setMargin: Dispatch<SetStateAction<Margin>>;
-  events: EventFunction[]|[];
-  setEvents: Dispatch<SetStateAction<EventFunction[]|[]>>;
+  events: EventFunction[] | [];
+  setEvents: Dispatch<SetStateAction<EventFunction[] | []>>;
 }
 
 interface IPlotProps {
-  stateVectors?: Vector[];
   index: number;
 }
 
@@ -36,7 +35,10 @@ interface IBarItemProps {
   title: string;
   leftIcon: ReactElement;
   rightIcon?: ReactElement | null;
-  subItems?: string[];
+  subItems?: {
+    title: string;
+    handleItemOnClick: React.MouseEventHandler<HTMLAnchorElement> | undefined;
+  }[];
   handleOnClick?: React.MouseEventHandler<HTMLAnchorElement> | undefined;
 }
 

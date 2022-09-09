@@ -35,6 +35,18 @@ class Vector {
       { coord1: this.x, coord2: this.y },
     ];
   };
+
+  // d3VectorFormat = (): VectorData[] => {
+  //   return [{
+  //     coordinates: [
+  //       { coord1: 0, coord2: 0 },
+  //       { coord1: this.x, coord2: this.y },
+  //     ],
+  //     color: this.color,
+  //     name: this._name,
+
+  //   }];
+  // };
   
 }
 

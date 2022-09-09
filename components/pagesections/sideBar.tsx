@@ -1,7 +1,16 @@
-import { FunctionComponent } from "react";
-import { Box, ChevronDown, MousePointer, Play, Type } from "react-feather";
-import { useD3Context } from "../../context";
+import { FunctionComponent, useEffect } from "react";
+import {
+  ArrowUpLeft,
+  ChevronDown,
+  MousePointer,
+  Play,
+  Type,
+} from "react-feather";
+import StateList from "../../classes/stateList";
+import Transformation from "../../classes/transformation";
+import { useD3Context, useListContext } from "../../context";
 import useEvents from "../../hooks/useEvents";
+import useList from "../../hooks/useList";
 import { ISideBarProps } from "../../interfaces/interfaces";
 import BarItem from "../ui/BarItem";
 
@@ -10,7 +19,24 @@ const SideBar: FunctionComponent<ISideBarProps> = ({
   sideBarRef,
 }) => {
   const { setEvents } = useD3Context();
+  const { list, setList, stateVecArr, setStateVecArr } = useListContext();
+  const { addTransformation } = useList();
   const { addVectorOnClick } = useEvents();
+
+  const transfromationSubmitHandler = (
+    e1: [number, number],
+    e2: [number, number]
+  ) => {
+    const newHead = addTransformation(new Transformation(e1, e2));
+    const newList = new StateList(newHead);
+    // console.log("newList", newList);
+    setList(newList);
+    setStateVecArr(list.toArray());
+  };
+
+  useEffect(() => {
+    console.log("stateVecArr", stateVecArr);
+  }, [stateVecArr]);
 
   return (
     <nav
@@ -31,7 +57,7 @@ const SideBar: FunctionComponent<ISideBarProps> = ({
         />
         <BarItem
           title={"Inserir Vetor"}
-          leftIcon={<Box />}
+          leftIcon={<ArrowUpLeft />}
           handleOnClick={() => setEvents([addVectorOnClick])}
         />
         <BarItem
@@ -39,14 +65,67 @@ const SideBar: FunctionComponent<ISideBarProps> = ({
           leftIcon={<Type />}
           rightIcon={<ChevronDown />}
           subItems={[
-            "Transformação Padrão",
-            "Reflexão",
-            "Cisalhamento",
-            "Contração",
-            "Expansão",
+            // prettier-ignore
+            {
+              title: "Transformação Padrão",
+              handleItemOnClick: () =>
+                transfromationSubmitHandler(
+                  [1, 0], 
+                  [0, 1]
+                ),
+            },
+            // prettier-ignore
+            {
+              title: "Reflexão pelo Eixo y",
+              handleItemOnClick: () =>
+                transfromationSubmitHandler(
+                  [-1, 0], 
+                  [0, 1]
+                ),
+            },
+            // prettier-ignore
+            {
+              title: "Cisalhamento",
+              handleItemOnClick: () =>
+                transfromationSubmitHandler(
+                  [1, 0], 
+                  [2, 1]
+                ),
+            },
+            // prettier-ignore
+            {
+              title: "Contração",
+              handleItemOnClick: () =>
+                transfromationSubmitHandler(
+                  [1 / 2, 0], 
+                  [0, 1 / 2]
+                ),
+            },
+            // prettier-ignore
+            {
+              title: "Expansão",
+              handleItemOnClick: () =>
+                transfromationSubmitHandler(
+                  [2, 0], 
+                  [0, 2]
+                ),
+            },
+            // prettier-ignore
+            {
+              title: "teste",
+              handleItemOnClick: () =>
+                transfromationSubmitHandler(
+                  [1, 2], 
+                  [3, 4]
+                ),
+            },
           ]}
         />
-        <BarItem title={"Executar Transformações"} leftIcon={<Play />} />
+        <BarItem
+          title={"Executar Transformações"}
+          leftIcon={<Play />}
+          handleOnClick={() => {}}
+        />
       </ul>
     </nav>
   );

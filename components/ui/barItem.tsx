@@ -26,7 +26,7 @@ const BarItem: FunctionComponent<IBarItemProps> = ({
       {subItems ? (
         <ul className="relative accordion-collapse collapse">
           <li className="relative">
-            {subItems.map((title, i) => {
+            {subItems.map(({ title, handleItemOnClick }, i) => {
               return (
                 <a
                   key={i}
@@ -36,6 +36,7 @@ const BarItem: FunctionComponent<IBarItemProps> = ({
                     flex items-center whitespace-nowrap overflow-hidden rounded 
                     hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out
                   "
+                  onClick={handleItemOnClick}
                 >
                   {title}
                 </a>

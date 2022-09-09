@@ -82,7 +82,7 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
         >
           {stateVecArr.map((vec, i) => {
             return (
-              <D3Plot key={i} stateVectors={vec} index={i} />
+              <D3Plot key={i} index={i} />
             );
           })}
         </section>

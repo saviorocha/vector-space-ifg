@@ -25,7 +25,6 @@ class PlotComponent {
     this.svg = d3
       .select(refComponent)
       .append("svg:svg")
-      .attr("id", "svgPlane")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
@@ -34,7 +33,7 @@ class PlotComponent {
     this.createAxis(width, height);
     this.createChart();
 
-    // that's not the way I wanted to deal with events
+    // that's not how I wanted to deal with events
     // but it's the solution I've got so far (￢_￢;)
     if (eventsArr.length) {
       this.addEvents(eventsArr);
