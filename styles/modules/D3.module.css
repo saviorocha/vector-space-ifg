@@ -1,4 +1,4 @@
-section.plot {
+#plot {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,6 +6,9 @@ section.plot {
   width: 480px;
   height: 420px;
 
+  margin: 100px;
+
+  display: none;
   /* margin: auto 20rem; */
   /* padding-left: 10px;
   padding-right: 10px; */

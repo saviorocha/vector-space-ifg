@@ -10,7 +10,6 @@ import {
   ZoomIn,
   ZoomOut,
 } from "react-feather";
-import Vector from "../../classes/vector";
 import { useListContext } from "../../context";
 import { IMainSectionProps } from "../../interfaces/interfaces";
 import styles from "../../styles/modules/editpage.module.css";
@@ -25,6 +24,7 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
 }) => {
   const { list, stateVecArr } = useListContext();
   const [mode, setMode] = useState<Mode>("dark");
+  const [currentPlot, setCurrentPlot] = useState(0);
   // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
 
   const marginValues: Margin = { top: 10, right: 30, bottom: 30, left: 50 };
@@ -33,7 +33,6 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
     width: 460 - marginValues.left - marginValues.right,
     height: 400 - marginValues.top - marginValues.bottom,
   };
-
 
   useEffect(() => {
     // const newHead = addTransformation(new Transformation([2, 0], [0, 2]));
@@ -69,6 +68,9 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
           <RoundButton
             icon={<ChevronsLeft className="text-gray-700" />}
             left="left-0"
+            handleOnClick={() => {
+              setCurrentPlot(currentPlot - 1);
+            }}
           />
           <RoundButton
             icon={<ChevronsLeft className="text-gray-700" />}
@@ -78,12 +80,15 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
 
         <section
           id={styles.middlesection}
-          className="h-full flex items-center justify-center"
+          // className="h-full flex items-center justify-center"
+          className="
+            flex items-center justify-center relative gap-1 
+            h-full overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0
+          "
         >
+          {/* <Carousel /> */}
           {stateVecArr.map((vec, i) => {
-            return (
-              <D3Plot key={i} index={i} />
-            );
+            return <D3Plot key={i} index={i} render={i === currentPlot} />;
           })}
         </section>
 
@@ -134,6 +139,9 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
           <RoundButton
             icon={<ChevronsRight className="text-gray-700" />}
             right="right-0"
+            handleOnClick={() => {
+              setCurrentPlot(currentPlot + 1);
+            }}
           />
           <div
             id="bottom-buttons"

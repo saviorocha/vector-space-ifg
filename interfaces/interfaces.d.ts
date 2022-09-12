@@ -18,6 +18,7 @@ interface IContextD3 {
 
 interface IPlotProps {
   index: number;
+  render: boolean;
 }
 
 interface IMainSectionProps {
