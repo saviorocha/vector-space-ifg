@@ -30,12 +30,12 @@ class StateNode {
     this._vectors = _vectors;
   }
 
-  updateVectors() {
+  updateVectors(): Vector[] {
     return this._previous
       ? this._previous._vectors.map((vec) => {
           return this._transformation.applyTransformation(vec);
         })
-      : [];
+      : [this._transformation.e1Vector, this._transformation.e2Vector];
   }
 
   // get next(): StateNode | null {

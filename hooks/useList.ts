@@ -19,7 +19,7 @@ const useList = () => {
     transformation: Transformation,
     previousTransformationName: string = list.getTail().transformation.name
   ): StateNode => {
-
+    
     const previousState = getStateByName(previousTransformationName);
 
     if (!previousState) {

@@ -110,7 +110,7 @@ const BottomBar = () => {
                         />
                         <RenderTex
                           mathExpression={String.raw`
-                      T_{1}(\mathbf{a,b}) = \begin{bmatrix}
+                      T_{1}(a,b) = \begin{bmatrix}
                         -k & 0\\
                         0 & k
                       \end{bmatrix}\begin{bmatrix}

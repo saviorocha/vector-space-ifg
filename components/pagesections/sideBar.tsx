@@ -27,7 +27,7 @@ const SideBar: FunctionComponent<ISideBarProps> = ({
     e1: [number, number],
     e2: [number, number]
   ) => {
-    const newHead = addTransformation(new Transformation(e1, e2));
+    const newHead = addTransformation(new Transformation(e1, e2, `T${stateVecArr.length}`));
     const newList = new StateList(newHead);
     // console.log("newList", newList);
     setList(newList);
@@ -37,6 +37,10 @@ const SideBar: FunctionComponent<ISideBarProps> = ({
   useEffect(() => {
     console.log("stateVecArr", stateVecArr);
   }, [stateVecArr]);
+
+  useEffect(() => {
+    console.log("current list", list);
+  }, [list]);
 
   return (
     <nav
@@ -65,59 +69,34 @@ const SideBar: FunctionComponent<ISideBarProps> = ({
           leftIcon={<Type />}
           rightIcon={<ChevronDown />}
           subItems={[
-            // prettier-ignore
             {
               title: "Transformação Padrão",
               handleItemOnClick: () =>
-                transfromationSubmitHandler(
-                  [1, 0], 
-                  [0, 1]
-                ),
+                transfromationSubmitHandler([1, 0], [0, 1]),
             },
-            // prettier-ignore
+
             {
               title: "Reflexão pelo Eixo y",
               handleItemOnClick: () =>
-                transfromationSubmitHandler(
-                  [-1, 0], 
-                  [0, 1]
-                ),
+                transfromationSubmitHandler([-1, 0], [0, 1]),
             },
-            // prettier-ignore
+
             {
               title: "Cisalhamento",
               handleItemOnClick: () =>
-                transfromationSubmitHandler(
-                  [1, 0], 
-                  [2, 1]
-                ),
+                transfromationSubmitHandler([1, 0], [2, 1]),
             },
-            // prettier-ignore
+
             {
               title: "Contração",
               handleItemOnClick: () =>
-                transfromationSubmitHandler(
-                  [1 / 2, 0], 
-                  [0, 1 / 2]
-                ),
+                transfromationSubmitHandler([1 / 2, 0], [0, 1 / 2]),
             },
-            // prettier-ignore
+
             {
               title: "Expansão",
               handleItemOnClick: () =>
-                transfromationSubmitHandler(
-                  [2, 0], 
-                  [0, 2]
-                ),
-            },
-            // prettier-ignore
-            {
-              title: "teste",
-              handleItemOnClick: () =>
-                transfromationSubmitHandler(
-                  [1, 2], 
-                  [3, 4]
-                ),
+                transfromationSubmitHandler([2, 0], [0, 2]),
             },
           ]}
         />

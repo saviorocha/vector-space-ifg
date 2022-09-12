@@ -25,8 +25,8 @@ class Transformation {
 
   applyTransformation(vector: Vector): Vector {
     const coordinates: [number, number] = [
-      multiply(this.matrixTransformation, vector.array).get([1]),
       multiply(this.matrixTransformation, vector.array).get([0]),
+      multiply(this.matrixTransformation, vector.array).get([1]),
     ];
     return new Vector(coordinates);
   }

@@ -77,8 +77,6 @@ class StateList {
     while (nextNode) {
       listArr[i] = [
         ...nextNode.vectors,
-        nextNode.transformation.e1Vector,
-        nextNode.transformation.e2Vector,
       ];
       nextNode = nextNode._next;
       i++;
