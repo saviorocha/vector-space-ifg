@@ -7,6 +7,7 @@ const RoundButton: FunctionComponent<IRoundButton> = ({
   right = "",
   top = "",
   bottom = "",
+  disabled = false,
   handleOnClick = () => {},
 }) => {
   return (
@@ -15,6 +16,7 @@ const RoundButton: FunctionComponent<IRoundButton> = ({
         flex items-center justify-center 
         bg-gray-50 bg-opacity-75 border border-gray-200 
       `}
+      disabled={disabled}
       onClick={handleOnClick}
     >
       {icon}

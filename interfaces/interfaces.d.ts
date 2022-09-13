@@ -50,6 +50,7 @@ interface IRoundButton {
   top?: string;
   bottom?: string;
   handleOnClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  disabled?: boolean;
 }
 
 interface ITransitionButtonProps {

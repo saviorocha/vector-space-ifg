@@ -37,6 +37,7 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index, render = false }) => {
     <section
       className="carousel-item text-center relative snap-start"
       style={{
+        // display: "block",
         display: render ? "block" : "none",
       }}
       id={styles.plot}

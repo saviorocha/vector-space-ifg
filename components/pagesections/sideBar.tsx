@@ -35,11 +35,11 @@ const SideBar: FunctionComponent<ISideBarProps> = ({
   };
 
   useEffect(() => {
-    console.log("stateVecArr", stateVecArr);
+    // console.log("stateVecArr", stateVecArr);
   }, [stateVecArr]);
 
   useEffect(() => {
-    console.log("current list", list);
+    // console.log("current list", list);
   }, [list]);
 
   return (

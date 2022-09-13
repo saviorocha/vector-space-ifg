@@ -46,7 +46,8 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
   }, [list]);
 
   useEffect(() => {
-    // console.log("mainsectionArr", stateVecArr);
+    console.log("mainsectionArr", stateVecArr.length - 1);
+    console.log("currentPlot", currentPlot);
   }, [stateVecArr]);
 
   return (
@@ -71,6 +72,7 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
             handleOnClick={() => {
               setCurrentPlot(currentPlot - 1);
             }}
+            disabled={currentPlot - 1 < 0}
           />
           <RoundButton
             icon={<ChevronsLeft className="text-gray-700" />}
@@ -82,7 +84,7 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
           id={styles.middlesection}
           // className="h-full flex items-center justify-center"
           className="
-            flex items-center justify-center relative gap-1 
+            flex items-center justify-center flex-col relative gap-1 
             h-full overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0
           "
         >
@@ -90,6 +92,20 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
           {stateVecArr.map((vec, i) => {
             return <D3Plot key={i} index={i} render={i === currentPlot} />;
           })}
+          <div className="mt-0">
+            {stateVecArr.map((vec, i) => {
+              return (
+                <span
+                  key={i}
+                  className={styles.dot}
+                  style={{
+                    backgroundColor: i === currentPlot ? "#717171" : "#bbb",
+                  }}
+                  onClick={() => setCurrentPlot(i)}
+                ></span>
+              );
+            })}
+          </div>
         </section>
 
         <section
@@ -142,6 +158,7 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
             handleOnClick={() => {
               setCurrentPlot(currentPlot + 1);
             }}
+            disabled={currentPlot + 1 > stateVecArr.length - 1}
           />
           <div
             id="bottom-buttons"
