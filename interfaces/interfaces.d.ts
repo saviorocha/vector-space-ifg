@@ -16,9 +16,19 @@ interface IContextD3 {
   setEvents: Dispatch<SetStateAction<EventFunction[] | []>>;
 }
 
+interface IContextName {
+  currentPlot: number;
+  setCurrentPlot: Dispatch<SetStateAction<number>>;
+  vectorNameCounter: number;
+  setVectorNameCounter: Dispatch<SetStateAction<number>>;
+  transformationNameCounter: number;
+  setTransformationNameCounter: Dispatch<SetStateAction<number>>;
+}
+
 interface IPlotProps {
   index: number;
   render: boolean;
+  translate?: number;
 }
 
 interface IMainSectionProps {

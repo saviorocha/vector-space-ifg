@@ -17,7 +17,12 @@ const ListContextProvider: FunctionComponent<any> = ({ children }) => {
   const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
 
   const providerList = useMemo(
-    () => ({ list, setList, stateVecArr, setStateVecArr }),
+    () => ({
+      list,
+      setList,
+      stateVecArr,
+      setStateVecArr,
+    }),
     [list, setList, stateVecArr, setStateVecArr]
   );
 

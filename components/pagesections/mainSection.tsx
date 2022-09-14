@@ -10,7 +10,7 @@ import {
   ZoomIn,
   ZoomOut,
 } from "react-feather";
-import { useListContext } from "../../context";
+import { useListContext, useNameContext } from "../../context";
 import { IMainSectionProps } from "../../interfaces/interfaces";
 import styles from "../../styles/modules/editpage.module.css";
 import D3Plot from "../d3/D3plot";
@@ -22,17 +22,14 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
   mainRef,
   children,
 }) => {
+  const { currentPlot, setCurrentPlot, vectorNameCounter, setVectorNameCounter } = useNameContext();
   const { list, stateVecArr } = useListContext();
   const [mode, setMode] = useState<Mode>("dark");
-  const [currentPlot, setCurrentPlot] = useState(0);
   // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
 
-  const marginValues: Margin = { top: 10, right: 30, bottom: 30, left: 50 };
-  const dimensions: Dimesion = {
-    margin: marginValues,
-    width: 460 - marginValues.left - marginValues.right,
-    height: 400 - marginValues.top - marginValues.bottom,
-  };
+  useEffect(() => {
+    console.log("vectorNameCounter", vectorNameCounter)
+  }, [vectorNameCounter])
 
   useEffect(() => {
     // const newHead = addTransformation(new Transformation([2, 0], [0, 2]));
@@ -46,8 +43,8 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
   }, [list]);
 
   useEffect(() => {
-    console.log("mainsectionArr", stateVecArr.length - 1);
-    console.log("currentPlot", currentPlot);
+    // console.log("mainsectionArr", stateVecArr.length - 1);
+    // console.log("currentPlot", currentPlot);
   }, [stateVecArr]);
 
   return (
@@ -84,13 +81,21 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
           id={styles.middlesection}
           // className="h-full flex items-center justify-center"
           className="
-            flex items-center justify-center flex-col relative gap-1 
-            h-full overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0
+            relative gap-1 overflow-hidden
+            flex items-center justify-center flex-col 
           "
+          // h-full overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0
         >
           {/* <Carousel /> */}
           {stateVecArr.map((vec, i) => {
-            return <D3Plot key={i} index={i} render={i === currentPlot} />;
+            return (
+              <D3Plot
+                key={i}
+                index={i}
+                render={i === currentPlot}
+                translate={currentPlot * 10}
+              />
+            );
           })}
           <div className="mt-0">
             {stateVecArr.map((vec, i) => {
@@ -112,6 +117,11 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
           id={styles.rightsection}
           className="h-full flex items-center justify-between flex-col"
         >
+          {/* <button id="counter" onClick={() => {
+            setVectorNameCounter(vectorNameCounter + 1);
+          }}>
+            <Hash />
+          </button> */}
           <TransitionButton
             icon={<Settings className="text-gray-700 w-7 h-7" />}
             sectionStyle={styles.settings}

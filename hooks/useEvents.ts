@@ -1,19 +1,17 @@
 import * as d3 from "d3";
-import { ScaleLinear, ZoomBehavior } from "d3";
 import StateList from "../classes/stateList";
 import Vector from "../classes/vector";
-import { useD3Context, useListContext } from "../context";
+import { useD3Context, useListContext, useNameContext } from "../context";
 import useList from "./useList";
 
 const useEvents = () => {
   const { addVector } = useList();
   const { setList, setStateVecArr } = useListContext();
+  const { vectorNameCounter, setVectorNameCounter } = useNameContext();
   const { dimension } = useD3Context();
   const { width, height } = dimension;
 
-
   const addVectorOnClick = () => {
-
     d3.select("#zoom-rect").remove();
     d3.select("#plane")
       .append("rect")
@@ -39,7 +37,19 @@ const useEvents = () => {
         // (Math.round(num * 100) / 100).toFixed(2); - 1.34252 -> 1.34
         const newHead = addVector(
           new Vector(
-            [clickX(d3.pointer(event)[0]), clickY(d3.pointer(event)[1])]
+            [
+              parseFloat(
+                (Math.round(clickX(d3.pointer(event)[0]) * 100) / 100).toFixed(
+                  2
+                )
+              ),
+              parseFloat(
+                (Math.round(clickY(d3.pointer(event)[1]) * 100) / 100).toFixed(
+                  2
+                )
+              ),
+            ],
+            `v_${vectorNameCounter}`
             // "#bb00ff"
           )
         );
@@ -47,10 +57,11 @@ const useEvents = () => {
         const newList = new StateList(newHead);
         setList(newList);
         setStateVecArr(newList.toArray());
+        setVectorNameCounter(vectorNameCounter + 1);
+        console.log("vectorNameCounter", vectorNameCounter);
       });
   };
 
-  
   return { addVectorOnClick };
 };
 

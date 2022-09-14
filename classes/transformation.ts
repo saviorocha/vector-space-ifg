@@ -17,8 +17,8 @@ class Transformation {
     this.e1 = e1;
     this.e2 = e2;
     this._name = _name;
-    this._e1Vector = new Vector(this.e1, undefined, "red");
-    this._e2Vector = new Vector(this.e2, undefined, "blue");
+    this._e1Vector = new Vector(this.e1, "e_1", "red");
+    this._e2Vector = new Vector(this.e2, "e_2", "blue");
     this.matrixTransformation = matrix([e1, e2]);
     // console.log(this.matrixTransformation);
   }

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Globe, Hash, Plus, Settings } from "react-feather";
 import { Transition } from "react-transition-group";
+import { useListContext, useNameContext } from "../../context";
 import styles from "../../styles/modules/bottombar.module.css";
 import KeyboardIcon from "../icons/KeyboardIcon";
 import RenderTex from "../tex/RenderTex";
-import TransitionButton from "../ui/TransitionButton"
+import TransitionButton from "../ui/TransitionButton";
 import VirtualKeyboard from "../ui/VirtualKeyboard";
 
 const navTransitionStyles = {
@@ -30,6 +31,13 @@ const keyboardTransitionStyles = {
 
 const BottomBar = () => {
   const [toggleKeyboard, setToggleKeyboard] = useState(false);
+  const { currentPlot } = useNameContext();
+  const { stateVecArr } = useListContext();
+
+  useEffect(() => {
+    // console.log("vectors", stateVecArr[0]);
+  }, []);
+
   return (
     <Transition in={toggleKeyboard} timeout={400}>
       {(state) => (
@@ -110,17 +118,17 @@ const BottomBar = () => {
                         />
                         <RenderTex
                           mathExpression={String.raw`
-                      T_{1}(a,b) = \begin{bmatrix}
-                        -k & 0\\
-                        0 & k
-                      \end{bmatrix}\begin{bmatrix}
-                        a\\
-                        b
-                      \end{bmatrix}=\begin{bmatrix}
-                        -ka\\
-                        kb
-                      \end{bmatrix}
-                    `}
+                            T_{1}(a,b) = \begin{bmatrix}
+                              -k & 0\\
+                              0 & k
+                            \end{bmatrix}\begin{bmatrix}
+                              a\\
+                              b
+                            \end{bmatrix}=\begin{bmatrix}
+                              -ka\\
+                              kb
+                            \end{bmatrix}
+                          `}
                           title="Matriz de transformação"
                         />
                       </div>
@@ -131,18 +139,19 @@ const BottomBar = () => {
 
                     <aside className="relative w-1/2 h-full flex flex-col justify-around items-center">
                       <div>
-                        <RenderTex
-                          mathExpression={"T_1(v_1)=(1,1)"}
-                          title="Vetor resultante da aplicação da transformação T"
-                        />
-                        <RenderTex
+                        {stateVecArr[currentPlot].map((vec, i) => {
+                          return (
+                            <RenderTex
+                              key={i}
+                              mathExpression={`${vec.name}=(${vec.x},${vec.y})`}
+                              title="Vetor resultante da aplicação da transformação T"
+                            />
+                          );
+                        })}
+                        {/* <RenderTex
                           mathExpression={"T_1(e_1)=(1,1)"}
                           title="Vetor resultante da aplicação da transformação T"
-                        />
-                        <RenderTex
-                          mathExpression={"T_1(e_2)=(1,1)"}
-                          title="Vetor resultante da aplicação da transformação T"
-                        />
+                        /> */}
                       </div>
                       <button className="absolute bottom-1 left-1">
                         <Plus />
