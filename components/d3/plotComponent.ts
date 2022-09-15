@@ -24,6 +24,7 @@ class PlotComponent {
 
     this.svg = d3
       .select(refComponent)
+      .attr("id", "svgPlot")
       .append("svg:svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)

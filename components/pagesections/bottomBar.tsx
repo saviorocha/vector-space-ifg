@@ -8,21 +8,21 @@ import RenderTex from "../tex/RenderTex";
 import TransitionButton from "../ui/TransitionButton";
 import VirtualKeyboard from "../ui/VirtualKeyboard";
 
-const navTransitionStyles = {
+const navTransitionStyles: any = {
   entering: { height: "9rem" },
   entered: { height: "30rem" },
   exiting: { height: "30rem" },
   exited: { height: "9rem" },
 };
 
-const mainTransitionStyles = {
+const mainTransitionStyles: any = {
   entering: { height: "100%" },
   entered: { height: "50%" },
   exiting: { height: "50%" },
   exited: { height: "100%" },
 };
 
-const keyboardTransitionStyles = {
+const keyboardTransitionStyles: any = {
   entering: { height: "0%" },
   entered: { height: "50%" },
   exiting: { height: "50%" },
@@ -33,10 +33,17 @@ const BottomBar = () => {
   const [toggleKeyboard, setToggleKeyboard] = useState(false);
   const { currentPlot } = useNameContext();
   const { stateVecArr } = useListContext();
+  const { vectorNameCounter, setVectorNameCounter } = useNameContext();
 
   useEffect(() => {
+    // setVectorNameCounter(vectorNameCounter + 1);
     // console.log("vectors", stateVecArr[0]);
-  }, []);
+  }, [stateVecArr]);
+
+  useEffect(() => {
+    // console.log("mainsectionArr", stateVecArr.length - 1);
+    console.log("currentPlot", stateVecArr[currentPlot]);
+  }, [currentPlot]);
 
   return (
     <Transition in={toggleKeyboard} timeout={400}>

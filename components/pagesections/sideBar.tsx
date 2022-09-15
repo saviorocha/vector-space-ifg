@@ -27,7 +27,7 @@ const SideBar: FunctionComponent<ISideBarProps> = ({
     e1: [number, number],
     e2: [number, number]
   ) => {
-    const newHead = addTransformation(new Transformation(e1, e2, `T${stateVecArr.length}`));
+    const newHead = addTransformation(new Transformation(e1, e2, `T_${stateVecArr.length}`));
     const newList = new StateList(newHead);
     // console.log("newList", newList);
     setList(newList);

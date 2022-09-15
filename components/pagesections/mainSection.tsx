@@ -28,7 +28,7 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
   // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
 
   useEffect(() => {
-    console.log("vectorNameCounter", vectorNameCounter)
+    // console.log("vectorNameCounter", vectorNameCounter)
   }, [vectorNameCounter])
 
   useEffect(() => {
@@ -42,10 +42,10 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
     // console.log("mainsectionList", list);
   }, [list]);
 
-  useEffect(() => {
-    // console.log("mainsectionArr", stateVecArr.length - 1);
-    // console.log("currentPlot", currentPlot);
-  }, [stateVecArr]);
+  // useEffect(() => {
+  //   // console.log("mainsectionArr", stateVecArr.length - 1);
+  //   console.log("currentPlot", currentPlot);
+  // }, [currentPlot]);
 
   return (
     <>
@@ -119,6 +119,7 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
         >
           {/* <button id="counter" onClick={() => {
             setVectorNameCounter(vectorNameCounter + 1);
+            console.log("vectorNameCounter", vectorNameCounter);
           }}>
             <Hash />
           </button> */}

@@ -7,12 +7,12 @@ import useList from "./useList";
 const useEvents = () => {
   const { addVector } = useList();
   const { setList, setStateVecArr } = useListContext();
-  const { vectorNameCounter, setVectorNameCounter } = useNameContext();
+  const { vectorNameCounter } = useNameContext();
   const { dimension } = useD3Context();
   const { width, height } = dimension;
 
   const addVectorOnClick = () => {
-    d3.select("#zoom-rect").remove();
+    // d3.select("#zoom-rect").remove();
     d3.select("#plane")
       .append("rect")
       .attr("id", "clicktest")
@@ -22,8 +22,8 @@ const useEvents = () => {
       .style("pointer-events", "all")
       .on("click", (event: any) => {
         // (doesn't change with screen resize!)
-        // domainX: width  -> 380
-        // domainY: height -> 360
+        // domainX: svg-width  -> 380
+        // domainY: svg-height -> 360
 
         // (changes with zoom in and zoom out)
         // rangeX: xAxis.scale().range() -> [-5, 5]
@@ -57,8 +57,7 @@ const useEvents = () => {
         const newList = new StateList(newHead);
         setList(newList);
         setStateVecArr(newList.toArray());
-        setVectorNameCounter(vectorNameCounter + 1);
-        console.log("vectorNameCounter", vectorNameCounter);
+        // console.log("vectorNameCounter", vectorNameCounter);
       });
   };
 

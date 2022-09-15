@@ -1,7 +1,7 @@
 import StateNode from "../classes/stateNode";
 import Transformation from "../classes/transformation";
 import Vector from "../classes/vector";
-import { useListContext } from "../context";
+import { useListContext, useNameContext } from "../context";
 
 const useList = () => {
   const { list, setList } = useListContext();

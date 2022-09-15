@@ -70,3 +70,8 @@ interface ITransitionButtonProps {
   buttonStyle: CSSProperties | string;
   transitionStyles: any;
 }
+
+interface IRenderTexProps {
+  mathExpression: string;
+  title: string;
+}
