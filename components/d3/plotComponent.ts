@@ -84,13 +84,13 @@ class PlotComponent {
       minX && minX < defaultMin ? minX : defaultMin,
       maxX && maxX > defaultMax ? maxX : defaultMax,
     ]);
-    this.svg.selectAll("#myXaxis").transition().duration(3000).call(this.xAxis);
+    this.svg.selectAll("#myXaxis").call(this.xAxis);
     // create the Y axis
     this.y.domain([
       minY && minY < defaultMin ? minY : defaultMin,
       maxY && maxY > defaultMax ? maxY : defaultMax,
     ]);
-    this.svg.selectAll("#myYaxis").transition().duration(3000).call(this.yAxis);
+    this.svg.selectAll("#myYaxis").call(this.yAxis);
   };
 
   addEvents = (eventsArr: EventFunction[]) => {

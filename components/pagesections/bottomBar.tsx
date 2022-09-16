@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import { Globe, Hash, Plus, Settings } from "react-feather";
 import { Transition } from "react-transition-group";
+import StateList from "../../classes/stateList";
+import Vector from "../../classes/vector";
 import { useListContext, useNameContext } from "../../context";
+import useList from "../../hooks/useList";
 import styles from "../../styles/modules/bottombar.module.css";
 import KeyboardIcon from "../icons/KeyboardIcon";
 import RenderTex from "../tex/RenderTex";
 import TransitionButton from "../ui/TransitionButton";
 import VirtualKeyboard from "../ui/VirtualKeyboard";
+import { validateVectorName, validateVectorValues } from "../../utils";
+import { evaluate } from "mathjs";
 
 const navTransitionStyles: any = {
   entering: { height: "9rem" },
@@ -31,9 +36,51 @@ const keyboardTransitionStyles: any = {
 
 const BottomBar = () => {
   const [toggleKeyboard, setToggleKeyboard] = useState(false);
+  const [toggleInput, setToggleInput] = useState(false);
   const { currentPlot } = useNameContext();
-  const { stateVecArr } = useListContext();
+  const { setList, stateVecArr, setStateVecArr } = useListContext();
+  const { addVector } = useList();
   const { vectorNameCounter, setVectorNameCounter } = useNameContext();
+
+  const handleEnter = (event: any) => {
+    if (event.key === "Enter") {
+      const expression = event.target.value;
+
+      const name = expression.includes("=")
+        ? expression.split("=")[0]
+        : `v_{${vectorNameCounter}}`;
+
+      const values = expression.includes("=")
+        ? expression
+            .split("=")[1]
+            .slice(1, self.length - 1)
+            .split(",")
+        : expression.slice(1, self.length - 1).split(",");
+
+      // gonna improve this later, sorry
+      if (name === `v_{${vectorNameCounter}}`) {
+        setVectorNameCounter(vectorNameCounter + 1);
+      }
+
+      if (
+        !validateVectorName(name) ||
+        !validateVectorValues(
+          expression.includes("=") ? expression.split("=")[1] : expression
+        )
+      ) {
+        alert("naum");
+        return;
+      }
+
+      const newHead = addVector(
+        new Vector([evaluate(values[0]), evaluate(values[1])], `${name}`)
+      );
+      const newList = new StateList(newHead);
+      setList(newList);
+      setStateVecArr(newList.toArray());
+      event.target.value = "";
+    }
+  };
 
   useEffect(() => {
     // setVectorNameCounter(vectorNameCounter + 1);
@@ -42,7 +89,7 @@ const BottomBar = () => {
 
   useEffect(() => {
     // console.log("mainsectionArr", stateVecArr.length - 1);
-    console.log("currentPlot", stateVecArr[currentPlot]);
+    // console.log("currentPlot", stateVecArr[currentPlot]);
   }, [currentPlot]);
 
   return (
@@ -144,7 +191,7 @@ const BottomBar = () => {
                       </button>
                     </aside>
 
-                    <aside className="relative w-1/2 h-full flex flex-col justify-around items-center">
+                    <aside className="relative w-1/2 h-full flex flex-col justify-around items-center overflow-scroll">
                       <div>
                         {stateVecArr[currentPlot].map((vec, i) => {
                           return (
@@ -160,9 +207,20 @@ const BottomBar = () => {
                           title="Vetor resultante da aplicação da transformação T"
                         /> */}
                       </div>
-                      <button className="absolute bottom-1 left-1">
+                      <button
+                        className="absolute bottom-1 left-1"
+                        onClick={() => {
+                          setToggleInput(!toggleInput);
+                        }}
+                      >
                         <Plus />
                       </button>
+                      {toggleInput ? (
+                        <input
+                          className="border border-slate-400"
+                          onKeyDown={handleEnter}
+                        />
+                      ) : null}
                     </aside>
                   </section>
                 </section>

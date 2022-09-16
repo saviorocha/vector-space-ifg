@@ -7,7 +7,7 @@ import useList from "./useList";
 const useEvents = () => {
   const { addVector } = useList();
   const { setList, setStateVecArr } = useListContext();
-  const { vectorNameCounter } = useNameContext();
+  const { vectorNameCounter, setVectorNameCounter } = useNameContext();
   const { dimension } = useD3Context();
   const { width, height } = dimension;
 
@@ -49,7 +49,7 @@ const useEvents = () => {
                 )
               ),
             ],
-            `v_${vectorNameCounter}`
+            `v_{${vectorNameCounter}}`
             // "#bb00ff"
           )
         );
@@ -59,6 +59,7 @@ const useEvents = () => {
         setStateVecArr(newList.toArray());
         // console.log("vectorNameCounter", vectorNameCounter);
       });
+      setVectorNameCounter(vectorNameCounter + 1)
   };
 
   return { addVectorOnClick };
