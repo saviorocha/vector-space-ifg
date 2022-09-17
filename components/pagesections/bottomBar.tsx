@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Globe, Hash, Plus, Settings } from "react-feather";
 import { Transition } from "react-transition-group";
 import StateList from "../../classes/stateList";
@@ -12,6 +12,7 @@ import TransitionButton from "../ui/TransitionButton";
 import VirtualKeyboard from "../ui/VirtualKeyboard";
 import { validateVectorName, validateVectorValues } from "../../utils";
 import { evaluate } from "mathjs";
+import KeyboardWrapper from "../tex/KeyboardWrapper";
 
 const navTransitionStyles: any = {
   entering: { height: "9rem" },
@@ -42,9 +43,51 @@ const BottomBar = () => {
   const { addVector } = useList();
   const { vectorNameCounter, setVectorNameCounter } = useNameContext();
 
+  const [input, setInput] = useState("");
+  const keyboard = useRef(null);
+
+  const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value;
+    setInput(input);
+    keyboard.current.setInput(input);
+  };
+
+  const handleKeyboardChange = (input: string) => {
+    // if (input.includes("teste")) {
+    //   input = input.replace(
+    //     "teste",
+    //     String.raw`T\colon \mathbb{R}^{2} \to \mathbb{R}^{2}`
+    //   );
+    // }
+
+    if (input.includes("√")) {
+      input = input.replace("√", "√()");
+    }
+    if (input.includes("log")) {
+      input = input.replace("log", "log()");
+    }
+
+    setInput(input);
+  };
+
   const handleEnter = (event: any) => {
     if (event.key === "Enter") {
-      const expression = event.target.value;
+      const expression: string = event.target.value
+        .replace("π", "pi")
+        .replace("√", "sqrt")
+        .replace("²", "^2")
+        .replace("³", "^3")
+        .replace("×", "*")
+        .replace("₀", "_{0}")
+        .replace("₁", "_{1}")
+        .replace("₂", "_{2}")
+        .replace("₃", "_{3}")
+        .replace("₄", "_{4}")
+        .replace("₅", "_{5}")
+        .replace("₆", "_{6}")
+        .replace("₇", "_{7}")
+        .replace("₈", "_{8}")
+        .replace("₉", "_{9}");
 
       const name = expression.includes("=")
         ? expression.split("=")[0]
@@ -57,17 +100,14 @@ const BottomBar = () => {
             .split(",")
         : expression.slice(1, self.length - 1).split(",");
 
-      // gonna improve this later, sorry
-      if (name === `v_{${vectorNameCounter}}`) {
-        setVectorNameCounter(vectorNameCounter + 1);
-      }
-
       if (
         !validateVectorName(name) ||
         !validateVectorValues(
           expression.includes("=") ? expression.split("=")[1] : expression
         )
       ) {
+        // console.log(name, expression);
+        // console.log(event.target.value);
         alert("naum");
         return;
       }
@@ -78,6 +118,11 @@ const BottomBar = () => {
       const newList = new StateList(newHead);
       setList(newList);
       setStateVecArr(newList.toArray());
+
+      // gonna improve this later, sorry
+      if (name === `v_{${vectorNameCounter}}`) {
+        setVectorNameCounter(vectorNameCounter + 1);
+      }
       event.target.value = "";
     }
   };
@@ -219,6 +264,8 @@ const BottomBar = () => {
                         <input
                           className="border border-slate-400"
                           onKeyDown={handleEnter}
+                          value={input}
+                          onChange={(e) => onChangeInput(e)}
                         />
                       ) : null}
                     </aside>
@@ -244,7 +291,11 @@ const BottomBar = () => {
                   ...keyboardTransitionStyles[state],
                 }}
               >
-                <VirtualKeyboard />
+                <KeyboardWrapper
+                  keyboardRef={keyboard}
+                  onChange={handleKeyboardChange}
+                />
+                {/* <VirtualKeyboard /> */}
               </section>
             )}
           </Transition>

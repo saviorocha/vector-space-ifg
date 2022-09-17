@@ -75,3 +75,9 @@ interface IRenderTexProps {
   mathExpression: string;
   title: string;
 }
+
+interface IKeyboardProps {
+  onChange: (input: string) => void;
+  // @ts-ignore
+  keyboardRef: MutableRefObject<Keyboard>;
+}

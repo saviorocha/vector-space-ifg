@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useRef, ChangeEvent } from "react";
-import KeyboardWrapper from "../../components/tex/keyboardwrapper";
+import KeyboardWrapper from "../../components/tex/KeyboardWrapper";
 import { InlineMath, BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
 

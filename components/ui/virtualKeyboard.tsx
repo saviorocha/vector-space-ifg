@@ -4,12 +4,13 @@ import KeyboardWrapper from "../tex/KeyboardWrapper";
 const VirtualKeyboard = () => {
   const [input, setInput] = useState("");
   const keyboard = useRef(null);
-  const onChangeInput = (event: ChangeEvent<HTMLInputElement>): void => {
+
+  const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     const input = event.target.value;
     setInput(input);
-    // @ts-ignore
     keyboard.current.setInput(input);
   };
+  
   const handleKeyboardChange = (input: string) => {
     if (input.includes("teste")) {
       input = input.replace(
@@ -19,6 +20,7 @@ const VirtualKeyboard = () => {
     }
     setInput(input);
   };
+  
   return (
     <>
       <KeyboardWrapper keyboardRef={keyboard} onChange={handleKeyboardChange} />
