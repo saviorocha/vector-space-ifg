@@ -1,10 +1,11 @@
 import { ReactElement } from "react";
 import StateList from "../classes/stateList";
+
 interface IContextList {
   list: StateList;
   setList: Dispatch<SetStateAction<StateList>>;
-  stateVecArr: Vector[][];
-  setStateVecArr: Dispatch<SetStateAction<Vector[][]>>;
+  stateVecArr: StateObj;
+  setStateVecArr: Dispatch<SetStateAction<StateObj>>;
 }
 
 interface IContextD3 {

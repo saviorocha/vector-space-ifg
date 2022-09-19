@@ -87,7 +87,7 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
           // h-full overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0
         >
           {/* <Carousel /> */}
-          {stateVecArr.map((vec, i) => {
+          {stateVecArr.vectorArr.map((vec, i) => {
             return (
               <D3Plot
                 key={i}
@@ -98,7 +98,7 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
             );
           })}
           <div className="mt-0">
-            {stateVecArr.map((vec, i) => {
+            {stateVecArr.vectorArr.map((vec, i) => {
               return (
                 <span
                   key={i}

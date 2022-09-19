@@ -7,6 +7,7 @@ import {
 } from "react";
 import StateList from "../classes/stateList";
 import StateNode from "../classes/stateNode";
+import Transformation from "../classes/transformation";
 import Vector from "../classes/vector";
 import { IContextList } from "../interfaces/interfaces";
 
@@ -14,7 +15,7 @@ const ListContext = createContext<IContextList>({} as IContextList);
 
 const ListContextProvider: FunctionComponent<any> = ({ children }) => {
   const [list, setList] = useState(new StateList(new StateNode()));
-  const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
+  const [stateVecArr, setStateVecArr] = useState<StateObj>(list.toArray());
 
   const providerList = useMemo(
     () => ({

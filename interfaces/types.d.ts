@@ -1,3 +1,8 @@
+type StateObj = {
+  transformationArr: Transformation[], 
+  vectorArr: Vector[][],
+}
+
 type Dimesion = {
   margin: Margin;
   width: number;

@@ -25,7 +25,7 @@ const useList = () => {
     if (!previousState) {
       return list.head;
     }
-
+    console.log("transformation",transformation)
     let newState = new StateNode(transformation, previousState);
 
     if (!previousState._next) {

@@ -1,4 +1,5 @@
 import StateNode from "./stateNode";
+import Transformation from "./transformation";
 import Vector from "./vector";
 
 /**
@@ -70,18 +71,24 @@ class StateList {
     return null;
   }
 
-  toArray(): Vector[][] {
+  toArray(): StateObj {
     let nextNode: StateNode | null = this.head;
-    let listArr = [];
+    let vecArr = [];
+    let trnArr = [];
     let i = 0;
     while (nextNode) {
-      listArr[i] = [
+      vecArr[i] = [
         ...nextNode.vectors,
       ];
+      trnArr.push(nextNode.transformation);
       nextNode = nextNode._next;
       i++;
     }
-    return listArr;
+    // return vecArr;
+    return {
+      transformationArr: trnArr, 
+      vectorArr: vecArr
+    };
   }
 
   updateNodes() {

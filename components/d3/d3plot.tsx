@@ -19,8 +19,8 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index, render = false, translat
   function initD3() {
     const section = d3.select(refElement.current);
 
-    const vectors = stateVecArr[index].map((vec) => {
-      return vec.d3VectorFormat();
+    const vectors = stateVecArr.vectorArr[index].map((state) => {
+      return state.d3VectorFormat();
     });
 
     setD3Component(

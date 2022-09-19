@@ -39,7 +39,7 @@ const BottomBar = () => {
   const [toggleKeyboard, setToggleKeyboard] = useState(false);
   const [toggleInput, setToggleInput] = useState(false);
   const { currentPlot } = useNameContext();
-  const { setList, stateVecArr, setStateVecArr } = useListContext();
+  const { list, setList, stateVecArr, setStateVecArr } = useListContext();
   const { addVector } = useList();
   const { vectorNameCounter, setVectorNameCounter } = useNameContext();
 
@@ -128,8 +128,13 @@ const BottomBar = () => {
   };
 
   useEffect(() => {
+    // console.log("list", list);
+  }, []);
+
+  useEffect(() => {
     // setVectorNameCounter(vectorNameCounter + 1);
     // console.log("vectors", stateVecArr[0]);
+    // console.log("stateVecArr", stateVecArr);
   }, [stateVecArr]);
 
   useEffect(() => {
@@ -211,7 +216,7 @@ const BottomBar = () => {
                       <div>
                         <RenderTex
                           mathExpression={
-                            "T_1\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}"
+                            `${stateVecArr.transformationArr[currentPlot]._name}\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}`
                           }
                           title="Transformação de R2 em R2"
                         />
@@ -238,7 +243,8 @@ const BottomBar = () => {
 
                     <aside className="relative w-1/2 h-full flex flex-col justify-around items-center overflow-scroll">
                       <div>
-                        {stateVecArr[currentPlot].map((vec, i) => {
+                        {stateVecArr.vectorArr[currentPlot].map((vec, i) => {
+                          // console.log("bottomBar/vec:", vec)
                           return (
                             <RenderTex
                               key={i}
@@ -247,10 +253,6 @@ const BottomBar = () => {
                             />
                           );
                         })}
-                        {/* <RenderTex
-                          mathExpression={"T_1(e_1)=(1,1)"}
-                          title="Vetor resultante da aplicação da transformação T"
-                        /> */}
                       </div>
                       <button
                         className="absolute bottom-1 left-1"
