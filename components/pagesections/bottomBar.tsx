@@ -13,6 +13,8 @@ import VirtualKeyboard from "../ui/VirtualKeyboard";
 import { validateVectorName, validateVectorValues } from "../../utils";
 import { evaluate } from "mathjs";
 import KeyboardWrapper from "../tex/KeyboardWrapper";
+import Transformation from "../../classes/transformation";
+import useTexStr from "../../hooks/useTexStr";
 
 const navTransitionStyles: any = {
   entering: { height: "9rem" },
@@ -43,6 +45,9 @@ const BottomBar = () => {
   const { addVector } = useList();
   const { vectorNameCounter, setVectorNameCounter } = useNameContext();
 
+  const [transformation, setTransformation] = useState<Transformation>(
+    stateVecArr.transformationArr[currentPlot]
+  );
   const [input, setInput] = useState("");
   const keyboard = useRef(null);
 
@@ -127,9 +132,7 @@ const BottomBar = () => {
     }
   };
 
-  useEffect(() => {
-    // console.log("list", list);
-  }, []);
+  useEffect(() => {}, []);
 
   useEffect(() => {
     // setVectorNameCounter(vectorNameCounter + 1);
@@ -140,6 +143,7 @@ const BottomBar = () => {
   useEffect(() => {
     // console.log("mainsectionArr", stateVecArr.length - 1);
     // console.log("currentPlot", stateVecArr[currentPlot]);
+    setTransformation(stateVecArr.transformationArr[currentPlot]);
   }, [currentPlot]);
 
   return (
@@ -214,27 +218,26 @@ const BottomBar = () => {
                       }}
                     >
                       <div>
-                        <RenderTex
-                          mathExpression={
-                            `${stateVecArr.transformationArr[currentPlot]._name}\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}`
-                          }
-                          title="Transformação de R2 em R2"
-                        />
-                        <RenderTex
-                          mathExpression={String.raw`
-                            T_{1}(a,b) = \begin{bmatrix}
-                              -k & 0\\
-                              0 & k
+                        {currentPlot !== 0 ? (
+                          <>
+                            <RenderTex
+                              mathExpression={`${transformation.name}\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}`}
+                              title="Transformação de R2 em R2"
+                            />
+                            <RenderTex
+                              mathExpression={String.raw`
+                          ${transformation.name}(a,b) = \begin{bmatrix}
+                          ${transformation.e1[0]} & ${transformation.e2[0]}\\
+                          ${transformation.e1[1]} & ${transformation.e2[1]}
                             \end{bmatrix}\begin{bmatrix}
                               a\\
                               b
-                            \end{bmatrix}=\begin{bmatrix}
-                              -ka\\
-                              kb
                             \end{bmatrix}
                           `}
-                          title="Matriz de transformação"
-                        />
+                              title="Matriz de transformação"
+                            />
+                          </>
+                        ) : null}
                       </div>
                       <button className="absolute bottom-1 left-1">
                         <Plus />
@@ -254,15 +257,17 @@ const BottomBar = () => {
                           );
                         })}
                       </div>
-                      <button
-                        className="absolute bottom-1 left-1"
-                        onClick={() => {
-                          setToggleInput(!toggleInput);
-                        }}
-                      >
-                        <Plus />
-                      </button>
-                      {toggleInput ? (
+                      {currentPlot === 0 ? (
+                        <button
+                          className="absolute bottom-1 left-1"
+                          onClick={() => {
+                            setToggleInput(!toggleInput);
+                          }}
+                        >
+                          <Plus />
+                        </button>
+                      ) : null}
+                      {toggleInput && currentPlot === 0 ? (
                         <input
                           className="border border-slate-400"
                           onKeyDown={handleEnter}
