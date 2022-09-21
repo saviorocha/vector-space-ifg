@@ -1,6 +1,4 @@
 import StateNode from "./stateNode";
-import Transformation from "./transformation";
-import Vector from "./vector";
 
 /**
  * Created based on the post: https://codeburst.io/linked-lists-in-javascript-es6-code-part-1-6dd349c3dcc3

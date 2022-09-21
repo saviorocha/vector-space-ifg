@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { Globe, Hash, Plus, Settings } from "react-feather";
+import { Globe, Hash, Plus, Send, Settings } from "react-feather";
 import { Transition } from "react-transition-group";
 import StateList from "../../classes/stateList";
 import Vector from "../../classes/vector";
@@ -10,7 +10,12 @@ import KeyboardIcon from "../icons/KeyboardIcon";
 import RenderTex from "../tex/RenderTex";
 import TransitionButton from "../ui/TransitionButton";
 import VirtualKeyboard from "../ui/VirtualKeyboard";
-import { validateVectorName, validateVectorValues } from "../../utils";
+import {
+  validateVectorName,
+  validateVectorValues,
+  validateTransformationName,
+  validateTransformationValue,
+} from "../../utils";
 import { evaluate } from "mathjs";
 import KeyboardWrapper from "../tex/KeyboardWrapper";
 import Transformation from "../../classes/transformation";
@@ -39,17 +44,19 @@ const keyboardTransitionStyles: any = {
 
 const BottomBar = () => {
   const [toggleKeyboard, setToggleKeyboard] = useState(false);
-  const [toggleInput, setToggleInput] = useState(false);
+  const [toggleVecInput, setToggleVecInput] = useState(false);
+  const [toggleTrnInput, setToggleTrnInput] = useState(false);
+
+  const [input, setInput] = useState("");
+  const keyboard = useRef(null);
+
   const { currentPlot } = useNameContext();
   const { list, setList, stateVecArr, setStateVecArr } = useListContext();
-  const { addVector } = useList();
+  const { addVector, addTransformation } = useList();
   const { vectorNameCounter, setVectorNameCounter } = useNameContext();
-
   const [transformation, setTransformation] = useState<Transformation>(
     stateVecArr.transformationArr[currentPlot]
   );
-  const [input, setInput] = useState("");
-  const keyboard = useRef(null);
 
   const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     const input = event.target.value;
@@ -75,7 +82,7 @@ const BottomBar = () => {
     setInput(input);
   };
 
-  const handleEnter = (event: any) => {
+  const vectorSubmitHandler = (event: any) => {
     if (event.key === "Enter") {
       const expression: string = event.target.value
         .replace("π", "pi")
@@ -132,7 +139,32 @@ const BottomBar = () => {
     }
   };
 
-  useEffect(() => {}, []);
+  const transfromationSubmitHandler = (event: any) => {
+    event.preventDefault();
+    if (!validateTransformationName(event.target.name.value)) {
+      alert("nope");
+      return;
+    }
+    const newHead = addTransformation(
+      new Transformation(
+        [evaluate(event.target.t00.value), evaluate(event.target.t10.value)],
+        [evaluate(event.target.t01.value), evaluate(event.target.t11.value)],
+        event.target.name.value
+          ? event.target.name.value
+          : `T_${stateVecArr.vectorArr.length}`
+      ),
+      transformation.name
+    );
+    const newList = new StateList(newHead);
+    // console.log("newList", newList);
+    setList(newList);
+    setStateVecArr(list.toArray());
+    setToggleTrnInput(false);
+  };
+
+  useEffect(() => {
+    console.log("list", list);
+  }, [list]);
 
   useEffect(() => {
     // setVectorNameCounter(vectorNameCounter + 1);
@@ -212,6 +244,7 @@ const BottomBar = () => {
                     "
                   >
                     <aside
+                      id="transformationsAside"
                       className="relative w-1/2 h-full flex-col flex justify-around items-center"
                       style={{
                         borderRight: "1px solid #c0c0c0",
@@ -239,15 +272,65 @@ const BottomBar = () => {
                           </>
                         ) : null}
                       </div>
-                      <button className="absolute bottom-1 left-1">
+                      <button
+                        className="absolute bottom-1 left-1"
+                        onClick={() => {
+                          setToggleTrnInput(!toggleTrnInput);
+                        }}
+                      >
                         <Plus />
                       </button>
+                      {toggleTrnInput ? (
+                        <form onSubmit={transfromationSubmitHandler}>
+                          <input
+                            className="border-2 border-slate-400 w-10"
+                            type="text"
+                            id="t00"
+                            defaultValue={2}
+                          />
+                          <input
+                            className="border-2 border-slate-400 w-10"
+                            type="text"
+                            id="t01"
+                            defaultValue={0}
+                          />
+                          <br />
+                          <input
+                            className="border-2 border-slate-400 w-10"
+                            type="text"
+                            id="t10"
+                            defaultValue={0}
+                          />
+                          <input
+                            className="border-2 border-slate-400 w-10"
+                            type="text"
+                            id="t11"
+                            defaultValue={2}
+                          />
+                          <br />
+                          <input
+                            className="border-2 border-slate-400 w-10"
+                            type="text"
+                            id="name"
+                            name="name"
+                          />
+
+                          <button
+                            className="border-2 border-slate-400 rounded-md w-14"
+                            type="submit"
+                          >
+                            Submit
+                          </button>
+                        </form>
+                      ) : null}
                     </aside>
 
-                    <aside className="relative w-1/2 h-full flex flex-col justify-around items-center overflow-scroll">
+                    <aside
+                      id="vectorsAside"
+                      className="relative w-1/2 h-full flex flex-col justify-around items-center overflow-scroll"
+                    >
                       <div>
                         {stateVecArr.vectorArr[currentPlot].map((vec, i) => {
-                          // console.log("bottomBar/vec:", vec)
                           return (
                             <RenderTex
                               key={i}
@@ -261,16 +344,16 @@ const BottomBar = () => {
                         <button
                           className="absolute bottom-1 left-1"
                           onClick={() => {
-                            setToggleInput(!toggleInput);
+                            setToggleVecInput(!toggleVecInput);
                           }}
                         >
                           <Plus />
                         </button>
                       ) : null}
-                      {toggleInput && currentPlot === 0 ? (
+                      {toggleVecInput && currentPlot === 0 ? (
                         <input
                           className="border border-slate-400"
-                          onKeyDown={handleEnter}
+                          onKeyDown={vectorSubmitHandler}
                           value={input}
                           onChange={(e) => onChangeInput(e)}
                         />

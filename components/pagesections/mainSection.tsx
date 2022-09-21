@@ -169,7 +169,7 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
             handleOnClick={() => {
               setCurrentPlot(currentPlot + 1);
             }}
-            disabled={currentPlot + 1 > stateVecArr.length - 1}
+            disabled={currentPlot + 1 > stateVecArr.transformationArr.length - 1}
           />
           <div
             id="bottom-buttons"

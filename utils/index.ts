@@ -1,1 +1,1 @@
-export { validateVectorName, validateVectorValues } from "./stringValidations"
+export { validateVectorName, validateVectorValues, validateTransformationName, validateTransformationValue} from "./stringValidations"

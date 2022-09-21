@@ -27,16 +27,22 @@ const useList = () => {
     }
     
     let newState = new StateNode(transformation, previousState);
-
+    
     if (!previousState._next) {
       previousState._next = newState;
     } else {
       let nextState = previousState._next;
-
+      
       newState._next = nextState;
       previousState._next = newState;
       nextState._previous = newState;
+
+      while (nextState) {
+        nextState.vectors = nextState.updateVectors();
+        nextState = nextState._next!;
+      }
     }
+
     return list.head;
   };
 
