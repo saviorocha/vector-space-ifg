@@ -1,25 +1,20 @@
+import { evaluate } from "mathjs";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { Globe, Hash, Plus, Send, Settings } from "react-feather";
+import { Globe, Hash, Plus, Settings } from "react-feather";
 import { Transition } from "react-transition-group";
 import StateList from "../../classes/stateList";
-import Vector from "../../classes/vector";
+import Transformation from "../../classes/transformation";
 import { useListContext, useNameContext } from "../../context";
 import useList from "../../hooks/useList";
+import useTexStr from "../../hooks/useTexStr";
 import styles from "../../styles/modules/bottombar.module.css";
+import {
+  validateTransformationName
+} from "../../utils";
 import KeyboardIcon from "../icons/KeyboardIcon";
+import KeyboardWrapper from "../tex/KeyboardWrapper";
 import RenderTex from "../tex/RenderTex";
 import TransitionButton from "../ui/TransitionButton";
-import VirtualKeyboard from "../ui/VirtualKeyboard";
-import {
-  validateVectorName,
-  validateVectorValues,
-  validateTransformationName,
-  validateTransformationValue,
-} from "../../utils";
-import { evaluate } from "mathjs";
-import KeyboardWrapper from "../tex/KeyboardWrapper";
-import Transformation from "../../classes/transformation";
-import useTexStr from "../../hooks/useTexStr";
 
 const navTransitionStyles: any = {
   entering: { height: "9rem" },
@@ -50,10 +45,10 @@ const BottomBar = () => {
   const [input, setInput] = useState("");
   const keyboard = useRef(null);
 
+  const { vectorFromTex } = useTexStr();
   const { currentPlot } = useNameContext();
   const { list, setList, stateVecArr, setStateVecArr } = useListContext();
   const { addVector, addTransformation } = useList();
-  const { vectorNameCounter, setVectorNameCounter } = useNameContext();
   const [transformation, setTransformation] = useState<Transformation>(
     stateVecArr.transformationArr[currentPlot]
   );
@@ -84,57 +79,17 @@ const BottomBar = () => {
 
   const vectorSubmitHandler = (event: any) => {
     if (event.key === "Enter") {
-      const expression: string = event.target.value
-        .replace("π", "pi")
-        .replace("√", "sqrt")
-        .replace("²", "^2")
-        .replace("³", "^3")
-        .replace("×", "*")
-        .replace("₀", "_{0}")
-        .replace("₁", "_{1}")
-        .replace("₂", "_{2}")
-        .replace("₃", "_{3}")
-        .replace("₄", "_{4}")
-        .replace("₅", "_{5}")
-        .replace("₆", "_{6}")
-        .replace("₇", "_{7}")
-        .replace("₈", "_{8}")
-        .replace("₉", "_{9}");
+      const newVector = vectorFromTex(event.target.value);
 
-      const name = expression.includes("=")
-        ? expression.split("=")[0]
-        : `v_{${vectorNameCounter}}`;
-
-      const values = expression.includes("=")
-        ? expression
-            .split("=")[1]
-            .slice(1, self.length - 1)
-            .split(",")
-        : expression.slice(1, self.length - 1).split(",");
-
-      if (
-        !validateVectorName(name) ||
-        !validateVectorValues(
-          expression.includes("=") ? expression.split("=")[1] : expression
-        )
-      ) {
-        // console.log(name, expression);
-        // console.log(event.target.value);
+      if (!newVector) {
         alert("naum");
         return;
       }
-
-      const newHead = addVector(
-        new Vector([evaluate(values[0]), evaluate(values[1])], `${name}`)
-      );
+      const newHead = addVector(newVector);
       const newList = new StateList(newHead);
       setList(newList);
       setStateVecArr(newList.toArray());
 
-      // gonna improve this later, sorry
-      if (name === `v_{${vectorNameCounter}}`) {
-        setVectorNameCounter(vectorNameCounter + 1);
-      }
       event.target.value = "";
     }
   };
@@ -163,7 +118,7 @@ const BottomBar = () => {
   };
 
   useEffect(() => {
-    console.log("list", list);
+    // console.log("list", list);
   }, [list]);
 
   useEffect(() => {
@@ -175,7 +130,16 @@ const BottomBar = () => {
   useEffect(() => {
     // console.log("mainsectionArr", stateVecArr.length - 1);
     // console.log("currentPlot", stateVecArr[currentPlot]);
+    // console.log("currentPlot", currentPlot);
+    // console.log("stateVecArr", stateVecArr.transformationArr)
+    // console.log("transformationArr", stateVecArr.transformationArr[currentPlot])
+    // setTeste(2);
     setTransformation(stateVecArr.transformationArr[currentPlot]);
+    // console.log(teste);
+    // console.log("transformation que é", transformation)
+    // console.log("transformation que era pra ser", stateVecArr.transformationArr[currentPlot])
+    // console.log("vetores: ", stateVecArr.vectorArr[currentPlot]);
+    
   }, [currentPlot]);
 
   return (
@@ -327,7 +291,10 @@ const BottomBar = () => {
 
                     <aside
                       id="vectorsAside"
-                      className="relative w-1/2 h-full flex flex-col justify-around items-center overflow-scroll"
+                      className="
+                        relative w-1/2 h-full overflow-scroll
+                        flex flex-col justify-around items-center
+                      "
                     >
                       <div>
                         {stateVecArr.vectorArr[currentPlot].map((vec, i) => {

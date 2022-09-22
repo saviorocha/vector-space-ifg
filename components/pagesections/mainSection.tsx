@@ -93,7 +93,7 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
                 key={i}
                 index={i}
                 render={i === currentPlot}
-                translate={currentPlot * 10}
+                // translate={currentPlot * 10}
               />
             );
           })}

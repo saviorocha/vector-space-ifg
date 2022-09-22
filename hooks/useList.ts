@@ -1,17 +1,32 @@
 import StateNode from "../classes/stateNode";
 import Transformation from "../classes/transformation";
 import Vector from "../classes/vector";
-import { useListContext, useNameContext } from "../context";
+import { useListContext } from "../context";
 
 const useList = () => {
-  const { list, setList } = useListContext();
+  const { list } = useListContext();
   //   const [head, setHead] = useState(list.head)
 
-  const addVector = (vector: Vector): StateNode => {
+  const addVector = (newVector: Vector): StateNode => {
     let newHead = list.head;
-    newHead.vectors.push(vector);
-    list.updateNodes()
+    newHead.vectors.push(newVector);
+    list.updateNodes();
 
+    return newHead;
+  };
+
+  const updateVector = (newVector: Vector, prevVectorName: string): StateNode => {
+    removeVector(prevVectorName);
+    const newHead = addVector(newVector);
+    return newHead;
+    // console.log("vector: ", newHead.vectors.find(element => element.name === vectorName));
+  };
+
+  const removeVector = (vectorName: string): StateNode => {
+    const newHead = list.head;
+    newHead.vectors = newHead.vectors.filter((vec) => {
+      return vec.name !== vectorName;
+    });
     return newHead;
   };
 
@@ -19,20 +34,19 @@ const useList = () => {
     transformation: Transformation,
     previousTransformationName: string = list.getTail().transformation.name
   ): StateNode => {
-    
     const previousState = getStateByName(previousTransformationName);
 
     if (!previousState) {
       return list.head;
     }
-    
+
     let newState = new StateNode(transformation, previousState);
-    
+
     if (!previousState._next) {
       previousState._next = newState;
     } else {
       let nextState = previousState._next;
-      
+
       newState._next = nextState;
       previousState._next = newState;
       nextState._previous = newState;
@@ -44,14 +58,6 @@ const useList = () => {
     }
 
     return list.head;
-  };
-
-  const removeVector = (vectorName: string): StateNode => {
-    const newHead = list.head;
-    newHead.vectors = newHead.vectors.filter((vec) => {
-      return vec.name !== vectorName;
-    });
-    return newHead;
   };
 
   const removeTransformation = (transformationName: string): StateNode => {
@@ -80,7 +86,13 @@ const useList = () => {
     }
     return currentState;
   };
-  return { addVector, addTransformation, removeVector, removeTransformation };
+  return {
+    addVector,
+    updateVector,
+    removeVector,
+    addTransformation,
+    removeTransformation,
+  };
 };
 
 export default useList;
