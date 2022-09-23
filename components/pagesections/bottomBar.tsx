@@ -1,6 +1,6 @@
 import { evaluate } from "mathjs";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { Globe, Hash, Plus, Settings } from "react-feather";
+import { Edit3, Globe, Hash, Plus, Settings } from "react-feather";
 import { Transition } from "react-transition-group";
 import StateList from "../../classes/stateList";
 import Transformation from "../../classes/transformation";
@@ -8,9 +8,7 @@ import { useListContext, useNameContext } from "../../context";
 import useList from "../../hooks/useList";
 import useTexStr from "../../hooks/useTexStr";
 import styles from "../../styles/modules/bottombar.module.css";
-import {
-  validateTransformationName
-} from "../../utils";
+import { validateTransformationName } from "../../utils";
 import KeyboardIcon from "../icons/KeyboardIcon";
 import KeyboardWrapper from "../tex/KeyboardWrapper";
 import RenderTex from "../tex/RenderTex";
@@ -41,6 +39,7 @@ const BottomBar = () => {
   const [toggleKeyboard, setToggleKeyboard] = useState(false);
   const [toggleVecInput, setToggleVecInput] = useState(false);
   const [toggleTrnInput, setToggleTrnInput] = useState(false);
+  const [showMatrix, setShowMatrix] = useState(true);
 
   const [input, setInput] = useState("");
   const keyboard = useRef(null);
@@ -96,17 +95,19 @@ const BottomBar = () => {
 
   const transfromationSubmitHandler = (event: any) => {
     event.preventDefault();
-    if (!validateTransformationName(event.target.name.value)) {
+    const name = event.target.name.value
+      ? event.target.name.value
+      : `T_{${stateVecArr.vectorArr.length}}`;
+
+    if (!validateTransformationName(name)) {
       alert("nope");
       return;
     }
     const newHead = addTransformation(
       new Transformation(
-        [evaluate(event.target.t00.value), evaluate(event.target.t10.value)],
-        [evaluate(event.target.t01.value), evaluate(event.target.t11.value)],
-        event.target.name.value
-          ? event.target.name.value
-          : `T_${stateVecArr.vectorArr.length}`
+        [evaluate(event.target.t0.value), evaluate(event.target.t2.value)],
+        [evaluate(event.target.t1.value), evaluate(event.target.t3.value)],
+        name
       ),
       transformation.name
     );
@@ -118,7 +119,7 @@ const BottomBar = () => {
   };
 
   useEffect(() => {
-    // console.log("list", list);
+    console.log("list", list);
   }, [list]);
 
   useEffect(() => {
@@ -132,14 +133,16 @@ const BottomBar = () => {
     // console.log("currentPlot", stateVecArr[currentPlot]);
     // console.log("currentPlot", currentPlot);
     // console.log("stateVecArr", stateVecArr.transformationArr)
-    // console.log("transformationArr", stateVecArr.transformationArr[currentPlot])
+    // console.log(
+    //   "transformationArr",
+    //   stateVecArr.transformationArr[currentPlot]
+    // );
+    // console.log("e1", transformation.e1.concat(transformation.e2));
     // setTeste(2);
-    setTransformation(stateVecArr.transformationArr[currentPlot]);
     // console.log(teste);
-    // console.log("transformation que é", transformation)
     // console.log("transformation que era pra ser", stateVecArr.transformationArr[currentPlot])
     // console.log("vetores: ", stateVecArr.vectorArr[currentPlot]);
-    
+    setTransformation(stateVecArr.transformationArr[currentPlot]);
   }, [currentPlot]);
 
   return (
@@ -215,7 +218,7 @@ const BottomBar = () => {
                       }}
                     >
                       <div>
-                        {currentPlot !== 0 ? (
+                        {currentPlot !== 0 && showMatrix ? (
                           <>
                             <RenderTex
                               mathExpression={`${transformation.name}\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}`}
@@ -223,19 +226,28 @@ const BottomBar = () => {
                             />
                             <RenderTex
                               mathExpression={String.raw`
-                          ${transformation.name}(a,b) = \begin{bmatrix}
-                          ${transformation.e1[0]} & ${transformation.e2[0]}\\
-                          ${transformation.e1[1]} & ${transformation.e2[1]}
-                            \end{bmatrix}\begin{bmatrix}
-                              a\\
-                              b
-                            \end{bmatrix}
-                          `}
+                              ${transformation.name}(a,b) = \begin{bmatrix}
+                              ${transformation.e1[0]} & ${transformation.e2[0]}\\
+                              ${transformation.e1[1]} & ${transformation.e2[1]}
+                                \end{bmatrix}\begin{bmatrix}
+                                  a\\
+                                  b
+                                \end{bmatrix}
+                              `}
                               title="Matriz de transformação"
                             />
                           </>
                         ) : null}
                       </div>
+                      <button
+                        className="absolute top-1 left-1"
+                        onClick={() => {
+                          setToggleTrnInput(!toggleTrnInput);
+                          setShowMatrix(!showMatrix);
+                        }}
+                      >
+                        <Edit3 />
+                      </button>
                       <button
                         className="absolute bottom-1 left-1"
                         onClick={() => {
@@ -246,11 +258,27 @@ const BottomBar = () => {
                       </button>
                       {toggleTrnInput ? (
                         <form onSubmit={transfromationSubmitHandler}>
-                          <input
+                          {transformation.e1
+                            .concat(transformation.e2)
+                            .map((el, i) => {
+                              return (
+                                <>
+                                  <input
+                                    key={i}
+                                    className="border-2 border-slate-400 w-10"
+                                    type="text"
+                                    id={`t${i}`}
+                                    defaultValue={showMatrix ? 0 : el}
+                                  />
+                                  {i === 1 ? <br key={i+1} /> : null}
+                                </>
+                              );
+                            })}
+                          {/* <input
                             className="border-2 border-slate-400 w-10"
                             type="text"
                             id="t00"
-                            defaultValue={2}
+                            defaultValue={0}
                           />
                           <input
                             className="border-2 border-slate-400 w-10"
@@ -269,8 +297,8 @@ const BottomBar = () => {
                             className="border-2 border-slate-400 w-10"
                             type="text"
                             id="t11"
-                            defaultValue={2}
-                          />
+                            defaultValue={0}
+                          /> */}
                           <br />
                           <input
                             className="border-2 border-slate-400 w-10"
