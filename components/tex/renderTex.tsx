@@ -16,7 +16,6 @@ const RenderTex: FunctionComponent<IRenderTexProps> = ({
   const [showTex, setShowTex] = useState(true);
   const { updateVector } = useList();
   const { vectorFromTex } = useTexStr();
-  const { addVector, addTransformation } = useList();
   const { setList, setStateVecArr } = useListContext();
   const { currentPlot } = useNameContext();
 

@@ -15,7 +15,10 @@ const useList = () => {
     return newHead;
   };
 
-  const updateVector = (newVector: Vector, prevVectorName: string): StateNode => {
+  const updateVector = (
+    newVector: Vector,
+    prevVectorName: string
+  ): StateNode => {
     removeVector(prevVectorName);
     const newHead = addVector(newVector);
     return newHead;
@@ -32,9 +35,9 @@ const useList = () => {
 
   const addTransformation = (
     transformation: Transformation,
-    previousTransformationName: string = list.getTail().transformation.name
+    prevTransformationName: string = list.getTail().transformation.name
   ): StateNode => {
-    const previousState = getStateByName(previousTransformationName);
+    const previousState = getStateByName(prevTransformationName);
 
     if (!previousState) {
       return list.head;
@@ -55,6 +58,26 @@ const useList = () => {
         nextState.vectors = nextState.updateVectors();
         nextState = nextState._next!;
       }
+    }
+
+    return list.head;
+  };
+
+  const updateTransformation = (
+    newTransformation: Transformation,
+    currentTransformationName: string
+  ): StateNode | null => {
+    const transformationState = getStateByName(currentTransformationName);
+
+    if (!transformationState) {
+      return null;
+    }
+    transformationState.transformation = newTransformation;
+
+    let nextState = transformationState;
+    while (nextState) {
+      nextState.vectors = nextState.updateVectors();
+      nextState = nextState._next!;
     }
 
     return list.head;
@@ -91,6 +114,7 @@ const useList = () => {
     updateVector,
     removeVector,
     addTransformation,
+    updateTransformation,
     removeTransformation,
   };
 };

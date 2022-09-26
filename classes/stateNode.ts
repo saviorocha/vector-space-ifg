@@ -22,6 +22,10 @@ class StateNode {
     return this._transformation;
   }
 
+  set transformation(_transformation: Transformation) {
+    this._transformation = _transformation;
+  }
+
   get vectors(): Vector[] {
     return this._vectors;
   }

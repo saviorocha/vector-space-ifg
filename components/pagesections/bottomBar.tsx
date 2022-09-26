@@ -12,6 +12,7 @@ import { validateTransformationName } from "../../utils";
 import KeyboardIcon from "../icons/KeyboardIcon";
 import KeyboardWrapper from "../tex/KeyboardWrapper";
 import RenderTex from "../tex/RenderTex";
+import TransformationForm from "../ui/TransformationForm";
 import TransitionButton from "../ui/TransitionButton";
 
 const navTransitionStyles: any = {
@@ -39,7 +40,7 @@ const BottomBar = () => {
   const [toggleKeyboard, setToggleKeyboard] = useState(false);
   const [toggleVecInput, setToggleVecInput] = useState(false);
   const [toggleTrnInput, setToggleTrnInput] = useState(false);
-  const [showMatrix, setShowMatrix] = useState(true);
+  const [toggleUpdateCreate, setToggleUpdateCreate] = useState("create");
 
   const [input, setInput] = useState("");
   const keyboard = useRef(null);
@@ -47,7 +48,7 @@ const BottomBar = () => {
   const { vectorFromTex } = useTexStr();
   const { currentPlot } = useNameContext();
   const { list, setList, stateVecArr, setStateVecArr } = useListContext();
-  const { addVector, addTransformation } = useList();
+  const { addVector, addTransformation, updateTransformation } = useList();
   const [transformation, setTransformation] = useState<Transformation>(
     stateVecArr.transformationArr[currentPlot]
   );
@@ -81,7 +82,7 @@ const BottomBar = () => {
       const newVector = vectorFromTex(event.target.value);
 
       if (!newVector) {
-        alert("naum");
+        alert("nome ou valores do vetor inválidos");
         return;
       }
       const newHead = addVector(newVector);
@@ -100,7 +101,7 @@ const BottomBar = () => {
       : `T_{${stateVecArr.vectorArr.length}}`;
 
     if (!validateTransformationName(name)) {
-      alert("nope");
+      alert("nome de transformação inválido");
       return;
     }
     const newHead = addTransformation(
@@ -118,14 +119,51 @@ const BottomBar = () => {
     setToggleTrnInput(false);
   };
 
+  const transformationUpdateHandler = (event: any) => {
+    event.preventDefault();
+    const name = event.target.name.value
+      ? event.target.name.value
+      : transformation.name;
+
+    if (!validateTransformationName(name)) {
+      alert("nome de transformação inválido");
+      return;
+    }
+    const newHead = updateTransformation(
+      new Transformation(
+        [evaluate(event.target.t0.value), evaluate(event.target.t2.value)],
+        [evaluate(event.target.t1.value), evaluate(event.target.t3.value)],
+        name
+      ),
+      transformation.name
+    );
+
+    if (!newHead) {
+      alert("erro ao encontrar a transformação");
+      return;
+    }
+    const newList = new StateList(newHead);
+    setList(newList);
+    setStateVecArr(list.toArray());
+  };
+
   useEffect(() => {
-    console.log("list", list);
+    // console.log("toggleTrnInput", toggleTrnInput);
+    // console.log("updateorcreate", toggleUpdateCreate);
+  }, [toggleTrnInput, toggleUpdateCreate]);
+
+  useEffect(() => {
+    // console.log("list", list);
+    // console.log("transformation", transformation);
+    // console.log("stateVecArr", stateVecArr);
+    // console.log("map", transformation.e1.concat(transformation.e2));
   }, [list]);
 
   useEffect(() => {
     // setVectorNameCounter(vectorNameCounter + 1);
     // console.log("vectors", stateVecArr[0]);
     // console.log("stateVecArr", stateVecArr);
+    setTransformation(stateVecArr.transformationArr[currentPlot]);
   }, [stateVecArr]);
 
   useEffect(() => {
@@ -218,7 +256,9 @@ const BottomBar = () => {
                       }}
                     >
                       <div>
-                        {currentPlot !== 0 && showMatrix ? (
+                        {/* {currentPlot !== 0 && showMatrix ? ( */}
+                        {currentPlot !== 0 &&
+                        toggleUpdateCreate === "create" ? (
                           <>
                             <RenderTex
                               mathExpression={`${transformation.name}\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}`}
@@ -242,8 +282,15 @@ const BottomBar = () => {
                       <button
                         className="absolute top-1 left-1"
                         onClick={() => {
-                          setToggleTrnInput(!toggleTrnInput);
-                          setShowMatrix(!showMatrix);
+                          setToggleTrnInput(
+                            !toggleTrnInput && currentPlot !== 0
+                          );
+                          // setShowMatrix(!showMatrix);
+                          setToggleUpdateCreate(
+                            toggleUpdateCreate === "update"
+                              ? "create"
+                              : "update"
+                          );
                         }}
                       >
                         <Edit3 />
@@ -252,68 +299,23 @@ const BottomBar = () => {
                         className="absolute bottom-1 left-1"
                         onClick={() => {
                           setToggleTrnInput(!toggleTrnInput);
+                          setToggleUpdateCreate("create");
                         }}
                       >
                         <Plus />
                       </button>
                       {toggleTrnInput ? (
-                        <form onSubmit={transfromationSubmitHandler}>
-                          {transformation.e1
-                            .concat(transformation.e2)
-                            .map((el, i) => {
-                              return (
-                                <>
-                                  <input
-                                    key={i}
-                                    className="border-2 border-slate-400 w-10"
-                                    type="text"
-                                    id={`t${i}`}
-                                    defaultValue={showMatrix ? 0 : el}
-                                  />
-                                  {i === 1 ? <br key={i+1} /> : null}
-                                </>
-                              );
-                            })}
-                          {/* <input
-                            className="border-2 border-slate-400 w-10"
-                            type="text"
-                            id="t00"
-                            defaultValue={0}
-                          />
-                          <input
-                            className="border-2 border-slate-400 w-10"
-                            type="text"
-                            id="t01"
-                            defaultValue={0}
-                          />
-                          <br />
-                          <input
-                            className="border-2 border-slate-400 w-10"
-                            type="text"
-                            id="t10"
-                            defaultValue={0}
-                          />
-                          <input
-                            className="border-2 border-slate-400 w-10"
-                            type="text"
-                            id="t11"
-                            defaultValue={0}
-                          /> */}
-                          <br />
-                          <input
-                            className="border-2 border-slate-400 w-10"
-                            type="text"
-                            id="name"
-                            name="name"
-                          />
-
-                          <button
-                            className="border-2 border-slate-400 rounded-md w-14"
-                            type="submit"
-                          >
-                            Submit
-                          </button>
-                        </form>
+                        <TransformationForm
+                          onSubmit={
+                            toggleUpdateCreate === "update"
+                              ? transformationUpdateHandler
+                              : transfromationSubmitHandler
+                          }
+                          updateOrCreate={toggleUpdateCreate}
+                          matrixArr={transformation.e1.concat(
+                            transformation.e2
+                          )}
+                        />
                       ) : null}
                     </aside>
 
