@@ -14,8 +14,6 @@ const BottomVectors = () => {
   const { addVector, removeVector } = useList();
   const { setList, stateVecArr, setStateVecArr } = useListContext();
 
-
-
   const vectorSubmitHandler = (event: any) => {
     if (event.key === "Enter") {
       const newVector = vectorFromTex(event.target.value);
@@ -39,11 +37,15 @@ const BottomVectors = () => {
         {stateVecArr.vectorArr[currentPlot].map((vec, i) => {
           return (
             <li key={i}>
-                <VectorTex mathExpression={`${vec.name}=(${vec.x},${vec.y})`} vectorName={vec.name} />
+              <VectorTex
+                vectorExpression={`${vec.name}=(${vec.x},${vec.y})`}
+                vectorName={vec.name}
+              />
             </li>
           );
         })}
       </ul>
+      
       {currentPlot === 0 ? (
         <button
           className="absolute bottom-1 left-1"
@@ -54,6 +56,7 @@ const BottomVectors = () => {
           <Plus />
         </button>
       ) : null}
+
       {toggleVecInput && currentPlot === 0 ? (
         <input
           className="border border-slate-400"

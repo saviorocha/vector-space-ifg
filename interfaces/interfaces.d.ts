@@ -79,7 +79,7 @@ interface IRenderTexProps {
 }
 
 interface IVectorTexProps {
-  mathExpression: string;
+  vectorExpression: string;
   vectorName: string;
 }
 

@@ -8,10 +8,10 @@ import { IVectorTexProps } from "../../interfaces/interfaces";
 import RenderTex from "./RenderTex";
 
 const VectorTex: FunctionComponent<IVectorTexProps> = ({
-  mathExpression,
+  vectorExpression,
   vectorName,
 }) => {
-  const [expression, setExpression] = useState(mathExpression);
+  const [expression, setExpression] = useState(vectorExpression);
   const [showTex, setShowTex] = useState(true);
 
   const { currentPlot } = useNameContext();
@@ -20,13 +20,13 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
   const { list, setList, setStateVecArr } = useListContext();
 
   useEffect(() => {
-    console.log("vectorName", vectorName);
+    // console.log("vectorName", vectorName);
   }, []);
 
   useEffect(() => {
-    setExpression(mathExpression);
-    // console.log("mathExpression", mathExpression);
-  }, [mathExpression]);
+    setExpression(vectorExpression);
+    // console.log("vectorExpression", vectorExpression);
+  }, [vectorExpression]);
 
   const handleOnChange = (event: any) => {
     setExpression(event.target.value);
@@ -35,7 +35,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
   const handleVectorUpdate = (event: any) => {
     if (event.key === "Enter") {
       const newVector = vectorFromTex(event.target.value);
-      const prevVectorName = vectorFromTex(mathExpression)?.name;
+      const prevVectorName = vectorFromTex(vectorExpression)?.name;
       if (!newVector || !prevVectorName) {
         alert("naum");
         return;
@@ -64,18 +64,20 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
   };
   return (
     <div>
-      {showTex ? (
-        <RenderTex
-          mathExpression={expression}
-          title="Vetor resultante da aplicação da transformação T"
-          handleDoubleClick={handleDoubleClick}
-        />
-      ) : (
+      {!vectorName.includes("e_{1}") &&
+      !vectorName.includes("e_{2}") &&
+      !showTex ? (
         <input
           className="border border-slate-400 w-24"
           onKeyDown={handleVectorUpdate}
           onChange={handleOnChange}
           value={expression}
+        />
+      ) : (
+        <RenderTex
+          mathExpression={expression}
+          title="Vetor resultante da aplicação da transformação T"
+          handleDoubleClick={handleDoubleClick}
         />
       )}
       {!vectorName.includes("e_{1}") &&
