@@ -153,17 +153,21 @@ const BottomBar = () => {
   }, [toggleTrnInput, toggleUpdateCreate]);
 
   useEffect(() => {
-    // console.log("list", list);
+    console.log("list", list);
     // console.log("transformation", transformation);
-    // console.log("stateVecArr", stateVecArr);
+    console.log("stateVecArr", stateVecArr);
     // console.log("map", transformation.e1.concat(transformation.e2));
   }, [list]);
+
+  useEffect(() => {
+    setTransformation(stateVecArr.transformationArr[currentPlot]);
+  }, [stateVecArr, currentPlot]);
 
   useEffect(() => {
     // setVectorNameCounter(vectorNameCounter + 1);
     // console.log("vectors", stateVecArr[0]);
     // console.log("stateVecArr", stateVecArr);
-    setTransformation(stateVecArr.transformationArr[currentPlot]);
+    // setTransformation(stateVecArr.transformationArr[currentPlot]);
   }, [stateVecArr]);
 
   useEffect(() => {
@@ -180,7 +184,7 @@ const BottomBar = () => {
     // console.log(teste);
     // console.log("transformation que era pra ser", stateVecArr.transformationArr[currentPlot])
     // console.log("vetores: ", stateVecArr.vectorArr[currentPlot]);
-    setTransformation(stateVecArr.transformationArr[currentPlot]);
+    // setTransformation(stateVecArr.transformationArr[currentPlot]);
   }, [currentPlot]);
 
   return (
@@ -257,8 +261,7 @@ const BottomBar = () => {
                     >
                       <div>
                         {/* {currentPlot !== 0 && showMatrix ? ( */}
-                        {currentPlot !== 0 &&
-                        toggleUpdateCreate === "create" ? (
+                        {toggleUpdateCreate === "create" ? (
                           <>
                             <RenderTex
                               mathExpression={`${transformation.name}\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}`}
@@ -292,6 +295,7 @@ const BottomBar = () => {
                               : "update"
                           );
                         }}
+                        disabled={currentPlot === 0}
                       >
                         <Edit3 />
                       </button>

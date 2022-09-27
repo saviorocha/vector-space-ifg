@@ -1,4 +1,4 @@
-import { Matrix, matrix, multiply } from "mathjs";
+import { Matrix, matrix, multiply, transpose } from "mathjs";
 import Vector from "./vector";
 
 class Transformation {
@@ -19,11 +19,18 @@ class Transformation {
     this._name = _name;
     this._e1Vector = new Vector(this._e1, "e_{1}", "red");
     this._e2Vector = new Vector(this._e2, "e_{2}", "blue");
-    this.matrixTransformation = matrix([_e1, _e2]);
+    this.matrixTransformation = transpose(matrix([_e1, _e2])); // have to transpose to match mathjs matrix
     // console.log(this.matrixTransformation);
   }
 
   applyTransformation(vector: Vector): Vector {
+    console.log(
+      `${this._name} applyTransformation: `,
+      this.matrixTransformation,
+      vector.array,
+      multiply(this.matrixTransformation, vector.array)
+    );
+    
     const coordinates: [number, number] = [
       multiply(this.matrixTransformation, vector.array).get([0]),
       multiply(this.matrixTransformation, vector.array).get([1]),
