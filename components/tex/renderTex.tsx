@@ -57,7 +57,7 @@ const RenderTex: FunctionComponent<IRenderTexProps> = ({
     <div>
       {showTex ? (
         <Tooltip title={title} placement="top">
-          <p onClick={currentPlot === 0 ? handleDoubleClick : () => {}}>
+          <p onClick={currentPlot === 0 ? handleDoubleClick : undefined}>
             <InlineMath math={expression} />
           </p>
         </Tooltip>

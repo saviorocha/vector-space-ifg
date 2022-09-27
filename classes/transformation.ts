@@ -24,13 +24,6 @@ class Transformation {
   }
 
   applyTransformation(vector: Vector): Vector {
-    console.log(
-      `${this._name} applyTransformation: `,
-      this.matrixTransformation,
-      vector.array,
-      multiply(this.matrixTransformation, vector.array)
-    );
-    
     const coordinates: [number, number] = [
       multiply(this.matrixTransformation, vector.array).get([0]),
       multiply(this.matrixTransformation, vector.array).get([1]),

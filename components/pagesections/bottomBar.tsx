@@ -1,6 +1,14 @@
 import { evaluate } from "mathjs";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { Edit3, Globe, Hash, Plus, Settings } from "react-feather";
+import {
+  Edit3,
+  Globe,
+  Hash,
+  Plus,
+  Settings,
+  Trash,
+  Trash2,
+} from "react-feather";
 import { Transition } from "react-transition-group";
 import StateList from "../../classes/stateList";
 import Transformation from "../../classes/transformation";
@@ -46,9 +54,15 @@ const BottomBar = () => {
   const keyboard = useRef(null);
 
   const { vectorFromTex } = useTexStr();
-  const { currentPlot } = useNameContext();
+  const { currentPlot, setCurrentPlot } = useNameContext();
   const { list, setList, stateVecArr, setStateVecArr } = useListContext();
-  const { addVector, addTransformation, updateTransformation } = useList();
+  const {
+    addVector,
+    addTransformation,
+    updateTransformation,
+    removeVector,
+    removeTransformation,
+  } = useList();
   const [transformation, setTransformation] = useState<Transformation>(
     stateVecArr.transformationArr[currentPlot]
   );
@@ -92,6 +106,13 @@ const BottomBar = () => {
 
       event.target.value = "";
     }
+  };
+
+  const vectorDeleteHandler = (vectorName: string) => {
+    const newHead = removeVector(vectorName);
+    const newList = new StateList(newHead);
+    setList(newList);
+    setStateVecArr(list.toArray());
   };
 
   const transfromationSubmitHandler = (event: any) => {
@@ -147,19 +168,28 @@ const BottomBar = () => {
     setStateVecArr(list.toArray());
   };
 
+  const transformationDeleteHandler = (transformationName: string) => {
+    const newHead = removeTransformation(transformationName);
+    const newList = new StateList(newHead);
+    setCurrentPlot(currentPlot - 1);
+    setList(newList);
+    setStateVecArr(list.toArray());
+  };
+
   useEffect(() => {
     // console.log("toggleTrnInput", toggleTrnInput);
     // console.log("updateorcreate", toggleUpdateCreate);
   }, [toggleTrnInput, toggleUpdateCreate]);
 
   useEffect(() => {
-    console.log("list", list);
+    // console.log("list", list);
     // console.log("transformation", transformation);
-    console.log("stateVecArr", stateVecArr);
+    // console.log("stateVecArr", stateVecArr);
     // console.log("map", transformation.e1.concat(transformation.e2));
   }, [list]);
 
   useEffect(() => {
+    // console.log("list", stateVecArr, list)
     setTransformation(stateVecArr.transformationArr[currentPlot]);
   }, [stateVecArr, currentPlot]);
 
@@ -288,7 +318,6 @@ const BottomBar = () => {
                           setToggleTrnInput(
                             !toggleTrnInput && currentPlot !== 0
                           );
-                          // setShowMatrix(!showMatrix);
                           setToggleUpdateCreate(
                             toggleUpdateCreate === "update"
                               ? "create"
@@ -307,6 +336,16 @@ const BottomBar = () => {
                         }}
                       >
                         <Plus />
+                      </button>
+
+                      <button
+                        disabled={currentPlot === 0}
+                        className="absolute bottom-1 right-1"
+                        onClick={() =>
+                          transformationDeleteHandler(transformation.name)
+                        }
+                      >
+                        <Trash2 />
                       </button>
                       {toggleTrnInput ? (
                         <TransformationForm
@@ -331,15 +370,28 @@ const BottomBar = () => {
                       "
                     >
                       <div>
-                        {stateVecArr.vectorArr[currentPlot].map((vec, i) => {
-                          return (
-                            <RenderTex
-                              key={i}
-                              mathExpression={`${vec.name}=(${vec.x},${vec.y})`}
-                              title="Vetor resultante da aplicação da transformação T"
-                            />
-                          );
-                        })}
+                        <ul>
+                          {stateVecArr.vectorArr[currentPlot].map((vec, i) => {
+                            return (
+                              <li key={i}>
+                                <RenderTex
+                                  mathExpression={`${vec.name}=(${vec.x},${vec.y})`}
+                                  title="Vetor resultante da aplicação da transformação T"
+                                />
+                                {vec.name.includes("e_{1}") &&
+                                vec.name.includes("e_{2}") ? (
+                                  <button
+                                    onClick={() =>
+                                      vectorDeleteHandler(vec.name)
+                                    }
+                                  >
+                                    <Trash2 />
+                                  </button>
+                                ) : null}
+                              </li>
+                            );
+                          })}
+                        </ul>
                       </div>
                       {currentPlot === 0 ? (
                         <button
