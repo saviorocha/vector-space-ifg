@@ -30,6 +30,7 @@ const useList = () => {
     newHead.vectors = newHead.vectors.filter((vec) => {
       return vec.name !== vectorName;
     });
+    list.updateNodes()
     return newHead;
   };
 
@@ -109,6 +110,7 @@ const useList = () => {
     }
     return currentState;
   };
+
   return {
     addVector,
     updateVector,

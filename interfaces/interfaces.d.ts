@@ -75,6 +75,12 @@ interface ITransitionButtonProps {
 interface IRenderTexProps {
   mathExpression: string;
   title: string;
+  handleDoubleClick: MouseEventHandler<HTMLParagraphElement> | undefined;
+}
+
+interface IVectorTexProps {
+  mathExpression: string;
+  vectorName: string;
 }
 
 interface IKeyboardProps {
