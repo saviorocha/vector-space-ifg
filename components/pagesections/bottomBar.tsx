@@ -1,20 +1,11 @@
 import { evaluate } from "mathjs";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
-import {
-  Edit3,
-  Globe,
-  Hash,
-  Plus,
-  Settings,
-  Trash,
-  Trash2,
-} from "react-feather";
+import { useEffect, useRef, useState } from "react";
+import { Edit3, Globe, Hash, Plus, Settings, Trash2 } from "react-feather";
 import { Transition } from "react-transition-group";
 import StateList from "../../classes/stateList";
 import Transformation from "../../classes/transformation";
 import { useListContext, useNameContext } from "../../context";
 import useList from "../../hooks/useList";
-import useTexStr from "../../hooks/useTexStr";
 import styles from "../../styles/modules/bottombar.module.css";
 import { validateTransformationName } from "../../utils";
 import KeyboardIcon from "../icons/KeyboardIcon";
@@ -22,6 +13,8 @@ import KeyboardWrapper from "../tex/KeyboardWrapper";
 import RenderTex from "../tex/RenderTex";
 import TransformationForm from "../ui/TransformationForm";
 import TransitionButton from "../ui/TransitionButton";
+import BottomTransformation from "./BottomTransformation";
+import BottomVectors from "./BottomVectors";
 
 const navTransitionStyles: any = {
   entering: { height: "9rem" },
@@ -46,32 +39,7 @@ const keyboardTransitionStyles: any = {
 
 const BottomBar = () => {
   const [toggleKeyboard, setToggleKeyboard] = useState(false);
-  const [toggleVecInput, setToggleVecInput] = useState(false);
-  const [toggleTrnInput, setToggleTrnInput] = useState(false);
-  const [toggleUpdateCreate, setToggleUpdateCreate] = useState("create");
-
-  const [input, setInput] = useState("");
   const keyboard = useRef(null);
-
-  const { vectorFromTex } = useTexStr();
-  const { currentPlot, setCurrentPlot } = useNameContext();
-  const { list, setList, stateVecArr, setStateVecArr } = useListContext();
-  const {
-    addVector,
-    addTransformation,
-    updateTransformation,
-    removeVector,
-    removeTransformation,
-  } = useList();
-  const [transformation, setTransformation] = useState<Transformation>(
-    stateVecArr.transformationArr[currentPlot]
-  );
-
-  const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
-    const input = event.target.value;
-    setInput(input);
-    keyboard.current.setInput(input);
-  };
 
   const handleKeyboardChange = (input: string) => {
     // if (input.includes("teste")) {
@@ -88,134 +56,8 @@ const BottomBar = () => {
       input = input.replace("log", "log()");
     }
 
-    setInput(input);
+    // setInput(input);
   };
-
-  const vectorSubmitHandler = (event: any) => {
-    if (event.key === "Enter") {
-      const newVector = vectorFromTex(event.target.value);
-
-      if (!newVector) {
-        alert("nome ou valores do vetor inválidos");
-        return;
-      }
-      const newHead = addVector(newVector);
-      const newList = new StateList(newHead);
-      setList(newList);
-      setStateVecArr(newList.toArray());
-
-      event.target.value = "";
-    }
-  };
-
-  const vectorDeleteHandler = (vectorName: string) => {
-    const newHead = removeVector(vectorName);
-    const newList = new StateList(newHead);
-    setList(newList);
-    setStateVecArr(list.toArray());
-  };
-
-  const transfromationSubmitHandler = (event: any) => {
-    event.preventDefault();
-    const name = event.target.name.value
-      ? event.target.name.value
-      : `T_{${stateVecArr.vectorArr.length}}`;
-
-    if (!validateTransformationName(name)) {
-      alert("nome de transformação inválido");
-      return;
-    }
-    const newHead = addTransformation(
-      new Transformation(
-        [evaluate(event.target.t0.value), evaluate(event.target.t2.value)],
-        [evaluate(event.target.t1.value), evaluate(event.target.t3.value)],
-        name
-      ),
-      transformation.name
-    );
-    const newList = new StateList(newHead);
-    // console.log("newList", newList);
-    setList(newList);
-    setStateVecArr(list.toArray());
-    setToggleTrnInput(false);
-  };
-
-  const transformationUpdateHandler = (event: any) => {
-    event.preventDefault();
-    const name = event.target.name.value
-      ? event.target.name.value
-      : transformation.name;
-
-    if (!validateTransformationName(name)) {
-      alert("nome de transformação inválido");
-      return;
-    }
-    const newHead = updateTransformation(
-      new Transformation(
-        [evaluate(event.target.t0.value), evaluate(event.target.t2.value)],
-        [evaluate(event.target.t1.value), evaluate(event.target.t3.value)],
-        name
-      ),
-      transformation.name
-    );
-
-    if (!newHead) {
-      alert("erro ao encontrar a transformação");
-      return;
-    }
-    const newList = new StateList(newHead);
-    setList(newList);
-    setStateVecArr(list.toArray());
-  };
-
-  const transformationDeleteHandler = (transformationName: string) => {
-    const newHead = removeTransformation(transformationName);
-    const newList = new StateList(newHead);
-    setCurrentPlot(currentPlot - 1);
-    setList(newList);
-    setStateVecArr(list.toArray());
-  };
-
-  useEffect(() => {
-    // console.log("toggleTrnInput", toggleTrnInput);
-    // console.log("updateorcreate", toggleUpdateCreate);
-  }, [toggleTrnInput, toggleUpdateCreate]);
-
-  useEffect(() => {
-    // console.log("list", list);
-    // console.log("transformation", transformation);
-    // console.log("stateVecArr", stateVecArr);
-    // console.log("map", transformation.e1.concat(transformation.e2));
-  }, [list]);
-
-  useEffect(() => {
-    // console.log("list", stateVecArr, list)
-    setTransformation(stateVecArr.transformationArr[currentPlot]);
-  }, [stateVecArr, currentPlot]);
-
-  useEffect(() => {
-    // setVectorNameCounter(vectorNameCounter + 1);
-    // console.log("vectors", stateVecArr[0]);
-    // console.log("stateVecArr", stateVecArr);
-    // setTransformation(stateVecArr.transformationArr[currentPlot]);
-  }, [stateVecArr]);
-
-  useEffect(() => {
-    // console.log("mainsectionArr", stateVecArr.length - 1);
-    // console.log("currentPlot", stateVecArr[currentPlot]);
-    // console.log("currentPlot", currentPlot);
-    // console.log("stateVecArr", stateVecArr.transformationArr)
-    // console.log(
-    //   "transformationArr",
-    //   stateVecArr.transformationArr[currentPlot]
-    // );
-    // console.log("e1", transformation.e1.concat(transformation.e2));
-    // setTeste(2);
-    // console.log(teste);
-    // console.log("transformation que era pra ser", stateVecArr.transformationArr[currentPlot])
-    // console.log("vetores: ", stateVecArr.vectorArr[currentPlot]);
-    // setTransformation(stateVecArr.transformationArr[currentPlot]);
-  }, [currentPlot]);
 
   return (
     <Transition in={toggleKeyboard} timeout={400}>
@@ -289,79 +131,8 @@ const BottomBar = () => {
                         borderRight: "1px solid #c0c0c0",
                       }}
                     >
-                      <div>
-                        {/* {currentPlot !== 0 && showMatrix ? ( */}
-                        {toggleUpdateCreate === "create" ? (
-                          <>
-                            <RenderTex
-                              mathExpression={`${transformation.name}\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}`}
-                              title="Transformação de R2 em R2"
-                            />
-                            <RenderTex
-                              mathExpression={String.raw`
-                              ${transformation.name}(a,b) = \begin{bmatrix}
-                              ${transformation.e1[0]} & ${transformation.e2[0]}\\
-                              ${transformation.e1[1]} & ${transformation.e2[1]}
-                                \end{bmatrix}\begin{bmatrix}
-                                  a\\
-                                  b
-                                \end{bmatrix}
-                              `}
-                              title="Matriz de transformação"
-                            />
-                          </>
-                        ) : null}
-                      </div>
-                      <button
-                        className="absolute top-1 left-1"
-                        onClick={() => {
-                          setToggleTrnInput(
-                            !toggleTrnInput && currentPlot !== 0
-                          );
-                          setToggleUpdateCreate(
-                            toggleUpdateCreate === "update"
-                              ? "create"
-                              : "update"
-                          );
-                        }}
-                        disabled={currentPlot === 0}
-                      >
-                        <Edit3 />
-                      </button>
-                      <button
-                        className="absolute bottom-1 left-1"
-                        onClick={() => {
-                          setToggleTrnInput(!toggleTrnInput);
-                          setToggleUpdateCreate("create");
-                        }}
-                      >
-                        <Plus />
-                      </button>
-
-                      <button
-                        disabled={currentPlot === 0}
-                        className="absolute bottom-1 right-1"
-                        onClick={() =>
-                          transformationDeleteHandler(transformation.name)
-                        }
-                      >
-                        <Trash2 />
-                      </button>
-                      {toggleTrnInput ? (
-                        <TransformationForm
-                          onSubmit={
-                            toggleUpdateCreate === "update"
-                              ? transformationUpdateHandler
-                              : transfromationSubmitHandler
-                          }
-                          updateOrCreate={toggleUpdateCreate}
-                          matrixArr={transformation.e1.concat(
-                            transformation.e2
-                          )}
-                        />
-                      ) : null}
+                      <BottomTransformation />
                     </aside>
-
                     <aside
                       id="vectorsAside"
                       className="
@@ -369,48 +140,7 @@ const BottomBar = () => {
                         flex flex-col justify-around items-center
                       "
                     >
-                      <div>
-                        <ul>
-                          {stateVecArr.vectorArr[currentPlot].map((vec, i) => {
-                            return (
-                              <li key={i}>
-                                <RenderTex
-                                  mathExpression={`${vec.name}=(${vec.x},${vec.y})`}
-                                  title="Vetor resultante da aplicação da transformação T"
-                                />
-                                {vec.name.includes("e_{1}") &&
-                                vec.name.includes("e_{2}") ? (
-                                  <button
-                                    onClick={() =>
-                                      vectorDeleteHandler(vec.name)
-                                    }
-                                  >
-                                    <Trash2 />
-                                  </button>
-                                ) : null}
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </div>
-                      {currentPlot === 0 ? (
-                        <button
-                          className="absolute bottom-1 left-1"
-                          onClick={() => {
-                            setToggleVecInput(!toggleVecInput);
-                          }}
-                        >
-                          <Plus />
-                        </button>
-                      ) : null}
-                      {toggleVecInput && currentPlot === 0 ? (
-                        <input
-                          className="border border-slate-400"
-                          onKeyDown={vectorSubmitHandler}
-                          value={input}
-                          onChange={(e) => onChangeInput(e)}
-                        />
-                      ) : null}
+                      <BottomVectors />
                     </aside>
                   </section>
                 </section>
