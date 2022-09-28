@@ -1,5 +1,5 @@
 import { evaluate } from "mathjs";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Edit3, Plus, Trash2 } from "react-feather";
 import StateList from "../../classes/stateList";
 import Transformation from "../../classes/transformation";
@@ -10,8 +10,8 @@ import RenderTex from "../tex/RenderTex";
 import TransformationForm from "../ui/TransformationForm";
 
 const BottomTransformation = () => {
-  const [toggleTrnInput, setToggleTrnInput] = useState(false);
-  const [toggleUpdateCreate, setToggleUpdateCreate] = useState("create");
+  const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
+  const [toggleUpdateCreate, setToggleUpdateCreate] = useState<string>("create");
   const { list, setList, stateVecArr, setStateVecArr } = useListContext();
   const { currentPlot, setCurrentPlot } = useNameContext();
 
@@ -94,7 +94,6 @@ const BottomTransformation = () => {
             <RenderTex
               mathExpression={`${transformation.name}\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}`}
               title="Transformação de R2 em R2"
-              handleDoubleClick={undefined}
             />
             <RenderTex
               mathExpression={String.raw`
@@ -107,7 +106,6 @@ const BottomTransformation = () => {
               \end{bmatrix}
             `}
               title="Matriz de transformação"
-              handleDoubleClick={undefined}
             />
           </>
         ) : null}

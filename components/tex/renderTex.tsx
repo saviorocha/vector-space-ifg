@@ -8,7 +8,7 @@ import { IRenderTexProps } from "../../interfaces/interfaces";
 const RenderTex: FunctionComponent<IRenderTexProps> = ({
   mathExpression,
   title,
-  handleDoubleClick,
+  handleDoubleClick = undefined,
 }) => {
   const { currentPlot } = useNameContext();
 
