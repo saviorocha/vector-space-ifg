@@ -1,6 +1,9 @@
 import { ReactElement } from "react";
 import StateList from "../classes/stateList";
 
+interface PropsChildren {
+  children: React.ReactNode;
+}
 interface IContextList {
   list: StateList;
   setList: Dispatch<SetStateAction<StateList>>;
@@ -75,6 +78,18 @@ interface ITransitionButtonProps {
 interface IRenderTexProps {
   mathExpression: string;
   title: string;
+  handleDoubleClick?: MouseEventHandler<HTMLParagraphElement> | undefined;
+}
+
+interface IVectorTexProps {
+  vectorExpression: string;
+  vectorName: string;
+}
+
+interface ITransformationFormProps {
+  onSubmit: React.FormEventHandler<HTMLFormElement> | undefined;
+  updateOrCreate: string;
+  matrixArr: number[];
 }
 
 interface IKeyboardProps {

@@ -5,11 +5,11 @@ import {
   useMemo,
   useState,
 } from "react";
-import { IContextName } from "../interfaces/interfaces";
+import { IContextName, PropsChildren } from "../interfaces/interfaces";
 
 const NameContext = createContext({} as IContextName);
 
-const NameContextProvider: FunctionComponent<any> = ({ children }) => {
+const NameContextProvider: FunctionComponent<PropsChildren> = ({ children }) => {
   const [vectorNameCounter, setVectorNameCounter] = useState<number>(1);
   const [transformationNameCounter, setTransformationNameCounter] = useState<number>(1);
   const [currentPlot, setCurrentPlot] = useState<number>(0);
