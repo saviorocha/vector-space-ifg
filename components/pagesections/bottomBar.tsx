@@ -1,17 +1,9 @@
-import { evaluate } from "mathjs";
-import { useEffect, useRef, useState } from "react";
-import { Edit3, Globe, Hash, Plus, Settings, Trash2 } from "react-feather";
+import { useRef, useState } from "react";
+import { Globe, Hash, Settings } from "react-feather";
 import { Transition } from "react-transition-group";
-import StateList from "../../classes/stateList";
-import Transformation from "../../classes/transformation";
-import { useListContext, useNameContext } from "../../context";
-import useList from "../../hooks/useList";
 import styles from "../../styles/modules/bottombar.module.css";
-import { validateTransformationName } from "../../utils";
 import KeyboardIcon from "../icons/KeyboardIcon";
 import KeyboardWrapper from "../tex/KeyboardWrapper";
-import RenderTex from "../tex/RenderTex";
-import TransformationForm from "../ui/TransformationForm";
 import TransitionButton from "../ui/TransitionButton";
 import BottomTransformation from "./BottomTransformation";
 import BottomVectors from "./BottomVectors";
@@ -37,6 +29,9 @@ const keyboardTransitionStyles: any = {
   exited: { height: "0%" },
 };
 
+/**
+ * Bottom bar component
+ */
 const BottomBar = () => {
   const [toggleKeyboard, setToggleKeyboard] = useState(false);
   const keyboard = useRef(null);

@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { ITransformationFormProps } from "../../interfaces/interfaces";
 
+
 const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
   onSubmit,
   updateOrCreate,
@@ -18,7 +19,7 @@ const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
               id={`t${i}`}
               defaultValue={updateOrCreate === "create" ? 0 : el}
             />
-            {i === 1 ? <br key={i + 1} /> : null}
+            {i === 1 && <br key={i + 1} />}
           </>
         );
       })}

@@ -6,16 +6,23 @@ import useList from "../../hooks/useList";
 import useTexStr from "../../hooks/useTexStr";
 import VectorTex from "../tex/VectorTex";
 
+/**
+ * Component for showing on the bottom bar the vectors referent to the current transformation state
+ */
 const BottomVectors = () => {
   const [toggleVecInput, setToggleVecInput] = useState(false);
 
   const { currentPlot } = useNameContext();
   const { vectorFromTex } = useTexStr();
-  const { addVector, removeVector } = useList();
+  const { addVector } = useList();
   const { setList, stateVecArr, setStateVecArr } = useListContext();
 
+  /**
+   * Adds a new vector to the list
+   */
   const vectorSubmitHandler = (event: any) => {
     if (event.key === "Enter") {
+      // triggered by enter key
       const newVector = vectorFromTex(event.target.value);
 
       if (!newVector) {
@@ -24,6 +31,8 @@ const BottomVectors = () => {
       }
       const newHead = addVector(newVector);
       const newList = new StateList(newHead);
+
+      // updates list
       setList(newList);
       setStateVecArr(newList.toArray());
 
@@ -45,8 +54,8 @@ const BottomVectors = () => {
           );
         })}
       </ul>
-      
-      {currentPlot === 0 ? (
+
+      {currentPlot === 0 && (
         <button
           className="absolute bottom-1 left-1"
           onClick={() => {
@@ -55,16 +64,16 @@ const BottomVectors = () => {
         >
           <Plus />
         </button>
-      ) : null}
+      )}
 
-      {toggleVecInput && currentPlot === 0 ? (
+      {toggleVecInput && currentPlot === 0 && (
         <input
           className="border border-slate-400"
           onKeyDown={vectorSubmitHandler}
           //   value={input}
           //   onChange={(e) => onChangeInput(e)}
         />
-      ) : null}
+      )}
     </>
   );
 };

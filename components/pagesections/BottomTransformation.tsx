@@ -9,9 +9,13 @@ import { validateTransformationName } from "../../utils";
 import RenderTex from "../tex/RenderTex";
 import TransformationForm from "../ui/TransformationForm";
 
+/**
+ * Component for showing on the bottom bar the current transformation being rendered
+ */
 const BottomTransformation = () => {
   const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
-  const [toggleUpdateCreate, setToggleUpdateCreate] = useState<string>("create");
+  const [toggleUpdateCreate, setToggleUpdateCreate] =
+    useState<string>("create");
   const { list, setList, stateVecArr, setStateVecArr } = useListContext();
   const { currentPlot, setCurrentPlot } = useNameContext();
 
@@ -21,12 +25,16 @@ const BottomTransformation = () => {
     stateVecArr.transformationArr[currentPlot]
   );
 
+  /**
+   * Adds a new transformation to the list based on the matrix and name submited
+   */
   const transfromationSubmitHandler = (event: any) => {
     event.preventDefault();
     const name = event.target.name.value
       ? event.target.name.value
       : `T_{${stateVecArr.vectorArr.length}}`;
 
+    // validate submited data
     if (!validateTransformationName(name)) {
       alert("nome de transformação inválido");
       return;
@@ -40,21 +48,28 @@ const BottomTransformation = () => {
       transformation.name
     );
     const newList = new StateList(newHead);
+
+    // updates the list context
     setList(newList);
     setStateVecArr(list.toArray());
     setToggleTrnInput(false);
   };
 
+  /**
+   * Updates the current transformation matrix and name
+   */
   const transformationUpdateHandler = (event: any) => {
     event.preventDefault();
     const name = event.target.name.value
       ? event.target.name.value
       : transformation.name;
 
+    // validate submited data
     if (!validateTransformationName(name)) {
       alert("nome de transformação inválido");
       return;
     }
+
     const newHead = updateTransformation(
       new Transformation(
         [evaluate(event.target.t0.value), evaluate(event.target.t2.value)],
@@ -69,27 +84,40 @@ const BottomTransformation = () => {
       return;
     }
     const newList = new StateList(newHead);
+
+    // updates the list context
     setList(newList);
     setStateVecArr(list.toArray());
   };
 
+  /**
+   * Deletes the current transformation
+   * @param {string} transformationName
+   */
   const transformationDeleteHandler = (transformationName: string) => {
     const newHead = removeTransformation(transformationName);
     const newList = new StateList(newHead);
-    setCurrentPlot(currentPlot - 1);
+    setCurrentPlot(currentPlot - 1); // changes the plot being rendered to avoid inconsistency
     setList(newList);
     setStateVecArr(list.toArray());
   };
 
   useEffect(() => {
+    console.log("toggleTrnInput", toggleTrnInput);
+    console.log("toggleUpdateCreate", toggleUpdateCreate);
+  }, [toggleTrnInput, toggleUpdateCreate]);
+
+  useEffect(() => {
     // console.log("list", stateVecArr, list)
     setTransformation(stateVecArr.transformationArr[currentPlot]);
+    setToggleTrnInput(false);
+    setToggleUpdateCreate("create")
   }, [stateVecArr, currentPlot]);
 
   return (
     <>
       <div>
-        {toggleUpdateCreate === "create" ? (
+        {toggleUpdateCreate === "create" && (
           <>
             <RenderTex
               mathExpression={`${transformation.name}\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}`}
@@ -108,7 +136,7 @@ const BottomTransformation = () => {
               title="Matriz de transformação"
             />
           </>
-        ) : null}
+        )}
       </div>
       <button
         className="absolute top-1 left-1"
@@ -139,7 +167,7 @@ const BottomTransformation = () => {
       >
         <Trash2 />
       </button>
-      {toggleTrnInput ? (
+      {toggleTrnInput && (
         <TransformationForm
           onSubmit={
             toggleUpdateCreate === "update"
@@ -149,7 +177,7 @@ const BottomTransformation = () => {
           updateOrCreate={toggleUpdateCreate}
           matrixArr={transformation.e1.concat(transformation.e2)}
         />
-      ) : null}
+      )}
     </>
   );
 };
