@@ -5,11 +5,13 @@ import {
   useMemo,
   useState,
 } from "react";
-import { IContextD3 } from "../interfaces/interfaces";
+import { IContextD3, PropsChildren } from "../interfaces/interfaces";
+
+
 
 const D3Context = createContext<IContextD3>({} as IContextD3);
 
-const D3ContextProvider: FunctionComponent<any> = ({ children }) => {
+const D3ContextProvider: FunctionComponent<PropsChildren> = ({ children }) => {
   const [margin, setMargin] = useState<Margin>({
     top: 10,
     right: 30,

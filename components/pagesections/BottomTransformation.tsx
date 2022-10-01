@@ -103,8 +103,8 @@ const BottomTransformation = () => {
   };
 
   useEffect(() => {
-    console.log("toggleTrnInput", toggleTrnInput);
-    console.log("toggleUpdateCreate", toggleUpdateCreate);
+    // console.log("toggleTrnInput", toggleTrnInput);
+    // console.log("toggleUpdateCreate", toggleUpdateCreate);
   }, [toggleTrnInput, toggleUpdateCreate]);
 
   useEffect(() => {

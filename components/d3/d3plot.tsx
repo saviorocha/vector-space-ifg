@@ -14,7 +14,7 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index, render = false, translat
   const { dimension, events } = useD3Context();
   const { stateVecArr } = useListContext();
 
-  useEffect(initD3, [stateVecArr, events]);
+  useEffect(initD3, [stateVecArr, events]); 
 
   function initD3() {
     const section = d3.select(refElement.current);

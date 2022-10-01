@@ -1,6 +1,9 @@
 import { ReactElement } from "react";
 import StateList from "../classes/stateList";
 
+interface PropsChildren {
+  children: React.ReactNode;
+}
 interface IContextList {
   list: StateList;
   setList: Dispatch<SetStateAction<StateList>>;
