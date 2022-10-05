@@ -14,6 +14,7 @@ import { useListContext, useNameContext } from "../../context";
 import { IMainSectionProps } from "../../interfaces/interfaces";
 import styles from "../../styles/modules/editpage.module.css";
 import D3Plot from "../d3/D3plot";
+
 import RoundButton from "../ui/RoundButton";
 import TransitionButton from "../ui/TransitionButton";
 
@@ -40,6 +41,7 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
     // console.log("lista mudou no main")
     // console.log("mainsectionArr", stateVecArr);
     // console.log("mainsectionList", list);
+    // console.log("stateVecArr", stateVecArr)
   }, [list]);
 
   // useEffect(() => {
