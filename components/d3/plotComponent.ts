@@ -56,7 +56,7 @@ class PlotComponent {
   createPlot = () => {
     // initialize a X axis:
     this.x = d3.scaleLinear().range([0, this.width]);
-    this.xAxis = d3.axisBottom(this.x);
+    this.xAxis = d3.axisBottom(this.x).scale(this.x);
     this.svg
       .append("g")
       .attr("transform", `translate(0, ${this.height / 2})`)
@@ -64,7 +64,7 @@ class PlotComponent {
 
     // initialize an Y axis
     this.y = d3.scaleLinear().range([this.height, 0]);
-    this.yAxis = d3.axisLeft(this.y);
+    this.yAxis = d3.axisLeft(this.y).scale(this.y);
     this.svg
       .append("g")
       .attr("transform", `translate(${this.width / 2}, 0)`)
