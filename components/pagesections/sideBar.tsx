@@ -13,11 +13,13 @@ import useEvents from "../../hooks/useEvents";
 import useList from "../../hooks/useList";
 import { ISideBarProps } from "../../interfaces/interfaces";
 import BarItem from "../ui/BarItem";
+import { useRouter } from 'next/router'
 
 const SideBar: FunctionComponent<ISideBarProps> = ({
   sideBarStyle,
   sideBarRef,
 }) => {
+  const router = useRouter();
   const { setEvents } = useD3Context();
   const { list, setList, stateVecArr, setStateVecArr } = useListContext();
   const { addTransformation } = useList();
@@ -112,7 +114,7 @@ const SideBar: FunctionComponent<ISideBarProps> = ({
         <BarItem
           title={"Executar Transformações"}
           leftIcon={<Play />}
-          handleOnClick={() => {}}
+          handleOnClick={() => {router.push("/animationplane")}}
         />
       </ul>
     </nav>
