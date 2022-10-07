@@ -16,6 +16,11 @@ const D3PlotAnimation = () => {
   const { dimension } = useD3Context();
   const { stateVecArr } = useListContext();
 
+  const handleProgressBar = (event: any) => {
+    event.preventDefault();
+    // console.log(event.target.value);
+  };
+
   const handleAnimation = () => {
     let run = 1;
 
@@ -65,6 +70,13 @@ const D3PlotAnimation = () => {
         <button onClick={handleAnimation}>
           <Play />
         </button>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          // step={0.01}
+          onChange={handleProgressBar}
+        />
       </section>
     </>
   );
