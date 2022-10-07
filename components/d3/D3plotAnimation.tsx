@@ -1,10 +1,13 @@
 import * as d3 from "d3";
+import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import { CornerUpLeft, Play } from "react-feather";
 import { useD3Context, useListContext } from "../../context";
 import styles from "../../styles/modules/D3.module.css";
 import AnimationPlotComponent from "./animationPlotComponent";
 
 const D3PlotAnimation = () => {
+  const router = useRouter();
   const refElement = useRef<null | HTMLDivElement>(null);
   const [d3Component, setD3Component] = useState<AnimationPlotComponent>(
     {} as AnimationPlotComponent
@@ -51,7 +54,18 @@ const D3PlotAnimation = () => {
   return (
     <>
       <section id={styles.plot} ref={refElement}></section>
-      <button onClick={handleAnimation}>animate</button>
+      <section className="flex items-center justify-center">
+        <button
+          onClick={() => {
+            router.push("/editplane");
+          }}
+        >
+          <CornerUpLeft />
+        </button>
+        <button onClick={handleAnimation}>
+          <Play />
+        </button>
+      </section>
     </>
   );
 };

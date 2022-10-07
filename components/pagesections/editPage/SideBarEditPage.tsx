@@ -6,16 +6,17 @@ import {
   Play,
   Type,
 } from "react-feather";
-import StateList from "../../classes/stateList";
-import Transformation from "../../classes/transformation";
-import { useD3Context, useListContext } from "../../context";
-import useEvents from "../../hooks/useEvents";
-import useList from "../../hooks/useList";
-import { ISideBarProps } from "../../interfaces/interfaces";
-import BarItem from "../ui/BarItem";
+import StateList from "../../../classes/stateList";
+import Transformation from "../../../classes/transformation";
+import { useD3Context, useListContext } from "../../../context";
+import useEvents from "../../../hooks/useEvents";
+import useList from "../../../hooks/useList";
+import { ISideBarProps } from "../../../interfaces/interfaces";
+import BarItem from "../../ui/BarItem";
 import { useRouter } from 'next/router'
+import SideBar from "../../ui/SideBar";
 
-const SideBar: FunctionComponent<ISideBarProps> = ({
+const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
   sideBarStyle,
   sideBarRef,
 }) => {
@@ -54,14 +55,10 @@ const SideBar: FunctionComponent<ISideBarProps> = ({
   }, [list]);
 
   return (
-    <nav
+    <SideBar
       // className={sidebarClass}
-      ref={sideBarRef}
-      style={sideBarStyle}
-      className="
-        w-60 h-full px-1 top-0 left-0 fixed shadow-md   
-        bg-gray-100 border-r border-gray-300 overflow-hidden
-      "
+      sideBarRef={sideBarRef}
+      sideBarStyle={sideBarStyle}
       // dark:bg-darklight dark:border-black
     >
       <ul className="relative">
@@ -117,8 +114,8 @@ const SideBar: FunctionComponent<ISideBarProps> = ({
           handleOnClick={() => {router.push("/animationplane")}}
         />
       </ul>
-    </nav>
+    </SideBar>
   );
 };
 
-export default SideBar;
+export default SideBarEditPage;

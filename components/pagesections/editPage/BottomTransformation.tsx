@@ -1,13 +1,13 @@
 import { evaluate } from "mathjs";
 import { useEffect, useState } from "react";
 import { Edit3, Plus, Trash2 } from "react-feather";
-import StateList from "../../classes/stateList";
-import Transformation from "../../classes/transformation";
-import { useListContext, useNameContext } from "../../context";
-import useList from "../../hooks/useList";
-import { validateTransformationName } from "../../utils";
-import RenderTex from "../tex/RenderTex";
-import TransformationForm from "../ui/TransformationForm";
+import StateList from "../../../classes/stateList";
+import Transformation from "../../../classes/transformation";
+import { useListContext, useNameContext } from "../../../context";
+import useList from "../../../hooks/useList";
+import { validateTransformationName } from "../../../utils";
+import RenderTex from "../../tex/RenderTex";
+import TransformationForm from "../../ui/TransformationForm";
 
 /**
  * Component for showing on the bottom bar the current transformation being rendered

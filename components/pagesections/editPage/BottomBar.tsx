@@ -1,12 +1,12 @@
 import { useRef, useState } from "react";
 import { Globe, Hash, Settings } from "react-feather";
 import { Transition } from "react-transition-group";
-import styles from "../../styles/modules/bottombar.module.css";
-import KeyboardIcon from "../icons/KeyboardIcon";
-import KeyboardWrapper from "../tex/KeyboardWrapper";
-import TransitionButton from "../ui/TransitionButton";
+import KeyboardIcon from "../../icons/KeyboardIcon";
+import KeyboardWrapper from "../../tex/KeyboardWrapper";
+import TransitionButton from "../../ui/TransitionButton";
 import BottomTransformation from "./BottomTransformation";
 import BottomVectors from "./BottomVectors";
+import styles from "../../../styles/modules/bottombar.module.css"
 
 const navTransitionStyles: any = {
   entering: { height: "9rem" },

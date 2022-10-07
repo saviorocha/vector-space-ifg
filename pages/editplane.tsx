@@ -1,9 +1,9 @@
 import { LegacyRef, useRef, useState } from "react";
 import { ChevronLeft } from "react-feather";
 import { Transition } from "react-transition-group";
-import BottomBar from "../components/pagesections/BottomBar";
-import MainSection from "../components/pagesections/MainSection";
-import SideBar from "../components/pagesections/SideBar";
+import BottomBar from "../components/pagesections/editPage/BottomBar";
+import MainSectionEditPage from "../components/pagesections/editPage/MainSectionEditPage";
+import SideBarEditPage from "../components/pagesections/editPage/SideBarEditPage";
 
 // transition properties of the main component
 const mainTransitionStyles: any = {
@@ -30,7 +30,7 @@ const EditPlanePage = () => {
     <div className="h-screen">
       <Transition in={toggleSideBar} timeout={400}>
         {(state) => (
-          <SideBar
+          <SideBarEditPage
             sideBarStyle={{
               transition: "0.5s",
               ...sideBarTransitionStyles[state],
@@ -41,7 +41,7 @@ const EditPlanePage = () => {
       </Transition>
       <Transition in={toggleSideBar} timeout={400}>
         {(state) => (
-          <MainSection
+          <MainSectionEditPage
             mainStyle={{
               transition: "0.5s",
               ...mainTransitionStyles[state],
@@ -58,7 +58,7 @@ const EditPlanePage = () => {
             >
               <ChevronLeft className="text-gray-700" />
             </button>
-          </MainSection>
+          </MainSectionEditPage>
         )}
       </Transition>
       <BottomBar />

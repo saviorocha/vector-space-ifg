@@ -23,7 +23,7 @@ const BarItem: FunctionComponent<IBarItemProps> = ({
         <span>{title}</span>
         {rightIcon}
       </a>
-      {subItems ? (
+      {subItems && (
         <ul className="relative accordion-collapse collapse">
           <li className="relative">
             {subItems.map(({ title, handleItemOnClick }, i) => {
@@ -44,7 +44,7 @@ const BarItem: FunctionComponent<IBarItemProps> = ({
             })}
           </li>
         </ul>
-      ) : null}
+      )}
     </li>
   );
 };

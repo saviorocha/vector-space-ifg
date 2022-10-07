@@ -42,8 +42,9 @@ interface IMainSectionProps {
 }
 
 interface ISideBarProps {
-  sideBarStyle: CSSProperties | string;
-  sideBarRef: LegacyRef<HTMLElement> | undefined;
+  children?: ReactNode;
+  sideBarStyle?: CSSProperties | string;
+  sideBarRef?: LegacyRef<HTMLElement> | undefined;
 }
 
 interface IBarItemProps {

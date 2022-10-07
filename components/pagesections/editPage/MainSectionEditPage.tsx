@@ -10,15 +10,15 @@ import {
   ZoomIn,
   ZoomOut,
 } from "react-feather";
-import { useListContext, useNameContext } from "../../context";
-import { IMainSectionProps } from "../../interfaces/interfaces";
-import styles from "../../styles/modules/editpage.module.css";
-import D3Plot from "../d3/D3plot";
+import { useListContext, useNameContext } from "../../../context";
+import { IMainSectionProps } from "../../../interfaces/interfaces";
+import styles from "../../../styles/modules/editpage.module.css"
+import D3Plot from "../../d3/D3plot";
 
-import RoundButton from "../ui/RoundButton";
-import TransitionButton from "../ui/TransitionButton";
+import RoundButton from "../../ui/RoundButton";
+import TransitionButton from "../../ui/TransitionButton";
 
-const MainSection: FunctionComponent<IMainSectionProps> = ({
+const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
   mainStyle,
   mainRef,
   children,
@@ -28,26 +28,6 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
   const [mode, setMode] = useState<Mode>("dark");
   // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
 
-  useEffect(() => {
-    // console.log("vectorNameCounter", vectorNameCounter)
-  }, [vectorNameCounter])
-
-  useEffect(() => {
-    // const newHead = addTransformation(new Transformation([2, 0], [0, 2]));
-    // const newList = new StateList(newHead);
-    // console.log("mainRef", mainRef);
-    // setList(newList);
-    // setStateVecArr(list.toArray());
-    // console.log("lista mudou no main")
-    // console.log("mainsectionArr", stateVecArr);
-    // console.log("mainsectionList", list);
-    // console.log("stateVecArr", stateVecArr)
-  }, [list]);
-
-  // useEffect(() => {
-  //   // console.log("mainsectionArr", stateVecArr.length - 1);
-  //   console.log("currentPlot", currentPlot);
-  // }, [currentPlot]);
 
   return (
     <>
@@ -206,4 +186,4 @@ const MainSection: FunctionComponent<IMainSectionProps> = ({
   );
 };
 
-export default MainSection;
+export default MainSectionEditPage;

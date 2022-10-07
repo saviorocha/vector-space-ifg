@@ -62,6 +62,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
     setList(newList);
     setStateVecArr(list.toArray());
   };
+  
   return (
     <div>
       {!vectorName.includes("e_{1}") &&
