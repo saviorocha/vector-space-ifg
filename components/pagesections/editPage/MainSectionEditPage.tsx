@@ -12,8 +12,9 @@ import {
 } from "react-feather";
 import { useListContext, useNameContext } from "../../../context";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
-import styles from "../../../styles/modules/editpage.module.css"
+import styles from "../../../styles/modules/editpage.module.css";
 import D3Plot from "../../d3/D3plot";
+import Carousel, { CarouselItem } from "../../ui/Carousel";
 
 import RoundButton from "../../ui/RoundButton";
 import TransitionButton from "../../ui/TransitionButton";
@@ -23,11 +24,15 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
   mainRef,
   children,
 }) => {
-  const { currentPlot, setCurrentPlot, vectorNameCounter, setVectorNameCounter } = useNameContext();
+  const {
+    currentPlot,
+    setCurrentPlot,
+    vectorNameCounter,
+    setVectorNameCounter,
+  } = useNameContext();
   const { list, stateVecArr } = useListContext();
   const [mode, setMode] = useState<Mode>("dark");
   // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
-
 
   return (
     <>
@@ -68,18 +73,17 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
           "
           // h-full overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0
         >
-          {/* <Carousel /> */}
-          {stateVecArr.vectorArr.map((vec, i) => {
-            return (
-              <D3Plot
-                key={i}
-                index={i}
-                render={i === currentPlot}
-                // translate={currentPlot * 10}
-              />
-            );
-          })}
-          <div className="mt-0">
+          <Carousel>
+            {stateVecArr.vectorArr.map((vec, i) => {
+              return (
+                <CarouselItem key={i}>
+                  <D3Plot index={i} />
+                </CarouselItem>
+              );
+            })}
+          </Carousel>
+
+          {/* <div className="mt-0">
             {stateVecArr.vectorArr.map((vec, i) => {
               return (
                 <span
@@ -92,7 +96,7 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
                 ></span>
               );
             })}
-          </div>
+          </div> */}
         </section>
 
         <section
@@ -151,7 +155,9 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
             handleOnClick={() => {
               setCurrentPlot(currentPlot + 1);
             }}
-            disabled={currentPlot + 1 > stateVecArr.transformationArr.length - 1}
+            disabled={
+              currentPlot + 1 > stateVecArr.transformationArr.length - 1
+            }
           />
           <div
             id="bottom-buttons"

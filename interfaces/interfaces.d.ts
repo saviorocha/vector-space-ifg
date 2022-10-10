@@ -31,8 +31,6 @@ interface IContextName {
 
 interface IPlotProps {
   index: number;
-  render: boolean;
-  translate?: number;
 }
 
 interface IMainSectionProps {

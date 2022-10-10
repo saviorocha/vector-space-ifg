@@ -1,16 +1,75 @@
-import React from "react";
-import { useListContext } from "../../context";
-import D3Plot from "../d3/D3plot";
+import React, { useState } from "react";
+import { useNameContext } from "../../context";
 
-const Carousel = () => {
-  const { list, stateVecArr } = useListContext();
+import styles from "../../styles/modules/carousel.module.css";
+
+export const CarouselItem = ({ children, width }) => {
+  return (
+    <div className={styles.carouselitem} style={{ width: width }}>
+      {children}
+    </div>
+  );
+};
+
+const Carousel = ({ children }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const { currentPlot, setCurrentPlot } = useNameContext();
+
+  const updateIndex = (newIndex) => {
+    if (newIndex < 0) {
+      newIndex = 0;
+    } else if (newIndex > React.Children.count(children)) {
+      newIndex = React.Children.count(children) - 1;
+    }
+
+    setActiveIndex(newIndex);
+  };
 
   return (
-    <div>
-      {stateVecArr.map((vec, i) => {
-        return <D3Plot key={i} index={i} />;
-      })}
-    </div>
+    <section className="carousel overflow-hidden">
+      <aside
+        className={styles.inner}
+        style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+      >
+        {React.Children.map(children, (child, index) => {
+          return React.cloneElement(child, { width: "100%" });
+        })}
+      </aside>
+      <aside className={styles.indicators}>
+        <button
+          className={styles.buttonindicators}
+          onClick={() => {
+            updateIndex(activeIndex - 1);
+          }}
+        >
+          prev
+        </button>
+        {React.Children.map(children, (child, index) => {
+          return (
+            <span
+            className={styles.dot}
+              style={{
+                backgroundColor: index + 1 === currentPlot ? "#717171" : "#bbb",
+              }}
+              onClick={() => {
+                setCurrentPlot(index + 1);
+                console.log("index", index);
+                updateIndex(index);
+              }}
+            >
+            </span>
+          );
+        })}
+        <button
+          className={styles.buttonindicators}
+          onClick={() => {
+            updateIndex(activeIndex + 1);
+          }}
+        >
+          next
+        </button>
+      </aside>
+    </section>
   );
 };
 
