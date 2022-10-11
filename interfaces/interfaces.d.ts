@@ -31,8 +31,6 @@ interface IContextName {
 
 interface IPlotProps {
   index: number;
-  render: boolean;
-  translate?: number;
 }
 
 interface IMainSectionProps {
@@ -60,10 +58,7 @@ interface IBarItemProps {
 
 interface IRoundButton {
   icon: ReactElement;
-  left?: string;
-  right?: string;
-  top?: string;
-  bottom?: string;
+  classString: string;
   handleOnClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   disabled?: boolean;
 }

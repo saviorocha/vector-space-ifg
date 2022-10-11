@@ -5,7 +5,9 @@ import { IPlotProps } from "../../interfaces/interfaces";
 import PlotComponent from "./plotComponent";
 import styles from "../../styles/modules/D3.module.css";
 
-const D3Plot: FunctionComponent<IPlotProps> = ({ index, render = false, translate = 0 }) => {
+const D3Plot: FunctionComponent<IPlotProps> = ({
+  index,
+}) => {
   const refElement = useRef<null | HTMLDivElement>(null);
   const [d3Component, setD3Component] = useState<PlotComponent>(
     {} as PlotComponent
@@ -14,7 +16,7 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index, render = false, translat
   const { dimension, events } = useD3Context();
   const { stateVecArr } = useListContext();
 
-  useEffect(initD3, [stateVecArr, events]); 
+  useEffect(initD3, [stateVecArr, events]);
 
   function initD3() {
     const section = d3.select(refElement.current);
@@ -34,15 +36,11 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index, render = false, translat
   }
 
   return (
-    <section
-      className={"carousel-item text-center relative snap-start"}
-      style={{
-        // transform: `translateX(${translate}px)`, //https://codepen.io/Schepp/pen/WNbQByE; https://freefrontend.com/css-carousels/
-        display: render ? "block" : "none",
-      }}
+    <aside
+      className="text-center relative snap-start"
       id={styles.plot}
       ref={refElement}
-    ></section>
+    ></aside>
   );
 };
 
