@@ -1,73 +1,83 @@
-import React, { useState } from "react";
-import { useNameContext } from "../../context";
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { ChevronsLeft, ChevronsRight } from "react-feather";
+import { useListContext, useNameContext } from "../../context";
+import { PropsChildren } from "../../interfaces/interfaces";
 
 import styles from "../../styles/modules/carousel.module.css";
+import RoundButton from "./RoundButton";
 
-export const CarouselItem = ({ children, width }) => {
-  return (
-    <div className={styles.carouselitem} style={{ width: width }}>
-      {children}
-    </div>
-  );
+const btnString = 
+`rounded-full h-10 w-10 right-0 mx-10
+flex items-center justify-center 
+bg-gray-50 bg-opacity-75 border border-gray-200`;
+
+export const CarouselItem: FunctionComponent<PropsChildren> = ({
+  children,
+}) => {
+  return <aside className={styles.carouselitem}>{children}</aside>;
 };
 
-const Carousel = ({ children }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+const Carousel: FunctionComponent<PropsChildren> = ({ children }) => {
   const { currentPlot, setCurrentPlot } = useNameContext();
+  const { stateVecArr } = useListContext();
 
-  const updateIndex = (newIndex) => {
+  const updateIndex = (newIndex: number) => {
     if (newIndex < 0) {
       newIndex = 0;
     } else if (newIndex > React.Children.count(children)) {
       newIndex = React.Children.count(children) - 1;
     }
 
-    setActiveIndex(newIndex);
+    setCurrentPlot(newIndex);
   };
+
+  useEffect(() => {
+    // console.log("stateVecArr", stateVecArr)
+    // console.log("currentPlot", currentPlot)
+  }, [currentPlot]);
 
   return (
     <section className="carousel overflow-hidden">
-      <aside
+      <section
         className={styles.inner}
-        style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+        style={{ transform: `translateX(-${currentPlot * 100}%)` }}
       >
-        {React.Children.map(children, (child, index) => {
+        {React.Children.map(children, (child: any, index) => {
           return React.cloneElement(child, { width: "100%" });
         })}
-      </aside>
+      </section>
       <aside className={styles.indicators}>
-        <button
-          className={styles.buttonindicators}
-          onClick={() => {
-            updateIndex(activeIndex - 1);
+        <RoundButton
+          classString={btnString}
+          icon={<ChevronsLeft className="text-gray-700" />}
+          handleOnClick={() => {
+            updateIndex(currentPlot - 1);
           }}
-        >
-          prev
-        </button>
-        {React.Children.map(children, (child, index) => {
-          return (
-            <span
-            className={styles.dot}
-              style={{
-                backgroundColor: index + 1 === currentPlot ? "#717171" : "#bbb",
-              }}
-              onClick={() => {
-                setCurrentPlot(index + 1);
-                console.log("index", index);
-                updateIndex(index);
-              }}
-            >
-            </span>
-          );
-        })}
-        <button
-          className={styles.buttonindicators}
-          onClick={() => {
-            updateIndex(activeIndex + 1);
+          disabled={currentPlot - 1 < 0}
+        />
+        <aside>
+          {React.Children.map(children, (child, index) => {
+            return (
+              <span
+                className={styles.dot}
+                style={{
+                  backgroundColor: index === currentPlot ? "#717171" : "#bbb",
+                }}
+                onClick={() => {
+                  updateIndex(index);
+                }}
+              ></span>
+            );
+          })}
+        </aside>
+        <RoundButton
+          classString={btnString}
+          icon={<ChevronsRight className="text-gray-700" />}
+          handleOnClick={() => {
+            updateIndex(currentPlot + 1);
           }}
-        >
-          next
-        </button>
+          disabled={currentPlot + 1 > stateVecArr.transformationArr.length - 1}
+        />
       </aside>
     </section>
   );

@@ -1,14 +1,12 @@
 import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useState } from "react";
 import {
-  ChevronsLeft,
-  ChevronsRight,
   Globe,
   Hash,
   Play,
   Settings,
   ZoomIn,
-  ZoomOut,
+  ZoomOut
 } from "react-feather";
 import { useListContext, useNameContext } from "../../../context";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
@@ -18,6 +16,10 @@ import Carousel, { CarouselItem } from "../../ui/Carousel";
 
 import RoundButton from "../../ui/RoundButton";
 import TransitionButton from "../../ui/TransitionButton";
+
+const btnClassName = `rounded-full h-10 w-10 right-0
+flex items-center justify-center 
+bg-gray-50 bg-opacity-75 border border-gray-200`
 
 const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
   mainStyle,
@@ -50,18 +52,6 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
           className="h-full flex items-center justify-around flex-col"
         >
           {children}
-          <RoundButton
-            icon={<ChevronsLeft className="text-gray-700" />}
-            left="left-0"
-            handleOnClick={() => {
-              setCurrentPlot(currentPlot - 1);
-            }}
-            disabled={currentPlot - 1 < 0}
-          />
-          <RoundButton
-            icon={<ChevronsLeft className="text-gray-700" />}
-            left="left-0"
-          />
         </section>
 
         <section
@@ -82,21 +72,6 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
               );
             })}
           </Carousel>
-
-          {/* <div className="mt-0">
-            {stateVecArr.vectorArr.map((vec, i) => {
-              return (
-                <span
-                  key={i}
-                  className={styles.dot}
-                  style={{
-                    backgroundColor: i === currentPlot ? "#717171" : "#bbb",
-                  }}
-                  onClick={() => setCurrentPlot(i)}
-                ></span>
-              );
-            })}
-          </div> */}
         </section>
 
         <section
@@ -149,31 +124,22 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
               </li>
             </ul>
           </TransitionButton>
-          <RoundButton
-            icon={<ChevronsRight className="text-gray-700" />}
-            right="right-0"
-            handleOnClick={() => {
-              setCurrentPlot(currentPlot + 1);
-            }}
-            disabled={
-              currentPlot + 1 > stateVecArr.transformationArr.length - 1
-            }
-          />
+
           <div
             id="bottom-buttons"
             className="flex items-center justify-center flex-col"
           >
             <RoundButton
+              classString={btnClassName}
               icon={<ZoomIn className="text-gray-700" />}
-              right="right-0"
             />
             <RoundButton
+              classString={btnClassName}
               icon={<ZoomOut className="text-gray-700" />}
-              right="right-0"
             />
             <RoundButton
+              classString={btnClassName}
               icon={<Play className="text-gray-700" />}
-              right="right-0"
             />
             {/* <button
             onClick={handleResetList}
