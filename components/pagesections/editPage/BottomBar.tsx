@@ -1,12 +1,13 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Globe, Hash, Settings } from "react-feather";
 import { Transition } from "react-transition-group";
+import useTexStr from "../../../hooks/useTexStr";
+import styles from "../../../styles/modules/bottombar.module.css";
 import KeyboardIcon from "../../icons/KeyboardIcon";
 import KeyboardWrapper from "../../tex/KeyboardWrapper";
 import TransitionButton from "../../ui/TransitionButton";
 import BottomTransformation from "./BottomTransformation";
 import BottomVectors from "./BottomVectors";
-import styles from "../../../styles/modules/bottombar.module.css"
 
 const navTransitionStyles: any = {
   entering: { height: "9rem" },
@@ -33,8 +34,28 @@ const keyboardTransitionStyles: any = {
  * Bottom bar component
  */
 const BottomBar = () => {
+  const { matrixStrings } = useTexStr();
+  const [currentPosition, setCurrentPosition] = useState(0);
+  const [currentTrnExpression, setCurrentTrnExpression] = useState(
+    matrixStrings()[0]
+  );
   const [toggleKeyboard, setToggleKeyboard] = useState(false);
   const keyboard = useRef(null);
+
+  useEffect(() => {
+    console.log("marixStrings", matrixStrings())
+    console.log("currentTrnExpression", currentTrnExpression);
+    console.log("currentPosition", currentPosition);
+  }, [currentTrnExpression]);
+
+  const changeName = (event: any) => {
+    event.preventDefault();
+    const trnNameArr = matrixStrings();
+    setCurrentPosition(
+      currentPosition === trnNameArr.length ? 0 : currentPosition + 1
+    );
+    setCurrentTrnExpression(trnNameArr[currentPosition]);
+  };
 
   const handleKeyboardChange = (input: string) => {
     // if (input.includes("teste")) {
@@ -91,11 +112,14 @@ const BottomBar = () => {
                     }}
                   >
                     <ul className="mt-3 text-sm">
-                      <li className="flex items-center justify-start ml-2 p-1 ">
+                      <li className="flex items-center justify-start ml-2 p-1">
                         <Globe />
                         Mudar formato de nomes
                       </li>
-                      <li className="flex items-center justify-start ml-2 p-1 ">
+                      <li
+                        className="flex items-center justify-start ml-2 p-1"
+                        onClick={changeName}
+                      >
                         <Hash />
                         Mudar formato de transformações
                       </li>
@@ -126,7 +150,9 @@ const BottomBar = () => {
                         borderRight: "1px solid #c0c0c0",
                       }}
                     >
-                      <BottomTransformation />
+                      <BottomTransformation
+                        transformationExpression={currentTrnExpression}
+                      />
                     </aside>
                     <aside
                       id="vectorsAside"

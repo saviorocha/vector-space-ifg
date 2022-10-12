@@ -1,36 +1,42 @@
 import { evaluate } from "mathjs";
-import { useState } from "react";
 import Transformation from "../classes/transformation";
 import Vector from "../classes/vector";
 import { useListContext, useNameContext } from "../context";
-import {
-  validateVectorName,
-  validateVectorValues
-} from "../utils";
+import { validateVectorName, validateVectorValues } from "../utils";
 
 const useTexStr = () => {
   const { stateVecArr } = useListContext();
   const { currentPlot } = useNameContext();
   const { vectorNameCounter, setVectorNameCounter } = useNameContext();
 
-  const [transformations, setTransformation] = useState<Transformation[]>(
-    stateVecArr.transformationArr
-  );
   const matrixStrings = () => {
-    return transformations.map((trn) => {
-      return {
-        name: `${trn.name}\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}`,
-        matrix: String.raw`
-        ${trn.name}(a,b) = \begin{bmatrix}
-        ${trn.e1[0]} & ${trn.e2[0]}\\
-        ${trn.e1[1]} & ${trn.e2[1]}
+    const transformation = stateVecArr.transformationArr[currentPlot];
+    return [
+      // prettier-ignore
+      `${transformation.name}(a, b) = (
+        ${defString(transformation.e1[0], "a")} ${defString(transformation.e1[0]) && "+"} ${defString(transformation.e2[0], "a")}, 
+        ${defString(transformation.e1[1], "b")} ${defString(transformation.e1[0]) && "+"} ${defString(transformation.e2[1], "b")})`
+        .split(" ").join("").trim().replace(/\n/g, ""),
+      String.raw`
+        ${transformation.name}(a, b) = \begin{bmatrix}
+        ${transformation.e1[0]} & ${transformation.e2[0]}\\
+        ${transformation.e1[1]} & ${transformation.e2[1]}
           \end{bmatrix}\begin{bmatrix}
             a\\
             b
           \end{bmatrix}
         `,
-      };
-    });
+    ];
+  };
+
+  const defString = (num: number, name: string = "") => {
+    if (num === 1) {
+      return name;
+    } else if (num === 0) {
+      return "";
+    } else {
+      return `${num}${name}`;
+    }
   };
 
   const vectorFromTex = (vectorStr: string): Vector | null => {

@@ -12,7 +12,7 @@ import TransformationForm from "../../ui/TransformationForm";
 /**
  * Component for showing on the bottom bar the current transformation being rendered
  */
-const BottomTransformation = () => {
+const BottomTransformation = ({ transformationExpression }) => {
   const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
   const [toggleUpdateCreate, setToggleUpdateCreate] =
     useState<string>("create");
@@ -111,7 +111,7 @@ const BottomTransformation = () => {
     // console.log("list", stateVecArr, list)
     setTransformation(stateVecArr.transformationArr[currentPlot]);
     setToggleTrnInput(false);
-    setToggleUpdateCreate("create")
+    setToggleUpdateCreate("create");
   }, [stateVecArr, currentPlot]);
 
   return (
@@ -124,15 +124,7 @@ const BottomTransformation = () => {
               title="Transformação de R2 em R2"
             />
             <RenderTex
-              mathExpression={String.raw`
-            ${transformation.name}(a,b) = \begin{bmatrix}
-            ${transformation.e1[0]} & ${transformation.e2[0]}\\
-            ${transformation.e1[1]} & ${transformation.e2[1]}
-              \end{bmatrix}\begin{bmatrix}
-                a\\
-                b
-              \end{bmatrix}
-            `}
+              mathExpression={transformationExpression}
               title="Matriz de transformação"
             />
           </>

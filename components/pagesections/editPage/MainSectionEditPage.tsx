@@ -11,7 +11,8 @@ import {
 import { useListContext, useNameContext } from "../../../context";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/editpage.module.css";
-import D3Plot from "../../d3/D3plot";
+import D3Plot from "../../d3/d3plot";
+
 import Carousel, { CarouselItem } from "../../ui/Carousel";
 
 import RoundButton from "../../ui/RoundButton";
@@ -26,12 +27,6 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
   mainRef,
   children,
 }) => {
-  const {
-    currentPlot,
-    setCurrentPlot,
-    vectorNameCounter,
-    setVectorNameCounter,
-  } = useNameContext();
   const { list, stateVecArr } = useListContext();
   const [mode, setMode] = useState<Mode>("dark");
   // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());

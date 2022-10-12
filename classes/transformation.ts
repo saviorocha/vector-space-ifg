@@ -7,7 +7,7 @@ class Transformation {
   private _e1Vector: Vector;
   private _e2Vector: Vector;
   private _name: string;
-  private matrixTransformation: Matrix;
+  private _matrixTransformation: Matrix;
 
   constructor(
     _e1: [number, number] = [1, 0],
@@ -19,14 +19,14 @@ class Transformation {
     this._name = _name;
     this._e1Vector = new Vector(this._e1, "e_{1}", "red");
     this._e2Vector = new Vector(this._e2, "e_{2}", "blue");
-    this.matrixTransformation = transpose(matrix([_e1, _e2])); // have to transpose to match mathjs matrix
-    // console.log(this.matrixTransformation);
+    this._matrixTransformation = transpose(matrix([_e1, _e2])); // have to transpose to match mathjs matrix
+    // console.log(this._matrixTransformation);
   }
 
   applyTransformation(vector: Vector): Vector {
     const coordinates: [number, number] = [
-      multiply(this.matrixTransformation, vector.array).get([0]),
-      multiply(this.matrixTransformation, vector.array).get([1]),
+      multiply(this._matrixTransformation, vector.array).get([0]),
+      multiply(this._matrixTransformation, vector.array).get([1]),
     ];
     return new Vector(coordinates, `${this._name}(${vector.name})`);
   }
@@ -54,6 +54,7 @@ class Transformation {
   set name(_name) {
     this._name = _name;
   }
+
 }
 
 export default Transformation;
