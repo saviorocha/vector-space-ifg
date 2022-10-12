@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Globe, Hash, Settings } from "react-feather";
 import { Transition } from "react-transition-group";
+import { useListContext, useNameContext } from "../../../context";
 import useTexStr from "../../../hooks/useTexStr";
 import styles from "../../../styles/modules/bottombar.module.css";
 import KeyboardIcon from "../../icons/KeyboardIcon";
@@ -35,6 +36,9 @@ const keyboardTransitionStyles: any = {
  */
 const BottomBar = () => {
   const { matrixStrings } = useTexStr();
+  const { currentPlot } = useNameContext();
+  const { stateVecArr } = useListContext();
+
   const [currentPosition, setCurrentPosition] = useState(0);
   const [currentTrnExpression, setCurrentTrnExpression] = useState(
     matrixStrings()[0]
@@ -43,16 +47,20 @@ const BottomBar = () => {
   const keyboard = useRef(null);
 
   useEffect(() => {
-    console.log("marixStrings", matrixStrings())
-    console.log("currentTrnExpression", currentTrnExpression);
-    console.log("currentPosition", currentPosition);
+    // console.log("marixStrings", matrixStrings());
+    // console.log("currentTrnExpression", currentTrnExpression);
+    // console.log("currentPosition", currentPosition);
   }, [currentTrnExpression]);
+
+  useEffect(() => {
+    setCurrentTrnExpression(matrixStrings()[0]);
+  }, [currentPlot, stateVecArr]);
 
   const changeName = (event: any) => {
     event.preventDefault();
     const trnNameArr = matrixStrings();
     setCurrentPosition(
-      currentPosition === trnNameArr.length ? 0 : currentPosition + 1
+      currentPosition === trnNameArr.length - 1 ? 0 : currentPosition + 1
     );
     setCurrentTrnExpression(trnNameArr[currentPosition]);
   };

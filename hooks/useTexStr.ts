@@ -11,11 +11,13 @@ const useTexStr = () => {
 
   const matrixStrings = () => {
     const transformation = stateVecArr.transformationArr[currentPlot];
+    // console.log("plus", defString(transformation.e1[0]));
     return [
       // prettier-ignore
-      `${transformation.name}(a, b) = (
-        ${defString(transformation.e1[0], "a")} ${defString(transformation.e1[0]) && "+"} ${defString(transformation.e2[0], "a")}, 
-        ${defString(transformation.e1[1], "b")} ${defString(transformation.e1[0]) && "+"} ${defString(transformation.e2[1], "b")})`
+      // ${defString(transformation.e1[0], "a")} ${defString(transformation.e1[0]) && "+"} ${defString(transformation.e2[0], "b")},
+      // ${defString(transformation.e1[1], "a")} ${defString(transformation.e1[1]) && "+"} ${defString(transformation.e2[1], "b")})`
+      `${transformation.name}(a, b) = 
+        (${defString(transformation.e1[0], transformation.e2[0])}, ${defString(transformation.e1[1], transformation.e2[1])})`
         .split(" ").join("").trim().replace(/\n/g, ""),
       String.raw`
         ${transformation.name}(a, b) = \begin{bmatrix}
@@ -29,7 +31,17 @@ const useTexStr = () => {
     ];
   };
 
-  const defString = (num: number, name: string = "") => {
+  const defString = (num1: number, num2: number): string => {
+    if (num1 === 0 && num2 === 0) {
+      return "0";
+    }
+
+    return `${validation(num1, "a")}${
+      num1 === 0 || num2 === 0 ? "" : "+"
+    }${validation(num2, "b")}`;
+  };
+
+  const validation = (num: number, name: string) => {
     if (num === 1) {
       return name;
     } else if (num === 0) {
