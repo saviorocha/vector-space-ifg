@@ -1,5 +1,4 @@
 import { evaluate } from "mathjs";
-import Transformation from "../classes/transformation";
 import Vector from "../classes/vector";
 import { useListContext, useNameContext } from "../context";
 import { validateVectorName, validateVectorValues } from "../utils";
@@ -7,38 +6,52 @@ import { validateVectorName, validateVectorValues } from "../utils";
 const useTexStr = () => {
   const { stateVecArr } = useListContext();
   const { currentPlot } = useNameContext();
-  const { vectorNameCounter, setVectorNameCounter } = useNameContext();
+  const { vectorNameCounter, setVectorNameCounter, transformationVars } =
+    useNameContext();
 
   const matrixStrings = () => {
     const transformation = stateVecArr.transformationArr[currentPlot];
-    // console.log("plus", defString(transformation.e1[0]));
+    const a = transformationVars[0];
+    const b = transformationVars[1];
     return [
-      // prettier-ignore
-      // ${defString(transformation.e1[0], "a")} ${defString(transformation.e1[0]) && "+"} ${defString(transformation.e2[0], "b")},
-      // ${defString(transformation.e1[1], "a")} ${defString(transformation.e1[1]) && "+"} ${defString(transformation.e2[1], "b")})`
-      `${transformation.name}(a, b) = 
-        (${defString(transformation.e1[0], transformation.e2[0])}, ${defString(transformation.e1[1], transformation.e2[1])})`
-        .split(" ").join("").trim().replace(/\n/g, ""),
+      `${transformation.name}(${a}, ${b}) = 
+        (${defString(
+          transformation.e1[0],
+          transformation.e2[0],
+          transformationVars
+        )}, ${defString(
+        transformation.e1[1],
+        transformation.e2[1],
+        transformationVars
+      )})`
+        .split(" ")
+        .join("")
+        .trim()
+        .replace(/\n/g, ""),
       String.raw`
-        ${transformation.name}(a, b) = \begin{bmatrix}
+        ${transformation.name}(${a}, ${b}) = \begin{bmatrix}
         ${transformation.e1[0]} & ${transformation.e2[0]}\\
         ${transformation.e1[1]} & ${transformation.e2[1]}
           \end{bmatrix}\begin{bmatrix}
-            a\\
-            b
+            ${a}\\
+            ${b}
           \end{bmatrix}
         `,
     ];
   };
 
-  const defString = (num1: number, num2: number): string => {
+  const defString = (
+    num1: number,
+    num2: number,
+    names: [string, string]
+  ): string => {
     if (num1 === 0 && num2 === 0) {
       return "0";
     }
 
-    return `${validation(num1, "a")}${
+    return `${validation(num1, names[0])}${
       num1 === 0 || num2 === 0 ? "" : "+"
-    }${validation(num2, "b")}`;
+    }${validation(num2, names[1])}`;
   };
 
   const validation = (num: number, name: string) => {

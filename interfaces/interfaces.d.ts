@@ -27,6 +27,8 @@ interface IContextName {
   setVectorNameCounter: Dispatch<SetStateAction<number>>;
   transformationNameCounter: number;
   setTransformationNameCounter: Dispatch<SetStateAction<number>>;
+  transformationVars: [string, string];
+  setTransformationVars: Dispatch<SetStateAction<[string, string]>>;
 }
 
 interface IPlotProps {
@@ -44,8 +46,8 @@ interface ISideBarProps {
   sideBarStyle?: CSSProperties | string;
   sideBarRef?: LegacyRef<HTMLElement> | undefined;
 }
-
 interface IBarItemProps {
+  /** comentário teste */
   title: string;
   leftIcon: ReactElement;
   rightIcon?: ReactElement | null;

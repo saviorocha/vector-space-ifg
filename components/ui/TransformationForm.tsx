@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { ITransformationFormProps } from "../../interfaces/interfaces";
 
-
 const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
   onSubmit,
   updateOrCreate,

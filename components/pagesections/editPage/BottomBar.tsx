@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Globe, Hash, Settings } from "react-feather";
+import { Check, Circle, Globe, Hash, Settings } from "react-feather";
 import { Transition } from "react-transition-group";
 import { useListContext, useNameContext } from "../../../context";
 import useTexStr from "../../../hooks/useTexStr";
@@ -36,33 +36,35 @@ const keyboardTransitionStyles: any = {
  */
 const BottomBar = () => {
   const { matrixStrings } = useTexStr();
-  const { currentPlot } = useNameContext();
+  const { currentPlot, setTransformationVars } = useNameContext();
   const { stateVecArr } = useListContext();
 
   const [currentPosition, setCurrentPosition] = useState(0);
   const [currentTrnExpression, setCurrentTrnExpression] = useState(
     matrixStrings()[0]
   );
+  const [toggleVarNameForm, setToggleVarNameForm] = useState(false);
   const [toggleKeyboard, setToggleKeyboard] = useState(false);
   const keyboard = useRef(null);
-
-  useEffect(() => {
-    // console.log("marixStrings", matrixStrings());
-    // console.log("currentTrnExpression", currentTrnExpression);
-    // console.log("currentPosition", currentPosition);
-  }, [currentTrnExpression]);
 
   useEffect(() => {
     setCurrentTrnExpression(matrixStrings()[0]);
   }, [currentPlot, stateVecArr]);
 
-  const changeName = (event: any) => {
+  const changeDefinition = (event: any) => {
     event.preventDefault();
     const trnNameArr = matrixStrings();
     setCurrentPosition(
       currentPosition === trnNameArr.length - 1 ? 0 : currentPosition + 1
     );
     setCurrentTrnExpression(trnNameArr[currentPosition]);
+  };
+
+  const handleVarSubmit = (event: any) => {
+    event.preventDefault();
+    // validate input data...
+    setTransformationVars([event.target.a.value, event.target.b.value]);
+    setToggleVarNameForm(false)
   };
 
   const handleKeyboardChange = (input: string) => {
@@ -119,17 +121,35 @@ const BottomBar = () => {
                       exited: { opacity: 0 },
                     }}
                   >
-                    <ul className="mt-3 text-sm">
-                      <li className="flex items-center justify-start ml-2 p-1">
-                        <Globe />
-                        Mudar formato de nomes
-                      </li>
+                    <ul className="mt-3 text-xs">
                       <li
                         className="flex items-center justify-start ml-2 p-1"
-                        onClick={changeName}
+                        onClick={() => {
+                          setToggleVarNameForm(!toggleVarNameForm);
+                        }}
+                      >
+                        <Globe />
+                        Mudar variáveis das transformações
+                      </li>
+                      {toggleVarNameForm && (
+                        <form onSubmit={handleVarSubmit}>
+                          <input className="w-5" id="a" type="text" />
+                          <input className="w-5" id="b" type="text" />
+                          <button type="submit">
+                            <Check className="w-5" />
+                          </button>
+                        </form>
+                      )}
+                      <li
+                        className="flex items-center justify-start ml-2 p-1"
+                        onClick={changeDefinition}
                       >
                         <Hash />
                         Mudar formato de transformações
+                      </li>
+                      <li className="flex items-center justify-start ml-2 p-1">
+                        <Circle />
+                        Combinar transformações por composição
                       </li>
                     </ul>
                   </TransitionButton>

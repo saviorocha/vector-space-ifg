@@ -9,9 +9,12 @@ import { IContextName, PropsChildren } from "../interfaces/interfaces";
 
 const NameContext = createContext({} as IContextName);
 
-const NameContextProvider: FunctionComponent<PropsChildren> = ({ children }) => {
+const NameContextProvider: FunctionComponent<PropsChildren> = ({
+  children,
+}) => {
   const [vectorNameCounter, setVectorNameCounter] = useState<number>(1);
   const [transformationNameCounter, setTransformationNameCounter] = useState<number>(1);
+  const [transformationVars, setTransformationVars] = useState<[string, string]>(["a", "b"]);
   const [currentPlot, setCurrentPlot] = useState<number>(0);
 
   const nameProvider = useMemo(
@@ -22,6 +25,8 @@ const NameContextProvider: FunctionComponent<PropsChildren> = ({ children }) => 
       setVectorNameCounter,
       transformationNameCounter,
       setTransformationNameCounter,
+      transformationVars,
+      setTransformationVars,
     }),
     [
       currentPlot,
@@ -30,6 +35,8 @@ const NameContextProvider: FunctionComponent<PropsChildren> = ({ children }) => 
       setVectorNameCounter,
       transformationNameCounter,
       setTransformationNameCounter,
+      transformationVars,
+      setTransformationVars,
     ]
   );
 
