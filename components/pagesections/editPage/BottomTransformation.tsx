@@ -1,3 +1,4 @@
+import { Tooltip } from "@mui/material";
 import { evaluate } from "mathjs";
 import { useEffect, useState } from "react";
 import { Edit3, Plus, Trash2 } from "react-feather";
@@ -130,35 +131,42 @@ const BottomTransformation = ({ transformationExpression }) => {
           </>
         )}
       </div>
-      <button
-        className="absolute top-1 left-1"
-        onClick={() => {
-          setToggleTrnInput(!toggleTrnInput && currentPlot !== 0);
-          setToggleUpdateCreate(
-            toggleUpdateCreate === "update" ? "create" : "update"
-          );
-        }}
-        disabled={currentPlot === 0}
-      >
-        <Edit3 />
-      </button>
-      <button
-        className="absolute bottom-1 left-1"
-        onClick={() => {
-          setToggleTrnInput(!toggleTrnInput);
-          setToggleUpdateCreate("create");
-        }}
-      >
-        <Plus />
-      </button>
+      <Tooltip title="Editar matriz transformação">
+        <button
+          className="absolute top-1 left-1"
+          onClick={() => {
+            setToggleTrnInput(!toggleTrnInput && currentPlot !== 0);
+            setToggleUpdateCreate(
+              toggleUpdateCreate === "update" ? "create" : "update"
+            );
+          }}
+          disabled={currentPlot === 0}
+        >
+          <Edit3 />
+        </button>
+      </Tooltip>
 
-      <button
-        disabled={currentPlot === 0}
-        className="absolute bottom-1 right-1"
-        onClick={() => transformationDeleteHandler(transformation.name)}
-      >
-        <Trash2 />
-      </button>
+      <Tooltip title="Adicionar uma nova transformação">
+        <button
+          className="absolute bottom-1 left-1"
+          onClick={() => {
+            setToggleTrnInput(!toggleTrnInput);
+            setToggleUpdateCreate("create");
+          }}
+        >
+          <Plus />
+        </button>
+      </Tooltip>
+      <Tooltip title="Excluir transformação">
+        <button
+          disabled={currentPlot === 0}
+          className="absolute bottom-1 right-1"
+          onClick={() => transformationDeleteHandler(transformation.name)}
+        >
+          <Trash2 />
+        </button>
+      </Tooltip>
+
       {toggleTrnInput && (
         <TransformationForm
           onSubmit={

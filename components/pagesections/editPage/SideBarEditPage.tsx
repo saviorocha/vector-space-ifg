@@ -13,7 +13,7 @@ import useEvents from "../../../hooks/useEvents";
 import useList from "../../../hooks/useList";
 import { ISideBarProps } from "../../../interfaces/interfaces";
 import BarItem from "../../ui/BarItem";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import SideBar from "../../ui/SideBar";
 
 const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
@@ -102,7 +102,7 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
             },
 
             {
-              title: "Expansão",
+              title: "Dilatação",
               handleItemOnClick: () =>
                 transfromationSubmitHandler([2, 0], [0, 2]),
             },
@@ -111,7 +111,9 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
         <BarItem
           title={"Executar Transformações"}
           leftIcon={<Play />}
-          handleOnClick={() => {router.push("/animationplane")}}
+          handleOnClick={() => {
+            router.push("/animationplane");
+          }}
         />
       </ul>
     </SideBar>

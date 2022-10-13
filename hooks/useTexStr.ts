@@ -14,6 +14,7 @@ const useTexStr = () => {
     const a = transformationVars[0];
     const b = transformationVars[1];
     return [
+      // algebraic representation
       `${transformation.name}(${a}, ${b}) = 
         (${defString(
           transformation.e1[0],
@@ -28,6 +29,8 @@ const useTexStr = () => {
         .join("")
         .trim()
         .replace(/\n/g, ""),
+
+      // matrix representation
       String.raw`
         ${transformation.name}(${a}, ${b}) = \begin{bmatrix}
         ${transformation.e1[0]} & ${transformation.e2[0]}\\
@@ -37,6 +40,14 @@ const useTexStr = () => {
             ${b}
           \end{bmatrix}
         `,
+
+      // matrix transformation
+      String.raw`
+      \begin{bmatrix}
+        ${transformation.e1[0]} & ${transformation.e2[0]}\\
+        ${transformation.e1[1]} & ${transformation.e2[1]}
+      \end{bmatrix}
+      ` ,
     ];
   };
 

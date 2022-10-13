@@ -1,3 +1,4 @@
+import { Tooltip } from "@mui/material";
 import { useState } from "react";
 import { Plus } from "react-feather";
 import StateList from "../../../classes/stateList";
@@ -5,7 +6,6 @@ import { useListContext, useNameContext } from "../../../context";
 import useList from "../../../hooks/useList";
 import useTexStr from "../../../hooks/useTexStr";
 import VectorTex from "../../tex/VectorTex";
-
 
 /**
  * Component for showing on the bottom bar the vectors referent to the current transformation state
@@ -57,14 +57,16 @@ const BottomVectors = () => {
       </ul>
 
       {currentPlot === 0 && (
-        <button
-          className="absolute bottom-1 left-1"
-          onClick={() => {
-            setToggleVecInput(!toggleVecInput);
-          }}
-        >
-          <Plus />
-        </button>
+        <Tooltip title="Adicionar um novo vetor">
+          <button
+            className="absolute bottom-1 left-1"
+            onClick={() => {
+              setToggleVecInput(!toggleVecInput);
+            }}
+          >
+            <Plus />
+          </button>
+        </Tooltip>
       )}
 
       {toggleVecInput && currentPlot === 0 && (

@@ -147,10 +147,6 @@ const BottomBar = () => {
                         <Hash />
                         Mudar formato de transformações
                       </li>
-                      <li className="flex items-center justify-start ml-2 p-1">
-                        <Circle />
-                        Combinar transformações por composição
-                      </li>
                     </ul>
                   </TransitionButton>
                 </section>
