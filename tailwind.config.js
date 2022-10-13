@@ -6,10 +6,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    backgroundColor: (theme) => ({
-      ...theme("colors"),
-      "darklight":"#141414"
-    }),
+    typography: (theme) => ({}),
     extend: {},
   },
   plugins: [],

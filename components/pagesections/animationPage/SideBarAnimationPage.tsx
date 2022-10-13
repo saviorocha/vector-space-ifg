@@ -14,7 +14,7 @@ const SideBarAnimationPage: FunctionComponent<ISideBarProps> = ({
       // className={sidebarClass}
       sideBarRef={sideBarRef}
       sideBarStyle={sideBarStyle}
-      // dark:bg-darklight dark:border-black
+      // 
     >
       {stateVecArr.transformationArr.map((trn, i) => {
         return (

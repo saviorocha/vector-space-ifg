@@ -1,12 +1,12 @@
 import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
 import { useRouter } from "next/router";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { Globe, Hash, Play, Settings, ZoomIn, ZoomOut } from "react-feather";
 import { useListContext, useNameContext } from "../../../context";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/editpage.module.css";
 import D3Plot from "../../d3/d3plot";
-
+import { useTheme } from "next-themes";
 import Carousel, { CarouselItem } from "../../ui/Carousel";
 
 import RoundButton from "../../ui/RoundButton";
@@ -24,7 +24,9 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
   const router = useRouter();
   const { list, stateVecArr } = useListContext();
   const [mode, setMode] = useState<Mode>("dark");
+  const { theme, setTheme } = useTheme();
   // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
+
 
   return (
     <>
@@ -100,6 +102,7 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
                   activeThumbColor="#e2e8f0"
                   onChange={(mode) => {
                     setMode(mode);
+                    setTheme(theme === "dark" ? "light" : "dark");
                   }}
                 />
                 Tema

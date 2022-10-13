@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
+import { ThemeProvider } from "next-themes";
 import {
   D3ContextProvider,
   ListContextProvider,
@@ -11,7 +12,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ListContextProvider>
       <NameContextProvider>
         <D3ContextProvider>
-          <Component {...pageProps} />
+          <ThemeProvider attribute="class" defaultTheme="light">
+            <Component {...pageProps} />
+          </ThemeProvider>
         </D3ContextProvider>
       </NameContextProvider>
     </ListContextProvider>

@@ -33,7 +33,6 @@ const AnimationPlane = () => {
     <div className="h-screen">
       <SideBarAnimationPage />
       <MainSectionAnimationPage />
-      
     </div>
   );
 };
