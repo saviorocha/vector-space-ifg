@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import { ZoomBehavior } from "d3";
 import StateList from "../classes/stateList";
 import Vector from "../classes/vector";
 import { useD3Context, useListContext, useNameContext } from "../context";
@@ -59,7 +60,7 @@ const useEvents = () => {
         setStateVecArr(newList.toArray());
         // console.log("vectorNameCounter", vectorNameCounter);
       });
-      setVectorNameCounter(vectorNameCounter + 1)
+    setVectorNameCounter(vectorNameCounter + 1);
   };
 
   return { addVectorOnClick };

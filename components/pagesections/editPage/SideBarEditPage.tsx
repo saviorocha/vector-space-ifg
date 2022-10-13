@@ -40,7 +40,7 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
   };
 
   const vectorSubmitHandler = () => {
-    document.getElementById("svgPlot").onclick = () => {
+    document.getElementById("myPlane").onclick = () => {
       setEvents([]);
     };
     setEvents([addVectorOnClick]);

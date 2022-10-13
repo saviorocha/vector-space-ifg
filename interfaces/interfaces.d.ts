@@ -60,7 +60,8 @@ interface IBarItemProps {
 
 interface IRoundButton {
   icon: ReactElement;
-  classString: string;
+  classString?: string;
+  idString?: string;
   handleOnClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   disabled?: boolean;
 }

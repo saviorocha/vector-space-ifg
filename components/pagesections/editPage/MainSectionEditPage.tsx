@@ -1,13 +1,7 @@
 import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
+import { useRouter } from "next/router";
 import { FunctionComponent, useState } from "react";
-import {
-  Globe,
-  Hash,
-  Play,
-  Settings,
-  ZoomIn,
-  ZoomOut
-} from "react-feather";
+import { Globe, Hash, Play, Settings, ZoomIn, ZoomOut } from "react-feather";
 import { useListContext, useNameContext } from "../../../context";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/editpage.module.css";
@@ -20,13 +14,14 @@ import TransitionButton from "../../ui/TransitionButton";
 
 const btnClassName = `rounded-full h-10 w-10 right-0
 flex items-center justify-center 
-bg-gray-50 bg-opacity-75 border border-gray-200`
+bg-gray-50 bg-opacity-75 border border-gray-200`;
 
 const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
   mainStyle,
   mainRef,
   children,
 }) => {
+  const router = useRouter();
   const { list, stateVecArr } = useListContext();
   const [mode, setMode] = useState<Mode>("dark");
   // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
@@ -125,16 +120,21 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
             className="flex items-center justify-center flex-col"
           >
             <RoundButton
+              idString="zoom-in"
               classString={btnClassName}
               icon={<ZoomIn className="text-gray-700" />}
             />
             <RoundButton
+              idString="zoom-out"
               classString={btnClassName}
               icon={<ZoomOut className="text-gray-700" />}
             />
             <RoundButton
               classString={btnClassName}
               icon={<Play className="text-gray-700" />}
+              handleOnClick={() => {
+                router.push("/animationplane");
+              }}
             />
             {/* <button
             onClick={handleResetList}

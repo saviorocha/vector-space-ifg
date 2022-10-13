@@ -28,8 +28,9 @@ class PlotComponent {
 
     this.svg = d3
       .select(refComponent)
-      .attr("id", "svgPlot")
+      .attr("id", "myPlane")
       .append("svg:svg")
+      .attr("id", "svgPlot")
       .attr("width", this.width + this.margin.left + this.margin.right)
       .attr("height", height + this.margin.top + this.margin.bottom)
       .append("g")
@@ -92,7 +93,7 @@ class PlotComponent {
   };
 
   /**
-   * Sets the zoom and pan features: how much you can zoom, on which part, and what to do when there is a zoom
+   * Sets the zoom and pan features: how much you can zoom, on which part, and what to do when there is a zoom;
    */
   createZoom = () => {
     const zoom: ZoomBehavior<any, unknown> = d3
@@ -119,6 +120,21 @@ class PlotComponent {
         "translate(" + this.margin.left + "," + this.margin.top + ")"
       )
       .call(zoom);
+    this.zoomBtn(zoom);
+  };
+
+  /**
+   * Adds the zoom event to page buttons
+   * @param zoom
+   */
+  zoomBtn = (zoom: ZoomBehavior<any, unknown>) => {
+    d3.select("#zoom-in").on("click", function () {
+      zoom.scaleBy(d3.select("#svgPlot").transition().duration(750), 1.3);
+    });
+
+    d3.select("#zoom-out").on("click", function () {
+      zoom.scaleBy(d3.select("#svgPlot").transition().duration(750), 1 / 1.3);
+    });
   };
 
   /**
@@ -129,8 +145,8 @@ class PlotComponent {
     const newX = event.transform.rescaleX(this.x);
     const newY = event.transform.rescaleY(this.y);
 
-    // new domain values calculated, based on the dimension,
-    // to be used on the svg's translate attribute
+    // new domain values calculated to be used on the
+    // svg's translate attribute, based on the dimension
     let newDomain = [
       -(this.height - this.height / 2),
       0,
