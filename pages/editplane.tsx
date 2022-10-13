@@ -46,7 +46,6 @@ const EditPlanePage = () => {
               transition: "0.5s",
               ...mainTransitionStyles[state],
             }}
-            mainRef={mainRef}
           >
             <button
               className="

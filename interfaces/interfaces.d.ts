@@ -36,9 +36,10 @@ interface IPlotProps {
 }
 
 interface IMainSectionProps {
+  /** Button used to toggle the side bar */
   children: ReactNode;
+  /** Style attribute of the main tag (can be a string or a css module) */
   mainStyle: CSSProperties | string;
-  mainRef: LegacyRef<HTMLElement> | undefined;
 }
 
 interface ISideBarProps {
