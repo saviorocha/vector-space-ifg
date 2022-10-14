@@ -5,7 +5,7 @@ import { Globe, Hash, Play, Settings, ZoomIn, ZoomOut } from "react-feather";
 import { useListContext, useNameContext } from "../../../context";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/editpage.module.css";
-import D3Plot from "../../d3/d3plot";
+import D3Plot from "../../d3/D3plot";
 import { useTheme } from "next-themes";
 import Carousel, { CarouselItem } from "../../ui/Carousel";
 
@@ -87,7 +87,7 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
           }}
         >
           <ul className="mt-3 ">
-            <li className="flex items-center justify-start ml-2 p-1 ">
+            <li className="flex items-center justify-start ml-2 p-1">
               <DarkModeToggle
                 mode={mode}
                 size="sm"
@@ -106,11 +106,17 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
               />
               Tema
             </li>
-            <li className="flex items-center justify-start ml-2 p-1 ">
+            <li className="flex items-center justify-start ml-2 p-1">
               <Globe />
               Grid
             </li>
-            <li className="flex items-center justify-start ml-2 p-1 ">
+            <li
+              className="flex items-center justify-start ml-2 p-1"
+              id="toggle-numbers"
+              onClick={() => {
+                // .tickFormat((d, i) => [""][i]);
+              }}
+            >
               <Hash />
               Mostrar números
             </li>

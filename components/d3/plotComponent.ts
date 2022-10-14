@@ -13,6 +13,7 @@ class PlotComponent {
   y: ScaleLinear<number, number>;
   xAxis: any;
   yAxis: any;
+  ticksNumbers: boolean = false;
 
   constructor(
     refComponent: null | HTMLDivElement,
@@ -37,7 +38,7 @@ class PlotComponent {
       .attr("id", "plane")
       .attr("transform", `translate(${this.margin.left},${this.margin.top})`);
     // this.createAxis(width, height);
-    this.createPlot();
+    this.createAxis();
 
     // that's not how I wanted to deal with events
     // but it's the solution I've got so far (￢_￢;)
@@ -54,7 +55,7 @@ class PlotComponent {
   /**
    * Initializes axis values and adds them to the svg to create the plot
    */
-  createPlot = () => {
+  createAxis = () => {
     // initialize a X axis:
     this.x = d3.scaleLinear().range([0, this.width]);
     this.xAxis = d3.axisBottom(this.x).scale(this.x);
@@ -76,6 +77,8 @@ class PlotComponent {
     const defaultMin = -5;
     this.x.domain([defaultMin, defaultMax]);
     this.y.domain([defaultMin, defaultMax]);
+
+    this.toggleTickNumber();
 
     // add the axis
     this.svg.selectAll("#myXaxis").call(this.xAxis);
@@ -107,7 +110,9 @@ class PlotComponent {
 
     this.createLine(this.x, this.y);
 
-    // This add an invisible rect on top of the chart area. This rect can recover pointer events: necessary to understand when the user zoom
+    // This add an invisible rect on top of the chart area.
+    // This rect can recover pointer events: necessary to understand when the user zoom
+    this.svg.select("#zoom-rect").remove();
     this.svg
       .append("rect")
       .attr("id", "zoom-rect")
@@ -120,7 +125,7 @@ class PlotComponent {
         "translate(" + this.margin.left + "," + this.margin.top + ")"
       )
       .call(zoom);
-    this.zoomBtn(zoom);
+    if (!this.ticksNumbers) this.zoomBtn(zoom);
   };
 
   /**
@@ -184,15 +189,24 @@ class PlotComponent {
     const xAxisScale = d3.scaleLinear().domain(newDomain).range(xRange);
     const yAxisScale = d3.scaleLinear().domain(newDomain).range(yRange);
 
+    // new axis for the new plot, after the zoom or pan
+    let newXAxis = d3.axisBottom(newX) as any;
+    let newYAxis = d3.axisLeft(newY) as any;
+
+    if (this.ticksNumbers) {
+      newXAxis = newXAxis.tickFormat((d, i) => [""][i]) as any;
+      newYAxis = newYAxis.tickFormat((d, i) => [""][i]) as any;
+    }
+
     // update axes with these new boundaries
     this.svg
       .selectAll("#myXaxis")
       .attr("transform", `translate(0, ${xAxisScale(event.transform.y)})`)
-      .call(d3.axisBottom(newX) as any);
+      .call(newXAxis);
     this.svg
       .selectAll("#myYaxis")
       .attr("transform", `translate(${yAxisScale(event.transform.x)}, 0)`)
-      .call(d3.axisLeft(newY) as any);
+      .call(newYAxis);
 
     // update vector position
     this.createLine(newX, newY);
@@ -253,6 +267,23 @@ class PlotComponent {
       .append("path")
       .attr("d", "M2,2 L10,6 L2,10 L6,6 L2,2")
       .style("fill", "steelblue");
+  };
+
+  toggleTickNumber = () => {
+    d3.select("#toggle-numbers").on("click", this.teste);
+  };
+
+  teste = () => {
+    const createZoom = this.createZoom;
+    this.xAxis = this.xAxis.tickFormat((d, i) => [""][i]);
+    this.yAxis = this.yAxis.tickFormat((d, i) => [""][i]);
+
+    this.svg.selectAll("#myXaxis").call(this.xAxis);
+    this.svg.selectAll("#myYaxis").call(this.yAxis);
+
+    this.ticksNumbers = !this.ticksNumbers;
+
+    createZoom();
   };
 }
 
