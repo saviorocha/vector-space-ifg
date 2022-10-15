@@ -10,16 +10,15 @@ const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
     <form onSubmit={onSubmit}>
       {[matrixArr[0], matrixArr[2], matrixArr[1], matrixArr[3]].map((el, i) => {
         return (
-          <>
+          <React.Fragment key={i}>
             <input
-              key={i}
               className="border-2 border-slate-400 w-10"
-              type="text"
+              type="number"
               id={`t${i}`}
               defaultValue={updateOrCreate === "create" ? 0 : el}
             />
-            {i === 1 && <br key={i + 1} />}
-          </>
+            {i === 1 && <br />}
+          </React.Fragment>
         );
       })}
 

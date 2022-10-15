@@ -37,6 +37,10 @@ export function validateTransformationName(name: string): boolean {
   return regex.test(name);
 }
 
-export function validateTransformationValue(value: string): boolean {
-  return evaluate(value) !== Infinity && !isObject(evaluate(value));
+export function validateTransformationValues(valuesArr: string[]): boolean {
+  for (let i = 0; i < valuesArr.length; i++) {
+    if (evaluate(valuesArr[i]) === Infinity || isObject(evaluate(valuesArr[i])))
+      return false;
+  }
+  return true;
 }

@@ -7,7 +7,10 @@ import Transformation from "../../../classes/transformation";
 import { useListContext, useNameContext } from "../../../context";
 import useList from "../../../hooks/useList";
 import { IBottomTransformationProps } from "../../../interfaces/interfaces";
-import { validateTransformationName } from "../../../utils";
+import {
+  validateTransformationName,
+  validateTransformationValues,
+} from "../../../utils";
 import RenderTex from "../../tex/RenderTex";
 import TransformationForm from "../../ui/TransformationForm";
 
@@ -39,8 +42,16 @@ const BottomTransformation: FunctionComponent<IBottomTransformationProps> = ({
       : `T_{${stateVecArr.vectorArr.length}}`;
 
     // validate submited data
-    if (!validateTransformationName(name)) {
-      alert("nome de transformação inválido");
+    if (
+      !validateTransformationName(name) ||
+      !validateTransformationValues([
+        event.target.t0.value,
+        event.target.t2.value,
+        event.target.t1.value,
+        event.target.t3.value,
+      ])
+    ) {
+      alert("transformação inválida");
       return;
     }
     const newHead = addTransformation(
@@ -69,7 +80,15 @@ const BottomTransformation: FunctionComponent<IBottomTransformationProps> = ({
       : transformation.name;
 
     // validate submited data
-    if (!validateTransformationName(name)) {
+    if (
+      !validateTransformationName(name) ||
+      !validateTransformationValues([
+        event.target.t0.value,
+        event.target.t2.value,
+        event.target.t1.value,
+        event.target.t3.value,
+      ])
+    ) {
       alert("nome de transformação inválido");
       return;
     }

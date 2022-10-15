@@ -2,7 +2,7 @@ import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
 import { useRouter } from "next/router";
 import { FunctionComponent, useEffect, useState } from "react";
 import { Globe, Hash, Play, Settings, ZoomIn, ZoomOut } from "react-feather";
-import { useListContext, useNameContext } from "../../../context";
+import { useD3Context, useListContext, useNameContext } from "../../../context";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/editpage.module.css";
 import D3Plot from "../../d3/D3plot";
@@ -25,6 +25,7 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
 }) => {
   const router = useRouter();
   const { list, stateVecArr } = useListContext();
+  const { hideNumbers, setHideNumbers } = useD3Context();
   const [mode, setMode] = useState<Mode>("dark");
   const { theme, setTheme } = useTheme();
   // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
@@ -114,7 +115,7 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
               className="flex items-center justify-start ml-2 p-1"
               id="toggle-numbers"
               onClick={() => {
-                // .tickFormat((d, i) => [""][i]);
+                setHideNumbers(!hideNumbers)
               }}
             >
               <Hash />
