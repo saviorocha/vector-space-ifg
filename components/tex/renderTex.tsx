@@ -5,6 +5,9 @@ import { InlineMath } from "react-katex";
 import { useNameContext } from "../../context";
 import { IRenderTexProps } from "../../interfaces/interfaces";
 
+/**
+ * This component uses KaTeX library to render inline math expressions
+ */
 const RenderTex: FunctionComponent<IRenderTexProps> = ({
   mathExpression,
   title,

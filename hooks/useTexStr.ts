@@ -9,27 +9,15 @@ const useTexStr = () => {
   const { vectorNameCounter, setVectorNameCounter, transformationVars } =
     useNameContext();
 
+  /**
+   * Returns a array with different string representations for a transformation
+   * @returns KaTeX string array
+   */
   const matrixStrings = () => {
     const transformation = stateVecArr.transformationArr[currentPlot];
     const a = transformationVars[0];
     const b = transformationVars[1];
     return [
-      // algebraic representation
-      `${transformation.name}(${a}, ${b}) = 
-        (${defString(
-          transformation.e1[0],
-          transformation.e2[0],
-          transformationVars
-        )}, ${defString(
-        transformation.e1[1],
-        transformation.e2[1],
-        transformationVars
-      )})`
-        .split(" ")
-        .join("")
-        .trim()
-        .replace(/\n/g, ""),
-
       // matrix representation
       String.raw`
         ${transformation.name}(${a}, ${b}) = \begin{bmatrix}
@@ -47,10 +35,33 @@ const useTexStr = () => {
         ${transformation.e1[0]} & ${transformation.e2[0]}\\
         ${transformation.e1[1]} & ${transformation.e2[1]}
       \end{bmatrix}
-      ` ,
+      `,
+
+      // algebraic definition
+      `${transformation.name}(${a}, ${b}) = 
+            (${defString(
+              transformation.e1[0],
+              transformation.e2[0],
+              transformationVars
+            )}, ${defString(
+        transformation.e1[1],
+        transformation.e2[1],
+        transformationVars
+      )})`
+        .split(" ")
+        .join("")
+        .trim()
+        .replace(/\n/g, ""),
     ];
   };
 
+  /**
+   * Creates a Tex string for the transformation algebraic definition expression
+   * @param {number} num1 - e1's coeficient
+   * @param {number} num2 - e2's coeficient
+   * @param {Array} names - variable names ()
+   * @returns
+   */
   const defString = (
     num1: number,
     num2: number,
@@ -65,6 +76,12 @@ const useTexStr = () => {
     }${validation(num2, names[1])}`;
   };
 
+  /**
+   * Conditional rules to check for 1's or 0's on the definition
+   * @param num
+   * @param name
+   * @returns
+   */
   const validation = (num: number, name: string) => {
     if (num === 1) {
       return name;
@@ -75,6 +92,12 @@ const useTexStr = () => {
     }
   };
 
+  /**
+   * Returns a vector object from a valid vector Tex string;
+   * containing its coordinates and optionally its name;
+   * @param {string} vectorStr - in the format "[name]_{[number]} = ([xcoordinate], [ycoordinate])"
+   * @returns {Vector} New vector object
+   */
   const vectorFromTex = (vectorStr: string): Vector | null => {
     const expression: string = vectorStr
       .replace("π", "pi")

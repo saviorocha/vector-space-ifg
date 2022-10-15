@@ -26,6 +26,9 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
   const { addTransformation } = useList();
   const { addVectorOnClick } = useEvents();
 
+  /**
+   * Predefined SideBar transformations 
+   */
   const transfromationSubmitHandler = (
     e1: [number, number],
     e2: [number, number]
@@ -39,8 +42,11 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
     setStateVecArr(list.toArray());
   };
 
+  /**
+   * Sets the click event on the plane to add a new vector
+   */
   const vectorSubmitHandler = () => {
-    document.getElementById("myPlane").onclick = () => {
+    document.getElementById("myPlane")!.onclick = () => {
       setEvents([]);
     };
     setEvents([addVectorOnClick]);

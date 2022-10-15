@@ -47,8 +47,15 @@ interface IMainSectionProps {
 interface ISideBarProps {
   children?: ReactNode;
   sideBarStyle?: CSSProperties | string;
+  /** Ref used by the TransitionGroup library */
   sideBarRef?: LegacyRef<HTMLElement> | undefined;
 }
+
+interface IBottomTransformationProps {
+  /** Tex transformation expression to be rendered */
+  transformationExpression: string;
+}
+
 interface IBarItemProps {
   /** comentário teste */
   title: string;
@@ -78,13 +85,18 @@ interface ITransitionButtonProps {
 }
 
 interface IRenderTexProps {
+  /** Expression being rendered - must be a valid Tex expression */
   mathExpression: string;
+  /** Title that appears on hover */
   title: string;
+  /** Double click event for updating the expression - used mainly on vectors */
   handleDoubleClick?: MouseEventHandler<HTMLParagraphElement> | undefined;
 }
 
 interface IVectorTexProps {
+  /** Tex vector expression */
   vectorExpression: string;
+  /** Name of the vector being rendered; used in the component logic */
   vectorName: string;
 }
 

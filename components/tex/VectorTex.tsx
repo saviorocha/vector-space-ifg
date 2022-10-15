@@ -7,6 +7,9 @@ import useTexStr from "../../hooks/useTexStr";
 import { IVectorTexProps } from "../../interfaces/interfaces";
 import RenderTex from "./RenderTex";
 
+/**
+ * This component handles vector creation, update and deletion
+ */
 const VectorTex: FunctionComponent<IVectorTexProps> = ({
   vectorExpression,
   vectorName,
@@ -37,7 +40,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
       const newVector = vectorFromTex(event.target.value);
       const prevVectorName = vectorFromTex(vectorExpression)?.name;
       if (!newVector || !prevVectorName) {
-        alert("naum");
+        alert("invalid");
         return;
       }
       const newHead = updateVector(newVector, prevVectorName);

@@ -1,11 +1,12 @@
 import { Tooltip } from "@mui/material";
 import { evaluate } from "mathjs";
-import { useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { Edit3, Plus, Trash2 } from "react-feather";
 import StateList from "../../../classes/stateList";
 import Transformation from "../../../classes/transformation";
 import { useListContext, useNameContext } from "../../../context";
 import useList from "../../../hooks/useList";
+import { IBottomTransformationProps } from "../../../interfaces/interfaces";
 import { validateTransformationName } from "../../../utils";
 import RenderTex from "../../tex/RenderTex";
 import TransformationForm from "../../ui/TransformationForm";
@@ -13,7 +14,9 @@ import TransformationForm from "../../ui/TransformationForm";
 /**
  * Component for showing on the bottom bar the current transformation being rendered
  */
-const BottomTransformation = ({ transformationExpression }) => {
+const BottomTransformation: FunctionComponent<IBottomTransformationProps> = ({
+  transformationExpression,
+}) => {
   const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
   const [toggleUpdateCreate, setToggleUpdateCreate] =
     useState<string>("create");
@@ -131,41 +134,41 @@ const BottomTransformation = ({ transformationExpression }) => {
           </>
         )}
       </div>
-      <Tooltip title="Editar matriz transformação">
-        <button
-          className="absolute top-1 left-1"
-          onClick={() => {
-            setToggleTrnInput(!toggleTrnInput && currentPlot !== 0);
-            setToggleUpdateCreate(
-              toggleUpdateCreate === "update" ? "create" : "update"
-            );
-          }}
-          disabled={currentPlot === 0}
-        >
+      <button
+        className="absolute top-1 left-1"
+        onClick={() => {
+          setToggleTrnInput(!toggleTrnInput && currentPlot !== 0);
+          setToggleUpdateCreate(
+            toggleUpdateCreate === "update" ? "create" : "update"
+          );
+        }}
+        disabled={currentPlot === 0}
+      >
+        <Tooltip title="Editar matriz transformação">
           <Edit3 />
-        </button>
-      </Tooltip>
+        </Tooltip>
+      </button>
 
-      <Tooltip title="Adicionar uma nova transformação">
-        <button
-          className="absolute bottom-1 left-1"
-          onClick={() => {
-            setToggleTrnInput(!toggleTrnInput);
-            setToggleUpdateCreate("create");
-          }}
-        >
+      <button
+        className="absolute bottom-1 left-1"
+        onClick={() => {
+          setToggleTrnInput(!toggleTrnInput);
+          setToggleUpdateCreate("create");
+        }}
+      >
+        <Tooltip title="Adicionar uma nova transformação">
           <Plus />
-        </button>
-      </Tooltip>
-      <Tooltip title="Excluir transformação">
-        <button
-          disabled={currentPlot === 0}
-          className="absolute bottom-1 right-1"
-          onClick={() => transformationDeleteHandler(transformation.name)}
-        >
+        </Tooltip>
+      </button>
+      <button
+        disabled={currentPlot === 0}
+        className="absolute bottom-1 right-1"
+        onClick={() => transformationDeleteHandler(transformation.name)}
+      >
+        <Tooltip title="Excluir transformação">
           <Trash2 />
-        </button>
-      </Tooltip>
+        </Tooltip>
+      </button>
 
       {toggleTrnInput && (
         <TransformationForm
