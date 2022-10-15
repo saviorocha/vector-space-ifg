@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
-import { useD3Context, useListContext } from "../../context";
+import { useD3Context, useListContext, useNameContext } from "../../context";
 import { IPlotProps } from "../../interfaces/interfaces";
 import PlotComponent from "./plotComponent";
 import styles from "../../styles/modules/D3.module.css";
@@ -13,6 +13,7 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index }) => {
 
   const { dimension, events, hideNumbers } = useD3Context();
   const { stateVecArr } = useListContext();
+  const { currentPlot } = useNameContext()
 
   useEffect(initD3, [stateVecArr, events]);
 
@@ -29,7 +30,8 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index }) => {
         dimension,
         vectors,
         hideNumbers,
-        events
+        events,
+        currentPlot
       )
     );
 

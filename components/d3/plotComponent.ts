@@ -7,6 +7,7 @@ class PlotComponent {
   width: number;
   height: number;
   hideNumbers: boolean;
+  currentPlot: number;
 
   // @ts-ignore
   x: ScaleLinear<number, number>;
@@ -15,14 +16,15 @@ class PlotComponent {
   xAxis: any;
   yAxis: any;
   // @ts-ignore
-  zoom: ZoomBehavior<any, unknown>
+  zoom: ZoomBehavior<any, unknown>;
 
   constructor(
     refComponent: null | HTMLDivElement,
     dimensions: Dimesion,
     vectors: VectorData[][],
     hideNumbers: boolean,
-    eventsArr: EventFunction[]
+    eventsArr: EventFunction[],
+    currentPlot: number
   ) {
     const { margin, width, height } = dimensions;
     this.vectors = vectors;
@@ -30,6 +32,7 @@ class PlotComponent {
     this.width = width;
     this.height = height;
     this.hideNumbers = hideNumbers;
+    this.currentPlot = currentPlot;
 
     this.svg = d3
       .select(refComponent)
@@ -41,7 +44,7 @@ class PlotComponent {
       .append("g")
       .attr("id", "plane")
       .attr("transform", `translate(${this.margin.left},${this.margin.top})`);
-    
+
     this.createAxis();
 
     // that's not how I wanted to deal with events
@@ -105,8 +108,9 @@ class PlotComponent {
 
   events = () => {
     d3.select("#toggle-numbers").on("click", this.displayNumbers);
-    d3.select("#zoom-in").on("click",this.zoomIn)
+    d3.select("#zoom-in").on("click", this.zoomIn);
     d3.select("#zoom-out").on("click", this.zoomOut);
+    d3.select("#reset-zoom").on("click", this.resetPosition);
   };
 
   displayNumbers = () => {
@@ -117,11 +121,19 @@ class PlotComponent {
     this.createAxis();
     this.createZoom();
   };
-
   zoomIn = () =>
     this.zoom.scaleBy(d3.select("#svgPlot").transition().duration(750), 1.3);
   zoomOut = () =>
-    this.zoom.scaleBy(d3.select("#svgPlot").transition().duration(750), 1 / 1.3);
+    this.zoom.scaleBy(
+      d3.select("#svgPlot").transition().duration(750),
+      1 / 1.3
+    );
+  resetPosition = () => {
+    d3.select(`#zoom-rect-${this.currentPlot}`)
+      .transition()
+      .duration(750)
+      .call(this.zoom.transform, d3.zoomIdentity);
+  };
 
   /**
    * Sets the zoom and pan features: how much you can zoom, on which part, and what to do when there is a zoom;
@@ -140,10 +152,10 @@ class PlotComponent {
 
     // This add an invisible rect on top of the chart area.
     // This rect can recover pointer events: necessary to understand when the user zoom
-    this.svg.select("#zoom-rect").remove();
+    this.svg.select(`zoom-rect-${this.currentPlot}`).remove();
     this.svg
       .append("rect")
-      .attr("id", "zoom-rect")
+      .attr("id", `zoom-rect-${this.currentPlot}`)
       .attr("width", this.width)
       .attr("height", this.height)
       .style("fill", "none")

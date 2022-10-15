@@ -1,7 +1,7 @@
 import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
 import { useRouter } from "next/router";
 import { FunctionComponent, useEffect, useState } from "react";
-import { Globe, Hash, Play, Settings, ZoomIn, ZoomOut } from "react-feather";
+import { Globe, Hash, LifeBuoy, Play, Settings, ZoomIn, ZoomOut } from "react-feather";
 import { useD3Context, useListContext, useNameContext } from "../../../context";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/editpage.module.css";
@@ -138,6 +138,12 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
             classString={btnClassName}
             icon={<ZoomOut className="text-gray-700" />}
           />
+          <RoundButton
+            idString="reset-zoom"
+            classString={btnClassName}
+            icon={<LifeBuoy className="text-gray-700" />}
+          />
+          
           <RoundButton
             classString={btnClassName}
             icon={<Play className="text-gray-700" />}
