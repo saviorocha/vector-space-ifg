@@ -18,6 +18,8 @@ interface IContextD3 {
   setMargin: Dispatch<SetStateAction<Margin>>;
   events: EventFunction[] | [];
   setEvents: Dispatch<SetStateAction<EventFunction[] | []>>;
+  hideNumbers: boolean;
+  setHideNumbers: Dispatch<SetStateAction<boolean>>;
 }
 
 interface IContextName {

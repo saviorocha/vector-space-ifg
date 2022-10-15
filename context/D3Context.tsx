@@ -7,7 +7,7 @@ import {
 } from "react";
 import { IContextD3, PropsChildren } from "../interfaces/interfaces";
 
-
+const events = ["showNumbers", false];
 
 const D3Context = createContext<IContextD3>({} as IContextD3);
 
@@ -24,9 +24,28 @@ const D3ContextProvider: FunctionComponent<PropsChildren> = ({ children }) => {
     height: 400 - margin.top - margin.bottom,
   });
   const [events, setEvents] = useState([]);
+  const [hideNumbers, setHideNumbers] = useState(false);
   const d3Provider = useMemo(
-    () => ({ margin, setMargin, dimension, setDimension, events, setEvents }),
-    [margin, setMargin, dimension, setDimension, events, setEvents]
+    () => ({
+      margin,
+      setMargin,
+      dimension,
+      setDimension,
+      events,
+      setEvents,
+      hideNumbers,
+      setHideNumbers,
+    }),
+    [
+      margin,
+      setMargin,
+      dimension,
+      setDimension,
+      events,
+      setEvents,
+      hideNumbers,
+      setHideNumbers,
+    ]
   );
 
   return <D3Context.Provider value={d3Provider}>{children}</D3Context.Provider>;

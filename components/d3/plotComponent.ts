@@ -6,6 +6,7 @@ class PlotComponent {
   margin: Margin;
   width: number;
   height: number;
+  hideNumbers: boolean;
 
   // @ts-ignore
   x: ScaleLinear<number, number>;
@@ -13,12 +14,14 @@ class PlotComponent {
   y: ScaleLinear<number, number>;
   xAxis: any;
   yAxis: any;
-  ticksNumbers: boolean = false;
+  // @ts-ignore
+  zoom: ZoomBehavior<any, unknown>
 
   constructor(
     refComponent: null | HTMLDivElement,
     dimensions: Dimesion,
     vectors: VectorData[][],
+    hideNumbers: boolean,
     eventsArr: EventFunction[]
   ) {
     const { margin, width, height } = dimensions;
@@ -26,6 +29,7 @@ class PlotComponent {
     this.margin = margin;
     this.width = width;
     this.height = height;
+    this.hideNumbers = hideNumbers;
 
     this.svg = d3
       .select(refComponent)
@@ -37,7 +41,7 @@ class PlotComponent {
       .append("g")
       .attr("id", "plane")
       .attr("transform", `translate(${this.margin.left},${this.margin.top})`);
-    // this.createAxis(width, height);
+    
     this.createAxis();
 
     // that's not how I wanted to deal with events
@@ -50,6 +54,7 @@ class PlotComponent {
     // @ts-ignore
     this.createLine(this.x, this.y);
     this.createVector();
+    this.events();
   }
 
   /**
@@ -78,7 +83,10 @@ class PlotComponent {
     this.x.domain([defaultMin, defaultMax]);
     this.y.domain([defaultMin, defaultMax]);
 
-    this.toggleTickNumber();
+    if (this.hideNumbers) {
+      this.xAxis = this.xAxis.tickFormat((d: any, i: number) => [""][i]);
+      this.yAxis = this.yAxis.tickFormat((d: any, i: number) => [""][i]);
+    }
 
     // add the axis
     this.svg.selectAll("#myXaxis").call(this.xAxis);
@@ -95,11 +103,31 @@ class PlotComponent {
     }
   };
 
+  events = () => {
+    d3.select("#toggle-numbers").on("click", this.displayNumbers);
+    d3.select("#zoom-in").on("click",this.zoomIn)
+    d3.select("#zoom-out").on("click", this.zoomOut);
+  };
+
+  displayNumbers = () => {
+    d3.select("#myXaxis").remove();
+    d3.select("#myYaxis").remove();
+
+    this.hideNumbers = !this.hideNumbers;
+    this.createAxis();
+    this.createZoom();
+  };
+
+  zoomIn = () =>
+    this.zoom.scaleBy(d3.select("#svgPlot").transition().duration(750), 1.3);
+  zoomOut = () =>
+    this.zoom.scaleBy(d3.select("#svgPlot").transition().duration(750), 1 / 1.3);
+
   /**
    * Sets the zoom and pan features: how much you can zoom, on which part, and what to do when there is a zoom;
    */
   createZoom = () => {
-    const zoom: ZoomBehavior<any, unknown> = d3
+    this.zoom = d3
       .zoom()
       .scaleExtent([0.5, 20]) // This control how much you can unzoom (x0.5) and zoom (x20)
       .extent([
@@ -124,22 +152,7 @@ class PlotComponent {
         "transform",
         "translate(" + this.margin.left + "," + this.margin.top + ")"
       )
-      .call(zoom);
-    if (!this.ticksNumbers) this.zoomBtn(zoom);
-  };
-
-  /**
-   * Adds the zoom event to page buttons
-   * @param zoom
-   */
-  zoomBtn = (zoom: ZoomBehavior<any, unknown>) => {
-    d3.select("#zoom-in").on("click", function () {
-      zoom.scaleBy(d3.select("#svgPlot").transition().duration(750), 1.3);
-    });
-
-    d3.select("#zoom-out").on("click", function () {
-      zoom.scaleBy(d3.select("#svgPlot").transition().duration(750), 1 / 1.3);
-    });
+      .call(this.zoom);
   };
 
   /**
@@ -189,13 +202,13 @@ class PlotComponent {
     const xAxisScale = d3.scaleLinear().domain(newDomain).range(xRange);
     const yAxisScale = d3.scaleLinear().domain(newDomain).range(yRange);
 
-    // new axis for the new plot, after the zoom or pan
+    // new axis for the new plots created after the zoom or pan
     let newXAxis = d3.axisBottom(newX) as any;
     let newYAxis = d3.axisLeft(newY) as any;
 
-    if (this.ticksNumbers) {
-      newXAxis = newXAxis.tickFormat((d, i) => [""][i]) as any;
-      newYAxis = newYAxis.tickFormat((d, i) => [""][i]) as any;
+    if (this.hideNumbers) {
+      newXAxis = newXAxis.tickFormat((d: any, i: number) => [""][i]);
+      newYAxis = newYAxis.tickFormat((d: any, i: number) => [""][i]);
     }
 
     // update axes with these new boundaries
@@ -267,23 +280,6 @@ class PlotComponent {
       .append("path")
       .attr("d", "M2,2 L10,6 L2,10 L6,6 L2,2")
       .style("fill", "steelblue");
-  };
-
-  toggleTickNumber = () => {
-    d3.select("#toggle-numbers").on("click", this.teste);
-  };
-
-  teste = () => {
-    const createZoom = this.createZoom;
-    this.xAxis = this.xAxis.tickFormat((d, i) => [""][i]);
-    this.yAxis = this.yAxis.tickFormat((d, i) => [""][i]);
-
-    this.svg.selectAll("#myXaxis").call(this.xAxis);
-    this.svg.selectAll("#myYaxis").call(this.yAxis);
-
-    this.ticksNumbers = !this.ticksNumbers;
-
-    createZoom();
   };
 }
 

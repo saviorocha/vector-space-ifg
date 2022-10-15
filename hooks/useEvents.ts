@@ -58,7 +58,6 @@ const useEvents = () => {
         const newList = new StateList(newHead);
         setList(newList);
         setStateVecArr(newList.toArray());
-        // console.log("vectorNameCounter", vectorNameCounter);
       });
     setVectorNameCounter(vectorNameCounter + 1);
   };

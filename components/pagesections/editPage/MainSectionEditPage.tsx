@@ -118,7 +118,7 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
               }}
             >
               <Hash />
-              Mostrar números
+              Exibir números
             </li>
           </ul>
         </TransitionButton>

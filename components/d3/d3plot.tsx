@@ -5,15 +5,13 @@ import { IPlotProps } from "../../interfaces/interfaces";
 import PlotComponent from "./plotComponent";
 import styles from "../../styles/modules/D3.module.css";
 
-const D3Plot: FunctionComponent<IPlotProps> = ({
-  index,
-}) => {
+const D3Plot: FunctionComponent<IPlotProps> = ({ index }) => {
   const refElement = useRef<null | HTMLDivElement>(null);
   const [d3Component, setD3Component] = useState<PlotComponent>(
     {} as PlotComponent
   );
 
-  const { dimension, events } = useD3Context();
+  const { dimension, events, hideNumbers } = useD3Context();
   const { stateVecArr } = useListContext();
 
   useEffect(initD3, [stateVecArr, events]);
@@ -26,7 +24,13 @@ const D3Plot: FunctionComponent<IPlotProps> = ({
     });
 
     setD3Component(
-      new PlotComponent(refElement.current, dimension, vectors, events)
+      new PlotComponent(
+        refElement.current,
+        dimension,
+        vectors,
+        hideNumbers,
+        events
+      )
     );
 
     // cleanup to remove duplicate SVG
