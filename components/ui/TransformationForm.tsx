@@ -13,7 +13,7 @@ const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
           <React.Fragment key={i}>
             <input
               className="border-2 border-slate-400 w-10"
-              type="number"
+              // type="number"
               id={`t${i}`}
               defaultValue={updateOrCreate === "create" ? 0 : el}
             />
