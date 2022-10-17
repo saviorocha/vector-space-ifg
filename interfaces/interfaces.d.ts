@@ -1,5 +1,7 @@
 import { ReactElement } from "react";
 import StateList from "../classes/stateList";
+import Transformation from "../classes/transformation";
+import Vector from "../classes/vector";
 
 interface PropsChildren {
   children: React.ReactNode;
@@ -68,6 +70,10 @@ interface IBarItemProps {
   handleOnClick?: React.MouseEventHandler<HTMLAnchorElement> | undefined;
 }
 
+interface IBarItemCalculationProps {
+  transformation: Transformation;
+  vectors: Vector[]
+}
 interface IRoundButton {
   icon: ReactElement;
   classString?: string;

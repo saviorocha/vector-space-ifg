@@ -8,6 +8,7 @@ const VirtualKeyboard = () => {
   const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     const input = event.target.value;
     setInput(input);
+    // @ts-ignore
     keyboard.current.setInput(input);
   };
   

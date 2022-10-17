@@ -1,8 +1,11 @@
-import { useListContext } from "../../context";
+import { FunctionComponent } from "react";
+import { IBarItemCalculationProps } from "../../interfaces/interfaces";
 import RenderTex from "../tex/RenderTex";
 
-const BarItemCalculation = ({ transformation, vectors }) => {
-
+const BarItemCalculation: FunctionComponent<IBarItemCalculationProps> = ({
+  transformation,
+  vectors,
+}) => {
   return (
     <li className="relative m-1 py-1">
       <div
@@ -17,7 +20,7 @@ const BarItemCalculation = ({ transformation, vectors }) => {
           mathExpression={`${transformation.name}\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}`}
           title={`Transformação ${transformation.name}`}
         />
-        <br />  
+        <br />
         {vectors.map((vec, i) => {
           return (
             <RenderTex

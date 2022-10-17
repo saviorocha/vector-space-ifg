@@ -14,12 +14,15 @@ const SideBarAnimationPage: FunctionComponent<ISideBarProps> = ({
       // className={sidebarClass}
       sideBarRef={sideBarRef}
       sideBarStyle={sideBarStyle}
-      // 
+      //
     >
       {stateVecArr.transformationArr.map((trn, i) => {
         return (
           <aside key={i}>
-            <BarItemCalculation transformation={trn} vectors={stateVecArr.vectorArr[i]} />
+            <BarItemCalculation
+              transformation={trn}
+              vectors={stateVecArr.vectorArr[i]}
+            />
           </aside>
         );
       })}

@@ -1,6 +1,6 @@
 class Vector {
-  private x: number;
-  private y: number;
+  x: number;
+  y: number;
   private _name: string;
   private _array: [number, number];
   private color: string;
