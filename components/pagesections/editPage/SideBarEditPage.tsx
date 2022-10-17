@@ -83,11 +83,11 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
           leftIcon={<Type />}
           rightIcon={<ChevronDown />}
           subItems={[
-            {
-              title: "Transformação Padrão",
-              handleItemOnClick: () =>
-                transfromationSubmitHandler([1, 0], [0, 1]),
-            },
+            // {
+            //   title: "Transformação Padrão",
+            //   handleItemOnClick: () =>
+            //     transfromationSubmitHandler([1, 0], [0, 1]),
+            // },
 
             {
               title: "Reflexão pelo Eixo y",
