@@ -10,14 +10,15 @@ import { IRenderTexProps } from "../../interfaces/interfaces";
  */
 const RenderTex: FunctionComponent<IRenderTexProps> = ({
   mathExpression,
-  title,
+  title = "",
   handleDoubleClick = undefined,
+  classStyle = "",
 }) => {
   const { currentPlot } = useNameContext();
 
   return (
     <Tooltip title={title} placement="top">
-      <p onClick={currentPlot === 0 ? handleDoubleClick : undefined}>
+      <p className={classStyle} onClick={currentPlot === 0 ? handleDoubleClick : undefined}>
         <InlineMath math={mathExpression} />
       </p>
     </Tooltip>
