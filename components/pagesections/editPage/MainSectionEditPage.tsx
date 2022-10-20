@@ -79,10 +79,12 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
                               targetId: `element-${i + 1}`,
                               targetAnchor: "left",
                               sourceAnchor: "right",
-                              style: { strokeColor: "black", strokeWidth: 2 },
+                              style: { strokeColor: "black", strokeWidth: 1 },
                               label: (
                                 <RenderTex
-                                  mathExpression={`${stateVecArr.transformationArr[1].name}`}
+                                  mathExpression={`${
+                                    stateVecArr.transformationArr[i + 1].name
+                                  }`}
                                   classStyle={styles.transformationarrow}
                                 />
                               ),
