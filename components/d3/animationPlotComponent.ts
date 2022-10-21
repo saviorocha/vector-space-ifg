@@ -114,6 +114,7 @@ class AnimationPlotComponent {
       .join("path")
       .attr("class", "lineVector")
       .transition()
+      .attr("T", 1)
       .duration(2000)
       .attr(
         "d",

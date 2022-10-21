@@ -1,13 +1,14 @@
 import * as d3 from "d3";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { CornerUpLeft, Play } from "react-feather";
+import { CornerUpLeft, Pause, Play, RotateCcw } from "react-feather";
 import { useD3Context, useListContext } from "../../context";
 import styles from "../../styles/modules/D3.module.css";
 import AnimationPlotComponent from "./animationPlotComponent";
 
 const D3PlotAnimation = () => {
   const router = useRouter();
+  const [isPlaying, setIsPlaying] = useState(false);
   const refElement = useRef<null | HTMLDivElement>(null);
   const [d3Component, setD3Component] = useState<AnimationPlotComponent>(
     {} as AnimationPlotComponent
@@ -21,9 +22,9 @@ const D3PlotAnimation = () => {
     // console.log(event.target.value);
   };
 
-  const handleAnimation = () => {
+  const handlePlayAnimation = () => {
+    setIsPlaying(true)
     let run = 1;
-
     const interval = setInterval(() => {
       d3Component.updateData(
         stateVecArr.vectorArr[run].map((state) => {
@@ -37,8 +38,14 @@ const D3PlotAnimation = () => {
     }, 2000);
   };
 
-  useEffect(() => {
-    const section = d3.select(refElement.current);
+  const handlePauseAnimation = () => {
+    setIsPlaying(false)
+    d3.selectAll(".lineVector").transition().duration(0);
+  };
+
+  const createPlane = () => {
+    setIsPlaying(false);
+    d3.select(refElement.current).selectAll("*").remove();
 
     setD3Component(
       new AnimationPlotComponent(
@@ -49,12 +56,9 @@ const D3PlotAnimation = () => {
         })
       )
     );
+  };
 
-    // cleanup to remove duplicate SVG
-    return () => {
-      section.selectAll("*").remove();
-    };
-  }, []);
+  useEffect(createPlane, []);
 
   return (
     <>
@@ -67,9 +71,18 @@ const D3PlotAnimation = () => {
         >
           <CornerUpLeft />
         </button>
-        <button onClick={handleAnimation}>
-          <Play />
+        <button onClick={createPlane}>
+          <RotateCcw />
         </button>
+        {isPlaying ? (
+          <button onClick={handlePauseAnimation}>
+            <Pause />
+          </button>
+        ) : (
+          <button onClick={handlePlayAnimation}>
+            <Play />
+          </button>
+        )}
         <input
           type="range"
           min="0"
