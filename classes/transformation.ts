@@ -28,7 +28,7 @@ class Transformation {
       multiply(this._matrixTransformation, vector.array).get([0]),
       multiply(this._matrixTransformation, vector.array).get([1]),
     ];
-    return new Vector(coordinates, `${this._name}(${vector.name})`);
+    return new Vector(coordinates, `${this._name}(${vector.name})`, "", vector);
   }
 
   get e1(): [number, number] {
@@ -54,7 +54,6 @@ class Transformation {
   set name(_name) {
     this._name = _name;
   }
-
 }
 
 export default Transformation;

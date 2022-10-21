@@ -23,7 +23,7 @@ const D3PlotAnimation = () => {
   };
 
   const handlePlayAnimation = () => {
-    setIsPlaying(true)
+    setIsPlaying(true);
     let run = 1;
     const interval = setInterval(() => {
       d3Component.updateData(
@@ -39,7 +39,7 @@ const D3PlotAnimation = () => {
   };
 
   const handlePauseAnimation = () => {
-    setIsPlaying(false)
+    setIsPlaying(false);
     d3.selectAll(".lineVector").transition().duration(0);
   };
 

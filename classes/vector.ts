@@ -4,12 +4,19 @@ class Vector {
   private _name: string;
   private _array: [number, number];
   private color: string;
+  private _prevVector: Vector | undefined;
 
-  constructor(array: [number, number], _name: string = "v1", color: string = "") {
+  constructor(
+    array: [number, number],
+    _name: string = "v1",
+    color: string = "",
+    _prevVector = undefined
+  ) {
     this._array = array;
     this.x = array[0];
     this.y = array[1];
     this._name = _name;
+    this._prevVector = _prevVector;
     this.color = color;
   }
 
@@ -22,7 +29,11 @@ class Vector {
   }
 
   set name(_name: string) {
-    this._name = _name; 
+    this._name = _name;
+  }
+
+  get prevVector(): Vector | undefined {
+    return this._prevVector;
   }
 
   /**
@@ -47,7 +58,6 @@ class Vector {
 
   //   }];
   // };
-  
 }
 
 export default Vector;

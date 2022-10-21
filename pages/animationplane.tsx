@@ -31,7 +31,11 @@ const AnimationPlane = () => {
 
   return (
     <div className="h-screen">
-      <SideBarAnimationPage />
+      <SideBarAnimationPage
+        sideBarStyle={{
+          width: "450px",
+        }}
+      />
       <MainSectionAnimationPage />
     </div>
   );

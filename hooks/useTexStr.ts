@@ -1,4 +1,5 @@
 import { evaluate } from "mathjs";
+import Transformation from "../classes/transformation";
 import Vector from "../classes/vector";
 import { useListContext, useNameContext } from "../context";
 import { validateVectorName, validateVectorValues } from "../utils";
@@ -93,6 +94,37 @@ const useTexStr = () => {
   };
 
   /**
+   * Returns a Tex string with the multiplication of the vector times 
+   * the tranformation matrix
+   * @param {Transformation} transformation 
+   * @param {Vector} vec 
+   * @returns {string}
+   */
+  const vectorMatrixMultiplication = (
+    transformation: Transformation,
+    vec: Vector
+  ): string => {
+    const multiplyX = vec.prevVector?.x || vec.x;
+    const multiplyY = vec.prevVector?.y || vec.y;
+    
+    return String.raw`
+      ${vec.name} = \begin{bmatrix}
+          ${transformation.e1[0]} & ${transformation.e2[0]}\\
+          ${transformation.e1[1]} & ${transformation.e2[1]}
+        \end{bmatrix}\begin{bmatrix}
+          ${multiplyX}\\
+          ${multiplyY}
+        \end{bmatrix} = \begin{bmatrix}
+          (${transformation.e1[0]} \cdot ${multiplyX}) + (${transformation.e2[0]} \cdot ${multiplyY})\\
+          (${transformation.e1[1]} \cdot ${multiplyX}) + (${transformation.e2[1]} \cdot ${multiplyY})
+        \end{bmatrix} = \begin{bmatrix}
+          ${vec.x}\\
+          ${vec.y}
+        \end{bmatrix}
+    `;
+  };
+
+  /**
    * Returns a vector object from a valid vector Tex string;
    * containing its coordinates and optionally its name;
    * @param {string} vectorStr - in the format "[name]_{[number]} = ([xcoordinate], [ycoordinate])"
@@ -141,7 +173,7 @@ const useTexStr = () => {
     }
     return new Vector([evaluate(values[0]), evaluate(values[1])], `${name}`);
   };
-  return { matrixStrings, vectorFromTex };
+  return { matrixStrings, vectorFromTex, vectorMatrixMultiplication };
 };
 
 export default useTexStr;

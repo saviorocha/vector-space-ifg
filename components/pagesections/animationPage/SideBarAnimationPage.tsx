@@ -14,7 +14,6 @@ const SideBarAnimationPage: FunctionComponent<ISideBarProps> = ({
       // className={sidebarClass}
       sideBarRef={sideBarRef}
       sideBarStyle={sideBarStyle}
-      //
     >
       {stateVecArr.transformationArr.map((trn, i) => {
         return (
