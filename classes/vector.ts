@@ -10,13 +10,13 @@ class Vector {
     array: [number, number],
     _name: string = "v1",
     color: string = "",
-    _prevVector = undefined
+    _prevVector?: Vector
   ) {
     this._array = array;
     this.x = array[0];
     this.y = array[1];
     this._name = _name;
-    this._prevVector = _prevVector;
+    this._prevVector = _prevVector || undefined;
     this.color = color;
   }
 
