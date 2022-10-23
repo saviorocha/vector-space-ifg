@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 import { useListContext } from "../../../context";
 import { ISideBarProps } from "../../../interfaces/interfaces";
 import BarItemCalculation from "../../ui/BarItemCalculation";
+import HoverableComponent from "../../ui/HoverableDiv";
 import SideBar from "../../ui/SideBar";
 
 const SideBarAnimationPage: FunctionComponent<ISideBarProps> = ({

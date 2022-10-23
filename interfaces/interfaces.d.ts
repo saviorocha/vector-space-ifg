@@ -53,6 +53,11 @@ interface ISideBarProps {
   sideBarRef?: LegacyRef<HTMLElement> | undefined;
 }
 
+interface IHoverableDivProp {
+  children: ReactNode;
+  hoverText: string;
+}
+
 interface IBottomTransformationProps {
   /** Tex transformation expression to be rendered */
   transformationExpression: string;

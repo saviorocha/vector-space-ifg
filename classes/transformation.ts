@@ -20,7 +20,6 @@ class Transformation {
     this._e1Vector = new Vector(this._e1, "e_{1}", "red");
     this._e2Vector = new Vector(this._e2, "e_{2}", "blue");
     this._matrixTransformation = transpose(matrix([_e1, _e2])); // have to transpose to match mathjs matrix
-    // console.log(this._matrixTransformation);
   }
 
   applyTransformation(vector: Vector): Vector {
