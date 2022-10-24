@@ -64,43 +64,15 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
         "
         // h-full overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0
       >
-        <ArcherContainer>
-          <div className="flex flex-row items-center">
-            {stateVecArr.vectorArr.map((vec, i) => {
-              return (
-                <div key={i} className="mr-20">
-                  <ArcherElement
-                    id={`element-${i}`}
-                    relations={
-                      i === stateVecArr.vectorArr.length - 1
-                        ? undefined
-                        : [
-                            {
-                              targetId: `element-${i + 1}`,
-                              targetAnchor: "left",
-                              sourceAnchor: "right",
-                              style: { strokeColor: "black", strokeWidth: 1 },
-                              label: (
-                                <RenderTex
-                                  mathExpression={`${
-                                    stateVecArr.transformationArr[i + 1].name
-                                  }`}
-                                  classStyle={styles.transformationarrow}
-                                />
-                              ),
-                            },
-                          ]
-                    }
-                  >
-                    <div>
-                      <D3Plot index={i} />
-                    </div>
-                  </ArcherElement>
-                </div>
-              );
-            })}
-          </div>
-        </ArcherContainer>
+          <Carousel>
+          {stateVecArr.vectorArr.map((vec, i) => {
+            return (
+              <CarouselItem key={i}>
+                <D3Plot index={i} />
+              </CarouselItem>
+            );
+          })}
+        </Carousel>
       </section>
       <section
         id={styles.rightsection}

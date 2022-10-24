@@ -1,6 +1,7 @@
 import React from "react";
 
-const KeyboardIcon = () => {
+const KeyboardIcon = ({
+}) => {
   return (
     <svg
       version="1.1"

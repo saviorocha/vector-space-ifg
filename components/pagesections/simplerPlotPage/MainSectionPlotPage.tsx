@@ -1,6 +1,8 @@
 import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
+import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import { FunctionComponent, useEffect, useState } from "react";
+import { ArcherContainer, ArcherElement } from "react-archer";
 import {
   Globe,
   Hash,
@@ -10,16 +12,15 @@ import {
   ZoomIn,
   ZoomOut,
 } from "react-feather";
-import { useD3Context, useListContext, useNameContext } from "../../../context";
+import { useD3Context, useListContext } from "../../../context";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
-import styles from "../../../styles/modules/editpage.module.css";
+import styles from "../../../styles/modules/simpleplot.module.css";
 import D3Plot from "../../d3/D3plot";
-import { useTheme } from "next-themes";
-import Carousel, { CarouselItem } from "../../ui/Carousel";
-import { ArcherContainer, ArcherElement } from "react-archer";
+import KeyboardIcon from "../../icons/KeyboardIcon";
+import RenderTex from "../../tex/RenderTex";
 import RoundButton from "../../ui/RoundButton";
 import TransitionButton from "../../ui/TransitionButton";
-import RenderTex from "../../tex/RenderTex";
+import PlotVectors from "./PlotVectors";
 
 const btnClassName = `rounded-full h-10 w-10 right-0
 flex items-center justify-center 
@@ -28,7 +29,7 @@ bg-gray-50 bg-opacity-75 border border-gray-200`;
 /**
  * Central part of the edit page; it's divided in left, middle and right sections
  */
-const SimplerPlotPage: FunctionComponent<IMainSectionProps> = ({
+const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
   mainStyle,
   children,
 }) => {
@@ -38,6 +39,10 @@ const SimplerPlotPage: FunctionComponent<IMainSectionProps> = ({
   const [mode, setMode] = useState<Mode>("dark");
   const { theme, setTheme } = useTheme();
   // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
+
+  useEffect(() => {
+    // console.log("styles", styles.transformationarrow)
+  }, []);
 
   return (
     <main
@@ -66,7 +71,7 @@ const SimplerPlotPage: FunctionComponent<IMainSectionProps> = ({
       >
         <ArcherContainer>
           <div className="flex flex-row items-center">
-            {stateVecArr.vectorArr.map((vec, i) => {
+            {stateVecArr.vectorArr.map((vectors, i) => {
               return (
                 <div key={i} className="mr-20">
                   <ArcherElement
@@ -92,9 +97,10 @@ const SimplerPlotPage: FunctionComponent<IMainSectionProps> = ({
                           ]
                     }
                   >
-                    <div>
+                    <aside className="flex flex-col items-center bg-neutral-100">
                       <D3Plot index={i} />
-                    </div>
+                      <PlotVectors vectors={vectors} key={i} />
+                    </aside>
                   </ArcherElement>
                 </div>
               );
@@ -159,28 +165,13 @@ const SimplerPlotPage: FunctionComponent<IMainSectionProps> = ({
           className="flex items-center justify-center flex-col"
         >
           <RoundButton
-            idString="zoom-in"
-            classString={btnClassName}
-            icon={<ZoomIn className="text-gray-700" />}
-          />
-          <RoundButton
-            idString="zoom-out"
-            classString={btnClassName}
-            icon={<ZoomOut className="text-gray-700" />}
-          />
-          <RoundButton
-            idString="reset-zoom"
-            classString={btnClassName}
-            icon={<LifeBuoy className="text-gray-700" />}
-          />
-
-          <RoundButton
             classString={btnClassName}
             icon={<Play className="text-gray-700" />}
             handleOnClick={() => {
               router.push("/animationplane");
             }}
           />
+          <KeyboardIcon />
           {/* <button
             onClick={handleResetList}
             className="
@@ -197,4 +188,4 @@ const SimplerPlotPage: FunctionComponent<IMainSectionProps> = ({
   );
 };
 
-export default SimplerPlotPage;
+export default MainSectionPlotPage;
