@@ -3,6 +3,7 @@ import { Trash2 } from "react-feather";
 import StateList from "../../classes/stateList";
 import { useListContext, useNameContext } from "../../context";
 import useList from "../../hooks/useList";
+import useListEvents from "../../hooks/useListEvents";
 import useTexStr from "../../hooks/useTexStr";
 import { IVectorTexProps } from "../../interfaces/interfaces";
 import RenderTex from "./RenderTex";
@@ -18,9 +19,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
   const [showTex, setShowTex] = useState(true);
 
   const { currentPlot } = useNameContext();
-  const { vectorFromTex } = useTexStr();
-  const { updateVector, removeVector } = useList();
-  const { list, setList, setStateVecArr } = useListContext();
+  const { vectorDeleteHandler, vectorUpdateHandler } = useListEvents();
 
   useEffect(() => {
     // console.log("vectorName", vectorName);
@@ -37,18 +36,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
 
   const handleVectorUpdate = (event: any) => {
     if (event.key === "Enter") {
-      const newVector = vectorFromTex(event.target.value);
-      const prevVectorName = vectorFromTex(vectorExpression)?.name;
-      if (!newVector || !prevVectorName) {
-        alert("invalid");
-        return;
-      }
-      const newHead = updateVector(newVector, prevVectorName);
-      const newList = new StateList(newHead);
-      setList(newList);
-      setStateVecArr(newList.toArray());
-
-      event.target.value = "";
+      vectorUpdateHandler(vectorExpression, event);
       setExpression(event.target.value);
       setShowTex(true);
     }
@@ -59,13 +47,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
       setShowTex(false);
     }
   };
-  const vectorDeleteHandler = (vectorName: string) => {
-    const newHead = removeVector(vectorName);
-    const newList = new StateList(newHead);
-    setList(newList);
-    setStateVecArr(list.toArray());
-  };
-  
+
   return (
     <div className="flex">
       {!vectorName.includes("e_{1}") &&

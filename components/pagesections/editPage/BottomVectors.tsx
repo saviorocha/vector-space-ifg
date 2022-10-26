@@ -1,10 +1,8 @@
 import { Tooltip } from "@mui/material";
 import { useState } from "react";
 import { Plus } from "react-feather";
-import StateList from "../../../classes/stateList";
 import { useListContext, useNameContext } from "../../../context";
-import useList from "../../../hooks/useList";
-import useTexStr from "../../../hooks/useTexStr";
+import useListEvents from "../../../hooks/useListEvents";
 import VectorTex from "../../tex/VectorTex";
 
 /**
@@ -14,33 +12,9 @@ const BottomVectors = () => {
   const [toggleVecInput, setToggleVecInput] = useState(false);
 
   const { currentPlot } = useNameContext();
-  const { vectorFromTex } = useTexStr();
-  const { addVector } = useList();
-  const { setList, stateVecArr, setStateVecArr } = useListContext();
-
-  /**
-   * Adds a new vector to the list
-   */
-  const vectorSubmitHandler = (event: any) => {
-    if (event.key === "Enter") {
-      // triggered by enter key
-      const newVector = vectorFromTex(event.target.value);
-
-      if (!newVector) {
-        alert("nome ou valores do vetor inválidos");
-        return;
-      }
-      const newHead = addVector(newVector);
-      const newList = new StateList(newHead);
-
-      // updates list
-      setList(newList);
-      setStateVecArr(newList.toArray());
-
-      event.target.value = "";
-    }
-  };
-
+  const { stateVecArr } = useListContext();
+  const { vectorSubmitHandler } = useListEvents()
+  
   return (
     <>
       <ul>

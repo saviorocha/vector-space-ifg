@@ -250,7 +250,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
           </ul>
         </TransitionButton>
 
-        <div
+        {/* <div
           id="bottom-buttons"
           className="flex items-center justify-center flex-col"
         >
@@ -262,7 +262,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
             }}
           />
           <KeyboardIcon />
-          {/* <button
+          <button
             onClick={handleResetList}
             className="
               rounded-full h-12 w-12 
@@ -271,8 +271,8 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
             "
           >
             <Trash className="text-gray-700" />
-          </button> */}
-        </div>
+          </button>
+        </div> */}
       </section>
     </main>
   );

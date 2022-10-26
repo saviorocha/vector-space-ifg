@@ -9,7 +9,7 @@ import {
 import StateList from "../../../classes/stateList";
 import Transformation from "../../../classes/transformation";
 import { useD3Context, useListContext } from "../../../context";
-import useEvents from "../../../hooks/useEvents";
+import useD3Events from "../../../hooks/useD3Events";
 import useList from "../../../hooks/useList";
 import { ISideBarProps } from "../../../interfaces/interfaces";
 import BarItem from "../../ui/BarItem";
@@ -24,7 +24,7 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
   const { setEvents } = useD3Context();
   const { list, setList, stateVecArr, setStateVecArr } = useListContext();
   const { addTransformation } = useList();
-  const { addVectorOnClick } = useEvents();
+  const { addVectorOnClick } = useD3Events();
 
   /**
    * Predefined SideBar transformations 
