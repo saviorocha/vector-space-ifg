@@ -67,7 +67,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
   };
   
   return (
-    <div>
+    <div className="flex">
       {!vectorName.includes("e_{1}") &&
       !vectorName.includes("e_{2}") &&
       !showTex ? (

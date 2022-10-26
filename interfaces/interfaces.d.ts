@@ -42,10 +42,14 @@ interface IPlotProps {
 interface IMainSectionProps {
   /** Button used to toggle the side bar */
   children: ReactNode;
-  /** Style attribute of the main tag (can be a string or a css module) */
+  /** Style attribute of the main tag (can be a string or a css module) - used here for transitions*/
   mainStyle: CSSProperties | string;
 }
 
+interface IPlotTransformation {
+  transformation: Transformation;
+  trnIndex: number;
+}
 interface ISideBarProps {
   children?: ReactNode;
   sideBarStyle?: CSSProperties | string;
@@ -63,8 +67,12 @@ interface IBottomTransformationProps {
   transformationExpression: string;
 }
 
+interface IPlotVectorsProps {
+  vectors: Vector[], 
+  plotIndex: number 
+}
+
 interface IBarItemProps {
-  /** comentário teste */
   title: string;
   leftIcon: ReactElement;
   rightIcon?: ReactElement | null;
@@ -99,9 +107,11 @@ interface IRenderTexProps {
   /** Expression being rendered - must be a valid Tex expression */
   mathExpression: string;
   /** Title that appears on hover */
-  title: string;
+  title?: string;
   /** Double click event for updating the expression - used mainly on vectors */
   handleDoubleClick?: MouseEventHandler<HTMLParagraphElement> | undefined;
+  /** Class name attribute of the p tag (can be a string or a css module) */
+  classStyle?: CSSProperties | string;
 }
 
 interface IVectorTexProps {

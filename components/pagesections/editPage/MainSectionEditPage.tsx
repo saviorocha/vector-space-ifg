@@ -1,16 +1,25 @@
 import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
 import { useRouter } from "next/router";
 import { FunctionComponent, useEffect, useState } from "react";
-import { Globe, Hash, LifeBuoy, Play, Settings, ZoomIn, ZoomOut } from "react-feather";
+import {
+  Globe,
+  Hash,
+  LifeBuoy,
+  Play,
+  Settings,
+  ZoomIn,
+  ZoomOut,
+} from "react-feather";
 import { useD3Context, useListContext, useNameContext } from "../../../context";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/editpage.module.css";
 import D3Plot from "../../d3/D3plot";
 import { useTheme } from "next-themes";
 import Carousel, { CarouselItem } from "../../ui/Carousel";
-
+import { ArcherContainer, ArcherElement } from "react-archer";
 import RoundButton from "../../ui/RoundButton";
 import TransitionButton from "../../ui/TransitionButton";
+import RenderTex from "../../tex/RenderTex";
 
 const btnClassName = `rounded-full h-10 w-10 right-0
 flex items-center justify-center 
@@ -50,12 +59,12 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
         id={styles.middlesection}
         // className="h-full flex items-center justify-center"
         className="
-            relative gap-1 overflow-hidden
-            flex items-center justify-center flex-col 
-          "
+          relative gap-1 overflow-hidden
+          flex items-center justify-around flex-row 
+        "
         // h-full overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0
       >
-        <Carousel>
+          <Carousel>
           {stateVecArr.vectorArr.map((vec, i) => {
             return (
               <CarouselItem key={i}>
@@ -65,17 +74,10 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
           })}
         </Carousel>
       </section>
-
       <section
         id={styles.rightsection}
         className="h-full flex items-center justify-between flex-col"
       >
-        {/* <button id="counter" onClick={() => {
-            setVectorNameCounter(vectorNameCounter + 1);
-            console.log("vectorNameCounter", vectorNameCounter);
-          }}>
-            <Hash />
-          </button> */}
         <TransitionButton
           icon={<Settings className="text-gray-700 w-7 h-7" />}
           sectionStyle={styles.settings}
@@ -115,7 +117,7 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
               className="flex items-center justify-start ml-2 p-1"
               id="toggle-numbers"
               onClick={() => {
-                setHideNumbers(!hideNumbers)
+                setHideNumbers(!hideNumbers);
               }}
             >
               <Hash />
@@ -143,7 +145,7 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
             classString={btnClassName}
             icon={<LifeBuoy className="text-gray-700" />}
           />
-          
+
           <RoundButton
             classString={btnClassName}
             icon={<Play className="text-gray-700" />}

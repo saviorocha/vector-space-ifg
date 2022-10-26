@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Check, Circle, Globe, Hash, Settings } from "react-feather";
+import { Check, Globe, Hash, Settings } from "react-feather";
 import { Transition } from "react-transition-group";
 import { useListContext, useNameContext } from "../../../context";
 import useTexStr from "../../../hooks/useTexStr";
@@ -55,7 +55,7 @@ const BottomBar = () => {
     event.preventDefault();
     const trnNameArr = matrixStrings();
     setCurrentPosition(
-      currentPosition === trnNameArr.length - 1 ? 0 : currentPosition + 1
+      currentPosition === trnNameArr.length - 1 ? 0 : currentPosition + 1 // "loop" validation
     );
     setCurrentTrnExpression(trnNameArr[currentPosition]);
   };
@@ -64,7 +64,7 @@ const BottomBar = () => {
     event.preventDefault();
     // validate input data...
     setTransformationVars([event.target.a.value, event.target.b.value]);
-    setToggleVarNameForm(false)
+    setToggleVarNameForm(false);
   };
 
   const handleKeyboardChange = (input: string) => {

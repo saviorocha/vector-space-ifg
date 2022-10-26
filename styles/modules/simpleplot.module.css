@@ -32,3 +32,6 @@
   transition: opacity 300ms ease-in-out;
 }
 
+.transformationarrow {
+  margin-top: -30px;
+}
