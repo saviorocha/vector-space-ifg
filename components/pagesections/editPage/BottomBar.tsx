@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Check, Circle, Globe, Hash, Settings } from "react-feather";
+import { Check, Globe, Hash, Settings } from "react-feather";
 import { Transition } from "react-transition-group";
 import { useListContext, useNameContext } from "../../../context";
 import useTexStr from "../../../hooks/useTexStr";

@@ -9,7 +9,7 @@ import useList from "../../../hooks/useList";
 import { IBottomTransformationProps } from "../../../interfaces/interfaces";
 import {
   validateTransformationName,
-  validateTransformationValues,
+  validateTransformationValues
 } from "../../../utils";
 import RenderTex from "../../tex/RenderTex";
 import TransformationForm from "../../ui/TransformationForm";

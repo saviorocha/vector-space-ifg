@@ -1,5 +1,5 @@
 import { Tooltip } from "@mui/material";
-import React, { FunctionComponent, useState } from "react";
+import { FunctionComponent, useState } from "react";
 import { Plus } from "react-feather";
 import StateList from "../../../classes/stateList";
 import Vector from "../../../classes/vector";

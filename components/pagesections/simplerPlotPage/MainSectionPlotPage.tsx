@@ -6,12 +6,8 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { ArcherContainer, ArcherElement } from "react-archer";
 import {
   Globe,
-  Hash,
-  LifeBuoy,
-  Play,
-  Settings,
-  ZoomIn,
-  ZoomOut,
+  Hash, Play,
+  Settings
 } from "react-feather";
 import StateList from "../../../classes/stateList";
 import Transformation from "../../../classes/transformation";
@@ -21,7 +17,7 @@ import { IMainSectionProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/simpleplot.module.css";
 import {
   validateTransformationName,
-  validateTransformationValues,
+  validateTransformationValues
 } from "../../../utils";
 import D3Plot from "../../d3/D3plot";
 import KeyboardIcon from "../../icons/KeyboardIcon";

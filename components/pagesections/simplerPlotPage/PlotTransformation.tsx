@@ -1,19 +1,19 @@
 import { Tooltip } from "@mui/material";
-import React, { FunctionComponent, useEffect, useState } from "react";
+import { evaluate } from "mathjs";
+import { FunctionComponent, useEffect, useState } from "react";
 import { Edit3, Plus, RotateCcw, Trash2 } from "react-feather";
+import StateList from "../../../classes/stateList";
 import Transformation from "../../../classes/transformation";
-import { useListContext, useNameContext } from "../../../context";
+import { useListContext } from "../../../context";
 import useList from "../../../hooks/useList";
 import useTexStr from "../../../hooks/useTexStr";
-import RenderTex from "../../tex/RenderTex";
-import TransformationForm from "../../ui/TransformationForm";
+import { IPlotTransformation } from "../../../interfaces/interfaces";
 import {
   validateTransformationName,
-  validateTransformationValues,
+  validateTransformationValues
 } from "../../../utils";
-import { evaluate } from "mathjs";
-import StateList from "../../../classes/stateList";
-import { IPlotTransformation } from "../../../interfaces/interfaces";
+import RenderTex from "../../tex/RenderTex";
+import TransformationForm from "../../ui/TransformationForm";
 
 const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
   transformation,
