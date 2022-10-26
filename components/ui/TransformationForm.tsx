@@ -3,8 +3,7 @@ import { ITransformationFormProps } from "../../interfaces/interfaces";
 
 const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
   onSubmit,
-  updateOrCreate,
-  matrixArr,
+  matrixArr = [0, 0, 0, 0],
 }) => {
   return (
     <form onSubmit={onSubmit}>
@@ -15,7 +14,7 @@ const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
               className="border-2 border-slate-400 w-10"
               // type="number"
               id={`t${i}`}
-              defaultValue={updateOrCreate === "create" ? 0 : el}
+              defaultValue={el}
             />
             {i === 1 && <br />}
           </React.Fragment>

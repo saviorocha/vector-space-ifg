@@ -1,17 +1,10 @@
 import { Tooltip } from "@mui/material";
-import { evaluate } from "mathjs";
 import { FunctionComponent, useEffect, useState } from "react";
 import { Edit3, Plus, RotateCcw, Trash2 } from "react-feather";
-import StateList from "../../../classes/stateList";
-import Transformation from "../../../classes/transformation";
 import { useListContext } from "../../../context";
-import useList from "../../../hooks/useList";
+import useListEvents from "../../../hooks/useListEvents";
 import useTexStr from "../../../hooks/useTexStr";
 import { IPlotTransformation } from "../../../interfaces/interfaces";
-import {
-  validateTransformationName,
-  validateTransformationValues
-} from "../../../utils";
 import RenderTex from "../../tex/RenderTex";
 import TransformationForm from "../../ui/TransformationForm";
 
@@ -27,101 +20,24 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
   const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
   const [toggleUpdateCreate, setToggleUpdateCreate] =
     useState<string>("create");
-  const { list, setList, stateVecArr, setStateVecArr } = useListContext();
+  const { stateVecArr } = useListContext();
+  const {
+    transformationSubmitHandler,
+    transformationUpdateHandler,
+    transformationDeleteHandler,
+  } = useListEvents();
 
-  const { addTransformation, updateTransformation, removeTransformation } =
-    useList();
-
-  /**
-   * Adds a new transformation to the list based on the matrix and name submited
-   */
-  const transfromationSubmitHandler = (event: any) => {
-    event.preventDefault();
-    const name = event.target.name.value
-      ? event.target.name.value
-      : `T_{${stateVecArr.vectorArr.length}}`;
-
-    // validate submited data
-    if (
-      !validateTransformationName(name) ||
-      !validateTransformationValues([
-        event.target.t0.value,
-        event.target.t2.value,
-        event.target.t1.value,
-        event.target.t3.value,
-      ])
-    ) {
-      alert("transformação inválida");
-      return;
-    }
-    const newHead = addTransformation(
-      new Transformation(
-        [evaluate(event.target.t0.value), evaluate(event.target.t2.value)],
-        [evaluate(event.target.t1.value), evaluate(event.target.t3.value)],
-        name
-      ),
-      transformation.name
-    );
-    const newList = new StateList(newHead);
-
-    // updates the list context
-    setList(newList);
-    setStateVecArr(list.toArray());
+  const handleTransfromationSubmit = (event: any) => {
+    transformationSubmitHandler(event, transformation);
     setToggleTrnInput(false);
   };
 
-  /**
-   * Updates the current transformation matrix and name
-   */
-  const transformationUpdateHandler = (event: any) => {
-    event.preventDefault();
-    const name = event.target.name.value
-      ? event.target.name.value
-      : transformation.name;
-
-    // validate submited data
-    if (
-      !validateTransformationName(name) ||
-      !validateTransformationValues([
-        event.target.t0.value,
-        event.target.t2.value,
-        event.target.t1.value,
-        event.target.t3.value,
-      ])
-    ) {
-      alert("nome de transformação inválido");
-      return;
-    }
-
-    const newHead = updateTransformation(
-      new Transformation(
-        [evaluate(event.target.t0.value), evaluate(event.target.t2.value)],
-        [evaluate(event.target.t1.value), evaluate(event.target.t3.value)],
-        name
-      ),
-      transformation.name
-    );
-
-    if (!newHead) {
-      alert("erro ao encontrar a transformação");
-      return;
-    }
-    const newList = new StateList(newHead);
-
-    // updates the list context
-    setList(newList);
-    setStateVecArr(list.toArray());
+  const handleTransformationUpdate = (event: any) => {
+    transformationUpdateHandler(event, transformation);
   };
 
-  /**
-   * Deletes the current transformation
-   * @param {string} transformationName
-   */
-  const transformationDeleteHandler = (transformationName: string) => {
-    const newHead = removeTransformation(transformationName);
-    const newList = new StateList(newHead);
-    setList(newList);
-    setStateVecArr(list.toArray());
+  const handleTransformationDelete = () => {
+    transformationDeleteHandler(transformation.name);
   };
 
   const changeDefinition = (event: any) => {
@@ -175,6 +91,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
           setToggleTrnInput(!toggleTrnInput);
           setToggleUpdateCreate("create");
         }}
+        disabled={stateVecArr.transformationArr.length > 2}
       >
         <Tooltip title="Adicionar nova transformação">
           <Plus />
@@ -183,7 +100,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
       <button
         disabled={trnIndex === 0}
         className="absolute bottom-1 right-1"
-        onClick={() => transformationDeleteHandler(transformation.name)}
+        onClick={handleTransformationDelete}
       >
         <Tooltip title="Excluir transformação">
           <Trash2 />
@@ -198,10 +115,9 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
         <TransformationForm
           onSubmit={
             toggleUpdateCreate === "update"
-              ? transformationUpdateHandler
-              : transfromationSubmitHandler
+              ? handleTransformationUpdate
+              : handleTransfromationSubmit
           }
-          updateOrCreate={toggleUpdateCreate}
           matrixArr={transformation.e1.concat(transformation.e2)}
         />
       )}

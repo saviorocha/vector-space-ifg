@@ -30,15 +30,6 @@ const useTexStr = () => {
             ${b}
           \end{bmatrix}
         `,
-
-      // matrix transformation
-      String.raw`
-      \begin{bmatrix}
-        ${transformation.e1[0]} & ${transformation.e2[0]}\\
-        ${transformation.e1[1]} & ${transformation.e2[1]}
-      \end{bmatrix}
-      `,
-
       // algebraic definition
       `${transformation.name}(${a}, ${b}) = 
             (${defString(

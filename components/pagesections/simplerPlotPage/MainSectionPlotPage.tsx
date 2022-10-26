@@ -1,28 +1,16 @@
 import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
-import { evaluate } from "mathjs";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import { FunctionComponent, useEffect, useState } from "react";
 import { ArcherContainer, ArcherElement } from "react-archer";
-import {
-  Globe,
-  Hash, Play,
-  Settings
-} from "react-feather";
-import StateList from "../../../classes/stateList";
-import Transformation from "../../../classes/transformation";
+import { Globe, Hash, Settings } from "react-feather";
 import { useD3Context, useListContext } from "../../../context";
-import useList from "../../../hooks/useList";
+import useListEvents from "../../../hooks/useListEvents";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/simpleplot.module.css";
-import {
-  validateTransformationName,
-  validateTransformationValues
-} from "../../../utils";
 import D3Plot from "../../d3/D3plot";
-import KeyboardIcon from "../../icons/KeyboardIcon";
 import RenderTex from "../../tex/RenderTex";
-import RoundButton from "../../ui/RoundButton";
+import InfoBox from "../../ui/InfoBox";
 import TransformationForm from "../../ui/TransformationForm";
 import TransitionButton from "../../ui/TransitionButton";
 import PlotTransformation from "./PlotTransformation";
@@ -41,10 +29,10 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
 }) => {
   const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
   const router = useRouter();
-  const { list, setList, stateVecArr, setStateVecArr } = useListContext();
-  const { addTransformation, updateTransformation, removeTransformation } =
-    useList();
+  const { stateVecArr } = useListContext();
+  const { transformationSubmitHandler } = useListEvents();
   const { hideNumbers, setHideNumbers } = useD3Context();
+  const [justify, setJustify] = useState("justify-around");
   const { theme, setTheme } = useTheme();
   const [mode, setMode] = useState<Mode>("dark");
   const [transformation, setTransformation] = useState(
@@ -52,47 +40,23 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
   );
   // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
 
-  /**
-   * Adds a new transformation to the list based on the matrix and name submited
-   */
-  const transfromationSubmitHandler = (event: any) => {
-    event.preventDefault();
-    const name = event.target.name.value
-      ? event.target.name.value
-      : `T_{${stateVecArr.vectorArr.length}}`;
-
-    // validate submited data
-    if (
-      !validateTransformationName(name) ||
-      !validateTransformationValues([
-        event.target.t0.value,
-        event.target.t2.value,
-        event.target.t1.value,
-        event.target.t3.value,
-      ])
-    ) {
-      alert("transformação inválida");
-      return;
-    }
-    const newHead = addTransformation(
-      new Transformation(
-        [evaluate(event.target.t0.value), evaluate(event.target.t2.value)],
-        [evaluate(event.target.t1.value), evaluate(event.target.t3.value)],
-        name
-      ),
-      transformation.name
-    );
-    const newList = new StateList(newHead);
-
-    // updates the list context
-    setList(newList);
-    setStateVecArr(list.toArray());
+  const handleTransfromationSubmit = (event: any) => {
+    transformationSubmitHandler(event, transformation);
     setToggleTrnInput(false);
   };
 
   useEffect(() => {
-    console.log("stateVecArr", stateVecArr.transformationArr.length);
-  }, []);
+    console.log("stateVecArr", stateVecArr);
+  }, [stateVecArr]);
+
+  useEffect(() => {
+    setJustify(
+      `justify-${stateVecArr.transformationArr.length > 1 ? "start" : "around"}`
+    );
+    setTransformation(
+      stateVecArr.transformationArr[stateVecArr.transformationArr.length - 1]
+    );
+  }, [stateVecArr]);
 
   return (
     <main
@@ -113,10 +77,10 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
       <section
         id={styles.middlesection}
         // className="h-full flex items-center justify-center"
-        className="
-          relative gap-1 overflow-hidden
-          flex items-center justify-around flex-row 
-        "
+        className={`
+          relative gap-1 overflow-scroll
+          flex items-center ${justify} flex-row 
+        `}
         // h-full overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0
       >
         <ArcherContainer>
@@ -164,20 +128,18 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
             })}
           </div>
           <section className="flex justify-center">
-            <section
-              className="
-                rounded-md w-1/4 h-28 overflow-auto
-                flex flex-col items-center justify-center
-                bg-white border border-gray-400
-                text-sm shadow-md relative
-              "
-            >
-              {stateVecArr.transformationArr[1] ? (
+            {stateVecArr.transformationArr[1] ? (
+              <InfoBox>
                 <PlotTransformation
                   transformation={stateVecArr.transformationArr[1]}
                   trnIndex={1}
                 />
-              ) : (
+                {toggleTrnInput && (
+                  <TransformationForm onSubmit={handleTransfromationSubmit} />
+                )}
+              </InfoBox>
+            ) : (
+              <InfoBox>
                 <button
                   onClick={() => {
                     setToggleTrnInput(true);
@@ -185,15 +147,22 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
                 >
                   Adicionar transformação
                 </button>
-              )}
-              {toggleTrnInput && (
-                <TransformationForm
-                  onSubmit={transfromationSubmitHandler}
-                  updateOrCreate="create"
-                  matrixArr={transformation.e1.concat(transformation.e2)}
+                {toggleTrnInput && (
+                  <TransformationForm onSubmit={handleTransfromationSubmit} />
+                )}
+              </InfoBox>
+            )}
+            {stateVecArr.transformationArr[2] && (
+              <InfoBox>
+                <PlotTransformation
+                  transformation={stateVecArr.transformationArr[2]}
+                  trnIndex={2}
                 />
-              )}
-            </section>
+                {toggleTrnInput && (
+                  <TransformationForm onSubmit={handleTransfromationSubmit} />
+                )}
+              </InfoBox>
+            )}
           </section>
         </ArcherContainer>
       </section>
@@ -250,7 +219,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
           </ul>
         </TransitionButton>
 
-        <div
+        {/* <div
           id="bottom-buttons"
           className="flex items-center justify-center flex-col"
         >
@@ -262,7 +231,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
             }}
           />
           <KeyboardIcon />
-          {/* <button
+          <button
             onClick={handleResetList}
             className="
               rounded-full h-12 w-12 
@@ -271,8 +240,8 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
             "
           >
             <Trash className="text-gray-700" />
-          </button> */}
-        </div>
+          </button>
+        </div> */}
       </section>
     </main>
   );

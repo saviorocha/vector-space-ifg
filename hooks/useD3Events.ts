@@ -5,7 +5,7 @@ import Vector from "../classes/vector";
 import { useD3Context, useListContext, useNameContext } from "../context";
 import useList from "./useList";
 
-const useEvents = () => {
+const useD3Events = () => {
   const { addVector } = useList();
   const { setList, setStateVecArr } = useListContext();
   const { vectorNameCounter, setVectorNameCounter } = useNameContext();
@@ -65,4 +65,4 @@ const useEvents = () => {
   return { addVectorOnClick };
 };
 
-export default useEvents;
+export default useD3Events;
