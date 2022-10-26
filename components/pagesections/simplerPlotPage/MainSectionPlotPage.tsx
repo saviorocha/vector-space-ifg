@@ -32,6 +32,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
   const { stateVecArr } = useListContext();
   const { transformationSubmitHandler } = useListEvents();
   const { hideNumbers, setHideNumbers } = useD3Context();
+  const [justify, setJustify] = useState("justify-around");
   const { theme, setTheme } = useTheme();
   const [mode, setMode] = useState<Mode>("dark");
   const [transformation, setTransformation] = useState(
@@ -47,6 +48,13 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
   useEffect(() => {
     console.log("stateVecArr", stateVecArr.transformationArr.length);
   }, []);
+
+  useEffect(() => {
+    setJustify(
+      `justify-${stateVecArr.transformationArr.length > 1 ? "start" : "around"}`
+    );
+    console.log("justify", justify)
+  }, [stateVecArr]);
 
   return (
     <main
@@ -67,10 +75,10 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
       <section
         id={styles.middlesection}
         // className="h-full flex items-center justify-center"
-        className="
-          relative gap-1 overflow-auto
-          flex items-center justify-around flex-row 
-        "
+        className={`
+          relative gap-1 overflow-scroll
+          flex items-center ${justify} flex-row 
+        `}
         // h-full overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0
       >
         <ArcherContainer>
