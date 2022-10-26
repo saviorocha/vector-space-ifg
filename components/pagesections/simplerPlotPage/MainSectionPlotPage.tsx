@@ -46,14 +46,16 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
   };
 
   useEffect(() => {
-    console.log("stateVecArr", stateVecArr.transformationArr.length);
+    // console.log("stateVecArr", stateVecArr.transformationArr.length);
   }, []);
 
   useEffect(() => {
     setJustify(
       `justify-${stateVecArr.transformationArr.length > 1 ? "start" : "around"}`
     );
-    console.log("justify", justify)
+    setTransformation(
+      stateVecArr.transformationArr[stateVecArr.transformationArr.length - 1]
+    );
   }, [stateVecArr]);
 
   return (
