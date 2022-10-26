@@ -1,28 +1,15 @@
 import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
-import { evaluate } from "mathjs";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import { FunctionComponent, useEffect, useState } from "react";
 import { ArcherContainer, ArcherElement } from "react-archer";
-import {
-  Globe,
-  Hash, Play,
-  Settings
-} from "react-feather";
-import StateList from "../../../classes/stateList";
-import Transformation from "../../../classes/transformation";
+import { Globe, Hash, Settings } from "react-feather";
 import { useD3Context, useListContext } from "../../../context";
-import useList from "../../../hooks/useList";
+import useListEvents from "../../../hooks/useListEvents";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/simpleplot.module.css";
-import {
-  validateTransformationName,
-  validateTransformationValues
-} from "../../../utils";
 import D3Plot from "../../d3/D3plot";
-import KeyboardIcon from "../../icons/KeyboardIcon";
 import RenderTex from "../../tex/RenderTex";
-import RoundButton from "../../ui/RoundButton";
 import TransformationForm from "../../ui/TransformationForm";
 import TransitionButton from "../../ui/TransitionButton";
 import PlotTransformation from "./PlotTransformation";
@@ -41,9 +28,8 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
 }) => {
   const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
   const router = useRouter();
-  const { list, setList, stateVecArr, setStateVecArr } = useListContext();
-  const { addTransformation, updateTransformation, removeTransformation } =
-    useList();
+  const { stateVecArr } = useListContext();
+  const { transformationSubmitHandler } = useListEvents();
   const { hideNumbers, setHideNumbers } = useD3Context();
   const { theme, setTheme } = useTheme();
   const [mode, setMode] = useState<Mode>("dark");
@@ -52,41 +38,8 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
   );
   // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
 
-  /**
-   * Adds a new transformation to the list based on the matrix and name submited
-   */
-  const transfromationSubmitHandler = (event: any) => {
-    event.preventDefault();
-    const name = event.target.name.value
-      ? event.target.name.value
-      : `T_{${stateVecArr.vectorArr.length}}`;
-
-    // validate submited data
-    if (
-      !validateTransformationName(name) ||
-      !validateTransformationValues([
-        event.target.t0.value,
-        event.target.t2.value,
-        event.target.t1.value,
-        event.target.t3.value,
-      ])
-    ) {
-      alert("transformação inválida");
-      return;
-    }
-    const newHead = addTransformation(
-      new Transformation(
-        [evaluate(event.target.t0.value), evaluate(event.target.t2.value)],
-        [evaluate(event.target.t1.value), evaluate(event.target.t3.value)],
-        name
-      ),
-      transformation.name
-    );
-    const newList = new StateList(newHead);
-
-    // updates the list context
-    setList(newList);
-    setStateVecArr(list.toArray());
+  const handleTransfromationSubmit = (event: any) => {
+    transformationSubmitHandler(event, transformation);
     setToggleTrnInput(false);
   };
 
@@ -188,7 +141,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
               )}
               {toggleTrnInput && (
                 <TransformationForm
-                  onSubmit={transfromationSubmitHandler}
+                  onSubmit={handleTransfromationSubmit}
                   updateOrCreate="create"
                   matrixArr={transformation.e1.concat(transformation.e2)}
                 />
