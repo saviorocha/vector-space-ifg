@@ -91,6 +91,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
           setToggleTrnInput(!toggleTrnInput);
           setToggleUpdateCreate("create");
         }}
+        disabled={stateVecArr.transformationArr.length > 2}
       >
         <Tooltip title="Adicionar nova transformação">
           <Plus />

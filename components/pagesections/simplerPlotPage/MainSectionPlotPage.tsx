@@ -10,6 +10,7 @@ import { IMainSectionProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/simpleplot.module.css";
 import D3Plot from "../../d3/D3plot";
 import RenderTex from "../../tex/RenderTex";
+import InfoBox from "../../ui/InfoBox";
 import TransformationForm from "../../ui/TransformationForm";
 import TransitionButton from "../../ui/TransitionButton";
 import PlotTransformation from "./PlotTransformation";
@@ -67,7 +68,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
         id={styles.middlesection}
         // className="h-full flex items-center justify-center"
         className="
-          relative gap-1 overflow-hidden
+          relative gap-1 overflow-auto
           flex items-center justify-around flex-row 
         "
         // h-full overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0
@@ -117,20 +118,21 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
             })}
           </div>
           <section className="flex justify-center">
-            <section
-              className="
-                rounded-md w-1/4 h-28 overflow-auto
-                flex flex-col items-center justify-center
-                bg-white border border-gray-400
-                text-sm shadow-md relative
-              "
-            >
-              {stateVecArr.transformationArr[1] ? (
+            {stateVecArr.transformationArr[1] ? (
+              <InfoBox>
                 <PlotTransformation
                   transformation={stateVecArr.transformationArr[1]}
                   trnIndex={1}
                 />
-              ) : (
+                {toggleTrnInput && (
+                  <TransformationForm
+                    onSubmit={handleTransfromationSubmit}
+                    updateOrCreate="create"
+                  />
+                )}
+              </InfoBox>
+            ) : (
+              <InfoBox>
                 <button
                   onClick={() => {
                     setToggleTrnInput(true);
@@ -138,15 +140,28 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
                 >
                   Adicionar transformação
                 </button>
-              )}
-              {toggleTrnInput && (
-                <TransformationForm
-                  onSubmit={handleTransfromationSubmit}
-                  updateOrCreate="create"
-                  matrixArr={transformation.e1.concat(transformation.e2)}
+                {toggleTrnInput && (
+                  <TransformationForm
+                    onSubmit={handleTransfromationSubmit}
+                    updateOrCreate="create"
+                  />
+                )}
+              </InfoBox>
+            )}
+            {stateVecArr.transformationArr[2] && (
+              <InfoBox>
+                <PlotTransformation
+                  transformation={stateVecArr.transformationArr[2]}
+                  trnIndex={2}
                 />
-              )}
-            </section>
+                {toggleTrnInput && (
+                  <TransformationForm
+                    onSubmit={handleTransfromationSubmit}
+                    updateOrCreate="create"
+                  />
+                )}
+              </InfoBox>
+            )}
           </section>
         </ArcherContainer>
       </section>

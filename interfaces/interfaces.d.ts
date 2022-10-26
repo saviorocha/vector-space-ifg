@@ -124,7 +124,7 @@ interface IVectorTexProps {
 interface ITransformationFormProps {
   onSubmit: React.FormEventHandler<HTMLFormElement> | undefined;
   updateOrCreate: string;
-  matrixArr: number[];
+  matrixArr?: number[4];
 }
 
 interface IKeyboardProps {
