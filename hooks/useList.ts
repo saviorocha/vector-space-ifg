@@ -60,7 +60,7 @@ const useList = () => {
     transformation: Transformation,
     prevTransformationName: string = list.getTail().transformation.name
   ): StateNode => {
-    const previousState = getStateByName(prevTransformationName);
+    const previousState = getNodeByName(prevTransformationName);
 
     if (!previousState) {
       return list.head;
@@ -96,7 +96,7 @@ const useList = () => {
     newTransformation: Transformation,
     currentTransformationName: string
   ): StateNode | null => {
-    const transformationState = getStateByName(currentTransformationName);
+    const transformationState = getNodeByName(currentTransformationName);
 
     if (!transformationState) {
       return null;
@@ -119,14 +119,14 @@ const useList = () => {
    */
   const removeTransformation = (transformationName: string): StateNode => {
     const newHead = list.head;
-    const stateToRemove = getStateByName(transformationName);
+    const nodeToRemove = getNodeByName(transformationName);
 
-    let next: StateNode | null = stateToRemove!._next;
-    let previous: StateNode | null = stateToRemove!._previous;
+    let next: StateNode | null = nodeToRemove!._next;
+    let previous: StateNode | null = nodeToRemove!._previous;
 
     if (next) next._previous = previous;
     if (previous) previous._next = next;
-
+    list.updateNodes();
     return newHead;
   };
 
@@ -135,7 +135,7 @@ const useList = () => {
    * @param {string} transformationName 
    * @returns {StateNode}
    */
-  const getStateByName = (transformationName: string): StateNode | null => {
+  const getNodeByName = (transformationName: string): StateNode | null => {
     let currentState: StateNode | null = list.head;
     let transStateName = currentState.transformation.name;
 

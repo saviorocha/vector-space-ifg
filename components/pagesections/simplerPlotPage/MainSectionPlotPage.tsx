@@ -46,8 +46,8 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
   };
 
   useEffect(() => {
-    // console.log("stateVecArr", stateVecArr.transformationArr.length);
-  }, []);
+    console.log("stateVecArr", stateVecArr);
+  }, [stateVecArr]);
 
   useEffect(() => {
     setJustify(
