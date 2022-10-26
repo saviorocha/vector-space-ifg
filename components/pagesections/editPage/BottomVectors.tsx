@@ -13,8 +13,8 @@ const BottomVectors = () => {
 
   const { currentPlot } = useNameContext();
   const { stateVecArr } = useListContext();
-  const { vectorSubmitHandler } = useListEvents()
-  
+  const { vectorSubmitHandler } = useListEvents();
+
   return (
     <>
       <ul>
@@ -24,6 +24,7 @@ const BottomVectors = () => {
               <VectorTex
                 vectorExpression={`${vec.name}=(${vec.x},${vec.y})`}
                 vectorName={vec.name}
+                currentPlot={currentPlot}
               />
             </li>
           );

@@ -119,6 +119,7 @@ interface IVectorTexProps {
   vectorExpression: string;
   /** Name of the vector being rendered; used in the component logic */
   vectorName: string;
+  currentPlot: number
 }
 
 interface ITransformationFormProps {

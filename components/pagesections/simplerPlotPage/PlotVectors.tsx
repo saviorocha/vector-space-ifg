@@ -28,6 +28,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
               <VectorTex
                 vectorExpression={`${vec.name}=(${vec.x},${vec.y})`}
                 vectorName={vec.name}
+                currentPlot={plotIndex}
               />
             </li>
           );

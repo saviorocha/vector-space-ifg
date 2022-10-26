@@ -1,10 +1,7 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { Trash2 } from "react-feather";
-import StateList from "../../classes/stateList";
-import { useListContext, useNameContext } from "../../context";
-import useList from "../../hooks/useList";
+import { useNameContext } from "../../context";
 import useListEvents from "../../hooks/useListEvents";
-import useTexStr from "../../hooks/useTexStr";
 import { IVectorTexProps } from "../../interfaces/interfaces";
 import RenderTex from "./RenderTex";
 
@@ -14,11 +11,12 @@ import RenderTex from "./RenderTex";
 const VectorTex: FunctionComponent<IVectorTexProps> = ({
   vectorExpression,
   vectorName,
+  currentPlot
 }) => {
   const [expression, setExpression] = useState(vectorExpression);
   const [showTex, setShowTex] = useState(true);
 
-  const { currentPlot } = useNameContext();
+  // const { currentPlot } = useNameContext();
   const { vectorDeleteHandler, vectorUpdateHandler } = useListEvents();
 
   useEffect(() => {
