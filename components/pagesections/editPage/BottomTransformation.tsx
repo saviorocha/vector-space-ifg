@@ -114,7 +114,6 @@ const BottomTransformation: FunctionComponent<IBottomTransformationProps> = ({
               ? handleTransformationUpdate
               : handleTransfromationSubmit
           }
-          updateOrCreate={toggleUpdateCreate}
           matrixArr={transformation.e1.concat(transformation.e2)}
         />
       )}

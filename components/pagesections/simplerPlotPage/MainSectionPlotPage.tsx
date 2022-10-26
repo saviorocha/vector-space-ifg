@@ -125,10 +125,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
                   trnIndex={1}
                 />
                 {toggleTrnInput && (
-                  <TransformationForm
-                    onSubmit={handleTransfromationSubmit}
-                    updateOrCreate="create"
-                  />
+                  <TransformationForm onSubmit={handleTransfromationSubmit} />
                 )}
               </InfoBox>
             ) : (
@@ -141,10 +138,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
                   Adicionar transformação
                 </button>
                 {toggleTrnInput && (
-                  <TransformationForm
-                    onSubmit={handleTransfromationSubmit}
-                    updateOrCreate="create"
-                  />
+                  <TransformationForm onSubmit={handleTransfromationSubmit} />
                 )}
               </InfoBox>
             )}
@@ -155,10 +149,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
                   trnIndex={2}
                 />
                 {toggleTrnInput && (
-                  <TransformationForm
-                    onSubmit={handleTransfromationSubmit}
-                    updateOrCreate="create"
-                  />
+                  <TransformationForm onSubmit={handleTransfromationSubmit} />
                 )}
               </InfoBox>
             )}

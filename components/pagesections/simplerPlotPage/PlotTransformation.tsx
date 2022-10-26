@@ -118,7 +118,6 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
               ? handleTransformationUpdate
               : handleTransfromationSubmit
           }
-          updateOrCreate={toggleUpdateCreate}
           matrixArr={transformation.e1.concat(transformation.e2)}
         />
       )}
