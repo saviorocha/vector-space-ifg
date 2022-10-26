@@ -1,36 +1,36 @@
 import { Tooltip } from "@mui/material";
-import { evaluate } from "mathjs";
-import { FunctionComponent, useEffect, useState } from "react";
-import { Edit3, Plus, Trash2 } from "react-feather";
-import StateList from "../../../classes/stateList";
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { Edit3, Plus, RotateCcw, Trash2 } from "react-feather";
 import Transformation from "../../../classes/transformation";
 import { useListContext, useNameContext } from "../../../context";
 import useList from "../../../hooks/useList";
-import { IBottomTransformationProps } from "../../../interfaces/interfaces";
+import useTexStr from "../../../hooks/useTexStr";
+import RenderTex from "../../tex/RenderTex";
+import TransformationForm from "../../ui/TransformationForm";
 import {
   validateTransformationName,
   validateTransformationValues,
 } from "../../../utils";
-import RenderTex from "../../tex/RenderTex";
-import TransformationForm from "../../ui/TransformationForm";
+import { evaluate } from "mathjs";
+import StateList from "../../../classes/stateList";
+import { IPlotTransformation } from "../../../interfaces/interfaces";
 
-/**
- * Component for showing on the bottom bar the current transformation being rendered
- */
-const BottomTransformation: FunctionComponent<IBottomTransformationProps> = ({
-  transformationExpression,
+const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
+  transformation,
+  trnIndex,
 }) => {
+  const { matrixStrings } = useTexStr();
+  const [currentTrnExpression, setCurrentTrnExpression] = useState(
+    matrixStrings(trnIndex)[0]
+  );
+  const [currentPosition, setCurrentPosition] = useState(0);
   const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
   const [toggleUpdateCreate, setToggleUpdateCreate] =
     useState<string>("create");
   const { list, setList, stateVecArr, setStateVecArr } = useListContext();
-  const { currentPlot, setCurrentPlot } = useNameContext();
 
   const { addTransformation, updateTransformation, removeTransformation } =
     useList();
-  const [transformation, setTransformation] = useState<Transformation>(
-    stateVecArr.transformationArr[currentPlot]
-  );
 
   /**
    * Adds a new transformation to the list based on the matrix and name submited
@@ -120,26 +120,28 @@ const BottomTransformation: FunctionComponent<IBottomTransformationProps> = ({
   const transformationDeleteHandler = (transformationName: string) => {
     const newHead = removeTransformation(transformationName);
     const newList = new StateList(newHead);
-    setCurrentPlot(currentPlot - 1); // changes the plot being rendered to avoid inconsistency
     setList(newList);
     setStateVecArr(list.toArray());
   };
 
-  useEffect(() => {
-    // console.log("toggleTrnInput", toggleTrnInput);
-    // console.log("toggleUpdateCreate", toggleUpdateCreate);
-  }, [toggleTrnInput, toggleUpdateCreate]);
+  const changeDefinition = (event: any) => {
+    event.preventDefault();
+    const trnNameArr = matrixStrings(trnIndex);
+    setCurrentPosition(
+      currentPosition === trnNameArr.length - 1 ? 0 : currentPosition + 1 // "loop" validation
+    );
+    setCurrentTrnExpression(trnNameArr[currentPosition]);
+  };
 
   useEffect(() => {
     // console.log("list", stateVecArr, list)
-    setTransformation(stateVecArr.transformationArr[currentPlot]);
     setToggleTrnInput(false);
     setToggleUpdateCreate("create");
-  }, [stateVecArr, currentPlot]);
+  }, [stateVecArr]);
 
   return (
     <>
-      <div>
+      <aside>
         {toggleUpdateCreate === "create" && (
           <>
             <RenderTex
@@ -147,27 +149,26 @@ const BottomTransformation: FunctionComponent<IBottomTransformationProps> = ({
               title="Transformação de R2 em R2"
             />
             <RenderTex
-              mathExpression={transformationExpression}
+              mathExpression={currentTrnExpression}
               title="Matriz de transformação"
             />
           </>
         )}
-      </div>
+      </aside>
       <button
         className="absolute top-1 left-1"
         onClick={() => {
-          setToggleTrnInput(!toggleTrnInput && currentPlot !== 0);
+          setToggleTrnInput(!toggleTrnInput && trnIndex !== 0);
           setToggleUpdateCreate(
             toggleUpdateCreate === "update" ? "create" : "update"
           );
         }}
-        disabled={currentPlot === 0}
+        disabled={trnIndex === 0}
       >
         <Tooltip title="Editar matriz da transformação">
           <Edit3 />
         </Tooltip>
       </button>
-
       <button
         className="absolute bottom-1 left-1"
         onClick={() => {
@@ -175,12 +176,12 @@ const BottomTransformation: FunctionComponent<IBottomTransformationProps> = ({
           setToggleUpdateCreate("create");
         }}
       >
-        <Tooltip title="Adicionar uma nova transformação">
+        <Tooltip title="Adicionar nova transformação">
           <Plus />
         </Tooltip>
       </button>
       <button
-        disabled={currentPlot === 0}
+        disabled={trnIndex === 0}
         className="absolute bottom-1 right-1"
         onClick={() => transformationDeleteHandler(transformation.name)}
       >
@@ -188,7 +189,11 @@ const BottomTransformation: FunctionComponent<IBottomTransformationProps> = ({
           <Trash2 />
         </Tooltip>
       </button>
-
+      <button className="absolute top-1 right-1" onClick={changeDefinition}>
+        <Tooltip title="Excluir transformação">
+          <RotateCcw />
+        </Tooltip>
+      </button>
       {toggleTrnInput && (
         <TransformationForm
           onSubmit={
@@ -204,4 +209,4 @@ const BottomTransformation: FunctionComponent<IBottomTransformationProps> = ({
   );
 };
 
-export default BottomTransformation;
+export default PlotTransformation;

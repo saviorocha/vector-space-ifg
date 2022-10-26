@@ -3,6 +3,7 @@ import MainSectionPlotPage from "../components/pagesections/simplerPlotPage/Main
 import SideBarEditPage from "../components/pagesections/editPage/SideBarEditPage" 
 import { Transition } from "react-transition-group";
 import { ChevronLeft } from 'react-feather';
+import PlotTransformation from '../components/pagesections/simplerPlotPage/PlotTransformation';
 
 // transition properties of the main component
 const mainTransitionStyles: any = {
@@ -56,7 +57,7 @@ const SimplePlot = () => {
           </MainSectionPlotPage>
         )}
       </Transition>
-
+      {/* <PlotTransformation /> */}
     </div>
   )
 }

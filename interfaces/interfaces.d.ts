@@ -46,6 +46,10 @@ interface IMainSectionProps {
   mainStyle: CSSProperties | string;
 }
 
+interface IPlotTransformation {
+  transformation: Transformation;
+  trnIndex: number;
+}
 interface ISideBarProps {
   children?: ReactNode;
   sideBarStyle?: CSSProperties | string;
@@ -56,6 +60,11 @@ interface ISideBarProps {
 interface IBottomTransformationProps {
   /** Tex transformation expression to be rendered */
   transformationExpression: string;
+}
+
+interface IPlotVectorsProps {
+  vectors: Vector[], 
+  plotIndex: number 
 }
 
 interface IBarItemProps {

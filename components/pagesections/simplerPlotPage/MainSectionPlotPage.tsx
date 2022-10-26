@@ -1,4 +1,5 @@
 import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
+import { evaluate } from "mathjs";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import { FunctionComponent, useEffect, useState } from "react";
@@ -12,14 +13,23 @@ import {
   ZoomIn,
   ZoomOut,
 } from "react-feather";
+import StateList from "../../../classes/stateList";
+import Transformation from "../../../classes/transformation";
 import { useD3Context, useListContext } from "../../../context";
+import useList from "../../../hooks/useList";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/simpleplot.module.css";
+import {
+  validateTransformationName,
+  validateTransformationValues,
+} from "../../../utils";
 import D3Plot from "../../d3/D3plot";
 import KeyboardIcon from "../../icons/KeyboardIcon";
 import RenderTex from "../../tex/RenderTex";
 import RoundButton from "../../ui/RoundButton";
+import TransformationForm from "../../ui/TransformationForm";
 import TransitionButton from "../../ui/TransitionButton";
+import PlotTransformation from "./PlotTransformation";
 import PlotVectors from "./PlotVectors";
 
 const btnClassName = `rounded-full h-10 w-10 right-0
@@ -33,21 +43,65 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
   mainStyle,
   children,
 }) => {
+  const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
   const router = useRouter();
-  const { list, stateVecArr } = useListContext();
+  const { list, setList, stateVecArr, setStateVecArr } = useListContext();
+  const { addTransformation, updateTransformation, removeTransformation } =
+    useList();
   const { hideNumbers, setHideNumbers } = useD3Context();
-  const [mode, setMode] = useState<Mode>("dark");
   const { theme, setTheme } = useTheme();
+  const [mode, setMode] = useState<Mode>("dark");
+  const [transformation, setTransformation] = useState(
+    stateVecArr.transformationArr[0]
+  );
   // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
 
+  /**
+   * Adds a new transformation to the list based on the matrix and name submited
+   */
+  const transfromationSubmitHandler = (event: any) => {
+    event.preventDefault();
+    const name = event.target.name.value
+      ? event.target.name.value
+      : `T_{${stateVecArr.vectorArr.length}}`;
+
+    // validate submited data
+    if (
+      !validateTransformationName(name) ||
+      !validateTransformationValues([
+        event.target.t0.value,
+        event.target.t2.value,
+        event.target.t1.value,
+        event.target.t3.value,
+      ])
+    ) {
+      alert("transformação inválida");
+      return;
+    }
+    const newHead = addTransformation(
+      new Transformation(
+        [evaluate(event.target.t0.value), evaluate(event.target.t2.value)],
+        [evaluate(event.target.t1.value), evaluate(event.target.t3.value)],
+        name
+      ),
+      transformation.name
+    );
+    const newList = new StateList(newHead);
+
+    // updates the list context
+    setList(newList);
+    setStateVecArr(list.toArray());
+    setToggleTrnInput(false);
+  };
+
   useEffect(() => {
-    // console.log("styles", styles.transformationarrow)
+    console.log("stateVecArr", stateVecArr.transformationArr.length);
   }, []);
 
   return (
     <main
       className="
-        mx-auto absolute h-3/4 right-0
+        mx-auto absolute h-full right-0
         flex justify-center items-center
       "
       id={styles.main}
@@ -97,17 +151,57 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
                           ]
                     }
                   >
-                    <aside className="flex flex-col items-center bg-neutral-100">
-                      <D3Plot index={i} />
-                      <PlotVectors vectors={vectors} key={i} />
+                    <aside className="flex items-center justify-center">
+                      <aside
+                        className="
+                          flex flex-col items-center 
+                          bg-neutral-100 rounded-md w-11/12
+                        "
+                      >
+                        <D3Plot index={i} />
+                        <PlotVectors vectors={vectors} plotIndex={i} key={i} />
+                      </aside>
                     </aside>
                   </ArcherElement>
                 </div>
               );
             })}
           </div>
+          <section className="flex justify-center">
+            <section
+              className="
+                rounded-md w-1/4 h-28 overflow-auto
+                flex flex-col items-center justify-center
+                bg-white border border-gray-400
+                text-sm shadow-md relative
+              "
+            >
+              {stateVecArr.transformationArr[1] ? (
+                <PlotTransformation
+                  transformation={stateVecArr.transformationArr[1]}
+                  trnIndex={1}
+                />
+              ) : (
+                <button
+                  onClick={() => {
+                    setToggleTrnInput(true);
+                  }}
+                >
+                  Adicionar transformação
+                </button>
+              )}
+              {toggleTrnInput && (
+                <TransformationForm
+                  onSubmit={transfromationSubmitHandler}
+                  updateOrCreate="create"
+                  matrixArr={transformation.e1.concat(transformation.e2)}
+                />
+              )}
+            </section>
+          </section>
         </ArcherContainer>
       </section>
+
       <section
         id={styles.rightsection}
         className="h-full flex items-center justify-between flex-col"

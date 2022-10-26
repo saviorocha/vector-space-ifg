@@ -55,7 +55,7 @@ const BottomBar = () => {
     event.preventDefault();
     const trnNameArr = matrixStrings();
     setCurrentPosition(
-      currentPosition === trnNameArr.length - 1 ? 0 : currentPosition + 1
+      currentPosition === trnNameArr.length - 1 ? 0 : currentPosition + 1 // "loop" validation
     );
     setCurrentTrnExpression(trnNameArr[currentPosition]);
   };
@@ -64,7 +64,7 @@ const BottomBar = () => {
     event.preventDefault();
     // validate input data...
     setTransformationVars([event.target.a.value, event.target.b.value]);
-    setToggleVarNameForm(false)
+    setToggleVarNameForm(false);
   };
 
   const handleKeyboardChange = (input: string) => {

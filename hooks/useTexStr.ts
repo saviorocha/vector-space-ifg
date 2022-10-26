@@ -13,8 +13,9 @@ const useTexStr = () => {
    * Returns a array with different string representations for a transformation
    * @returns KaTeX string array
    */
-  const matrixStrings = () => {
-    const transformation = stateVecArr.transformationArr[currentPlot];
+  const matrixStrings = (transformationIndex?: number) => {
+    const transformation =
+      stateVecArr.transformationArr[transformationIndex || currentPlot];
     const a = transformationVars[0];
     const b = transformationVars[1];
     return [
