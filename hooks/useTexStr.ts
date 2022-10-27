@@ -123,6 +123,8 @@ const useTexStr = () => {
    * @returns {Vector} New vector object
    */
   const vectorFromTex = (vectorStr: string): Vector | null => {
+    vectorStr = vectorStr.replace(/\s/g, ""); // removes white spaces
+
     const expression: string = vectorStr
       .replace("π", "pi")
       .replace("√", "sqrt")

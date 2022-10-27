@@ -60,7 +60,6 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
       ) : (
         <RenderTex
           mathExpression={expression}
-          title="Vetor resultante da aplicação da transformação T"
           handleDoubleClick={handleDoubleClick}
         />
       )}

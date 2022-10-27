@@ -59,7 +59,8 @@ interface ISideBarProps {
 
 interface IHoverableDivProp {
   children: ReactNode;
-  hoverText: string;
+  hoverText?: string;
+  hoverTexExpression?: string;
 }
 
 interface IBottomTransformationProps {

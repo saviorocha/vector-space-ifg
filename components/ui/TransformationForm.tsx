@@ -3,7 +3,7 @@ import { ITransformationFormProps } from "../../interfaces/interfaces";
 
 const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
   onSubmit,
-  matrixArr = [0, 0, 0, 0],
+  matrixArr = [1, 0, 0, 1],
 }) => {
   return (
     <form onSubmit={onSubmit}>

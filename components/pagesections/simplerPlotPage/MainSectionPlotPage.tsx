@@ -78,7 +78,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
         id={styles.middlesection}
         // className="h-full flex items-center justify-center"
         className={`
-          relative gap-1 overflow-scroll
+          relative gap-1 overflow-x-scroll overflow-y-hidden
           flex items-center ${justify} flex-row 
         `}
         // h-full overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0
