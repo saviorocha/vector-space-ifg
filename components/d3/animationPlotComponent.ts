@@ -61,6 +61,9 @@ class AnimationPlotComponent {
       .attr("id", "myYaxis");
   };
 
+  /**
+   * Recreates the lines with new vector values 
+   */
   updateData = (vecData: VectorData[][]) => {
     const defaultMax = 5;
     const defaultMin = -5;

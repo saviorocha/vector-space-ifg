@@ -46,7 +46,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
   };
 
   useEffect(() => {
-    console.log("stateVecArr", stateVecArr);
+    // console.log("stateVecArr", stateVecArr);
   }, [stateVecArr]);
 
   useEffect(() => {

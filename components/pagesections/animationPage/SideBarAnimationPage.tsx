@@ -11,22 +11,23 @@ const SideBarAnimationPage: FunctionComponent<ISideBarProps> = ({
 }) => {
   const { stateVecArr } = useListContext();
   return (
-    <SideBar
-      // className={sidebarClass}
-      sideBarRef={sideBarRef}
-      sideBarStyle={sideBarStyle}
-    >
-      {stateVecArr.transformationArr.map((trn, i) => {
-        return (
-          <aside key={i}>
-            <BarItemCalculation
-              transformation={trn}
-              vectors={stateVecArr.vectorArr[i]}
-            />
-          </aside>
-        );
-      })}
-    </SideBar>
+    // <SideBar
+    //   // className={sidebarClass}
+    //   sideBarRef={sideBarRef}
+    //   sideBarStyle={sideBarStyle}
+    // >
+    //   {stateVecArr.transformationArr.map((trn, i) => {
+    //     return (
+    //       <aside key={i}>
+    //         <BarItemCalculation
+    //           transformation={trn}
+    //           vectors={stateVecArr.vectorArr[i]}
+    //         />
+    //       </aside>
+    //     );
+    //   })}
+    // </SideBar>
+    <></>
   );
 };
 
