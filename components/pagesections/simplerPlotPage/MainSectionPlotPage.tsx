@@ -1,7 +1,7 @@
 import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
-import { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import { ArcherContainer, ArcherElement } from "react-archer";
 import { Globe, Hash, Settings } from "react-feather";
 import { useD3Context, useListContext } from "../../../context";
@@ -10,10 +10,7 @@ import { IMainSectionProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/simpleplot.module.css";
 import D3Plot from "../../d3/D3plot";
 import RenderTex from "../../tex/RenderTex";
-import InfoBox from "../../ui/InfoBox";
-import TransformationForm from "../../ui/TransformationForm";
 import TransitionButton from "../../ui/TransitionButton";
-import PlotTransformation from "./PlotTransformation";
 import PlotVectors from "./PlotVectors";
 import TransformationBar from "./TransformationBar";
 
@@ -28,34 +25,20 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
   mainStyle,
   children,
 }) => {
-  const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
   const router = useRouter();
   const { stateVecArr } = useListContext();
   const [trnNum, setTrnNum] = useState(stateVecArr.vectorArr.length);
-  const { transformationSubmitHandler } = useListEvents();
   const { hideNumbers, setHideNumbers } = useD3Context();
-  const [justify, setJustify] = useState("justify-around");
   const { theme, setTheme } = useTheme();
   const [mode, setMode] = useState<Mode>("dark");
-  const [transformation, setTransformation] = useState(
-    stateVecArr.transformationArr[0]
-  );
   // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
 
-  const handleTransfromationSubmit = (event: any) => {
-    transformationSubmitHandler(event, transformation);
-    setToggleTrnInput(false);
-  };
-
   useEffect(() => {
-    console.log("stateVecArr", stateVecArr);
+    // console.log("stateVecArr", stateVecArr);
   }, [stateVecArr]);
 
   useEffect(() => {
     setTrnNum(stateVecArr.vectorArr.length);
-    setTransformation(
-      stateVecArr.transformationArr[stateVecArr.transformationArr.length - 1]
-    );
   }, [stateVecArr]);
 
   return (
@@ -91,8 +74,8 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
           >
             {stateVecArr.vectorArr.map((vectors, i) => {
               return (
-                <>
-                  <div key={i}>
+                <React.Fragment key={i}>
+                  <div>
                     <ArcherElement
                       id={`element-${i}`}
                       relations={
@@ -139,7 +122,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
                   {i === 0 || i !== stateVecArr.vectorArr.length - 1 ? (
                     <TransformationBar numtest={i + 1} />
                   ) : null}
-                </>
+                </React.Fragment>
               );
             })}
           </div>
@@ -148,7 +131,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
 
       <section
         id={styles.rightsection}
-        className="h-full flex items-center justify-between flex-col"
+        className="h-full flex items-start flex-col"
       >
         <TransitionButton
           icon={<Settings className="text-gray-700 w-7 h-7" />}

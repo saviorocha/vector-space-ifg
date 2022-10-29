@@ -8,6 +8,7 @@ import useTexStr from "../../../hooks/useTexStr";
 import { IPlotVectorsProps } from "../../../interfaces/interfaces";
 import VectorTex from "../../tex/VectorTex";
 import HoverableComponent from "../../ui/HoverableComponent";
+import SimpleInput from "../../ui/SimpleInput";
 
 const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   vectors,
@@ -77,12 +78,13 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
             </button>
           </Tooltip>
           {toggleVecInput && (
-            <input
-              className="border border-slate-400 w-20"
-              onKeyDown={vectorSubmitHandler}
-              //   value={input}
-              //   onChange={(e) => onChangeInput(e)}
-            />
+            <SimpleInput />
+            // <input
+            //   className="border border-slate-400 w-20"
+            //   onKeyDown={vectorSubmitHandler}
+            //   //   value={input}
+            //   //   onChange={(e) => onChangeInput(e)}
+            // />
           )}
         </div>
       )}
