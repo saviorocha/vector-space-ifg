@@ -61,7 +61,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
   return (
     <main
       className={`
-        mx-auto absolute right-0 ${trnNum > 1 ? "mt-20" : "mt-5"}
+        mx-auto absolute right-0 ${trnNum > 1 ? "" : "mt-5"}
         flex justify-center items-center
       `}
       id={styles.main}
@@ -87,7 +87,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
           <div
             className={`flex ${
               trnNum === 1 ? "flex-col" : "flex-row"
-            } items-center`}
+            } items-center mb-20`} // mb-20
           >
             {stateVecArr.vectorArr.map((vectors, i) => {
               return (
@@ -143,43 +143,6 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
               );
             })}
           </div>
-          {/* <section className="flex justify-center">
-            {stateVecArr.transformationArr[1] ? ( // first transformation
-              <InfoBox>
-                <PlotTransformation
-                  transformation={stateVecArr.transformationArr[1]}
-                  trnIndex={1}
-                />
-                {toggleTrnInput && (
-                  <TransformationForm onSubmit={handleTransfromationSubmit} />
-                )}
-              </InfoBox>
-            ) : (
-              <InfoBox>
-                <button
-                  onClick={() => {
-                    setToggleTrnInput(true);
-                  }}
-                >
-                  Adicionar transformação
-                </button>
-                {toggleTrnInput && (
-                  <TransformationForm onSubmit={handleTransfromationSubmit} />
-                )}
-              </InfoBox>
-            )}
-            {stateVecArr.transformationArr[2] && ( // second transformation
-              <InfoBox>
-                <PlotTransformation
-                  transformation={stateVecArr.transformationArr[2]}
-                  trnIndex={2}
-                />
-                {toggleTrnInput && (
-                  <TransformationForm onSubmit={handleTransfromationSubmit} />
-                )}
-              </InfoBox>
-            )}
-          </section> */}
         </ArcherContainer>
       </section>
 
