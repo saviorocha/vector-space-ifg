@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 import StateList from "../classes/stateList";
 import Transformation from "../classes/transformation";
 import Vector from "../classes/vector";
@@ -73,6 +73,11 @@ interface IPlotVectorsProps {
   plotIndex: number 
 }
 
+interface IInforBox {
+  children: ReactNode;
+  customStyles?: string;
+}
+
 interface IBarItemProps {
   title: string;
   leftIcon: ReactElement;
@@ -88,6 +93,7 @@ interface IBarItemCalculationProps {
   transformation: Transformation;
   vectors: Vector[]
 }
+
 interface IRoundButton {
   icon: ReactElement;
   classString?: string;

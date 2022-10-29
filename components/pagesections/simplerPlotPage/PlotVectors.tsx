@@ -7,7 +7,7 @@ import useListEvents from "../../../hooks/useListEvents";
 import useTexStr from "../../../hooks/useTexStr";
 import { IPlotVectorsProps } from "../../../interfaces/interfaces";
 import VectorTex from "../../tex/VectorTex";
-import HoverableComponent from "../../ui/HoverableDiv";
+import HoverableComponent from "../../ui/HoverableComponent";
 
 const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   vectors,
@@ -43,7 +43,6 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
             <li key={i}>
               {plotIndex !== 0 ? (
                 <HoverableComponent
-                  hoverText="blablabla"
                   hoverTexExpression={vectorMatrixMultiplication(
                     stateVecArr.transformationArr[plotIndex],
                     vec

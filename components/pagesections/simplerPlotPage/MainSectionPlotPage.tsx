@@ -15,6 +15,7 @@ import TransformationForm from "../../ui/TransformationForm";
 import TransitionButton from "../../ui/TransitionButton";
 import PlotTransformation from "./PlotTransformation";
 import PlotVectors from "./PlotVectors";
+import TransformationBar from "./TransformationBar";
 
 const btnClassName = `rounded-full h-10 w-10 right-0
 flex items-center justify-center 
@@ -30,6 +31,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
   const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
   const router = useRouter();
   const { stateVecArr } = useListContext();
+  const [trnNum, setTrnNum] = useState(stateVecArr.vectorArr.length);
   const { transformationSubmitHandler } = useListEvents();
   const { hideNumbers, setHideNumbers } = useD3Context();
   const [justify, setJustify] = useState("justify-around");
@@ -46,13 +48,11 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
   };
 
   useEffect(() => {
-    // console.log("stateVecArr", stateVecArr);
+    console.log("stateVecArr", stateVecArr);
   }, [stateVecArr]);
 
   useEffect(() => {
-    setJustify(
-      `justify-${stateVecArr.transformationArr.length > 1 ? "start" : "around"}`
-    );
+    setTrnNum(stateVecArr.vectorArr.length);
     setTransformation(
       stateVecArr.transformationArr[stateVecArr.transformationArr.length - 1]
     );
@@ -60,10 +60,10 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
 
   return (
     <main
-      className="
-        mx-auto absolute h-full right-0
+      className={`
+        mx-auto absolute right-0 ${trnNum > 1 ? "mt-20" : "mt-5"}
         flex justify-center items-center
-      "
+      `}
       id={styles.main}
       style={mainStyle}
     >
@@ -79,56 +79,72 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
         // className="h-full flex items-center justify-center"
         className={`
           relative gap-1 overflow-x-scroll overflow-y-hidden
-          flex items-center ${justify} flex-row 
+          flex items-center justify-${trnNum > 1 ? "start" : "around"} flex-row 
         `}
         // h-full overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0
       >
         <ArcherContainer>
-          <div className="flex flex-row items-center">
+          <div
+            className={`flex ${
+              trnNum === 1 ? "flex-col" : "flex-row"
+            } items-center`}
+          >
             {stateVecArr.vectorArr.map((vectors, i) => {
               return (
-                <div key={i} className="mr-20">
-                  <ArcherElement
-                    id={`element-${i}`}
-                    relations={
-                      i === stateVecArr.vectorArr.length - 1
-                        ? undefined
-                        : [
-                            {
-                              targetId: `element-${i + 1}`,
-                              targetAnchor: "left",
-                              sourceAnchor: "right",
-                              style: { strokeColor: "black", strokeWidth: 1 },
-                              label: (
-                                <RenderTex
-                                  mathExpression={`${
-                                    stateVecArr.transformationArr[i + 1].name
-                                  }`}
-                                  classStyle={styles.transformationarrow}
-                                />
-                              ),
-                            },
-                          ]
-                    }
-                  >
-                    <aside className="flex items-center justify-center">
+                <>
+                  <div key={i}>
+                    <ArcherElement
+                      id={`element-${i}`}
+                      relations={
+                        i === stateVecArr.vectorArr.length - 1
+                          ? undefined
+                          : [
+                              {
+                                targetId: `element-${i + 1}`,
+                                targetAnchor: "left",
+                                sourceAnchor: "right",
+                                style: { strokeColor: "black", strokeWidth: 1 },
+                                label: (
+                                  <RenderTex
+                                    mathExpression={`${
+                                      stateVecArr.transformationArr[i + 1].name
+                                    }`}
+                                    classStyle={styles.transformationarrow}
+                                  />
+                                ),
+                              },
+                            ]
+                      }
+                    >
                       <aside
-                        className="
+                        id="plot-aside"
+                        className="flex items-center justify-center"
+                      >
+                        <aside
+                          className="
                           flex flex-col items-center 
                           bg-neutral-100 rounded-md w-11/12
                         "
-                      >
-                        <D3Plot index={i} />
-                        <PlotVectors vectors={vectors} plotIndex={i} key={i} />
+                        >
+                          <D3Plot index={i} />
+                          <PlotVectors
+                            vectors={vectors}
+                            plotIndex={i}
+                            key={i}
+                          />
+                        </aside>
                       </aside>
-                    </aside>
-                  </ArcherElement>
-                </div>
+                    </ArcherElement>
+                  </div>
+                  {i === 0 || i !== stateVecArr.vectorArr.length - 1 ? (
+                    <TransformationBar numtest={i + 1} />
+                  ) : null}
+                </>
               );
             })}
           </div>
-          <section className="flex justify-center">
-            {stateVecArr.transformationArr[1] ? (
+          {/* <section className="flex justify-center">
+            {stateVecArr.transformationArr[1] ? ( // first transformation
               <InfoBox>
                 <PlotTransformation
                   transformation={stateVecArr.transformationArr[1]}
@@ -152,7 +168,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
                 )}
               </InfoBox>
             )}
-            {stateVecArr.transformationArr[2] && (
+            {stateVecArr.transformationArr[2] && ( // second transformation
               <InfoBox>
                 <PlotTransformation
                   transformation={stateVecArr.transformationArr[2]}
@@ -163,7 +179,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
                 )}
               </InfoBox>
             )}
-          </section>
+          </section> */}
         </ArcherContainer>
       </section>
 

@@ -1,6 +1,6 @@
 #main {
   /* remember to configure later to be responsive */
-  margin-top: 10px;
+  /* margin-top: 10px; */
   /* width: 82%; */
   /* margin-left: 40px; */
 }
@@ -10,7 +10,7 @@
 }
 
 #middlesection {
-  width: 80%;
+  width: 100%;
 }
 
 #rightsection {
