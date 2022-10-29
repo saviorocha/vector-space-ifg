@@ -1,5 +1,5 @@
 import { Tooltip } from "@mui/material";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Plus } from "react-feather";
 import { useListContext, useNameContext } from "../../../context";
 import useListEvents from "../../../hooks/useListEvents";
@@ -9,11 +9,27 @@ import VectorTex from "../../tex/VectorTex";
  * Component for showing on the bottom bar the vectors referent to the current transformation state
  */
 const BottomVectors = () => {
-  const [toggleVecInput, setToggleVecInput] = useState(false);
+  const inputRef = useRef(null);
 
   const { currentPlot } = useNameContext();
   const { stateVecArr } = useListContext();
   const { vectorSubmitHandler } = useListEvents();
+
+  const handleVectorInputSubmit = (event: any) => {
+    if (event.key === "Enter") {
+      vectorSubmitHandler(event.target.value);
+      event.target.value = "";
+    }
+  };
+
+  const handleVectorBtnSubmit = () => {
+    if (inputRef.current) {
+      // @ts-ignore
+      vectorSubmitHandler(inputRef.current.value);
+      // @ts-ignore
+      inputRef.current.value = "";
+    }
+  };
 
   return (
     <>
@@ -32,25 +48,23 @@ const BottomVectors = () => {
       </ul>
 
       {currentPlot === 0 && (
-        <Tooltip title="Adicionar um novo vetor">
-          <button
-            className="absolute bottom-1 left-1"
-            onClick={() => {
-              setToggleVecInput(!toggleVecInput);
-            }}
-          >
-            <Plus />
-          </button>
-        </Tooltip>
-      )}
-
-      {toggleVecInput && currentPlot === 0 && (
-        <input
-          className="border border-slate-400"
-          onKeyDown={vectorSubmitHandler}
-          //   value={input}
-          //   onChange={(e) => onChangeInput(e)}
-        />
+        <footer>
+          <input
+            className="border border-slate-400"
+            onKeyDown={handleVectorInputSubmit}
+            ref={inputRef}
+            //   value={input}
+            //   onChange={(e) => onChangeInput(e)}
+          />
+          <Tooltip title="Adicionar um novo vetor">
+            <button
+              className="absolute bottom-1 left-1"
+              onClick={handleVectorBtnSubmit}
+            >
+              <Plus />
+            </button>
+          </Tooltip>
+        </footer>
       )}
     </>
   );

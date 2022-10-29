@@ -21,24 +21,20 @@ const useListEvents = () => {
   /**
    * Adds a new vector to the list
    */
-  const vectorSubmitHandler = (event: any) => {
-    if (event.key === "Enter") {
-      // triggered by enter key
-      const newVector = vectorFromTex(event.target.value);
+  const vectorSubmitHandler = (vectorStr: string) => {
+    // triggered by enter key
+    const newVector = vectorFromTex(vectorStr);
 
-      if (!newVector) {
-        alert("nome ou valores do vetor inválidos");
-        return;
-      }
-      const newHead = addVector(newVector);
-      const newList = new StateList(newHead);
-
-      // updates list
-      setList(newList);
-      setStateVecArr(newList.toArray());
-
-      event.target.value = "";
+    if (!newVector) {
+      alert("nome ou valores do vetor inválidos");
+      return;
     }
+    const newHead = addVector(newVector);
+    const newList = new StateList(newHead);
+
+    // updates list
+    setList(newList);
+    setStateVecArr(newList.toArray());
   };
 
   const vectorDeleteHandler = (vectorName: string) => {

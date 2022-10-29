@@ -66,8 +66,8 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
       {!vectorName.includes("e_{1}") &&
       !vectorName.includes("e_{2}") &&
       currentPlot === 0 ? (
-        <button onClick={() => vectorDeleteHandler(vectorName)}>
-          <Trash2 />
+        <button onClick={() => vectorDeleteHandler(vectorName)} className="ml-1">
+          <Trash2 size={19} />
         </button>
       ) : null}
     </div>
