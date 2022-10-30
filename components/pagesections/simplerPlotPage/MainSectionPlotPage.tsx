@@ -68,9 +68,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
       >
         <ArcherContainer>
           <div
-            className={`flex ${
-              trnNum === 1 ? "flex-col" : "flex-row"
-            } items-center mb-20`} // mb-20
+            className={`flex flex-row items-center mb-20`} // mb-20
           >
             {stateVecArr.vectorArr.map((vectors, i) => {
               return (

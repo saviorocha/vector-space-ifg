@@ -36,8 +36,6 @@ const TransformationBar = ({ numtest = 0 }) => {
       }`}
     >
       {stateVecArr.transformationArr.length > 1 ? (
-        // o primeiro: ou o botão ou a transformação posição um
-        // o segundo: a transformação de posição n
         <InfoBox customStyles="w-60 h-32">
           <PlotTransformation
             transformation={stateVecArr.transformationArr[numtest]}
