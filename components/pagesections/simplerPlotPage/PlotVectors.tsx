@@ -39,11 +39,11 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
     <div
       className="
         rounded-md w-1/2 h-24
-        flex flex-col items-center justify-center
+        flex flex-col items-center justify-between
         bg-white border border-gray-400
         text-sm shadow-md"
     >
-      <ul className="overflow-scroll">
+      <ul className="overflow-scroll" id={styles.vectorlist}>
         {vectors.map((vec: Vector, i: number) => {
           return (
             <li key={i}>
