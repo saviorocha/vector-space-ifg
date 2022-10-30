@@ -1,20 +1,21 @@
 #main {
   /* remember to configure later to be responsive */
-  margin-top: 10px;
+  /* margin-top: 10px; */
   /* width: 82%; */
   /* margin-left: 40px; */
 }
 
 #leftsection {
-  width: 10%;
+  width: 5%;
 }
 
 #middlesection {
-  width: 80%;
+  width: 100%;
+  height: 100vh;
 }
 
 #rightsection {
-  width: 10%;
+  width: 5%;
 }
 
 .settings {

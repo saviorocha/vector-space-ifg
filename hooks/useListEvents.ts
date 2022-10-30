@@ -1,10 +1,10 @@
 import { evaluate } from "mathjs";
 import StateList from "../classes/stateList";
 import Transformation from "../classes/transformation";
-import { useListContext } from "../context";
+import { useListContext, useNameContext } from "../context";
 import {
   validateTransformationName,
-  validateTransformationValues
+  validateTransformationValues,
 } from "../utils";
 import useList from "./useList";
 import useTexStr from "./useTexStr";
@@ -13,30 +13,28 @@ const useListEvents = () => {
   const { vectorFromTex } = useTexStr();
   const { addVector, removeVector, updateVector } = useList();
   const { list, setList, stateVecArr, setStateVecArr } = useListContext();
+  const { transformationNameCounter, setTransformationNameCounter } =
+    useNameContext();
   const { addTransformation, updateTransformation, removeTransformation } =
     useList();
 
   /**
    * Adds a new vector to the list
    */
-  const vectorSubmitHandler = (event: any) => {
-    if (event.key === "Enter") {
-      // triggered by enter key
-      const newVector = vectorFromTex(event.target.value);
+  const vectorSubmitHandler = (vectorStr: string) => {
+    // triggered by enter key
+    const newVector = vectorFromTex(vectorStr);
 
-      if (!newVector) {
-        alert("nome ou valores do vetor inválidos");
-        return;
-      }
-      const newHead = addVector(newVector);
-      const newList = new StateList(newHead);
-
-      // updates list
-      setList(newList);
-      setStateVecArr(newList.toArray());
-
-      event.target.value = "";
+    if (!newVector) {
+      alert("nome ou valores do vetor inválidos");
+      return;
     }
+    const newHead = addVector(newVector);
+    const newList = new StateList(newHead);
+
+    // updates list
+    setList(newList);
+    setStateVecArr(newList.toArray());
   };
 
   const vectorDeleteHandler = (vectorName: string) => {
@@ -71,7 +69,7 @@ const useListEvents = () => {
     event.preventDefault();
     const name = event.target.name.value
       ? event.target.name.value
-      : `T_{${stateVecArr.vectorArr.length}}`;
+      : `T_{${transformationNameCounter}}`;
 
     // validate submited data
     if (
@@ -99,6 +97,7 @@ const useListEvents = () => {
     // updates the list context
     setList(newList);
     setStateVecArr(list.toArray());
+    setTransformationNameCounter(() => transformationNameCounter + 1);
   };
 
   /**

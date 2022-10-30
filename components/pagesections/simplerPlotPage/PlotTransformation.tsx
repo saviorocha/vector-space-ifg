@@ -107,7 +107,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
         </Tooltip>
       </button>
       <button className="absolute top-1 right-1" onClick={changeDefinition}>
-        <Tooltip title="Excluir transformação">
+        <Tooltip title="Trocar definição">
           <RotateCcw />
         </Tooltip>
       </button>

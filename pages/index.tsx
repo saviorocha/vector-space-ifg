@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import HoverableComponent from "../components/ui/HoverableDiv";
+import HoverableComponent from "../components/ui/HoverableComponent";
 
 const Home: NextPage = () => {
   return (

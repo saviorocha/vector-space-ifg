@@ -30,7 +30,6 @@ const D3PlotAnimation = () => {
 
     let scales = [];
     for (let i = 0; i < trnNumber; i++) {
-      // console.log(i);
       scales.push(d3.scaleLinear().range([i * range, range + i * range]));
     }
 
