@@ -1,5 +1,5 @@
 .hoverdiv {
-  width: 240px;
+  width: 280px;
   padding: 15px;
   font-size: 15px;
   border: 1px solid #bdbdbd;
@@ -20,7 +20,7 @@
   overflow: hidden;
 }
 
-.hoverdiv:after {
+/* .hoverdiv:after {
   content: "";
   position: absolute;
   margin-top: 180px;
@@ -31,7 +31,7 @@
   transform: rotate(-90deg);
   left: -15px;
   top: 10px;
-}
+} */
 
 @keyframes fadeInOpacity {
   0% {

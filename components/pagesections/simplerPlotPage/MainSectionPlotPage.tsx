@@ -118,7 +118,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
                     </ArcherElement>
                   </div>
                   {i === 0 || i !== stateVecArr.vectorArr.length - 1 ? (
-                    <TransformationBar numtest={i + 1} />
+                    <TransformationBar transformationNum={i + 1} />
                   ) : null}
                 </React.Fragment>
               );

@@ -38,18 +38,7 @@ const useD3Events = () => {
         // (Math.round(num * 100) / 100).toFixed(2); - 1.34252 -> 1.34
         const newHead = addVector(
           new Vector(
-            [
-              parseFloat(
-                (Math.round(clickX(d3.pointer(event)[0]) * 100) / 100).toFixed(
-                  2
-                )
-              ),
-              parseFloat(
-                (Math.round(clickY(d3.pointer(event)[1]) * 100) / 100).toFixed(
-                  2
-                )
-              ),
-            ],
+            [clickX(d3.pointer(event)[0]), clickY(d3.pointer(event)[1])],
             `v_{${vectorNameCounter}}`
             // "#bb00ff"
           )

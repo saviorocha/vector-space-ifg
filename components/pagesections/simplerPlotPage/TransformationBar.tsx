@@ -5,7 +5,7 @@ import InfoBox from "../../ui/InfoBox";
 import TransformationForm from "../../ui/TransformationForm";
 import PlotTransformation from "./PlotTransformation";
 
-const TransformationBar = ({ numtest = 0 }) => {
+const TransformationBar = ({ transformationNum = 0 }) => {
   const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
   const { transformationSubmitHandler } = useListEvents();
   const { stateVecArr } = useListContext();
@@ -38,8 +38,8 @@ const TransformationBar = ({ numtest = 0 }) => {
       {stateVecArr.transformationArr.length > 1 ? (
         <InfoBox customStyles="w-60 h-32">
           <PlotTransformation
-            transformation={stateVecArr.transformationArr[numtest]}
-            trnIndex={numtest}
+            transformation={stateVecArr.transformationArr[transformationNum]}
+            trnIndex={transformationNum}
           />
           {toggleTrnInput && (
             <TransformationForm onSubmit={handleTransfromationSubmit} />

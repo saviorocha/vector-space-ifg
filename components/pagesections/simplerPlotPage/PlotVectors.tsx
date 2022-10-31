@@ -38,7 +38,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   return (
     <div
       className="
-        rounded-md w-3/5 h-24
+        rounded-md w-full h-36
         flex flex-col items-center justify-between
         bg-white border border-gray-400
         text-sm shadow-md"
@@ -74,6 +74,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
       {plotIndex === 0 && (
         <footer className={styles.inputcontainer}>
           <input
+            placeholder="Inserir vetor"
             ref={inputRef}
             className={styles.inp}
             onKeyDown={handleVectorInputSubmit}

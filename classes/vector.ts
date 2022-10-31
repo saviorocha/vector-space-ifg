@@ -12,6 +12,7 @@ class Vector {
     color: string = "",
     _prevVector?: Vector
   ) {
+    array = [parseFloat(array[0].toFixed(2)), parseFloat(array[1].toFixed(2))];
     this._array = array;
     this.x = array[0];
     this.y = array[1];
