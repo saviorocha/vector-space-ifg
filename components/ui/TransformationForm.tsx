@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { ITransformationFormProps } from "../../interfaces/interfaces";
+import styles from "../../styles/modules/input.module.css"
 
 const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
   onSubmit,
@@ -11,7 +12,7 @@ const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
         return (
           <React.Fragment key={i}>
             <input
-              className="border-2 border-slate-400 w-10"
+              className={styles.inptrn}
               // type="number"
               id={`t${i}`}
               defaultValue={el}
@@ -23,7 +24,7 @@ const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
 
       <br />
       <input
-        className="border-2 border-slate-400 w-10"
+        className={styles.inptrn}
         type="text"
         id="name"
         name="name"

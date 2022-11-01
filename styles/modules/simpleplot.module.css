@@ -18,6 +18,15 @@
   width: 5%;
 }
 
+.configicon {
+  width: 50px;
+  margin-right: 5px;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .settings {
   position: absolute;
   border-radius: 0.375rem;

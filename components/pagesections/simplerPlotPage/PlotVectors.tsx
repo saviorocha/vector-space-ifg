@@ -76,7 +76,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
           <input
             placeholder="Inserir vetor"
             ref={inputRef}
-            className={styles.inp}
+            className={styles.inpvec}
             onKeyDown={handleVectorInputSubmit}
             //   value={input}
             //   onChange={(e) => onChangeInput(e)}

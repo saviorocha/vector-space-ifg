@@ -90,6 +90,7 @@ class StateList {
   }
 
   updateNodes() {
+    
     let currentNode: StateNode | null = this.head._next;
     
     if (!currentNode) {

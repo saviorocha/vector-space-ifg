@@ -3,14 +3,13 @@ import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { ArcherContainer, ArcherElement } from "react-archer";
-import { Globe, Hash, Settings } from "react-feather";
+import { Feather, Globe, Hash } from "react-feather";
 import { useD3Context, useListContext } from "../../../context";
-import useListEvents from "../../../hooks/useListEvents";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/simpleplot.module.css";
 import D3Plot from "../../d3/D3plot";
 import RenderTex from "../../tex/RenderTex";
-import TransitionButton from "../../ui/TransitionButton";
+import ConfigPopup from "../../ui/ConfigPopup";
 import PlotVectors from "./PlotVectors";
 import TransformationBar from "./TransformationBar";
 
@@ -131,53 +130,58 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
         id={styles.rightsection}
         className="h-full flex items-start flex-col"
       >
-        <TransitionButton
-          icon={<Settings className="text-gray-700 w-7 h-7" />}
-          sectionStyle={styles.settings}
-          buttonStyle="z-10"
-          transitionStyles={{
-            entering: { opacity: 0 },
-            entered: { opacity: 1 },
-            exiting: { opacity: 1 },
-            exited: { opacity: 0 },
-          }}
-        >
+        <ConfigPopup>
           <ul className="mt-3 ">
-            <li className="flex items-center justify-start ml-2 p-1">
-              <DarkModeToggle
-                mode={mode}
-                size="sm"
-                inactiveTrackColor="#e2e8f0"
-                inactiveTrackColorOnHover="#f8fafc"
-                inactiveTrackColorOnActive="#cbd5e1"
-                activeTrackColor="#334155"
-                activeTrackColorOnHover="#1e293b"
-                activeTrackColorOnActive="#0f172a"
-                inactiveThumbColor="#1e293b"
-                activeThumbColor="#e2e8f0"
-                onChange={(mode) => {
-                  setMode(mode);
-                  setTheme(theme === "dark" ? "light" : "dark");
-                }}
-              />
-              Tema
+            <li>
+              <div className={styles.configicon}>
+                <DarkModeToggle
+                  mode={mode}
+                  size="sm"
+                  inactiveTrackColor="#e2e8f0"
+                  inactiveTrackColorOnHover="#f8fafc"
+                  inactiveTrackColorOnActive="#cbd5e1"
+                  activeTrackColor="#334155"
+                  activeTrackColorOnHover="#1e293b"
+                  activeTrackColorOnActive="#0f172a"
+                  inactiveThumbColor="#1e293b"
+                  activeThumbColor="#e2e8f0"
+                  onChange={(mode) => {
+                    setMode(mode);
+                    setTheme(theme === "dark" ? "light" : "dark");
+                  }}
+                />
+              </div>
+              <p>Tema</p>
             </li>
-            <li className="flex items-center justify-start ml-2 p-1">
-              <Globe />
-              Grid
+            <li>
+              <div className={styles.configicon}>
+                <Globe />
+              </div>
+              <p>Mostrar linhas grid</p>
             </li>
             <li
-              className="flex items-center justify-start ml-2 p-1"
               id="toggle-numbers"
               onClick={() => {
                 setHideNumbers(!hideNumbers);
               }}
             >
-              <Hash />
-              Mostrar números
+              <div className={styles.configicon}>
+                <Hash />
+              </div>
+              <p>Mostrar números</p>
+            </li>
+            <li>
+              <div className={styles.configicon}>
+                <Feather />
+              </div>
+              <p>Configurar casas decimais</p>
+            </li>
+            <li>
+            <div className={styles.configicon}><Feather /></div>
+              <p>Incluir vetores canônicos</p>
             </li>
           </ul>
-        </TransitionButton>
+        </ConfigPopup>
 
         {/* <div
           id="bottom-buttons"
