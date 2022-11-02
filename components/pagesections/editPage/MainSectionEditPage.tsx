@@ -1,6 +1,7 @@
 import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
+import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useState } from "react";
 import {
   Globe,
   Hash,
@@ -8,18 +9,16 @@ import {
   Play,
   Settings,
   ZoomIn,
-  ZoomOut,
+  ZoomOut
 } from "react-feather";
-import { useD3Context, useListContext, useNameContext } from "../../../context";
+import { useListContext } from "../../../context";
+import { useConfigContext } from "../../../context/ConfigContext";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/editpage.module.css";
 import D3Plot from "../../d3/D3plot";
-import { useTheme } from "next-themes";
 import Carousel, { CarouselItem } from "../../ui/Carousel";
-import { ArcherContainer, ArcherElement } from "react-archer";
 import RoundButton from "../../ui/RoundButton";
 import TransitionButton from "../../ui/TransitionButton";
-import RenderTex from "../../tex/RenderTex";
 
 const btnClassName = `rounded-full h-10 w-10 right-0
 flex items-center justify-center 
@@ -34,7 +33,7 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
 }) => {
   const router = useRouter();
   const { list, stateVecArr } = useListContext();
-  const { hideNumbers, setHideNumbers } = useD3Context();
+  const { hideNumbers, setHideNumbers } = useConfigContext();
   const [mode, setMode] = useState<Mode>("dark");
   const { theme, setTheme } = useTheme();
   // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
@@ -64,7 +63,7 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
         "
         // h-full overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0
       >
-          <Carousel>
+        <Carousel>
           {stateVecArr.vectorArr.map((vec, i) => {
             return (
               <CarouselItem key={i}>

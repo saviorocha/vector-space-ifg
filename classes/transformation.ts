@@ -17,8 +17,8 @@ class Transformation {
     this._e1 = _e1;
     this._e2 = _e2;
     this._name = _name;
-    this._e1Vector = new Vector(this._e1, "e_{1}", "red");
-    this._e2Vector = new Vector(this._e2, "e_{2}", "blue");
+    this._e1Vector = new Vector(this._e1, "e_{1}", "red", true);
+    this._e2Vector = new Vector(this._e2, "e_{2}", "blue", true);
     this._matrixTransformation = transpose(matrix([_e1, _e2])); // have to transpose to match mathjs matrix
   }
 
@@ -27,7 +27,13 @@ class Transformation {
       multiply(this._matrixTransformation, vector.array).get([0]),
       multiply(this._matrixTransformation, vector.array).get([1]),
     ];
-    return new Vector(coordinates, `${this._name}(${vector.name})`, "", vector);
+    return new Vector(
+      coordinates,
+      `${this._name}(${vector.name})`,
+      "",
+      vector.isBasisVector,
+      vector
+    );
   }
 
   get e1(): [number, number] {

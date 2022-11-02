@@ -9,31 +9,46 @@ import { IPlotVectorsProps } from "../../../interfaces/interfaces";
 import VectorTex from "../../tex/VectorTex";
 import HoverableComponent from "../../ui/HoverableComponent";
 import styles from "../../../styles/modules/input.module.css";
+import { useConfigContext } from "../../../context/ConfigContext";
 
 const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   vectors,
   plotIndex,
 }) => {
   const inputRef = useRef(null);
+  const [vectorRender, setVectorRender] = useState(vectors);
+  const { showBasisVectors } = useConfigContext();
   const { vectorSubmitHandler } = useListEvents();
   const { vectorMatrixMultiplication } = useTexStr();
   const { stateVecArr } = useListContext();
 
   const handleVectorInputSubmit = (event: any) => {
     if (event.key === "Enter") {
-      vectorSubmitHandler(event.target.value)
+      vectorSubmitHandler(event.target.value);
       event.target.value = "";
     }
-  }
+  };
 
   const handleVectorBtnSubmit = () => {
     if (inputRef.current) {
       // @ts-ignore
-      vectorSubmitHandler(inputRef.current.value)
+      vectorSubmitHandler(inputRef.current.value);
       // @ts-ignore
       inputRef.current.value = "";
     }
-  }
+  };
+
+  useEffect(() => {
+    if (!showBasisVectors) {
+      setVectorRender(
+        vectors.filter((vector: Vector) => {
+          return !vector.isBasisVector;
+        })
+      );
+    } else {
+      setVectorRender(vectors);
+    }
+  }, [showBasisVectors]);
 
   return (
     <div
@@ -44,7 +59,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
         text-sm shadow-md"
     >
       <ul className="overflow-scroll" id={styles.vectorlist}>
-        {vectors.map((vec: Vector, i: number) => {
+        {vectorRender.map((vec: Vector, i: number) => {
           return (
             <li key={i}>
               {plotIndex !== 0 ? (

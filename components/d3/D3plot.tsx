@@ -4,6 +4,8 @@ import { useD3Context, useListContext, useNameContext } from "../../context";
 import { IPlotProps } from "../../interfaces/interfaces";
 import PlotComponent from "./plotComponent";
 import styles from "../../styles/modules/D3.module.css";
+import { useConfigContext } from "../../context/ConfigContext";
+import Vector from "../../classes/vector";
 
 const D3Plot: FunctionComponent<IPlotProps> = ({ index }) => {
   const refElement = useRef<null | HTMLDivElement>(null);
@@ -11,17 +13,26 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index }) => {
     {} as PlotComponent
   );
 
-  const { dimension, events, hideNumbers } = useD3Context();
+  const { hideNumbers, showBasisVectors } = useConfigContext();
+  const { dimension, events } = useD3Context();
   const { stateVecArr } = useListContext();
-  const { currentPlot } = useNameContext()
+  const { currentPlot } = useNameContext();
 
-  useEffect(initD3, [stateVecArr, events]);
+  useEffect(initD3, [stateVecArr, events, hideNumbers, showBasisVectors]);
+
 
   function initD3() {
     const section = d3.select(refElement.current);
 
-    const vectors = stateVecArr.vectorArr[index].map((state) => {
-      return state.d3VectorFormat();
+    let vectorsMap = stateVecArr.vectorArr[index];
+    if (!showBasisVectors) { // filter out the basis vectors
+      vectorsMap = vectorsMap.filter((vector: Vector) => {
+        return !vector.isBasisVector;
+      });
+    }
+
+    const vectors = vectorsMap.map((vector) => {
+      return vector.d3VectorFormat();
     });
 
     setD3Component(

@@ -1,3 +1,5 @@
+import { useConfigContext } from "../context/ConfigContext";
+
 class Vector {
   x: number;
   y: number;
@@ -5,11 +7,13 @@ class Vector {
   private _array: [number, number];
   private color: string;
   private _prevVector: Vector | undefined;
+  private _isBasisVector: boolean;
 
   constructor(
     array: [number, number],
     _name: string = "v1",
     color: string = "",
+    isBasisVector: boolean = false,
     _prevVector?: Vector
   ) {
     array = [parseFloat(array[0].toFixed(2)), parseFloat(array[1].toFixed(2))];
@@ -19,6 +23,7 @@ class Vector {
     this._name = _name;
     this._prevVector = _prevVector || undefined;
     this.color = color;
+    this._isBasisVector = isBasisVector;
   }
 
   get array(): [number, number] {
@@ -35,6 +40,10 @@ class Vector {
 
   get prevVector(): Vector | undefined {
     return this._prevVector;
+  }
+
+  get isBasisVector(): boolean {
+    return this._isBasisVector;
   }
 
   /**
