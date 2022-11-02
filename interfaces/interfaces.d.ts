@@ -20,8 +20,6 @@ interface IContextD3 {
   setMargin: Dispatch<SetStateAction<Margin>>;
   events: EventFunction[] | [];
   setEvents: Dispatch<SetStateAction<EventFunction[] | []>>;
-  hideNumbers: boolean;
-  setHideNumbers: Dispatch<SetStateAction<boolean>>;
 }
 
 interface IContextName {
@@ -33,6 +31,17 @@ interface IContextName {
   setTransformationNameCounter: Dispatch<SetStateAction<number>>;
   transformationVars: [string, string];
   setTransformationVars: Dispatch<SetStateAction<[string, string]>>;
+}
+
+interface IContextConfig {
+  showGridLines: boolean;
+  setShowGridLines: Dispatch<SetStateAction<boolean>>;
+  hideNumbers: boolean;
+  setHideNumbers: Dispatch<SetStateAction<boolean>>;
+  decimalPoint: number;
+  setDecimalPoint: Dispatch<SetStateAction<boolean>>;
+  showBasisVectors: boolean;
+  setShowBasisVectors: Dispatch<SetStateAction<boolean>>;
 }
 
 interface IPlotProps {
@@ -69,8 +78,8 @@ interface IBottomTransformationProps {
 }
 
 interface IPlotVectorsProps {
-  vectors: Vector[], 
-  plotIndex: number 
+  vectors: Vector[];
+  plotIndex: number;
 }
 
 interface IInforBox {
@@ -91,7 +100,7 @@ interface IBarItemProps {
 
 interface IBarItemCalculationProps {
   transformation: Transformation;
-  vectors: Vector[]
+  vectors: Vector[];
 }
 
 interface IRoundButton {
@@ -126,7 +135,7 @@ interface IVectorTexProps {
   vectorExpression: string;
   /** Name of the vector being rendered; used in the component logic */
   vectorName: string;
-  currentPlot: number
+  currentPlot: number;
 }
 
 interface ITransformationFormProps {

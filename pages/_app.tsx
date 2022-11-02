@@ -6,18 +6,21 @@ import {
   ListContextProvider,
   NameContextProvider,
 } from "../context";
+import ConfigContextProvider from "../context/ConfigContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ListContextProvider>
-      <NameContextProvider>
-        <D3ContextProvider>
-          <ThemeProvider attribute="class" defaultTheme="light">
-            <Component {...pageProps} />
-          </ThemeProvider>
-        </D3ContextProvider>
-      </NameContextProvider>
-    </ListContextProvider>
+    <ConfigContextProvider>
+      <ListContextProvider>
+        <NameContextProvider>
+          <D3ContextProvider>
+            <ThemeProvider attribute="class" defaultTheme="light">
+              <Component {...pageProps} />
+            </ThemeProvider>
+          </D3ContextProvider>
+        </NameContextProvider>
+      </ListContextProvider>
+    </ConfigContextProvider>
   );
 }
 
