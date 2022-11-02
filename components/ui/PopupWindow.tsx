@@ -7,8 +7,19 @@ const PopupWindow: FunctionComponent<PropsChildren> = ({ children }) => {
   const [isActive, setIsActive] = useState(false);
   return (
     <>
-      {isActive && <section className={styles.configpopup}>{children}</section>}
-      <button className="z-10" onClick={() => setIsActive(!isActive)}>
+      <section
+        className={styles.configpopup}
+        style={{
+          visibility: isActive ? "hidden" : "visible",
+          opacity: isActive ? 0 : 1,
+        }}
+      >
+        {children}
+      </section>
+      <button
+        className="z-10 absolute top-0"
+        onClick={() => setIsActive(!isActive)}
+      >
         <Settings size={35} />
       </button>
     </>

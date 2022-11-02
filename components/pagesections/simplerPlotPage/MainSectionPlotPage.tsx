@@ -122,33 +122,9 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
 
       <section
         id={stylesplot.rightsection}
-        className="h-full flex items-start flex-col"
+        className="h-screen flex items-start flex-col"
       >
         <ConfigPopup />
-
-        {/* <div
-          id="bottom-buttons"
-          className="flex items-center justify-center flex-col"
-        >
-          <RoundButton
-            classString={btnClassName}
-            icon={<Play className="text-gray-700" />}
-            handleOnClick={() => {
-              router.push("/animationplane");
-            }}
-          />
-          <KeyboardIcon />
-          <button
-            onClick={handleResetList}
-            className="
-              rounded-full h-12 w-12 
-              
-              bg-gray-50 bg-opacity-75 border border-gray-200 
-            "
-          >
-            <Trash className="text-gray-700" />
-          </button>
-        </div> */}
       </section>
     </main>
   );
