@@ -1,5 +1,5 @@
 .configpopup {
-  width: 20rem;
+  width: 22rem;
   height: 13rem;
   border-radius: 1em;
   border: 2px solid #ededed;
@@ -9,13 +9,12 @@
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-    filter: invert(2px);
+  filter: invert(2px);
   transition: all 0.15s ease;
 }
 
 .configpopup li:hover {
   background-color: #ededed;
-  cursor: pointer;
   /* filter: blur(2px); */
 }
 
@@ -25,9 +24,9 @@
   align-items: center;
 }
 
-.configpopup li {
+.popupitem {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   width: 90%;
   height: 100%;
   border-bottom: 1px solid #ededed;
@@ -37,4 +36,19 @@
 
 .configpopup li:last-child {
   border: none;
+}
+
+.configicon {
+  width: 50px;
+  margin-right: 5px;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.configcontrol {
+  width: 50px;
+  display: flex;
+  justify-content: center;
 }
