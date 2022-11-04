@@ -2,9 +2,11 @@ import React, { FunctionComponent, useState } from "react";
 import { Settings } from "react-feather";
 import { PropsChildren } from "../../interfaces/interfaces";
 import styles from "../../styles/modules/config.module.css";
+import { useTheme } from "next-themes";
 
 const PopupWindow: FunctionComponent<PropsChildren> = ({ children }) => {
   const [isActive, setIsActive] = useState(false);
+  const { theme } = useTheme();
   return (
     <>
       <section

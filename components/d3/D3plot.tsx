@@ -54,7 +54,7 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index }) => {
 
   return (
     <aside
-      className="text-center relative snap-start cursor-move"
+      className="text-center relative snap-start cursor-move "
       id={styles.plot}
       ref={refElement}
     ></aside>

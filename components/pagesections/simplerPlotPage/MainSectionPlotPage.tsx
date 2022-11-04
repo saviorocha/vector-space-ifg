@@ -1,3 +1,4 @@
+import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { ArcherContainer, ArcherElement } from "react-archer";
@@ -22,6 +23,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
   children,
 }) => {
   const router = useRouter();
+  const { theme } = useTheme();
   const { stateVecArr } = useListContext();
   const [trnNum, setTrnNum] = useState(stateVecArr.vectorArr.length);
   // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
@@ -77,7 +79,11 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
                                 targetId: `element-${i + 1}`,
                                 targetAnchor: "left",
                                 sourceAnchor: "right",
-                                style: { strokeColor: "black", strokeWidth: 1 },
+                                style: {
+                                  strokeColor:
+                                    theme === "dark" ? "white" : "black",
+                                  strokeWidth: 1,
+                                },
                                 label: (
                                   <RenderTex
                                     mathExpression={`${
@@ -98,6 +104,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
                           className="
                             flex flex-col items-center 
                             bg-neutral-100 rounded-md w-11/12
+                            dark:bg-black
                           "
                         >
                           <D3Plot index={i} />

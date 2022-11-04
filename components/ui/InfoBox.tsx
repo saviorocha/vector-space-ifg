@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
-import { IInforBox, PropsChildren } from "../../interfaces/interfaces";
+import { IInfoBox, PropsChildren } from "../../interfaces/interfaces";
 
-const InfoBox: FunctionComponent<IInforBox> = ({ children, customStyles }) => {
+const InfoBox: FunctionComponent<IInfoBox> = ({ children, customStyles }) => {
   return (
     <section
       className={`
@@ -9,6 +9,7 @@ const InfoBox: FunctionComponent<IInforBox> = ({ children, customStyles }) => {
         flex flex-col items-center justify-center
         bg-white border border-gray-400
         text-sm shadow-md relative
+        dark:bg-zinc-900 dark:border-neutral-600
         ${customStyles}
       `}
     >

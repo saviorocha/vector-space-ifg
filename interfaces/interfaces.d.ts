@@ -84,7 +84,7 @@ interface IPlotVectorsProps {
   plotIndex: number;
 }
 
-interface IInforBox {
+interface IInfoBox {
   children: ReactNode;
   customStyles?: string;
 }

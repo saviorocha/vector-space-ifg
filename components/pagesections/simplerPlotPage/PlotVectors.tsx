@@ -52,7 +52,9 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
         rounded-md w-full h-36
         flex flex-col items-center justify-between
         bg-white border border-gray-400
-        text-sm shadow-md"
+        text-sm shadow-md dark:bg-zinc-900 dark:border-neutral-600
+      "
+        
     >
       <ul className="overflow-scroll" id={styles.vectorlist}>
         {vectorRender.map((vec: Vector, i: number) => {
