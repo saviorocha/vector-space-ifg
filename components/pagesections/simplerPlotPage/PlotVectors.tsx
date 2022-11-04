@@ -39,16 +39,12 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   };
 
   useEffect(() => {
-    if (!showBasisVectors) {
-      setVectorRender(
-        vectors.filter((vector: Vector) => {
-          return !vector.isBasisVector;
-        })
-      );
-    } else {
-      setVectorRender(vectors);
-    }
-  }, [showBasisVectors]);
+    setVectorRender(
+      vectors.filter((vector: Vector) => {
+        return showBasisVectors ? vector : !vector.isBasisVector;
+      })
+    );
+  }, [showBasisVectors, vectors]);
 
   return (
     <div
