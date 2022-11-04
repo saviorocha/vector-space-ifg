@@ -42,6 +42,8 @@ interface IContextConfig {
   setDecimalPoint: Dispatch<SetStateAction<boolean>>;
   showBasisVectors: boolean;
   setShowBasisVectors: Dispatch<SetStateAction<boolean>>;
+  showMathSymbols: boolean;
+  setShowMathSymbols: Dispatch<SetStateAction<boolean>>;
 }
 
 interface IPlotProps {

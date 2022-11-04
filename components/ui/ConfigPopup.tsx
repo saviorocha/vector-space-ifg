@@ -16,6 +16,8 @@ const ConfigPopup = () => {
     setDecimalPoint,
     showGridLines,
     setShowGridLines,
+    showMathSymbols,
+    setShowMathSymbols,
   } = useConfigContext();
   const { theme, setTheme } = useTheme();
   const [mode, setMode] = useState<Mode>("dark");
@@ -66,7 +68,7 @@ const ConfigPopup = () => {
           <div className={stylesconfig.configicon}>
             <Hash />
           </div>
-          <p>Mostrar números</p>
+          <p>Mostrar números do gráfico</p>
           <div className={stylesconfig.configcontrol}>
             <input
               type="checkbox"
@@ -109,6 +111,21 @@ const ConfigPopup = () => {
             />
           </div>
         </li>
+        {/* <li className={stylesconfig.popupitem}>
+          <div className={stylesconfig.configicon}>
+            <Feather />
+          </div>
+          <p>Mostrar Símbolos</p>
+          <div className={stylesconfig.configcontrol}>
+            <input
+              type="checkbox"
+              checked={showMathSymbols}
+              onChange={() => {
+                setShowMathSymbols(!showMathSymbols);
+              }}
+            />
+          </div>
+        </li> */}
       </ul>
     </PopupWindow>
   );

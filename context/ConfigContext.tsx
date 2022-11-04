@@ -16,6 +16,7 @@ const ConfigContextProvider: FunctionComponent<PropsChildren> = ({
   const [showGridLines, setShowGridLines] = useState(true);
   const [hideNumbers, setHideNumbers] = useState(false);
   const [decimalPoint, setDecimalPoint] = useState(2);
+  const [showMathSymbols, setShowMathSymbols] = useState(true);
 
   const configProvider = useMemo(
     () => ({
@@ -27,6 +28,8 @@ const ConfigContextProvider: FunctionComponent<PropsChildren> = ({
       setShowGridLines,
       decimalPoint,
       setDecimalPoint,
+      showMathSymbols,
+      setShowMathSymbols,
     }),
     [
       showBasisVectors,
@@ -37,6 +40,8 @@ const ConfigContextProvider: FunctionComponent<PropsChildren> = ({
       setShowGridLines,
       decimalPoint,
       setDecimalPoint,
+      showMathSymbols,
+      setShowMathSymbols,
     ]
   );
 
