@@ -44,3 +44,11 @@ export function validateTransformationValues(valuesArr: string[]): boolean {
   }
   return true;
 }
+
+export function validateTransformationVar(name: string): boolean {
+  if (name.length === 1) {
+    return !!name.match(/[a-z]/i);
+  }
+  const regex = /^[a-z]_\{[0-9]+\}/;
+  return regex.test(name);
+}
