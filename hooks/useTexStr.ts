@@ -2,11 +2,13 @@ import { evaluate } from "mathjs";
 import Transformation from "../classes/transformation";
 import Vector from "../classes/vector";
 import { useListContext, useNameContext } from "../context";
+import { useConfigContext } from "../context/ConfigContext";
 import { validateVectorName, validateVectorValues } from "../utils";
 
 const useTexStr = () => {
   const { stateVecArr } = useListContext();
   const { currentPlot } = useNameContext();
+  const { decimalPoint } = useConfigContext();
   const { vectorNameCounter, setVectorNameCounter, transformationVars } =
     useNameContext();
 
@@ -86,10 +88,10 @@ const useTexStr = () => {
   };
 
   /**
-   * Returns a Tex string with the multiplication of the vector times 
+   * Returns a Tex string with the multiplication of the vector times
    * the tranformation matrix
-   * @param {Transformation} transformation 
-   * @param {Vector} vec 
+   * @param {Transformation} transformation
+   * @param {Vector} vec
    * @returns {string}
    */
   const vectorMatrixMultiplication = (
@@ -98,7 +100,7 @@ const useTexStr = () => {
   ): string => {
     const multiplyX = vec.prevVector?.x || vec.x;
     const multiplyY = vec.prevVector?.y || vec.y;
-    
+
     return String.raw`
       ${vec.name} = \begin{bmatrix}
           ${transformation.e1[0]} & ${transformation.e2[0]}\\
@@ -165,7 +167,13 @@ const useTexStr = () => {
     if (name === `v_{${vectorNameCounter}}`) {
       setVectorNameCounter(vectorNameCounter + 1);
     }
-    return new Vector([evaluate(values[0]), evaluate(values[1])], `${name}`);
+    return new Vector(
+      [
+        parseFloat(evaluate(values[0]).toFixed(decimalPoint)),
+        parseFloat(evaluate(values[1]).toFixed(decimalPoint)),
+      ],
+      `${name}`
+    );
   };
   return { matrixStrings, vectorFromTex, vectorMatrixMultiplication };
 };

@@ -96,9 +96,9 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
                       >
                         <aside
                           className="
-                          flex flex-col items-center 
-                          bg-neutral-100 rounded-md w-11/12
-                        "
+                            flex flex-col items-center 
+                            bg-neutral-100 rounded-md w-11/12
+                          "
                         >
                           <D3Plot index={i} />
                           <PlotVectors

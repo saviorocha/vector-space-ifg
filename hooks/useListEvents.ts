@@ -2,6 +2,7 @@ import { evaluate } from "mathjs";
 import StateList from "../classes/stateList";
 import Transformation from "../classes/transformation";
 import { useListContext, useNameContext } from "../context";
+import { useConfigContext } from "../context/ConfigContext";
 import {
   validateTransformationName,
   validateTransformationValues,
@@ -12,7 +13,8 @@ import useTexStr from "./useTexStr";
 const useListEvents = () => {
   const { vectorFromTex } = useTexStr();
   const { addVector, removeVector, updateVector } = useList();
-  const { list, setList, stateVecArr, setStateVecArr } = useListContext();
+  const { list, setList, setStateVecArr } = useListContext();
+  const { decimalPoint } = useConfigContext();
   const { transformationNameCounter, setTransformationNameCounter } =
     useNameContext();
   const { addTransformation, updateTransformation, removeTransformation } =
@@ -86,8 +88,14 @@ const useListEvents = () => {
     }
     const newHead = addTransformation(
       new Transformation(
-        [evaluate(event.target.t0.value), evaluate(event.target.t2.value)],
-        [evaluate(event.target.t1.value), evaluate(event.target.t3.value)],
+        [
+          parseFloat(evaluate(event.target.t0.value).toFixed(decimalPoint)),
+          parseFloat(evaluate(event.target.t2.value).toFixed(decimalPoint)),
+        ],
+        [
+          parseFloat(evaluate(event.target.t1.value).toFixed(decimalPoint)),
+          parseFloat(evaluate(event.target.t3.value).toFixed(decimalPoint)),
+        ],
         name
       ),
       transformation.name
@@ -128,8 +136,14 @@ const useListEvents = () => {
 
     const newHead = updateTransformation(
       new Transformation(
-        [evaluate(event.target.t0.value), evaluate(event.target.t2.value)],
-        [evaluate(event.target.t1.value), evaluate(event.target.t3.value)],
+        [
+          parseFloat(evaluate(event.target.t0.value).toFixed(decimalPoint)),
+          parseFloat(evaluate(event.target.t2.value).toFixed(decimalPoint)),
+        ],
+        [
+          parseFloat(evaluate(event.target.t1.value).toFixed(decimalPoint)),
+          parseFloat(evaluate(event.target.t3.value).toFixed(decimalPoint)),
+        ],
         name
       ),
       transformation.name

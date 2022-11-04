@@ -1,5 +1,3 @@
-import { useConfigContext } from "../context/ConfigContext";
-
 class Vector {
   x: number;
   y: number;
@@ -16,7 +14,6 @@ class Vector {
     isBasisVector: boolean = false,
     _prevVector?: Vector
   ) {
-    array = [parseFloat(array[0].toFixed(2)), parseFloat(array[1].toFixed(2))];
     this._array = array;
     this.x = array[0];
     this.y = array[1];
@@ -48,7 +45,6 @@ class Vector {
 
   /**
    * Returns a object to be used in the d3 plot
-   * @returns object
    */
   d3VectorFormat = (): VectorData[] => {
     return [
