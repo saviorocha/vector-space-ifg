@@ -1,14 +1,11 @@
-.hoverdiv {
+#hoverdiv {
   width: 280px;
   padding: 15px;
   font-size: 15px;
-  border: 1px solid #bdbdbd;
-  background: white;
   box-shadow: 0 30px 90px -20px rgba(0, 0, 0, 0.3);
   position: absolute;
   display: block;
   z-index: 1;
-
   margin-left: 50px;
   margin-bottom: 100vh;
   border-radius: 0.2rem;
@@ -20,19 +17,6 @@
   overflow: hidden;
 }
 
-/* .hoverdiv:after {
-  content: "";
-  position: absolute;
-  margin-top: 180px;
-  margin-left: -3px;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-bottom: 12px solid white;
-  transform: rotate(-90deg);
-  left: -15px;
-  top: 10px;
-} */
-
 @keyframes fadeInOpacity {
   0% {
     opacity: 0;
@@ -42,11 +26,3 @@
   }
 }
 
-.triangle {
-  border-style: solid;
-  border-color: transparent white transparent transparent;
-  border-width: 25px 50px 25px 0;
-  display: inline-block;
-  height: 0;
-  width: 0;
-}

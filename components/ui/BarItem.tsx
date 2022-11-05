@@ -14,8 +14,11 @@ const BarItem: FunctionComponent<IBarItemProps> = ({
         className="
           flex items-center text-sm py-4 px-6 h-12 
           bg-gray-50 border border-gray-400 shadow-md 
+          dark:bg-neutral-800 dark:border-neutral-900
           overflow-hidden whitespace-nowrap rounded-lg
-          hover:text-gray-900 hover:bg-gray-200 transition duration-300 ease-in-out cursor-pointer
+          hover:text-gray-900 hover:bg-gray-200 
+          dark:hover:text-gray-50 dark:hover:bg-neutral-700 
+          transition duration-300 ease-in-out cursor-pointer
         "
         onClick={handleOnClick}
       >
@@ -30,11 +33,9 @@ const BarItem: FunctionComponent<IBarItemProps> = ({
               return (
                 <a
                   key={i}
-                  href="#!"
                   className="
-                    text-xs py-4 pl-12 pr-6 h-6 
+                    text-xs py-4 pl-12 pr-6 h-6 cursor-pointer
                     flex items-center whitespace-nowrap overflow-hidden rounded 
-                    hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out
                   "
                   onClick={handleItemOnClick}
                 >

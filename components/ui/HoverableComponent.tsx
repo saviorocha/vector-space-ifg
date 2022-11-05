@@ -28,7 +28,13 @@ const HoverableComponent: FunctionComponent<IHoverableDivProp> = ({
     <section onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
       {children}
       {isHovering && (
-        <div className={styles.hoverdiv}>
+        <div
+          id={styles.hoverdiv}
+          className="
+            bg-white border-white
+            dark:bg-zinc-900 
+          "
+        >
           {hoverText}
           {hoverTexExpression && (
             <RenderTex mathExpression={hoverTexExpression} />

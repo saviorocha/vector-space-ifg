@@ -1,6 +1,5 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { Trash2 } from "react-feather";
-import { useNameContext } from "../../context";
 import useListEvents from "../../hooks/useListEvents";
 import { IVectorTexProps } from "../../interfaces/interfaces";
 import RenderTex from "./RenderTex";
@@ -21,6 +20,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
 
   useEffect(() => {
     // console.log("vectorName", vectorName);
+    // console.log("vectorExpression", vectorExpression);
   }, []);
 
   useEffect(() => {

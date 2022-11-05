@@ -8,7 +8,9 @@
       dark:bg-black
       text-black
       dark:text-gray-50
-      transition-colors;
+      transition-colors
+      selection:text-white selection:bg-black
+      dark:selection:text-black dark:selection:bg-gray-100;
   }
 }
 

@@ -10,7 +10,11 @@ const PopupWindow: FunctionComponent<PropsChildren> = ({ children }) => {
   return (
     <>
       <section
-        className={styles.configpopup}
+        id={styles.configpopup}
+        className="
+          bg-gray-200 border-neutral-400
+          dark:bg-zinc-900 dark:border-black
+        "
         style={{
           visibility: isActive ? "visible" : "hidden",
           opacity: isActive ? 1 : 0,

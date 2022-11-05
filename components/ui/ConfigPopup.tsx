@@ -26,7 +26,7 @@ const ConfigPopup = () => {
 
   return (
     <PopupWindow>
-      <ul className="mt-3 ">
+      <ul className="mt-3">
         <li className={stylesconfig.popupitem}>
           <div className={stylesconfig.configicon}>
             <Moon />
