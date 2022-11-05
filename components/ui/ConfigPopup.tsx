@@ -5,6 +5,8 @@ import { Feather, Globe, Hash, Moon } from "react-feather";
 import { useConfigContext } from "../../context/ConfigContext";
 import stylesconfig from "../../styles/modules/config.module.css";
 import PopupWindow from "./PopupWindow";
+import BasisVectorIcon from "../icons/BasisVectorIcon";
+import DecimalIcon from "../icons/DecimalIcon";
 
 const ConfigPopup = () => {
   const {
@@ -81,7 +83,7 @@ const ConfigPopup = () => {
         </li>
         <li className={stylesconfig.popupitem}>
           <div className={stylesconfig.configicon}>
-            <Feather />
+            <DecimalIcon />
           </div>
           <p>Configurar casas decimais</p>
           <div className={stylesconfig.configcontrol}>
@@ -98,7 +100,7 @@ const ConfigPopup = () => {
         </li>
         <li className={stylesconfig.popupitem}>
           <div className={stylesconfig.configicon}>
-            <Feather />
+            <BasisVectorIcon />
           </div>
           <p>Incluir vetores canônicos</p>
           <div className={stylesconfig.configcontrol}>

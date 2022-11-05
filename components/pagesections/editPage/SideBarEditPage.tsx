@@ -14,6 +14,7 @@ import { useConfigContext } from "../../../context/ConfigContext";
 import useD3Events from "../../../hooks/useD3Events";
 import useList from "../../../hooks/useList";
 import { ISideBarProps } from "../../../interfaces/interfaces";
+import VectorIcon from "../../icons/VectorIcon";
 import BarItem from "../../ui/BarItem";
 import SideBar from "../../ui/SideBar";
 
@@ -76,7 +77,7 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
         />
         <BarItem
           title={"Inserir Vetor"}
-          leftIcon={<ArrowUpLeft />}
+          leftIcon={<VectorIcon />}
           handleOnClick={vectorSubmitHandler}
         />
         <BarItem
@@ -84,12 +85,6 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
           leftIcon={<Type />}
           rightIcon={<ChevronDown />}
           subItems={[
-            // {
-            //   title: "Transformação Padrão",
-            //   handleItemOnClick: () =>
-            //     transfromationSubmitHandler([1, 0], [0, 1]),
-            // },
-
             {
               title: "Reflexão pelo Eixo y",
               handleItemOnClick: () =>
