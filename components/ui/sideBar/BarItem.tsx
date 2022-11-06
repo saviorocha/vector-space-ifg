@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from "react";
-import { IBarItemProps } from "../../interfaces/interfaces";
+import { FunctionComponent } from "react";
+import { IBarItemProps } from "../../../interfaces/interfaces";
 
 const BarItem: FunctionComponent<IBarItemProps> = ({
   title,

@@ -1,12 +1,12 @@
 import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
 import { useTheme } from "next-themes";
 import { useState } from "react";
-import { Feather, Globe, Hash, Moon } from "react-feather";
-import { useConfigContext } from "../../context/ConfigContext";
-import stylesconfig from "../../styles/modules/config.module.css";
+import { Globe, Hash, Moon } from "react-feather";
+import { useConfigContext } from "../../../context/ConfigContext";
+import stylesconfig from "../../../styles/modules/ui/config.module.css";
+import BasisVectorIcon from "../../icons/BasisVectorIcon";
+import DecimalIcon from "../../icons/DecimalIcon";
 import PopupWindow from "./PopupWindow";
-import BasisVectorIcon from "../icons/BasisVectorIcon";
-import DecimalIcon from "../icons/DecimalIcon";
 
 const ConfigPopup = () => {
   const {

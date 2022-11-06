@@ -6,7 +6,7 @@ import { useListContext, useNameContext } from "../../../context";
 import useListEvents from "../../../hooks/useListEvents";
 import { IBottomTransformationProps } from "../../../interfaces/interfaces";
 import RenderTex from "../../tex/RenderTex";
-import TransformationForm from "../../ui/TransformationForm";
+import TransformationForm from "../../ui/inputs/TransformationForm";
 
 /**
  * Component for showing on the bottom bar the current transformation being rendered
@@ -62,7 +62,7 @@ const BottomTransformation: FunctionComponent<IBottomTransformationProps> = ({
           <>
             <RenderTex
               mathExpression={`${transformation.name}\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}`}
-              title="Transformação de R2 em R2"
+              title="Transformação de R² em R²"
             />
             <RenderTex
               mathExpression={transformationExpression}

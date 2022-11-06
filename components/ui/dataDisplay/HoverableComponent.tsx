@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
-import { IHoverableDivProp } from "../../interfaces/interfaces";
-import styles from "../../styles/modules/hoverdiv.module.css";
-import RenderTex from "../tex/RenderTex";
+import { FunctionComponent, useState } from "react";
+import { IHoverableDivProp } from "../../../interfaces/interfaces";
+import styles from "../../../styles/modules/ui/hoverdiv.module.css";
+import RenderTex from "../../tex/RenderTex";
 
 /**
  * Shows a dialog text div component when hovering over it

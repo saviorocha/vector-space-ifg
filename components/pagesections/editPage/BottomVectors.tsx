@@ -1,5 +1,5 @@
 import { Tooltip } from "@mui/material";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { Plus } from "react-feather";
 import { useListContext, useNameContext } from "../../../context";
 import useListEvents from "../../../hooks/useListEvents";

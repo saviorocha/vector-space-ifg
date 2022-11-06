@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useListContext } from "../../../context";
 import useListEvents from "../../../hooks/useListEvents";
-import InfoBox from "../../ui/InfoBox";
-import TransformationForm from "../../ui/TransformationForm";
+import InfoBox from "../../ui/dataDisplay/InfoBox";
+import TransformationForm from "../../ui/inputs/TransformationForm";
 import PlotTransformation from "./PlotTransformation";
 
 const TransformationBar = ({ transformationNum = 0 }) => {

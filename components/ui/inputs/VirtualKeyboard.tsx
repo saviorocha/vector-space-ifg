@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useRef, useState } from "react";
-import KeyboardWrapper from "../tex/KeyboardWrapper";
+import KeyboardWrapper from "../../tex/KeyboardWrapper";
 
 const VirtualKeyboard = () => {
   const [input, setInput] = useState("");

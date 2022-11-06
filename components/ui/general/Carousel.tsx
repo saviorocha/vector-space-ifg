@@ -1,9 +1,9 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import { ChevronsLeft, ChevronsRight } from "react-feather";
-import { useListContext, useNameContext } from "../../context";
-import { PropsChildren } from "../../interfaces/interfaces";
+import { useListContext, useNameContext } from "../../../context";
+import { PropsChildren } from "../../../interfaces/interfaces";
 
-import styles from "../../styles/modules/carousel.module.css";
+import styles from "../../../styles/modules/ui/carousel.module.css";
 import RoundButton from "./RoundButton";
 
 const btnString = 

@@ -3,7 +3,7 @@ import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { useD3Context, useListContext, useNameContext } from "../../context";
 import { IPlotProps } from "../../interfaces/interfaces";
 import PlotComponent from "./plotComponent";
-import styles from "../../styles/modules/D3.module.css";
+import styles from "../../styles/modules/pages/D3.module.css";
 import { useConfigContext } from "../../context/ConfigContext";
 import Vector from "../../classes/vector";
 

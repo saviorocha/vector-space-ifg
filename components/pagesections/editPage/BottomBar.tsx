@@ -3,11 +3,11 @@ import { Check, Globe, Hash, Settings } from "react-feather";
 import { Transition } from "react-transition-group";
 import { useListContext, useNameContext } from "../../../context";
 import useTexStr from "../../../hooks/useTexStr";
-import styles from "../../../styles/modules/bottombar.module.css";
+import styles from "../../../styles/modules/pages/bottombar.module.css";
 import { validateTransformationVar } from "../../../utils";
 import KeyboardIcon from "../../icons/KeyboardIcon";
 import KeyboardWrapper from "../../tex/KeyboardWrapper";
-import TransitionButton from "../../ui/TransitionButton";
+import TransitionButton from "../../ui/general/TransitionButton";
 import BottomTransformation from "./BottomTransformation";
 import BottomVectors from "./BottomVectors";
 

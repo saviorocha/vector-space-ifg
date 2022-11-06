@@ -1,9 +1,8 @@
-import React, { LegacyRef, useRef, useState } from 'react'
-import MainSectionPlotPage from "../components/pagesections/simplerPlotPage/MainSectionPlotPage" 
-import SideBarEditPage from "../components/pagesections/editPage/SideBarEditPage" 
+import { LegacyRef, useRef, useState } from "react";
+import { ChevronLeft } from "react-feather";
 import { Transition } from "react-transition-group";
-import { ChevronLeft } from 'react-feather';
-import PlotTransformation from '../components/pagesections/simplerPlotPage/PlotTransformation';
+import SideBarEditPage from "../components/pagesections/editPage/SideBarEditPage";
+import MainSectionPlotPage from "../components/pagesections/simplerPlotPage/MainSectionPlotPage";
 
 // transition properties of the main component
 const mainTransitionStyles: any = {
@@ -20,7 +19,54 @@ const sideBarTransitionStyles: any = {
   exiting: { width: "20%" },
   exited: { width: "0px", padding: "0px" },
 };
+
 const SimplePlot = () => {
+  // const [windowDimenion, detectHW] = useState({
+  //   winWidth: window.innerWidth,
+  //   winHeight: window.innerHeight,
+  // });
+  // const [mainPrctSize, setMainPrctSize] = useState("80%");
+  // const [sidePrctSize, setSidePrctSize] = useState("20%");
+  // // transition properties of the main component
+  // const mainTransitionStyles = (): any => {
+  //   return {
+  //     entering: { width: "100%" },
+  //     entered: { width: mainPrctSize },
+  //     exiting: { width: mainPrctSize },
+  //     exited: { width: "100%" },
+  //   };
+  // };
+
+  // // transition properties of the sidebar component
+  // const sideBarTransitionStyles = (): any => {
+  //   return {
+  //     entering: { width: "0px", padding: "0px" },
+  //     entered: { width: sidePrctSize },
+  //     exiting: { width: sidePrctSize },
+  //     exited: { width: "0px", padding: "0px" },
+  //   };
+  // };
+
+  // const detectSize = () => {
+  //   detectHW({
+  //     winWidth: window.innerWidth,
+  //     winHeight: window.innerHeight,
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   console.log(windowDimenion.winWidth > 800)
+  //   if (windowDimenion.winWidth < 380) {
+  //     setSidePrctSize("80%");
+  //     setMainPrctSize("20%");
+  //   }
+
+  //   window.addEventListener("resize", detectSize);
+  //   return () => {
+  //     window.removeEventListener("resize", detectSize);
+  //   };
+  // }, [windowDimenion]);
+
   const [toggleSideBar, setToggleSideBar] = useState(false);
   const sideBarRef = useRef<LegacyRef<HTMLElement> | undefined>(null);
   return (
@@ -57,9 +103,8 @@ const SimplePlot = () => {
           </MainSectionPlotPage>
         )}
       </Transition>
-      {/* <PlotTransformation /> */}
     </div>
-  )
-}
+  );
+};
 
-export default SimplePlot
+export default SimplePlot;

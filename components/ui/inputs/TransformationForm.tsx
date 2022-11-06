@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
-import { ITransformationFormProps } from "../../interfaces/interfaces";
-import styles from "../../styles/modules/input.module.css"
+import { ITransformationFormProps } from "../../../interfaces/interfaces";
+import styles from "../../../styles/modules/ui/input.module.css"
 
 const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
   onSubmit,

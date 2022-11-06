@@ -14,11 +14,11 @@ import {
 import { useListContext } from "../../../context";
 import { useConfigContext } from "../../../context/ConfigContext";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
-import styles from "../../../styles/modules/editpage.module.css";
+import styles from "../../../styles/modules/pages/editpage.module.css";
 import D3Plot from "../../d3/D3plot";
-import Carousel, { CarouselItem } from "../../ui/Carousel";
-import RoundButton from "../../ui/RoundButton";
-import TransitionButton from "../../ui/TransitionButton";
+import Carousel, { CarouselItem } from "../../ui/general/Carousel";
+import RoundButton from "../../ui/general/RoundButton";
+import TransitionButton from "../../ui/general/TransitionButton";
 
 const btnClassName = `rounded-full h-10 w-10 right-0
 flex items-center justify-center 

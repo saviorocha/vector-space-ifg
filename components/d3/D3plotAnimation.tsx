@@ -2,9 +2,8 @@ import * as d3 from "d3";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { CornerUpLeft, Pause, Play, RotateCcw } from "react-feather";
-import Vector from "../../classes/vector";
 import { useD3Context, useListContext } from "../../context";
-import styles from "../../styles/modules/D3.module.css";
+import styles from "../../styles/modules/pages/D3.module.css";
 import AnimationPlotComponent from "./animationPlotComponent";
 
 const D3PlotAnimation = () => {

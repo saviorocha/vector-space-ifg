@@ -1,7 +1,4 @@
-import { useRouter } from "next/router";
-import React from "react";
-import { CornerUpLeft } from "react-feather";
-import styles from "../../../styles/modules/editpage.module.css";
+import styles from "../../../styles/modules/pages/editpage.module.css";
 import D3PlotAnimation from "../../d3/D3plotAnimation";
 
 const MainSectionAnimationPage = () => {

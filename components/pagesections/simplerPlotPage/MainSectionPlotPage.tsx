@@ -4,10 +4,10 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { ArcherContainer, ArcherElement } from "react-archer";
 import { useListContext } from "../../../context";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
-import stylesplot from "../../../styles/modules/simpleplot.module.css";
+import stylesplot from "../../../styles/modules/pages/simpleplot.module.css";
 import D3Plot from "../../d3/D3plot";
 import RenderTex from "../../tex/RenderTex";
-import ConfigPopup from "../../ui/ConfigPopup";
+import ConfigPopup from "../../ui/inputs/ConfigPopup";
 import PlotVectors from "./PlotVectors";
 import TransformationBar from "./TransformationBar";
 
@@ -103,8 +103,8 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
                         <aside
                           className="
                             flex flex-col items-center 
-                            bg-neutral-100 rounded-md w-11/12
-                            dark:bg-black
+                            bg-neutral-100 dark:bg-black
+                            rounded-md w-11/12
                           "
                         >
                           <D3Plot index={i} />

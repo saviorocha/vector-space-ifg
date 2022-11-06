@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { FunctionComponent, useEffect } from "react";
 import {
-  ArrowUpLeft,
   ChevronDown,
   MousePointer,
   Play,
@@ -10,13 +9,12 @@ import {
 import StateList from "../../../classes/stateList";
 import Transformation from "../../../classes/transformation";
 import { useD3Context, useListContext } from "../../../context";
-import { useConfigContext } from "../../../context/ConfigContext";
 import useD3Events from "../../../hooks/useD3Events";
 import useList from "../../../hooks/useList";
 import { ISideBarProps } from "../../../interfaces/interfaces";
 import VectorIcon from "../../icons/VectorIcon";
-import BarItem from "../../ui/BarItem";
-import SideBar from "../../ui/SideBar";
+import SideBar from "../../ui/sideBar/SideBar";
+import BarItem from "../../ui/sideBar/BarItem";
 
 const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
   sideBarStyle,

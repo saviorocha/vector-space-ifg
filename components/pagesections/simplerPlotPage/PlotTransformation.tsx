@@ -6,7 +6,7 @@ import useListEvents from "../../../hooks/useListEvents";
 import useTexStr from "../../../hooks/useTexStr";
 import { IPlotTransformation } from "../../../interfaces/interfaces";
 import RenderTex from "../../tex/RenderTex";
-import TransformationForm from "../../ui/TransformationForm";
+import TransformationForm from "../../ui/inputs/TransformationForm";
 
 const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
   transformation,
@@ -62,7 +62,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
           <>
             <RenderTex
               mathExpression={`${transformation.name}\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}`}
-              title="Transformação de R2 em R2"
+              title="Transformação de R² em R²"
             />
             <RenderTex
               mathExpression={currentTrnExpression}

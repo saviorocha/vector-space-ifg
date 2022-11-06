@@ -7,8 +7,8 @@ import useListEvents from "../../../hooks/useListEvents";
 import useTexStr from "../../../hooks/useTexStr";
 import { IPlotVectorsProps } from "../../../interfaces/interfaces";
 import VectorTex from "../../tex/VectorTex";
-import HoverableComponent from "../../ui/HoverableComponent";
-import styles from "../../../styles/modules/input.module.css";
+import HoverableComponent from "../../ui/dataDisplay/HoverableComponent";
+import styles from "../../../styles/modules/ui/input.module.css";
 import { useConfigContext } from "../../../context/ConfigContext";
 
 const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
@@ -49,7 +49,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   return (
     <div
       className="
-        rounded-md w-full h-36
+        rounded-md w-11/12 h-36
         flex flex-col items-center justify-between
         bg-white border border-gray-400
         text-sm shadow-md dark:bg-zinc-900 dark:border-neutral-600

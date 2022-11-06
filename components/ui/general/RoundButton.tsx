@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { IRoundButton } from "../../interfaces/interfaces";
+import { IRoundButton } from "../../../interfaces/interfaces";
 
 const RoundButton: FunctionComponent<IRoundButton> = ({
   icon,

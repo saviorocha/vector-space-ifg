@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
-import useTexStr from "../../hooks/useTexStr";
-import { IBarItemCalculationProps } from "../../interfaces/interfaces";
-import RenderTex from "../tex/RenderTex";
+import useTexStr from "../../../hooks/useTexStr";
+import { IBarItemCalculationProps } from "../../../interfaces/interfaces";
+import RenderTex from "../../tex/RenderTex";
 
 const BarItemCalculation: FunctionComponent<IBarItemCalculationProps> = ({
   transformation,

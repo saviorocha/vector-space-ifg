@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from "react";
-import { IInfoBox, PropsChildren } from "../../interfaces/interfaces";
+import { FunctionComponent } from "react";
+import { IInfoBox } from "../../../interfaces/interfaces";
 
 const InfoBox: FunctionComponent<IInfoBox> = ({ children, customStyles }) => {
   return (

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { ISideBarProps } from '../../interfaces/interfaces'
+import { ISideBarProps } from '../../../interfaces/interfaces'
 
 const SideBar: FunctionComponent<ISideBarProps> = ({
     sideBarStyle,

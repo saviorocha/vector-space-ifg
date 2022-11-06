@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from "react";
 import { Transition } from "react-transition-group";
-import { ITransitionButtonProps } from "../../interfaces/interfaces";
+import { ITransitionButtonProps } from "../../../interfaces/interfaces";
 
 /**
  * sectionStyle: must have a transition property!
