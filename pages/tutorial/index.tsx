@@ -1,16 +1,19 @@
 import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
 import { useTheme } from "next-themes";
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { Aperture, ChevronRight } from "react-feather";
 import styles from "../../styles/modules/pages/tutorial.module.css";
 
 const Tutorial = () => {
   const [mode, setMode] = useState<Mode>("dark");
+  const router = useRouter();
   const { theme, setTheme } = useTheme();
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <a className={styles.logo}>
+        <a className={styles.logo} href="#">
           <Aperture />
           VectorSpace
         </a>
