@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import { LegacyRef, useEffect, useRef, useState } from "react";
 import { Transition } from "react-transition-group";
-import D3PlotAnimation from "../components/d3/D3plotAnimation";
-import MainSectionAnimationPage from "../components/pagesections/animationPage/MainSectionAnimationPage";
-import SideBarAnimationPage from "../components/pagesections/animationPage/SideBarAnimationPage";
-import { useD3Context } from "../context";
+import D3PlotAnimation from "../../components/d3/D3plotAnimation";
+import MainSectionAnimationPage from "../../components/pagesections/animationPage/MainSectionAnimationPage";
+import SideBarAnimationPage from "../../components/pagesections/animationPage/SideBarAnimationPage";
+import { useD3Context } from "../../context";
 
 // transition properties of the main component
 const mainTransitionStyles: any = {

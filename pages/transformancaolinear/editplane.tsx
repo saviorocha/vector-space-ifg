@@ -1,9 +1,9 @@
 import { LegacyRef, useRef, useState } from "react";
 import { ChevronLeft } from "react-feather";
 import { Transition } from "react-transition-group";
-import BottomBar from "../components/pagesections/editPage/BottomBar";
-import MainSectionEditPage from "../components/pagesections/editPage/MainSectionEditPage";
-import SideBarEditPage from "../components/pagesections/editPage/SideBarEditPage";
+import BottomBar from "../../components/pagesections/editPage/BottomBar";
+import MainSectionEditPage from "../../components/pagesections/editPage/MainSectionEditPage";
+import SideBarEditPage from "../../components/pagesections/editPage/SideBarEditPage";
 
 // transition properties of the main component
 const mainTransitionStyles: any = {

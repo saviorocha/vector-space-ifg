@@ -1,8 +1,8 @@
 import { LegacyRef, useRef, useState } from "react";
 import { ChevronLeft } from "react-feather";
 import { Transition } from "react-transition-group";
-import SideBarEditPage from "../components/pagesections/editPage/SideBarEditPage";
-import MainSectionPlotPage from "../components/pagesections/simplerPlotPage/MainSectionPlotPage";
+import SideBarEditPage from "../../components/pagesections/editPage/SideBarEditPage";
+import MainSectionPlotPage from "../../components/pagesections/simplerPlotPage/MainSectionPlotPage";
 
 // transition properties of the main component
 const mainTransitionStyles: any = {
