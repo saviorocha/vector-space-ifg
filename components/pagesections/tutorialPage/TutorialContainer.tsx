@@ -2,13 +2,40 @@ import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { FunctionComponent, useState } from "react";
-import { Aperture, ChevronRight, Minus } from "react-feather";
+import { Aperture } from "react-feather";
 import { PropsChildren } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/pages/tutorial.module.css";
+import ListItem from "./ListItem";
+
+const listItems = [
+  {
+    href: "/tutorial",
+    linkText: "O que é o VectorSpace?",
+  },
+  {
+    href: "/tutorial/vectorstransformations/creation",
+    linkText: "Vetores e transformações",
+  },
+  {
+    href: "/tutorial/vectorstransformations/creation",
+    linkText: "Criação de transformações",
+    isSubItem: true,
+  },
+  {
+    href: "/tutorial/vectorstransformations/animation",
+    linkText: "Animação de transformações",
+    isSubItem: true,
+  },
+  {
+    href: "/tutorial/configs",
+    linkText: "Configurações variadas",
+  },
+];
 
 const TutorialContainer: FunctionComponent<PropsChildren> = ({ children }) => {
   const [mode, setMode] = useState<Mode>("dark");
   const { theme, setTheme } = useTheme();
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -42,36 +69,16 @@ const TutorialContainer: FunctionComponent<PropsChildren> = ({ children }) => {
         <main className={styles.pagecontent}>
           <aside className={styles.navcontent}>
             <ul>
-              <li className={styles.listitem}>
-                <ChevronRight size={15} />
-                <Link href="/tutorial">
-                  <a>
-                    O que é o <em>VectorSpace</em>?
-                  </a>
-                </Link>
-              </li>
-              <li className={styles.listitem}>
-                <ChevronRight size={15} />
-                <Link href="/tutorial/vectorstransformations/creation">
-                  Vetores e transformações
-                </Link>
-              </li>
-              <li className={styles.listsubitem}>
-                <Minus size={11} />
-                <Link href="/tutorial/vectorstransformations/creation">
-                  Criação de transformações
-                </Link>
-              </li>
-              <li className={styles.listsubitem}>
-                <Minus size={11} />
-                <Link href="/tutorial/vectorstransformations/animation">
-                  Animação de transformações
-                </Link>
-              </li>
-              <li className={styles.listitem}>
-                <ChevronRight size={15} />
-                <Link href="/tutorial/configs">Configurações variadas</Link>
-              </li>
+              {listItems.map(({ href, linkText, isSubItem }, i) => {
+                return (
+                  <ListItem
+                    key={i}
+                    href={href}
+                    linkText={linkText}
+                    isSubItem={isSubItem}
+                  />
+                );
+              })}
             </ul>
           </aside>
           <article className={styles.tutorialcontent}>{children}</article>

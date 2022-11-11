@@ -73,9 +73,16 @@
   color: #a4a4a4;
 }
 
+.listitemcurrent {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  color: #7c7c7c;
+}
+
 .listsubitem {
   font-size: 14px;
-  margin-left: 10px;
+  margin-left: 15px;
   display: flex;
   align-items: center;
   flex-direction: row;

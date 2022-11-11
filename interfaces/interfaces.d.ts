@@ -89,6 +89,12 @@ interface IInfoBox {
   customStyles?: string;
 }
 
+interface ListItemProps {
+  href: string;
+  linkText: string;
+  isSubItem?: boolean;
+}
+
 interface IBarItemProps {
   title: string;
   leftIcon: ReactElement;
