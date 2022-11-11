@@ -4,7 +4,7 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { ArcherContainer, ArcherElement } from "react-archer";
 import { useListContext } from "../../../context";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
-import stylesplot from "../../../styles/modules/pages/simpleplot.module.css";
+import stylesplot from "../../../styles/modules/pages/editartransformacoes.module.css";
 import D3Plot from "../../d3/D3plot";
 import RenderTex from "../../tex/RenderTex";
 import ConfigPopup from "../../ui/inputs/ConfigPopup";

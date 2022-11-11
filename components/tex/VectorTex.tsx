@@ -5,7 +5,7 @@ import { IVectorTexProps } from "../../interfaces/interfaces";
 import RenderTex from "./RenderTex";
 
 /**
- * This component handles vector creation, update and deletion
+ * This component handles vector criacao, update and deletion
  */
 const VectorTex: FunctionComponent<IVectorTexProps> = ({
   vectorExpression,

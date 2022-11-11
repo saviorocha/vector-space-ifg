@@ -10,10 +10,10 @@
   margin-bottom: 100vh;
   border-radius: 0.2rem;
   opacity: 1;
-  animation-name: fadeInOpacity;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in;
-  animation-duration: 0.2s;
+  animacao-name: fadeInOpacity;
+  animacao-iteration-count: 1;
+  animacao-timing-function: ease-in;
+  animacao-duration: 0.2s;
   overflow: hidden;
 }
 

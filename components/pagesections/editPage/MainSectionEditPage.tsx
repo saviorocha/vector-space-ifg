@@ -149,7 +149,7 @@ const MainSectionEditPage: FunctionComponent<IMainSectionProps> = ({
             classString={btnClassName}
             icon={<Play className="text-gray-700" />}
             handleOnClick={() => {
-              router.push("/animationplane");
+              router.push("/transformacaolinear/animartransformacoes");
             }}
           />
           {/* <button

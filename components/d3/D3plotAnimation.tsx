@@ -25,7 +25,6 @@ const D3PlotAnimation = () => {
     const range = maxInput / trnNumber;
 
     // console.log(stateVecArr.vectorArr);
-    
 
     let scales = [];
     for (let i = 0; i < trnNumber; i++) {
@@ -40,10 +39,10 @@ const D3PlotAnimation = () => {
      * [4,12]
      */
     for (let i = 0; i < trnNumber; i++) {
-      console.log("-------------")
+      console.log("-------------");
       for (let j = 0; j < vecArr[0].length - 1; j++) {
         console.log("_____________");
-        
+
         // prettier-ignore
         console.log(
           vecArr[i][j].x, vecArr[i + 1][j].x,
@@ -124,11 +123,7 @@ const D3PlotAnimation = () => {
     <>
       <section id={styles.plot} ref={refElement}></section>
       <section className="flex items-center justify-center">
-        <button
-          onClick={() => {
-            router.push("/editplane");
-          }}
-        >
+        <button onClick={() => {}}>
           <CornerUpLeft />
         </button>
         <button onClick={createPlane}>

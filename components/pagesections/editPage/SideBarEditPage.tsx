@@ -112,7 +112,7 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
           title={"Executar Transformações"}
           leftIcon={<Play />}
           handleOnClick={() => {
-            router.push("/animationplane");
+            router.push("/transformacaolinear/animartransformacoes");
           }}
         />
       </ul>

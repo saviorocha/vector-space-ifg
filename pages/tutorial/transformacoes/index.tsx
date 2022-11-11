@@ -12,13 +12,13 @@ const VectorsTransformations = () => {
       </p>
       <ul className={styles.genericlist}>
         <li>
-          <Link href="/transformacaolinear/simpleplot">
+          <Link href="/transformacaolinear/editartransformacoes">
             <a className={styles.link}>Uma tela de criação </a>
           </Link>
           para a criação e manipulação das transformações
         </li>
         <li>
-          <Link href="/transformacaolinear/animationplane">
+          <Link href="/transformacaolinear/animartransformacoes">
             <a className={styles.link}>Uma tela de animação </a>
           </Link>
           para visualizar a transformação a partir de uma animação gráfica.

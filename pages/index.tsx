@@ -40,7 +40,7 @@ const Home: NextPage = () => {
             <div
               className={styles.pagecard}
               onClick={() => {
-                router.push("/transformacaolinear/simpleplot");
+                router.push("/transformacaolinear/editartransformacoes");
               }}
             >
               <button>
@@ -51,7 +51,7 @@ const Home: NextPage = () => {
             <div
               className={styles.pagecard}
               onClick={() => {
-                router.push("/transformacaolinear/animationplane");
+                router.push("/transformacaolinear/animartransformacoes");
               }}
             >
               <button>
