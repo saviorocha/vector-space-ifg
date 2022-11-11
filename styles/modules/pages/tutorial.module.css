@@ -73,7 +73,16 @@
   color: #a4a4a4;
 }
 
-.listitem:hover {
+.listsubitem {
+  font-size: 14px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  color: #a3a3a3;
+}
+
+.listitem:hover, .listsubitem:hover {
   color: #7c7c7c;
 }
 
