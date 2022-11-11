@@ -81,7 +81,7 @@ const Tutorial = () => {
                 Para inserir um vetor você pode escrever, na caixa de entrada,
                 as suas coordenadas entre parênteses, do seguinte modo: (x, y).
                 Caso deseje criar um vetor com um nome, insira-o do seguinte
-                modo: v_&#123;i&#125;=(x, y). Para editar um vetor criado,
+                modo: v_i=(x, y). Para editar um vetor criado,
                 clique no ícone com um lápis, ou dê um clique duplo em cima de
                 suas coordenadas. Para inserir uma transformação linear, clique
                 no botão abaixo e insira os valores de sua matriz de
