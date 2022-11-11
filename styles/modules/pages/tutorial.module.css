@@ -96,3 +96,14 @@
 .tutorialcontent {
   min-width: calc(100% - 300px - 1rem);
 }
+
+.genericlist {
+  list-style-type: circle;
+  margin-left: 50px;
+}
+
+.link {
+  color: #2115ff;
+  cursor: pointer;
+  text-decoration: underline;
+}

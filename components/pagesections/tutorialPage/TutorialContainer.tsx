@@ -13,8 +13,8 @@ const listItems = [
     linkText: "O que é o VectorSpace?",
   },
   {
-    href: "/tutorial/vectorstransformations/creation",
-    linkText: "Vetores e transformações",
+    href: "/tutorial/vectorstransformations",
+    linkText: "Transformações Lineares",
   },
   {
     href: "/tutorial/vectorstransformations/creation",
