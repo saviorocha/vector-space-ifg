@@ -19,6 +19,7 @@ export function validateVectorValues(values: string): boolean {
   } catch (SyntaxError) {
     return false;
   }
+  
   return (
     //prettier-ignore
     valuesArr.length === 2 &&

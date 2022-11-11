@@ -60,26 +60,26 @@ const useList = () => {
     transformation: Transformation,
     prevTransformationName: string = list.getTail().transformation.name
   ): StateNode => {
-    const previousState = getNodeByName(prevTransformationName);
+    const previousNode = getNodeByName(prevTransformationName);
 
-    if (!previousState) {
+    if (!previousNode) {
       return list.head;
     }
 
-    let newState = new StateNode(transformation, previousState);
+    let newNode = new StateNode(transformation, previousNode);
 
-    if (!previousState._next) {
-      previousState._next = newState;
+    if (!previousNode._next) {
+      previousNode._next = newNode;
     } else {
-      let nextState = previousState._next;
+      let nextNode = previousNode._next;
 
-      newState._next = nextState;
-      previousState._next = newState;
-      nextState._previous = newState;
+      newNode._next = nextNode;
+      previousNode._next = newNode;
+      nextNode._previous = newNode;
 
-      while (nextState) {
-        nextState.vectors = nextState.updateVectors();
-        nextState = nextState._next!;
+      while (nextNode) {
+        nextNode.vectors = nextNode.updateVectors();
+        nextNode = nextNode._next!;
       }
     }
 
@@ -96,14 +96,14 @@ const useList = () => {
     newTransformation: Transformation,
     currentTransformationName: string
   ): StateNode | null => {
-    const transformationState = getNodeByName(currentTransformationName);
+    const transformationNode = getNodeByName(currentTransformationName);
 
-    if (!transformationState) {
+    if (!transformationNode) {
       return null;
     }
-    transformationState.transformation = newTransformation;
+    transformationNode.transformation = newTransformation;
 
-    let nextState = transformationState;
+    let nextState = transformationNode;
     while (nextState) {
       nextState.vectors = nextState.updateVectors();
       nextState = nextState._next!;

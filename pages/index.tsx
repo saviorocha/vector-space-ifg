@@ -21,12 +21,12 @@ const Home: NextPage = () => {
       <section className={styles.pages}>
         <fieldset className={styles.textborder}>
           <legend>Tutorial</legend>
-          <div className={styles.pagecard}>
+          <div className={styles.pagecard} onClick={() => {
+                router.push("/tutorial");
+              }}>
             <button
               className=""
-              onClick={() => {
-                router.push("/tutorial");
-              }}
+              
             >
               <HelpCircle />
               {/* Primeira vez aqui? Veja o tutorial de como usar este sistema. */}
@@ -37,21 +37,21 @@ const Home: NextPage = () => {
         <fieldset className={styles.textborder}>
           <legend>Transformações Lineares</legend>
           <div className={styles.transformationpages}>
-            <div className={styles.pagecard}>
-              <button
-                onClick={() => {
+            <div className={styles.pagecard} onClick={() => {
                   router.push("/transformancaolinear/simpleplot");
-                }}
+                }}>
+              <button
+                
               >
                 <PlusCircle />
               </button>
               <p>Criar Transformações</p>
             </div>
-            <div className={styles.pagecard}>
-              <button
-                onClick={() => {
+            <div className={styles.pagecard} onClick={() => {
                   router.push("/transformancaolinear/animationplane");
-                }}
+                }}>
+              <button
+                
               >
                 <PlayCircle />
               </button>

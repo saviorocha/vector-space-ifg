@@ -50,7 +50,7 @@
 .pagecard {
     display: flex;
     flex-direction: row;
-
+    cursor: pointer;
     width: fit-content;
     padding: 10px;
     margin: 1px;

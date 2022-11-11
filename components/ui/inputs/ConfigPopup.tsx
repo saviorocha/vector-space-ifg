@@ -51,7 +51,7 @@ const ConfigPopup = () => {
             />
           </div>
         </li>
-        <li className={stylesconfig.popupitem}>
+        {/* <li className={stylesconfig.popupitem}>
           <div className={stylesconfig.configicon}>
             <Globe />
           </div>
@@ -65,7 +65,7 @@ const ConfigPopup = () => {
               }}
             />
           </div>
-        </li>
+        </li> */}
         <li id="toggle-numbers" className={stylesconfig.popupitem}>
           <div className={stylesconfig.configicon}>
             <Hash />

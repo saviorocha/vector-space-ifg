@@ -17,6 +17,7 @@
     "@types/mathjs": "^9.4.2",
     "d3": "^7.6.1",
     "d3-react": "^1.0.4",
+    "html-entities": "^2.3.3",
     "lodash": "^4.17.21",
     "mathjax": "^3.2.2",
     "mathjs": "^11.0.1",

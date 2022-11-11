@@ -24,7 +24,6 @@ const useListEvents = () => {
    * Adds a new vector to the list
    */
   const vectorSubmitHandler = (vectorStr: string) => {
-    // triggered by enter key
     const newVector = vectorFromTex(vectorStr);
 
     if (!newVector) {
