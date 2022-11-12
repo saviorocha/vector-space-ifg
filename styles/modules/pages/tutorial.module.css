@@ -1,10 +1,10 @@
 .container {
-  font-family: "Raleway", sans-serif;
   line-height: 1.65;
   text-justify: auto;
 }
 
 .tutorialtext {
+  /* font-family: "Raleway", sans-serif; */
   /* font-size: 16px; */
   /* font-weight: 500; */
 }
@@ -44,29 +44,57 @@
   max-width: 1124px;
 }
 
+/* desktop */
+@media only screen and (min-width: 768px) {
+  .navcontent {
+    border-right: 1px solid #cccccc;
+    border-bottom: none;
+    position: sticky;
+    top: calc(81px + 50px);
+    height: calc(100vh - 2rem - 81px - 50px);
+    margin-right: 30px;
+    padding-bottom: 0;
+    padding-right: 1.5rem;
+    width: 300px;
+    min-width: 300px;
+  }
+
+  .pagecontent {
+    flex-direction: initial;
+    margin-top: 2rem;
+  }
+
+  .tutorialcontent {
+    min-width: calc(100% - 300px - 1rem);
+  }
+
+  .tutorialcontent > p {
+    margin: 10px 0;
+  }
+}
+
+/* mobile */
 .pagecontent {
   position: relative;
   display: flex;
-  margin-top: 2rem;
+  flex-direction: column;
+  margin-top: 0;
 }
 
 .navcontent {
-  /* background-color: #f4f4f4; */
-  /* border-radius: 1rem; */
-  border-right: 1px solid #cccccc;
-  position: sticky;
-  top: calc(81px + 50px);
-  height: calc(100vh - 2rem - 81px - 50px);
-  margin-right: 30px;
-  padding-bottom: 0;
-  padding-right: 1.5rem;
-  width: 300px;
-  min-width: 300px;
+  min-width: 0;
+  border-bottom: 1px solid #cccccc;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 
 .navcontent ul {
   margin-left: 30px;
   margin-top: 30px;
+}
+
+.tutorialcontent {
+  min-width: calc(100% - 300px - 1rem);
 }
 
 .listitem {
@@ -92,12 +120,9 @@
   color: #a3a3a3;
 }
 
-.listitem:hover, .listsubitem:hover {
+.listitem:hover,
+.listsubitem:hover {
   color: #848484;
-}
-
-.tutorialcontent {
-  min-width: calc(100% - 300px - 1rem);
 }
 
 .genericlist {
@@ -113,8 +138,4 @@
 
 .heading {
   font-size: 1.5em;
-}
-
-.tutorialcontent > p {
-  margin: 10px 0;
 }

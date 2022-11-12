@@ -13,9 +13,9 @@ const Home: NextPage = () => {
           <Aperture size={170} />
           VectorSpace
         </div>
-        <h1>
-          Bem-vindo ao VectorSpace! Um sistema de visualização e manipualação de
-          conceitos de Álgebra Linear.
+        <h1 className={styles.greetingstext}>
+          Bem-vindo ao VectorSpace, um sistema de visualização e manipualação de
+          conceitos de Álgebra Linear!
         </h1>
       </section>
       <section className={styles.pages}>
@@ -29,7 +29,6 @@ const Home: NextPage = () => {
           >
             <button className="">
               <HelpCircle />
-              {/* Primeira vez aqui? Veja o tutorial de como usar este sistema. */}
             </button>
             <p>Tela de tutorial</p>
           </div>
