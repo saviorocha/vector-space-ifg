@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Aperture, HelpCircle, PlayCircle, PlusCircle } from "react-feather";
 import Logo from "../components/icons/Logo";
 import styles from "../styles/modules/pages/homepage.module.css";
-
+import logostyle from "../styles/modules/ui/logo.module.css";
 const Home: NextPage = () => {
   const router = useRouter();
 
@@ -11,7 +11,7 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <section className={styles.greetings}>
         <div className={styles.logo}>
-          <Logo />
+          <Logo className={logostyle.logo}></Logo>
           <p className={styles.logotext}>VectorSpace</p>
         </div>
         <h1 className={styles.greetingstext}>

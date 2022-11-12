@@ -95,6 +95,10 @@ interface ListItemProps {
   isSubItem?: boolean;
 }
 
+interface LogoProps {
+  className: CSSProperties;
+}
+
 interface IBarItemProps {
   title: string;
   leftIcon: ReactElement;

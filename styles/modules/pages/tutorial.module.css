@@ -29,8 +29,21 @@
 .logo {
   margin-left: 30px;
   display: flex;
+  align-items: center;
   flex-direction: row;
 }
+
+.logotext {
+  font-family: "Prompt", sans-serif;
+  font-weight: 300;
+  font-size: 22px;
+  margin-left: 5px;
+}
+
+.headerlogo {
+  width: 45px;
+}
+
 
 .darkmodetoggle {
   margin-right: 30px;
@@ -66,35 +79,6 @@
 
 .tutorialcontent {
   min-width: calc(100% - 300px - 1rem);
-}
-
-/* desktop */
-@media only screen and (min-width: 768px) {
-  .navcontent {
-    border-right: 1px solid #cccccc;
-    border-bottom: none;
-    position: sticky;
-    top: calc(81px + 50px);
-    height: calc(100vh - 2rem - 81px - 50px);
-    margin-right: 30px;
-    padding-bottom: 0;
-    padding-right: 1.5rem;
-    width: 300px;
-    min-width: 300px;
-  }
-
-  .pagecontent {
-    flex-direction: initial;
-    margin-top: 2rem;
-  }
-
-  .tutorialcontent {
-    min-width: calc(100% - 300px - 1rem);
-  }
-
-  .tutorialcontent > p {
-    margin: 10px 0;
-  }
 }
 
 .listitem {
@@ -138,4 +122,33 @@
 
 .heading {
   font-size: 1.5em;
+}
+
+/* desktop */
+@media only screen and (min-width: 768px) {
+  .navcontent {
+    border-right: 1px solid #cccccc;
+    border-bottom: none;
+    position: sticky;
+    top: calc(81px + 50px);
+    height: calc(100vh - 2rem - 81px - 50px);
+    margin-right: 30px;
+    padding-bottom: 0;
+    padding-right: 1.5rem;
+    width: 300px;
+    min-width: 300px;
+  }
+
+  .pagecontent {
+    flex-direction: initial;
+    margin-top: 2rem;
+  }
+
+  .tutorialcontent {
+    min-width: calc(100% - 300px - 1rem);
+  }
+
+  .tutorialcontent > p {
+    margin: 10px 0;
+  }
 }

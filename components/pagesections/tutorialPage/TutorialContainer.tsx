@@ -5,6 +5,7 @@ import { FunctionComponent, useState } from "react";
 import { Aperture } from "react-feather";
 import { PropsChildren } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/pages/tutorial.module.css";
+import Logo from "../../icons/Logo";
 import ListItem from "./ListItem";
 
 const listItems = [
@@ -41,8 +42,8 @@ const TutorialContainer: FunctionComponent<PropsChildren> = ({ children }) => {
       <header className={styles.header}>
         <Link href="/">
           <a className={styles.logo}>
-            <Aperture />
-            VectorSpace
+            <Logo className={styles.headerlogo} />
+            <p className={styles.logotext}>VectorSpace</p>
           </a>
         </Link>
         <div className={styles.darkmodetoggle}>
