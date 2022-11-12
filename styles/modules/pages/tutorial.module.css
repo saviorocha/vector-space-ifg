@@ -44,6 +44,30 @@
   max-width: 1124px;
 }
 
+/* mobile */
+.pagecontent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+}
+
+.navcontent {
+  min-width: 0;
+  border-bottom: 1px solid #cccccc;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+}
+
+.navcontent ul {
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+.tutorialcontent {
+  min-width: calc(100% - 300px - 1rem);
+}
+
 /* desktop */
 @media only screen and (min-width: 768px) {
   .navcontent {
@@ -71,30 +95,6 @@
   .tutorialcontent > p {
     margin: 10px 0;
   }
-}
-
-/* mobile */
-.pagecontent {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  margin-top: 0;
-}
-
-.navcontent {
-  min-width: 0;
-  border-bottom: 1px solid #cccccc;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-}
-
-.navcontent ul {
-  margin-left: 30px;
-  margin-top: 30px;
-}
-
-.tutorialcontent {
-  min-width: calc(100% - 300px - 1rem);
 }
 
 .listitem {
