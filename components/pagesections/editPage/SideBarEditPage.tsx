@@ -68,11 +68,11 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
       // dark:bg-darklight dark:border-black
     >
       <ul className="relative">
-        <BarItem
+        {/* <BarItem
           title={"Movimentar"}
           leftIcon={<MousePointer />}
           handleOnClick={() => setEvents([])}
-        />
+        /> */}
         <BarItem
           title={"Inserir Vetor"}
           leftIcon={<VectorIcon />}

@@ -93,7 +93,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
         }}
         disabled={stateVecArr.transformationArr.length > 2}
       >
-        <Tooltip title="Adicionar nova transformação">
+        <Tooltip title="Adicionar Transformação Linear">
           <Plus />
         </Tooltip>
       </button>

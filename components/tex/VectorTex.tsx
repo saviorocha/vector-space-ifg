@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { Trash2 } from "react-feather";
+import { Edit2, Trash2 } from "react-feather";
 import useListEvents from "../../hooks/useListEvents";
 import { IVectorTexProps } from "../../interfaces/interfaces";
 import RenderTex from "./RenderTex";
@@ -10,7 +10,7 @@ import RenderTex from "./RenderTex";
 const VectorTex: FunctionComponent<IVectorTexProps> = ({
   vectorExpression,
   vectorName,
-  currentPlot
+  currentPlot,
 }) => {
   const [expression, setExpression] = useState(vectorExpression);
   const [showTex, setShowTex] = useState(true);
@@ -66,9 +66,17 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
       {!vectorName.includes("e_{1}") &&
       !vectorName.includes("e_{2}") &&
       currentPlot === 0 ? (
-        <button onClick={() => vectorDeleteHandler(vectorName)} className="ml-1">
-          <Trash2 size={19} />
-        </button>
+        <>
+          <button onClick={() => {}} className="ml-1">
+            <Edit2 size={19} />
+          </button>
+          <button
+            onClick={() => vectorDeleteHandler(vectorName)}
+            className="ml-1"
+          >
+            <Trash2 size={19} />
+          </button>
+        </>
       ) : null}
     </div>
   );
