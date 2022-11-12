@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { Aperture, HelpCircle, PlayCircle, PlusCircle } from "react-feather";
+import Logo from "../components/icons/Logo";
 import styles from "../styles/modules/pages/homepage.module.css";
 
 const Home: NextPage = () => {
@@ -10,8 +11,8 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <section className={styles.greetings}>
         <div className={styles.logo}>
-          <Aperture size={170} />
-          VectorSpace
+          <Logo />
+          <p className={styles.logotext}>VectorSpace</p>
         </div>
         <h1 className={styles.greetingstext}>
           Bem-vindo ao VectorSpace, um sistema de visualização e manipualação de

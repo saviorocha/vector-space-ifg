@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Prompt:wght@100;200;300;500&display=swap");
+
 /* mobile */
 .container {
   display: flex;
@@ -20,16 +22,26 @@
 }
 
 .greetingstext {
-    margin-top: 10px;
-    width: 90%;
+  margin-top: 10px;
+  width: 90%;
+  text-align: center;
+  /* font-size: ;   */
+
 }
 
 .logo {
   margin: 0 auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.logotext {
+  margin-top: 0.5rem;
+  font-family: "Prompt", sans-serif;
+  font-weight: 300;
+  font-size: 30px;
 }
 
 .pages {
@@ -68,5 +80,11 @@
 @media only screen and (min-width: 768px) {
   .transformationpages {
     flex-direction: row;
+  }
+  .logotext {
+    font-size: 50px;
+  }
+  .greetingstext {
+    font-size: 18px;  
   }
 }
