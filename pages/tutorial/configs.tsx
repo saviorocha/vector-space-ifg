@@ -1,24 +1,24 @@
 import React from "react";
 import TutorialContainer from "../../components/pagesections/tutorialPage/TutorialContainer";
 import styles from "../../styles/modules/pages/tutorial.module.css";
+import Image from "next/image";
+import configbox from "../../public/images/configbox.png";
 
 const Configs = () => {
   return (
     <TutorialContainer>
       <p>
         Algumas configurações podem ser realizadas clicando sobre o ícone com
-        uma engrenagem.
+        uma engrenagem no canto superior direito da tela:
       </p>
       <br />
-      <div
-        style={{
-          width: "200px",
-          height: "200px",
-          border: "1px solid gray",
-          margin: "0 auto",
-        }}
-      >
-        *imagem*
+      <div className={styles.imgwrapper}>
+        <Image
+          src={configbox}
+          alt="Janela de configurações"
+          width={350}
+          height={200}
+        />
       </div>
       <br />
       <p>Essas configurações possuem as seguintes funções:</p>

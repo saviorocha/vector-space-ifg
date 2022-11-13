@@ -55,7 +55,7 @@ const TransformationBar = ({ transformationNum = 0 }) => {
                 setToggleTrnInput(true);
               }}
             >
-              Adicionar transformação
+              Adicionar Transformação Linear
             </button>
           )}
         </InfoBox>

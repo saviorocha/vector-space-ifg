@@ -1,7 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import TutorialContainer from "../../../components/pagesections/tutorialPage/TutorialContainer";
 import styles from "../../../styles/modules/pages/tutorial.module.css";
+import animationplane from "../../../public/images/animationplane.gif";
+import animationbar from "../../../public/images/animationbar.png";
 
 const Animation = () => {
   return (
@@ -20,15 +23,13 @@ const Animation = () => {
         transformação nos vetores através de uma animação, na qual os vetores
         são deslocados de acordo com a transformação aplicada.
       </p>
-      <div
-        style={{
-          width: "200px",
-          height: "200px",
-          border: "1px solid gray",
-          margin: "0 auto",
-        }}
-      >
-        *imagem*
+      <div className={styles.imgwrapper}>
+        <Image
+          src={animationplane}
+          alt="Animação do plano"
+          width={360}
+          height={320}
+        />
       </div>
       <p>
         Abaixo do plano de coordenadas é possível encontrar três botões e uma
@@ -36,15 +37,13 @@ const Animation = () => {
         transformações. O segundo botão reinicia a animação. O terceiro botão
         inicia/pausa a animação dos vetores.
       </p>
-      <div
-        style={{
-          width: "200px",
-          height: "200px",
-          border: "1px solid gray",
-          margin: "0 auto",
-        }}
-      >
-        *imagem*
+      <div className={styles.imgwrapper}>
+        <Image
+          src={animationbar}
+          alt="Barra de funções de animação"
+          width={300}
+          height={40}
+        />
       </div>
     </TutorialContainer>
   );

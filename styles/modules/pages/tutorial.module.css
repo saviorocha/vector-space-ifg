@@ -3,11 +3,11 @@
   text-justify: auto;
 }
 
-.tutorialtext {
+/* .tutorialtext { */
   /* font-family: "Raleway", sans-serif; */
   /* font-size: 16px; */
   /* font-weight: 500; */
-}
+/* } */
 
 .header {
   position: sticky;
@@ -24,6 +24,11 @@
   transition: background 0.6s ease;
   transform: translateZ(0);
   backdrop-filter: saturate(180%) blur(5px);
+}
+
+.imgwrapper {
+  display: flex;
+  justify-content: center;
 }
 
 .logo {

@@ -25,7 +25,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
 
   useEffect(() => {
     setExpression(vectorExpression);
-    // console.log("vectorExpression", vectorExpression);
+    console.log("vectorExpression", vectorExpression);
   }, [vectorExpression]);
 
   const handleOnChange = (event: any) => {
