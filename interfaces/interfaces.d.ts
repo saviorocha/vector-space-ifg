@@ -87,6 +87,7 @@ interface IPlotVectorsProps {
 interface IInfoBox {
   children: ReactNode;
   customStyles?: string;
+  flexDirection?: string;
 }
 
 interface ListItemProps {

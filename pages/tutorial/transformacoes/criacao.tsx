@@ -95,7 +95,7 @@ const Creation = () => {
         />
       </div>
       <p>
-        Nesta caixa você pode-se editar a transformação clicando no botão
+        Nesta caixa pode-se editar a transformação clicando no botão
         superior esquerdo, mudar sua definição clicando no botão superior
         direito ou excluí-la clicando no botão inferior direito.
       </p>

@@ -5,6 +5,9 @@ import { useListContext, useNameContext } from "../context";
 import { useConfigContext } from "../context/ConfigContext";
 import { validateVectorName, validateVectorValues } from "../utils";
 
+/**
+ * Custom hook with methods for operations with KaTeX strings
+ */
 const useTexStr = () => {
   const { stateVecArr } = useListContext();
   const { currentPlot } = useNameContext();
@@ -14,6 +17,7 @@ const useTexStr = () => {
 
   /**
    * Returns a array with different string representations for a transformation
+   * @param {number} transformationIndex - index of the transformation on the stateVecArr of the list context
    * @returns KaTeX string array
    */
   const matrixStrings = (transformationIndex?: number) => {

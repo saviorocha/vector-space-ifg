@@ -1,19 +1,22 @@
+import { Tooltip } from "@mui/material";
 import * as d3 from "d3";
-import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
-import { CornerUpLeft, Pause, Play, RotateCcw } from "react-feather";
+import React, { useEffect, useRef, useState } from "react";
+import { Pause, Play, RotateCcw } from "react-feather";
 import { useD3Context, useListContext } from "../../context";
-import styles from "../../styles/modules/pages/D3.module.css";
+import useTexStr from "../../hooks/useTexStr";
+import styles from "../../styles/modules/pages/animation.module.css";
+import RenderTex from "../tex/RenderTex";
+import InfoBox from "../ui/dataDisplay/InfoBox";
 import AnimationPlotComponent from "./animationPlotComponent";
 
 const D3PlotAnimation = () => {
-  const router = useRouter();
   const [isPlaying, setIsPlaying] = useState(false);
   const refElement = useRef<null | HTMLDivElement>(null);
   const [d3Component, setD3Component] = useState<AnimationPlotComponent>(
     {} as AnimationPlotComponent
   );
 
+  const { matrixStrings } = useTexStr();
   const { dimension } = useD3Context();
   const { stateVecArr } = useListContext();
 
@@ -82,6 +85,11 @@ const D3PlotAnimation = () => {
   };
 
   const handlePlayAnimation = () => {
+    if (stateVecArr.transformationArr.length < 2) {
+      alert("nenhuma transformação adicionada ainda!");
+      return;
+    }
+
     setIsPlaying(true);
     let run = 1;
     const interval = setInterval(() => {
@@ -121,24 +129,59 @@ const D3PlotAnimation = () => {
 
   return (
     <>
-      <section id={styles.plot} ref={refElement}></section>
-      <section className="flex items-center justify-center">
-        <button onClick={() => {}}>
-          <CornerUpLeft />
-        </button>
-        <button onClick={createPlane}>
-          <RotateCcw />
-        </button>
-        {isPlaying ? (
-          <button onClick={handlePauseAnimation}>
-            <Pause />
-          </button>
-        ) : (
-          <button onClick={handlePlayAnimation}>
-            <Play />
-          </button>
-        )}
+      <div className={styles.plotcontainer}>
+        <section id={styles.plot} ref={refElement}></section>
+        <InfoBox customStyles="h-32" flexDirection="row">
+          {stateVecArr.transformationArr.length > 1 ? (
+            stateVecArr.transformationArr.map((trn, i) => {
+              if (i !== 0) {
+                return (
+                  <React.Fragment key={i}>
+                    <RenderTex mathExpression={matrixStrings(i)[0]} />
+                    {i < stateVecArr.transformationArr.length - 1 ? (
+                      <RenderTex
+                        mathExpression={String.raw`\longrightarrow`}
+                        classStyle="m-5"
+                      />
+                    ) : null}
+                  </React.Fragment>
+                );
+              }
+            })
+          ) : (
+            <div>nenhuma transformação adicionada</div>
+          )}
+        </InfoBox>
+      </div>
+      <section className={styles.playercontainer}>
+        <section className={styles.btncontainer}>
+          <Tooltip title="Reiniciar transformação">
+            <button className={styles.playerbtn} onClick={createPlane}>
+              <RotateCcw />
+            </button>
+          </Tooltip>
+          {isPlaying ? (
+            <Tooltip title="Pausar">
+              <button
+                className={styles.playerbtn}
+                onClick={handlePauseAnimation}
+              >
+                <Pause />
+              </button>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Reproduzir">
+              <button
+                className={styles.playerbtn}
+                onClick={handlePlayAnimation}
+              >
+                <Play />
+              </button>
+            </Tooltip>
+          )}
+        </section>
         <input
+          className={styles.playerbar}
           type="range"
           min="0"
           max="100"
@@ -146,8 +189,10 @@ const D3PlotAnimation = () => {
           // step={0.01}
           onChange={handleProgressBar}
         />
-        <button onClick={teste}>teste</button>
       </section>
+      {/* <button className={styles.playerbtn} onClick={teste}>
+        teste
+      </button> */}
     </>
   );
 };

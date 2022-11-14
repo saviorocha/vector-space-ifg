@@ -1,0 +1,152 @@
+#returnbtn {
+  cursor: pointer;
+}
+
+#plot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 480px;
+  height: 420px;
+
+  margin: 10px;
+
+  /* margin: auto 20rem; */
+  /* padding-left: 10px; */
+  /* padding-right: 10px; */
+
+  /* background-color: rgb(252, 252, 252);
+    border: 1px solid rgb(250, 250, 250);
+    border-radius: 0.25rem;
+    box-shadow: 0 0 0.25em rgb(220, 220, 220); */
+}
+
+.plotcontainer {
+  margin: 10px 0;
+  border: 1px solid #cfcfcf;
+  border-radius: 1rem;
+  background-color: #f7f7f7;
+  height: 33rem;
+}
+
+.transformationarrow {
+  margin-top: -30px;
+}
+
+.playercontainer {
+  /* margin-top: 5rem; */
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: 3em;
+  border: 1px solid #737373;
+  width: 70%;
+}
+
+.playerbtn,
+.playerbar {
+  padding: 3px;
+}
+
+.playerbtn:hover {
+  background-color: #d7d7d7;
+}
+
+.btncontainer {
+  display: flex;
+  align-items: center;
+  margin-left: 13px;
+}
+
+/* bar styles */
+.playerbar {
+  -webkit-appearance: none;
+  width: 85%;
+  margin-right: 10px;
+  cursor: pointer;
+  /* --thumb-color: red; */
+}
+.playerbar:focus {
+  outline: none;
+}
+.playerbar::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000;
+  background: #dbdbdb;
+  border-radius: 3px;
+  border: 0px solid #010101;
+}
+.playerbar::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000031;
+  border: 1px solid #00001e;
+  height: 14px;
+  width: 21px;
+  border-radius: 15px;
+  background: #f7f7f7;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -3.5px;
+}
+.playerbar:focus::-webkit-slider-runnable-track {
+  background: #dbdbdb;
+}
+.playerbar::-moz-range-track {
+  width: 100%;
+  height: 8px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000;
+  background: #dbdbdb;
+  border-radius: 3px;
+  border: 0px solid #010101;
+}
+.playerbar::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000031;
+  border: 1px solid #00001e;
+  height: 14px;
+  width: 21px;
+  border-radius: 15px;
+  background: #f7f7f7;
+  cursor: pointer;
+}
+.playerbar::-ms-track {
+  width: 100%;
+  height: 8px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+.playerbar::-ms-fill-lower {
+  background: #dbdbdb;
+  border: 0px solid #010101;
+  border-radius: 6px;
+  box-shadow: 1px 1px 1px #000000;
+}
+.playerbar::-ms-fill-upper {
+  background: #dbdbdb;
+  border: 0px solid #010101;
+  border-radius: 6px;
+  box-shadow: 1px 1px 1px #000000;
+}
+.playerbar::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 1px 1px 1px #000031;
+  border: 1px solid #00001e;
+  height: 14px;
+  width: 21px;
+  border-radius: 15px;
+  background: #f7f7f7;
+  cursor: pointer;
+}
+.playerbar:focus::-ms-fill-lower {
+  background: #dbdbdb;
+}
+.playerbar:focus::-ms-fill-upper {
+  background: #dbdbdb;
+}
