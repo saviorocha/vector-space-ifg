@@ -10,6 +10,7 @@ import InfoBox from "../ui/dataDisplay/InfoBox";
 import AnimationPlotComponent from "./animationPlotComponent";
 
 const D3PlotAnimation = () => {
+  const barRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const refElement = useRef<null | HTMLDivElement>(null);
   const [d3Component, setD3Component] = useState<AnimationPlotComponent>(
@@ -86,7 +87,7 @@ const D3PlotAnimation = () => {
 
   const handlePlayAnimation = () => {
     if (stateVecArr.transformationArr.length < 2) {
-      alert("nenhuma transformação adicionada ainda!");
+      alert("Nenhuma transformação adicionada ainda!");
       return;
     }
 
@@ -94,8 +95,8 @@ const D3PlotAnimation = () => {
     let run = 1;
     const interval = setInterval(() => {
       d3Component.updateData(
-        stateVecArr.vectorArr[run].map((state) => {
-          return state.d3VectorFormat();
+        stateVecArr.vectorArr[run].map((vector) => {
+          return vector.d3VectorFormat();
         })
       );
       run++;
@@ -111,6 +112,8 @@ const D3PlotAnimation = () => {
   };
 
   const createPlane = () => {
+    // @ts-ignore
+    barRef.current.value = 0;
     setIsPlaying(false);
     d3.select(refElement.current).selectAll("*").remove();
 
@@ -126,6 +129,23 @@ const D3PlotAnimation = () => {
   };
 
   useEffect(createPlane, []);
+
+  useEffect(() => {
+    // @ts-ignore
+    let value = barRef.current.value;
+    const seconds = 30 * (stateVecArr.transformationArr.length - 1);
+      console.log("isPlaying - outside", isPlaying)
+      const interval = setInterval(() => {
+      // @ts-ignore
+      barRef.current.value = value;
+      value++;
+      console.log("isPlaying - interval", isPlaying)
+      if (value > 100 || !isPlaying) {
+        clearInterval(interval);
+        return;
+      }
+    }, seconds);
+  }, [isPlaying]);
 
   return (
     <>
@@ -149,7 +169,7 @@ const D3PlotAnimation = () => {
               }
             })
           ) : (
-            <div>nenhuma transformação adicionada</div>
+            <div>Nenhuma transformação adicionada ainda!</div>
           )}
         </InfoBox>
       </div>
@@ -182,6 +202,8 @@ const D3PlotAnimation = () => {
         </section>
         <input
           className={styles.playerbar}
+          disabled
+          ref={barRef}
           type="range"
           min="0"
           max="100"
@@ -190,7 +212,7 @@ const D3PlotAnimation = () => {
           onChange={handleProgressBar}
         />
       </section>
-      {/* <button className={styles.playerbtn} onClick={teste}>
+      {/* <button className={styles.playerbtn} onClick={timer}>
         teste
       </button> */}
     </>
