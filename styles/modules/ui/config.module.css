@@ -17,6 +17,21 @@
   align-items: center;
 }
 
+.top {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  margin-top: 5px;
+  margin-right: 5px;
+  margin-bottom: 0;
+}
+
+.x {
+  margin-right: 3px;
+  margin-top: 3px;
+}
+
 .popupitem {
   display: flex;
   justify-content: space-between;

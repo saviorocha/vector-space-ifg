@@ -1,7 +1,7 @@
 import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
 import { useTheme } from "next-themes";
 import { useState } from "react";
-import { Globe, Hash, Moon } from "react-feather";
+import { Hash, Moon } from "react-feather";
 import { useConfigContext } from "../../../context/ConfigContext";
 import stylesconfig from "../../../styles/modules/ui/config.module.css";
 import BasisVectorIcon from "../../icons/BasisVectorIcon";

@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from "react";
-import { Settings } from "react-feather";
+import { Settings, X } from "react-feather";
 import { PropsChildren } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/ui/config.module.css";
 
@@ -18,6 +18,13 @@ const PopupWindow: FunctionComponent<PropsChildren> = ({ children }) => {
           opacity: isActive ? 1 : 0,
         }}
       >
+        <section className={styles.top}>
+          <button className={styles.x} onClick={() => {
+            setIsActive(false)
+          }}>
+            <X />
+          </button>
+        </section>
         {children}
       </section>
       <button
