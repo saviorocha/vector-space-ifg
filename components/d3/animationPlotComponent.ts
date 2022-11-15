@@ -14,9 +14,12 @@ class AnimationPlotComponent {
   xAxis: any;
   yAxis: any;
 
+  hideNumbers: boolean;
+
   constructor(
     refComponent: null | HTMLDivElement,
     dimensions: Dimesion,
+    hideNumbers: boolean,
     vectors: VectorData[][]
   ) {
     const { margin, width, height } = dimensions;
@@ -24,6 +27,7 @@ class AnimationPlotComponent {
     this.margin = margin;
     this.width = width;
     this.height = height;
+    this.hideNumbers = hideNumbers;
 
     this.svg = d3
       .select(refComponent)
@@ -35,10 +39,20 @@ class AnimationPlotComponent {
       .attr("id", "plane")
       .attr("transform", `translate(${this.margin.left},${this.margin.top})`);
     this.createPlot();
-
     this.updateData(this.vectors);
     this.createVector();
+    this.events();
   }
+
+  events = () => {};
+
+  displayNumbers = () => {
+    d3.select("#myXaxis").remove();
+    d3.select("#myYaxis").remove();
+
+    this.hideNumbers = !this.hideNumbers;
+    this.createPlot();
+  };
 
   /**
    * Initializes axis values and adds them to the svg to create the plot
@@ -59,10 +73,19 @@ class AnimationPlotComponent {
       .append("g")
       .attr("transform", `translate(${this.width / 2}, 0)`)
       .attr("id", "myYaxis");
+      
+    if (this.hideNumbers) {
+      this.xAxis = this.xAxis.tickFormat((d: any, i: number) => [""][i]);
+      this.yAxis = this.yAxis.tickFormat((d: any, i: number) => [""][i]);
+    }
+
+    // add the axis
+    this.svg.selectAll("#myXaxis").call(this.xAxis);
+    this.svg.selectAll("#myYaxis").call(this.yAxis);
   };
 
   /**
-   * Recreates the lines with new vector values 
+   * Recreates the lines with new vector values
    */
   updateData = (vecData: VectorData[][]) => {
     const defaultMax = 5;

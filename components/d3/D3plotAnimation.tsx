@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import React, { useEffect, useRef, useState } from "react";
 import { Pause, Play, RotateCcw } from "react-feather";
 import { useD3Context, useListContext } from "../../context";
+import { useConfigContext } from "../../context/ConfigContext";
 import useTexStr from "../../hooks/useTexStr";
 import styles from "../../styles/modules/pages/animation.module.css";
 import RenderTex from "../tex/RenderTex";
@@ -17,6 +18,7 @@ const D3PlotAnimation = () => {
     {} as AnimationPlotComponent
   );
 
+  const { hideNumbers, showBasisVectors } = useConfigContext()
   const { matrixStrings } = useTexStr();
   const { dimension } = useD3Context();
   const { stateVecArr } = useListContext();
@@ -117,18 +119,29 @@ const D3PlotAnimation = () => {
     setIsPlaying(false);
     d3.select(refElement.current).selectAll("*").remove();
 
+    let vectorsMap = stateVecArr.vectorArr[0];
+    if (!showBasisVectors) { // filter out the basis vectors
+      vectorsMap = vectorsMap.filter((vector) => {
+        return !vector.isBasisVector;
+      });
+    }
+
+    const vectors = vectorsMap.map((vector) => {
+      return vector.d3VectorFormat();
+    });
+
+
     setD3Component(
       new AnimationPlotComponent(
         refElement.current,
         dimension,
-        stateVecArr.vectorArr[0].map((state) => {
-          return state.d3VectorFormat();
-        })
+        hideNumbers,
+        vectors
       )
     );
   };
 
-  useEffect(createPlane, []);
+  useEffect(createPlane, [stateVecArr, hideNumbers, showBasisVectors]);
 
   useEffect(() => {
     // @ts-ignore
