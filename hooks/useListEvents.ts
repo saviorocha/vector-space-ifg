@@ -49,7 +49,7 @@ const useListEvents = () => {
     const newVector = vectorFromTex(event.target.value);
     const prevVectorName = vectorFromTex(vectorExpression)?.name;
     if (!newVector || !prevVectorName) {
-      alert("invalid");
+      alert("Expressão inválida");
       return;
     }
     const newHead = updateVector(newVector, prevVectorName);

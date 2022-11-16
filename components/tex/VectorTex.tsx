@@ -21,22 +21,27 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
   useEffect(() => {
     // console.log("vectorName", vectorName);
     // console.log("vectorExpression", vectorExpression);
-  }, []);
+    // console.log("expression", expression);
+  }, [expression]);
 
   useEffect(() => {
     setExpression(vectorExpression);
-    console.log("vectorExpression", vectorExpression);
+    // console.log("vectorExpression", vectorExpression);
   }, [vectorExpression]);
 
   const handleOnChange = (event: any) => {
-    setExpression(event.target.value);
+    if (event.target.value) {
+      setExpression(event.target.value);
+    }
   };
 
   const handleVectorUpdate = (event: any) => {
     if (event.key === "Enter") {
       vectorUpdateHandler(vectorExpression, event);
-      setExpression(event.target.value);
       setShowTex(true);
+    }
+    if (event.target.value) {
+      setExpression(event.target.value);
     }
   };
 

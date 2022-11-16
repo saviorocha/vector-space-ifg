@@ -70,7 +70,7 @@ const ConfigPopup = () => {
           <div className={stylesconfig.configicon}>
             <Hash />
           </div>
-          <p>Mostrar números do gráfico</p>
+          <p>Esconder números do gráfico</p>
           <div className={stylesconfig.configcontrol}>
             <input
               type="checkbox"

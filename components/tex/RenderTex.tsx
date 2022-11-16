@@ -1,6 +1,6 @@
 import { Tooltip } from "@mui/material";
 import "katex/dist/katex.min.css";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { InlineMath } from "react-katex";
 import { useNameContext } from "../../context";
 import { IRenderTexProps } from "../../interfaces/interfaces";
@@ -15,6 +15,10 @@ const RenderTex: FunctionComponent<IRenderTexProps> = ({
   classStyle = "",
 }) => {
   const { currentPlot } = useNameContext();
+
+  useEffect(() => {
+    // console.log(mathExpression)
+  }, [])
 
   return (
     <Tooltip title={title} placement="top">
