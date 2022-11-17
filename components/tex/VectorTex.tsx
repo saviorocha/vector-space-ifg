@@ -40,7 +40,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
       vectorUpdateHandler(vectorExpression, event);
       setShowTex(true);
     }
-    if (event.target.value) {
+    if (event.target.value) { // checks for empty strings
       setExpression(event.target.value);
     }
   };

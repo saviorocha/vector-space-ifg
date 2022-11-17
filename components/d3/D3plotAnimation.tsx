@@ -13,12 +13,15 @@ import AnimationPlotComponent from "./animationPlotComponent";
 const D3PlotAnimation = () => {
   const barRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const intervalRef = useRef();
+  const [state, setState] = useState("init");
+  const [countDown, setCountdown] = useState(0);
   const refElement = useRef<null | HTMLDivElement>(null);
   const [d3Component, setD3Component] = useState<AnimationPlotComponent>(
     {} as AnimationPlotComponent
   );
 
-  const { hideNumbers, showBasisVectors } = useConfigContext()
+  const { hideNumbers, showBasisVectors } = useConfigContext();
   const { matrixStrings } = useTexStr();
   const { dimension } = useD3Context();
   const { stateVecArr } = useListContext();
@@ -82,6 +85,18 @@ const D3PlotAnimation = () => {
     // chamar função updateData()
   };
 
+  const time = () => {
+    setCountdown((countDown: any) => {
+      if (countDown < 100) {
+        return countDown + 1;
+      }
+      if (countDown === 100) {
+        setIsPlaying(false);
+        return countDown;
+      }
+    });
+  };
+
   const handleProgressBar = (event: any) => {
     // console.log(event.target.value);
     event.preventDefault();
@@ -116,11 +131,13 @@ const D3PlotAnimation = () => {
   const createPlane = () => {
     // @ts-ignore
     barRef.current.value = 0;
+    setCountdown(0);
     setIsPlaying(false);
     d3.select(refElement.current).selectAll("*").remove();
 
     let vectorsMap = stateVecArr.vectorArr[0];
-    if (!showBasisVectors) { // filter out the basis vectors
+    if (!showBasisVectors) {
+      // filter out the basis vectors
       vectorsMap = vectorsMap.filter((vector) => {
         return !vector.isBasisVector;
       });
@@ -129,7 +146,6 @@ const D3PlotAnimation = () => {
     const vectors = vectorsMap.map((vector) => {
       return vector.d3VectorFormat();
     });
-
 
     setD3Component(
       new AnimationPlotComponent(
@@ -142,23 +158,24 @@ const D3PlotAnimation = () => {
   };
 
   useEffect(createPlane, [stateVecArr, hideNumbers, showBasisVectors]);
+  
+  useEffect(() => {
+    if (isPlaying) {
+      // @ts-ignore
+      intervalRef.current = setInterval(
+        time,
+        30 * (stateVecArr.transformationArr.length - 1)
+      );
+    }
+    if (!isPlaying) {
+      clearInterval(intervalRef.current);
+    }
+  }, [isPlaying]);
 
   useEffect(() => {
     // @ts-ignore
-    let value = barRef.current.value;
-    const seconds = 30 * (stateVecArr.transformationArr.length - 1);
-      console.log("isPlaying - outside", isPlaying)
-      const interval = setInterval(() => {
-      // @ts-ignore
-      barRef.current.value = value;
-      value++;
-      console.log("isPlaying - interval", isPlaying)
-      if (value > 100 || !isPlaying) {
-        clearInterval(interval);
-        return;
-      }
-    }, seconds);
-  }, [isPlaying]);
+    barRef.current.value = countDown;
+  }, [countDown]);
 
   return (
     <>
@@ -225,9 +242,15 @@ const D3PlotAnimation = () => {
           onChange={handleProgressBar}
         />
       </section>
-      {/* <button className={styles.playerbtn} onClick={timer}>
+      {/* <button
+        className={styles.playerbtn}
+        onClick={() => {
+          setIsPlaying(!isPlaying);
+        }}
+      >
         teste
-      </button> */}
+      </button>
+      <div>count: {countDown}</div> */}
     </>
   );
 };
