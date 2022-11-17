@@ -17,6 +17,7 @@ const D3PlotAnimation = () => {
   const [state, setState] = useState("init");
   const [countDown, setCountdown] = useState(0);
   const refElement = useRef<null | HTMLDivElement>(null);
+  // const [vectors, setVectors] = useState();
   const [d3Component, setD3Component] = useState<AnimationPlotComponent>(
     {} as AnimationPlotComponent
   );
@@ -97,6 +98,20 @@ const D3PlotAnimation = () => {
     });
   };
 
+  const vectors = (index: number) => {
+    let vectorsMap = stateVecArr.vectorArr[index];
+    if (!showBasisVectors) {
+      // filter out the basis vectors
+      vectorsMap = vectorsMap.filter((vector) => {
+        return !vector.isBasisVector;
+      });
+    }
+
+    return vectorsMap.map((vector) => {
+      return vector.d3VectorFormat();
+    });
+  };
+
   const handleProgressBar = (event: any) => {
     // console.log(event.target.value);
     event.preventDefault();
@@ -111,11 +126,7 @@ const D3PlotAnimation = () => {
     setIsPlaying(true);
     let run = 1;
     const interval = setInterval(() => {
-      d3Component.updateData(
-        stateVecArr.vectorArr[run].map((vector) => {
-          return vector.d3VectorFormat();
-        })
-      );
+      d3Component.updateData(vectors(run));
       run++;
       if (run === stateVecArr.transformationArr.length) {
         clearInterval(interval);
@@ -135,30 +146,18 @@ const D3PlotAnimation = () => {
     setIsPlaying(false);
     d3.select(refElement.current).selectAll("*").remove();
 
-    let vectorsMap = stateVecArr.vectorArr[0];
-    if (!showBasisVectors) {
-      // filter out the basis vectors
-      vectorsMap = vectorsMap.filter((vector) => {
-        return !vector.isBasisVector;
-      });
-    }
-
-    const vectors = vectorsMap.map((vector) => {
-      return vector.d3VectorFormat();
-    });
-
     setD3Component(
       new AnimationPlotComponent(
         refElement.current,
         dimension,
         hideNumbers,
-        vectors
+        vectors(0)
       )
     );
   };
 
   useEffect(createPlane, [stateVecArr, hideNumbers, showBasisVectors]);
-  
+
   useEffect(() => {
     if (isPlaying) {
       // @ts-ignore
