@@ -15,7 +15,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   vectors,
   plotIndex,
 }) => {
-  const inputRef = useRef(null);
+  const inputRef = useRef<null | HTMLInputElement>(null);
   const [vectorRender, setVectorRender] = useState(vectors);
   const { showBasisVectors } = useConfigContext();
   const { vectorSubmitHandler } = useListEvents();
@@ -31,16 +31,14 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
 
   const handleVectorBtnSubmit = () => {
     if (inputRef.current) {
-      // @ts-ignore
       vectorSubmitHandler(inputRef.current.value);
-      // @ts-ignore
       inputRef.current.value = "";
     }
   };
 
   useEffect(() => {
     setVectorRender(
-      vectors.filter((vector: Vector) => {
+      vectors.filter((vector: Vector) => { // filter basis vectors
         return showBasisVectors ? vector : !vector.isBasisVector;
       })
     );
@@ -54,7 +52,6 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
         bg-white border border-gray-400
         text-sm shadow-md dark:bg-zinc-900 dark:border-neutral-600
       "
-        
     >
       <ul className="overflow-scroll" id={styles.vectorlist}>
         {vectorRender.map((vec: Vector, i: number) => {

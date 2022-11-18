@@ -20,7 +20,7 @@ const useList = () => {
   const addVector = (newVector: Vector): StateNode => {
     let newHead = list.head;
     newHead.vectors.push(newVector);
-    list.updateNodes();
+    list.updateNodes(decimalPoint);
 
     return newHead;
   };
@@ -47,7 +47,7 @@ const useList = () => {
     newHead.vectors = newHead.vectors.filter((vec) => {
       return vec.name !== vectorName;
     });
-    list.updateNodes();
+    list.updateNodes(decimalPoint);
     return newHead;
   };
 
@@ -127,7 +127,7 @@ const useList = () => {
 
     if (next) next._previous = previous;
     if (previous) previous._next = next;
-    list.updateNodes();
+    list.updateNodes(decimalPoint);
     return newHead;
   };
 

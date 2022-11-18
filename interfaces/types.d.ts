@@ -1,7 +1,7 @@
 type StateObj = {
-  transformationArr: Transformation[], 
-  vectorArr: Vector[][],
-}
+  transformationArr: Transformation[];
+  vectorArr: Vector[][];
+};
 
 type Dimesion = {
   margin: Margin;
@@ -19,6 +19,11 @@ type Margin = {
 type VectorData = {
   coord1: number;
   coord2: number;
+};
+
+type VectorType = {
+  expression?: string;
+  value: number;
 };
 
 // type VectorData = {
