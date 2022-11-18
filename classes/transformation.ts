@@ -22,10 +22,18 @@ class Transformation {
     this._matrixTransformation = transpose(matrix([_e1, _e2])); // have to transpose to match mathjs matrix
   }
 
-  applyTransformation(vector: Vector): Vector {
+  applyTransformation(vector: Vector, decimalPoint: number): Vector {
     const coordinates: [number, number] = [
-      multiply(this._matrixTransformation, vector.array).get([0]),
-      multiply(this._matrixTransformation, vector.array).get([1]),
+      parseFloat(
+        multiply(this._matrixTransformation, vector.array)
+          .get([0])
+          .toFixed(decimalPoint)
+      ),
+      parseFloat(
+        multiply(this._matrixTransformation, vector.array)
+          .get([1])
+          .toFixed(decimalPoint)
+      ),
     ];
     return new Vector(
       coordinates,

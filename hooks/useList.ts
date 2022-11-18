@@ -2,6 +2,7 @@ import StateNode from "../classes/stateNode";
 import Transformation from "../classes/transformation";
 import Vector from "../classes/vector";
 import { useListContext } from "../context";
+import { useConfigContext } from "../context/ConfigContext";
 
 /**
  * Custom hook to manage operations on the current list object through the listContext;
@@ -9,7 +10,7 @@ import { useListContext } from "../context";
  */
 const useList = () => {
   const { list } = useListContext();
-  //   const [head, setHead] = useState(list.head)
+  const { decimalPoint } = useConfigContext()
 
   /**
    * Adds a new vector to the list
@@ -66,7 +67,7 @@ const useList = () => {
       return list.head;
     }
 
-    let newNode = new StateNode(transformation, previousNode);
+    let newNode = new StateNode(transformation, previousNode, decimalPoint);
 
     if (!previousNode._next) {
       previousNode._next = newNode;
@@ -78,7 +79,7 @@ const useList = () => {
       nextNode._previous = newNode;
 
       while (nextNode) {
-        nextNode.vectors = nextNode.updateVectors();
+        nextNode.vectors = nextNode.updateVectors(decimalPoint);
         nextNode = nextNode._next!;
       }
     }
@@ -105,7 +106,7 @@ const useList = () => {
 
     let nextState = transformationNode;
     while (nextState) {
-      nextState.vectors = nextState.updateVectors();
+      nextState.vectors = nextState.updateVectors(decimalPoint);
       nextState = nextState._next!;
     }
 

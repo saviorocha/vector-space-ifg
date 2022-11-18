@@ -128,7 +128,7 @@ const useTexStr = () => {
    * @param {string} vectorStr - in the format "[name]_{[number]} = ([xcoordinate], [ycoordinate])"
    * @returns {Vector} New vector object
    */
-  const vectorFromTex = (vectorStr: string): Vector | null => {
+  const vectorFromTex = (vectorStr: string): Vector | undefined => {
     vectorStr = vectorStr.replace(/\s/g, ""); // removes white spaces
 
     const expression: string = vectorStr
@@ -165,7 +165,8 @@ const useTexStr = () => {
         expression.includes("=") ? expression.split("=")[1] : expression
       )
     ) {
-      return null;
+      alert("expressão inválida");
+      return;
     }
     // gonna improve this later, sorry
     if (name === `v_{${vectorNameCounter}}`) {
