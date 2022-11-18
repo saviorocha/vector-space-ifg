@@ -4,13 +4,13 @@ class Vector {
   private _xTex: string;
   private _yTex: string;
   private _name: string;
-  private _array: [CoordinateType, CoordinateType];
+  private _array: [ExpressionType, ExpressionType];
   private color: string;
   private _prevVector: Vector | undefined;
   private _isBasisVector: boolean;
 
   constructor(
-    array: [CoordinateType, CoordinateType],
+    array: [ExpressionType, ExpressionType],
     _name: string = "v1",
     color: string = "",
     isBasisVector: boolean = false,
@@ -27,7 +27,7 @@ class Vector {
     this._isBasisVector = isBasisVector;
   }
 
-  get array(): [CoordinateType, CoordinateType] {
+  get array(): [ExpressionType, ExpressionType] {
     return this._array;
   }
 

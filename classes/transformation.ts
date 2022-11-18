@@ -2,19 +2,19 @@ import { Matrix, matrix, multiply, transpose } from "mathjs";
 import Vector from "./vector";
 
 class Transformation {
-  private _e1: [CoordinateType, CoordinateType];
-  private _e2: [CoordinateType, CoordinateType];
+  private _e1: [ExpressionType, ExpressionType];
+  private _e2: [ExpressionType, ExpressionType];
   private _e1Vector: Vector;
   private _e2Vector: Vector;
   private _name: string;
   private _matrixTransformation: Matrix;
 
   constructor(
-    _e1: [CoordinateType, CoordinateType] = [
+    _e1: [ExpressionType, ExpressionType] = [
       { value: 1, texExpression: "1" },
       { value: 0, texExpression: "0" },
     ],
-    _e2: [CoordinateType, CoordinateType] = [
+    _e2: [ExpressionType, ExpressionType] = [
       { value: 0, texExpression: "0" },
       { value: 1, texExpression: "1" },
     ],
@@ -48,7 +48,7 @@ class Transformation {
         .get([1])
         .toFixed(decimalPoint)
     );
-    const coordinates: [CoordinateType, CoordinateType] = [
+    const coordinates: [ExpressionType, ExpressionType] = [
       {
         value: value1,
         texExpression: value1.toString(),
@@ -67,11 +67,11 @@ class Transformation {
     );
   }
 
-  get e1(): [CoordinateType, CoordinateType] {
+  get e1(): [ExpressionType, ExpressionType] {
     return this._e1;
   }
 
-  get e2(): [CoordinateType, CoordinateType] {
+  get e2(): [ExpressionType, ExpressionType] {
     return this._e2;
   }
 

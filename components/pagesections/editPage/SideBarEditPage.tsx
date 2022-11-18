@@ -25,8 +25,8 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
    * Predefined SideBar transformations
    */
   const transfromationSubmitHandler = (
-    e1: [CoordinateType, CoordinateType],
-    e2: [CoordinateType, CoordinateType]
+    e1: [ExpressionType, ExpressionType],
+    e2: [ExpressionType, ExpressionType]
   ) => {
     const newHead = addTransformation(
       new Transformation(e1, e2, `T_${stateVecArr.vectorArr.length}`)
