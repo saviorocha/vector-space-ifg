@@ -17,7 +17,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
 }) => {
   const inputRef = useRef<null | HTMLInputElement>(null);
   const [vectorRender, setVectorRender] = useState(vectors);
-  const { showBasisVectors } = useConfigContext();
+  const { showBasisVectors, showMathSymbols } = useConfigContext();
   const { vectorSubmitHandler } = useListEvents();
   const { vectorMatrixMultiplication } = useTexStr();
   const { stateVecArr } = useListContext();
@@ -38,7 +38,8 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
 
   useEffect(() => {
     setVectorRender(
-      vectors.filter((vector: Vector) => { // filter basis vectors
+      vectors.filter((vector: Vector) => {
+        // filter basis vectors
         return showBasisVectors ? vector : !vector.isBasisVector;
       })
     );
@@ -65,14 +66,22 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
                   )}
                 >
                   <VectorTex
-                    vectorExpression={`${vec.name}=(${vec.x},${vec.y})`}
+                    vectorExpression={`${vec.name}=(${
+                      showMathSymbols ? vec.xTex : vec.x
+                    },${
+                      showMathSymbols ? vec.yTex : vec.y
+                    })`}
                     vectorName={vec.name}
                     currentPlot={plotIndex}
                   />
                 </HoverableComponent>
               ) : (
                 <VectorTex
-                  vectorExpression={`${vec.name}=(${vec.x},${vec.y})`}
+                  vectorExpression={`${vec.name}=(${
+                    showMathSymbols ? vec.xTex : vec.x
+                  },${
+                    showMathSymbols ? vec.yTex : vec.y
+                  })`}
                   vectorName={vec.name}
                   currentPlot={plotIndex}
                 />

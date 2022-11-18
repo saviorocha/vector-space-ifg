@@ -1,29 +1,33 @@
 class Vector {
   x: number;
   y: number;
+  private _xTex: string;
+  private _yTex: string;
   private _name: string;
-  private _array: [number, number];
+  private _array: [CoordinateType, CoordinateType];
   private color: string;
   private _prevVector: Vector | undefined;
   private _isBasisVector: boolean;
 
   constructor(
-    array: [number, number],
+    array: [CoordinateType, CoordinateType],
     _name: string = "v1",
     color: string = "",
     isBasisVector: boolean = false,
     _prevVector?: Vector
   ) {
     this._array = array;
-    this.x = array[0];
-    this.y = array[1];
+    this.x = array[0].value;
+    this.y = array[1].value;
+    this._xTex = array[0].texExpression;
+    this._yTex = array[1].texExpression;
     this._name = _name;
     this._prevVector = _prevVector || undefined;
     this.color = color;
     this._isBasisVector = isBasisVector;
   }
 
-  get array(): [number, number] {
+  get array(): [CoordinateType, CoordinateType] {
     return this._array;
   }
 
@@ -41,6 +45,14 @@ class Vector {
 
   get isBasisVector(): boolean {
     return this._isBasisVector;
+  }
+
+  get xTex(): string {
+    return this._xTex;
+  }
+
+  get yTex(): string {
+    return this._yTex;
   }
 
   /**

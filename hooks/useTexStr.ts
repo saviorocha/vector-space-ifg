@@ -1,4 +1,4 @@
-import { evaluate } from "mathjs";
+import { evaluate, parse } from "mathjs";
 import Transformation from "../classes/transformation";
 import Vector from "../classes/vector";
 import { useListContext, useNameContext } from "../context";
@@ -11,7 +11,7 @@ import { validateVectorName, validateVectorValues } from "../utils";
 const useTexStr = () => {
   const { stateVecArr } = useListContext();
   const { currentPlot } = useNameContext();
-  const { decimalPoint } = useConfigContext();
+  const { decimalPoint, showMathSymbols } = useConfigContext();
   const { vectorNameCounter, setVectorNameCounter, transformationVars } =
     useNameContext();
 
@@ -21,7 +21,7 @@ const useTexStr = () => {
    * @returns KaTeX string array
    */
   const matrixStrings = (transformationIndex?: number) => {
-    const transformation =
+    const transformation: Transformation =
       stateVecArr.transformationArr[transformationIndex || currentPlot];
     const a = transformationVars[0];
     const b = transformationVars[1];
@@ -29,8 +29,24 @@ const useTexStr = () => {
       // matrix representation
       String.raw`
         ${transformation.name}(${a}, ${b}) = \begin{bmatrix}
-        ${transformation.e1[0]} & ${transformation.e2[0]}\\
-        ${transformation.e1[1]} & ${transformation.e2[1]}
+        ${
+          showMathSymbols
+            ? transformation.e1[0].texExpression
+            : transformation.e1[0].value
+        } & ${
+        showMathSymbols
+          ? transformation.e2[0].texExpression
+          : transformation.e2[0].value
+      }\\
+        ${
+          showMathSymbols
+            ? transformation.e1[1].texExpression
+            : transformation.e1[1].value
+        } & ${
+        showMathSymbols
+          ? transformation.e2[1].texExpression
+          : transformation.e2[1].value
+      }
           \end{bmatrix}\begin{bmatrix}
             ${a}\\
             ${b}
@@ -39,12 +55,12 @@ const useTexStr = () => {
       // algebraic definition
       `${transformation.name}(${a}, ${b}) = 
             (${defString(
-              transformation.e1[0],
-              transformation.e2[0],
+              transformation.e1[0].value,
+              transformation.e2[0].value,
               transformationVars
             )}, ${defString(
-        transformation.e1[1],
-        transformation.e2[1],
+        transformation.e1[1].value,
+        transformation.e2[1].value,
         transformationVars
       )})`
         .split(" ")
@@ -174,8 +190,14 @@ const useTexStr = () => {
     }
     return new Vector(
       [
-        parseFloat(evaluate(values[0]).toFixed(decimalPoint)),
-        parseFloat(evaluate(values[1]).toFixed(decimalPoint)),
+        {
+          value: parseFloat(evaluate(values[0]).toFixed(decimalPoint)),
+          texExpression: parse(values[0]).toTex(),
+        },
+        {
+          value: parseFloat(evaluate(values[1]).toFixed(decimalPoint)),
+          texExpression: parse(values[1]).toTex(),
+        },
       ],
       `${name}`
     );

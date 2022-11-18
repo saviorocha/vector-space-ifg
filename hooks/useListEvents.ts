@@ -1,4 +1,4 @@
-import { evaluate } from "mathjs";
+import { evaluate, parse } from "mathjs";
 import StateList from "../classes/stateList";
 import Transformation from "../classes/transformation";
 import { useListContext, useNameContext } from "../context";
@@ -88,12 +88,32 @@ const useListEvents = () => {
     const newHead = addTransformation(
       new Transformation(
         [
-          parseFloat(evaluate(event.target.t0.value).toFixed(decimalPoint)),
-          parseFloat(evaluate(event.target.t2.value).toFixed(decimalPoint)),
+          {
+            value: parseFloat(
+              evaluate(event.target.t0.value).toFixed(decimalPoint)
+            ),
+            texExpression: parse(event.target.t0.value).toTex(),
+          },
+          {
+            value: parseFloat(
+              evaluate(event.target.t2.value).toFixed(decimalPoint)
+            ),
+            texExpression: parse(event.target.t2.value).toTex(),
+          },
         ],
         [
-          parseFloat(evaluate(event.target.t1.value).toFixed(decimalPoint)),
-          parseFloat(evaluate(event.target.t3.value).toFixed(decimalPoint)),
+          {
+            value: parseFloat(
+              evaluate(event.target.t1.value).toFixed(decimalPoint)
+            ),
+            texExpression: parse(event.target.t1.value).toTex(),
+          },
+          {
+            value: parseFloat(
+              evaluate(event.target.t3.value).toFixed(decimalPoint)
+            ),
+            texExpression: parse(event.target.t3.value).toTex(),
+          },
         ],
         name
       ),
@@ -136,12 +156,32 @@ const useListEvents = () => {
     const newHead = updateTransformation(
       new Transformation(
         [
-          parseFloat(evaluate(event.target.t0.value).toFixed(decimalPoint)),
-          parseFloat(evaluate(event.target.t2.value).toFixed(decimalPoint)),
+          {
+            value: parseFloat(
+              evaluate(event.target.t0.value).toFixed(decimalPoint)
+            ),
+            texExpression: parse(event.target.t0.value).toTex(),
+          },
+          {
+            value: parseFloat(
+              evaluate(event.target.t2.value).toFixed(decimalPoint)
+            ),
+            texExpression: parse(event.target.t2.value).toTex(),
+          },
         ],
         [
-          parseFloat(evaluate(event.target.t1.value).toFixed(decimalPoint)),
-          parseFloat(evaluate(event.target.t3.value).toFixed(decimalPoint)),
+          {
+            value: parseFloat(
+              evaluate(event.target.t1.value).toFixed(decimalPoint)
+            ),
+            texExpression: parse(event.target.t1.value).toTex(),
+          },
+          {
+            value: parseFloat(
+              evaluate(event.target.t3.value).toFixed(decimalPoint)
+            ),
+            texExpression: parse(event.target.t3.value).toTex(),
+          },
         ],
         name
       ),

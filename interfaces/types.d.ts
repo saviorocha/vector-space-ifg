@@ -21,8 +21,8 @@ type VectorData = {
   coord2: number;
 };
 
-type VectorType = {
-  expression?: string;
+type CoordinateType = {
+  texExpression: string;
   value: number;
 };
 

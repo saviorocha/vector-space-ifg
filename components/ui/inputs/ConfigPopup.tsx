@@ -1,11 +1,12 @@
 import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
 import { useTheme } from "next-themes";
 import { useState } from "react";
-import { Hash, Moon } from "react-feather";
+import { Feather, Hash, Moon } from "react-feather";
 import { useConfigContext } from "../../../context/ConfigContext";
 import stylesconfig from "../../../styles/modules/ui/config.module.css";
 import BasisVectorIcon from "../../icons/BasisVectorIcon";
 import DecimalIcon from "../../icons/DecimalIcon";
+import MathSymbolIcon from "../../icons/MathSymbolIcon";
 import PopupWindow from "./PopupWindow";
 
 const ConfigPopup = () => {
@@ -113,11 +114,11 @@ const ConfigPopup = () => {
             />
           </div>
         </li>
-        {/* <li className={stylesconfig.popupitem}>
+        <li className={stylesconfig.popupitem}>
           <div className={stylesconfig.configicon}>
-            <Feather />
+            <MathSymbolIcon />
           </div>
-          <p>Mostrar Símbolos</p>
+          <p>Mostrar Símbolos Matemáticos</p>
           <div className={stylesconfig.configcontrol}>
             <input
               type="checkbox"
@@ -127,7 +128,7 @@ const ConfigPopup = () => {
               }}
             />
           </div>
-        </li> */}
+        </li>
       </ul>
     </PopupWindow>
   );
