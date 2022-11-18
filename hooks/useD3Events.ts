@@ -38,11 +38,24 @@ const useD3Events = () => {
         // const yCoord = clickY(d3.pointer(event)[1]);
 
         // (Math.round(num * 100) / 100).toFixed(2); - 1.34252 -> 1.34
+
+        const valueX = parseFloat(
+          clickX(d3.pointer(event)[0]).toFixed(decimalPoint)
+        );
+        const valueY = parseFloat(
+          clickY(d3.pointer(event)[1]).toFixed(decimalPoint)
+        );
         const newHead = addVector(
           new Vector(
             [
-              parseFloat(clickX(d3.pointer(event)[0]).toFixed(decimalPoint)),
-              parseFloat(clickY(d3.pointer(event)[1]).toFixed(decimalPoint)),
+              {
+                value: valueX,
+                texExpression: valueX.toString(),
+              },
+              {
+                value: valueY,
+                texExpression: valueY.toString(),
+              },
             ],
             `v_{${vectorNameCounter}}`
             // "#bb00ff"

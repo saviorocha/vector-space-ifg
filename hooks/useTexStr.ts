@@ -118,19 +118,55 @@ const useTexStr = () => {
     transformation: Transformation,
     vec: Vector
   ): string => {
-    const multiplyX = vec.prevVector?.x || vec.x;
-    const multiplyY = vec.prevVector?.y || vec.y;
+    const multiplyX = showMathSymbols
+      ? vec.prevVector?.xTex || vec.xTex
+      : vec.prevVector?.x || vec.x;
+    const multiplyY = showMathSymbols
+      ? vec.prevVector?.yTex || vec.yTex
+      : vec.prevVector?.y || vec.y;
 
     return String.raw`
       ${vec.name} = \begin{bmatrix}
-          ${transformation.e1[0]} & ${transformation.e2[0]}\\
-          ${transformation.e1[1]} & ${transformation.e2[1]}
+          ${
+            showMathSymbols
+              ? transformation.e1[0].texExpression
+              : transformation.e1[0].value
+          } & ${
+      showMathSymbols
+        ? transformation.e2[0].texExpression
+        : transformation.e2[0].value
+    }\\
+          ${
+            showMathSymbols
+              ? transformation.e1[1].texExpression
+              : transformation.e1[1].value
+          } & ${
+      showMathSymbols
+        ? transformation.e2[1].texExpression
+        : transformation.e2[1].value
+    }
         \end{bmatrix}\begin{bmatrix}
           ${multiplyX}\\
           ${multiplyY}
         \end{bmatrix} = \begin{bmatrix}
-          (${transformation.e1[0]} \cdot ${multiplyX}) + (${transformation.e2[0]} \cdot ${multiplyY})\\
-          (${transformation.e1[1]} \cdot ${multiplyX}) + (${transformation.e2[1]} \cdot ${multiplyY})
+          (${
+            showMathSymbols
+              ? transformation.e1[0].texExpression
+              : transformation.e1[0].value
+          } \cdot ${multiplyX}) + (${
+      showMathSymbols
+        ? transformation.e2[0].texExpression
+        : transformation.e2[0].value
+    } \cdot ${multiplyY})\\
+          (${
+            showMathSymbols
+              ? transformation.e1[1].texExpression
+              : transformation.e1[1].value
+          } \cdot ${multiplyX}) + (${
+      showMathSymbols
+        ? transformation.e2[1].texExpression
+        : transformation.e2[1].value
+    } \cdot ${multiplyY})
         \end{bmatrix} = \begin{bmatrix}
           ${vec.x}\\
           ${vec.y}

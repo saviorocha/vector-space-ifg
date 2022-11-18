@@ -1,11 +1,6 @@
 import { useRouter } from "next/router";
 import { FunctionComponent, useEffect } from "react";
-import {
-  ChevronDown,
-  MousePointer,
-  Play,
-  Type
-} from "react-feather";
+import { ChevronDown, MousePointer, Play, Type } from "react-feather";
 import StateList from "../../../classes/stateList";
 import Transformation from "../../../classes/transformation";
 import { useD3Context, useListContext } from "../../../context";
@@ -27,11 +22,11 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
   const { addVectorOnClick } = useD3Events();
 
   /**
-   * Predefined SideBar transformations 
+   * Predefined SideBar transformations
    */
   const transfromationSubmitHandler = (
-    e1: [number, number],
-    e2: [number, number]
+    e1: [CoordinateType, CoordinateType],
+    e2: [CoordinateType, CoordinateType]
   ) => {
     const newHead = addTransformation(
       new Transformation(e1, e2, `T_${stateVecArr.vectorArr.length}`)
@@ -86,25 +81,61 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
             {
               title: "Reflexão pelo Eixo y",
               handleItemOnClick: () =>
-                transfromationSubmitHandler([-1, 0], [0, 1]),
+                transfromationSubmitHandler(
+                  [
+                    { value: -1, texExpression: "-1" },
+                    { value: 0, texExpression: "0" },
+                  ],
+                  [
+                    { value: 0, texExpression: "0" },
+                    { value: 1, texExpression: "1" },
+                  ]
+                ),
             },
 
             {
               title: "Cisalhamento",
               handleItemOnClick: () =>
-                transfromationSubmitHandler([1, 0], [2, 1]),
+                transfromationSubmitHandler(
+                  [
+                    { value: 1, texExpression: "1" },
+                    { value: 0, texExpression: "0" },
+                  ],
+                  [
+                    { value: 2, texExpression: "2" },
+                    { value: 1, texExpression: "1" },
+                  ]
+                ),
             },
 
             {
               title: "Contração",
               handleItemOnClick: () =>
-                transfromationSubmitHandler([1 / 2, 0], [0, 1 / 2]),
+                transfromationSubmitHandler(
+                  [
+                    { value: 1 / 2, texExpression: "\\frac{1}{2}" },
+                    { value: 0, texExpression: "0" },
+                  ],
+                  [
+                    { value: 0, texExpression: "0" },
+                    { value: 1 / 2, texExpression: "\\frac{1}{2}" },
+                  ]
+                ),
             },
 
             {
               title: "Dilatação",
               handleItemOnClick: () =>
-                transfromationSubmitHandler([2, 0], [0, 2]),
+                transfromationSubmitHandler(
+                  [
+                    { value: 2, texExpression: "2" },
+                    { value: 0, texExpression: "0" },
+                  ],
+                  [
+                    { value: 0, texExpression: "0" },
+                    { value: 2, texExpression: "2" },
+                  ]
+                ),
             },
           ]}
         />
