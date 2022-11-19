@@ -12,7 +12,7 @@ const MainSectionAnimationPage = () => {
       //   mx-auto absolute h-3/4 right-0
       //   flex justify-center items-center
       // "
-      className="mx-auto ml-40"
+      className="mx-auto"
       id={styles.main}
     >
       <section id={styles.return} className="absolute top-5 left-5">
