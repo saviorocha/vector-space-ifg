@@ -22,12 +22,21 @@
     box-shadow: 0 0 0.25em rgb(220, 220, 220); */
 }
 
+/* mobile */
 .plotcontainer {
   margin: 10px 0;
+  margin-top: 75px;
   border: 1px solid #cfcfcf;
   border-radius: 1rem;
   background-color: #f7f7f7;
   height: 33rem;
+}
+
+/* desktop */
+@media only screen and (min-width: 768px) {
+  .plotcontainer {
+    margin-top: 30px;
+  }
 }
 
 .transformationarrow {
@@ -67,9 +76,11 @@
   cursor: pointer;
   /* --thumb-color: red; */
 }
+
 .playerbar:focus {
   outline: none;
 }
+
 .playerbar::-webkit-slider-runnable-track {
   width: 100%;
   height: 8px;
@@ -80,6 +91,7 @@
   border-radius: 3px;
   border: 0px solid #010101;
 }
+
 .playerbar::-webkit-slider-thumb {
   box-shadow: 1px 1px 1px #000031;
   border: 1px solid #00001e;
@@ -91,9 +103,11 @@
   -webkit-appearance: none;
   margin-top: -3.5px;
 }
+
 .playerbar:focus::-webkit-slider-runnable-track {
   background: #dbdbdb;
 }
+
 .playerbar::-moz-range-track {
   width: 100%;
   height: 8px;
@@ -104,6 +118,7 @@
   border-radius: 3px;
   border: 0px solid #010101;
 }
+
 .playerbar::-moz-range-thumb {
   box-shadow: 1px 1px 1px #000031;
   border: 1px solid #00001e;
@@ -113,6 +128,7 @@
   background: #f7f7f7;
   cursor: pointer;
 }
+
 .playerbar::-ms-track {
   width: 100%;
   height: 8px;
@@ -122,18 +138,21 @@
   border-color: transparent;
   color: transparent;
 }
+
 .playerbar::-ms-fill-lower {
   background: #dbdbdb;
   border: 0px solid #010101;
   border-radius: 6px;
   box-shadow: 1px 1px 1px #000000;
 }
+
 .playerbar::-ms-fill-upper {
   background: #dbdbdb;
   border: 0px solid #010101;
   border-radius: 6px;
   box-shadow: 1px 1px 1px #000000;
 }
+
 .playerbar::-ms-thumb {
   margin-top: 1px;
   box-shadow: 1px 1px 1px #000031;
@@ -144,9 +163,11 @@
   background: #f7f7f7;
   cursor: pointer;
 }
+
 .playerbar:focus::-ms-fill-lower {
   background: #dbdbdb;
 }
+
 .playerbar:focus::-ms-fill-upper {
   background: #dbdbdb;
 }
