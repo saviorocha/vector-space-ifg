@@ -62,7 +62,7 @@
 #vectorlist {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 10px;
-  width: 55%;
+  width: 90%;
 }

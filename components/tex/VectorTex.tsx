@@ -40,7 +40,8 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
       vectorUpdateHandler(vectorExpression, event);
       setShowTex(true);
     }
-    if (event.target.value) { // checks for empty strings
+    if (event.target.value) {
+      // checks for empty strings
       setExpression(event.target.value);
     }
   };
@@ -53,6 +54,21 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
 
   return (
     <div className="flex">
+      {!vectorName.includes("e_{1}") &&
+      !vectorName.includes("e_{2}") &&
+      currentPlot === 0 ? (
+        <>
+          <button
+            onClick={() => vectorDeleteHandler(vectorName)}
+            className="ml-1"
+          >
+            <Trash2 size={19} />
+          </button>
+          <button onClick={() => {}} className="ml-1">
+            <Edit2 size={19} />
+          </button>
+        </>
+      ) : null}
       {!vectorName.includes("e_{1}") &&
       !vectorName.includes("e_{2}") &&
       !showTex ? (
@@ -68,21 +84,6 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
           handleDoubleClick={handleDoubleClick}
         />
       )}
-      {!vectorName.includes("e_{1}") &&
-      !vectorName.includes("e_{2}") &&
-      currentPlot === 0 ? (
-        <>
-          <button onClick={() => {}} className="ml-1">
-            <Edit2 size={19} />
-          </button>
-          <button
-            onClick={() => vectorDeleteHandler(vectorName)}
-            className="ml-1"
-          >
-            <Trash2 size={19} />
-          </button>
-        </>
-      ) : null}
     </div>
   );
 };

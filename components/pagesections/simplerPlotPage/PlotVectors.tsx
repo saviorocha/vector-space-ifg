@@ -8,7 +8,7 @@ import useTexStr from "../../../hooks/useTexStr";
 import { IPlotVectorsProps } from "../../../interfaces/interfaces";
 import VectorTex from "../../tex/VectorTex";
 import HoverableComponent from "../../ui/dataDisplay/HoverableComponent";
-import styles from "../../../styles/modules/ui/input.module.css";
+import styles from "../../../styles/modules/ui/vectorbox.module.css";
 import { useConfigContext } from "../../../context/ConfigContext";
 
 const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
@@ -58,7 +58,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
         {vectorRender.map((vec: Vector, i: number) => {
           return (
             <li key={i}>
-              {plotIndex !== 0 ? (
+              {plotIndex !== 0 ? ( 
                 <HoverableComponent
                   hoverTexExpression={vectorMatrixMultiplication(
                     stateVecArr.transformationArr[plotIndex],
@@ -75,7 +75,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
                     currentPlot={plotIndex}
                   />
                 </HoverableComponent>
-              ) : (
+              ) : ( // don't hover on vectors of the first plot
                 <VectorTex
                   vectorExpression={`${vec.name}=(${
                     showMathSymbols ? vec.xTex : vec.x
