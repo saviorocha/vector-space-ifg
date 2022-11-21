@@ -19,7 +19,7 @@ export function validateVectorValues(values: string): boolean {
   } catch (SyntaxError) {
     return false;
   }
-  
+
   return (
     //prettier-ignore
     valuesArr.length === 2 &&
@@ -39,9 +39,17 @@ export function validateTransformationName(name: string): boolean {
 }
 
 export function validateTransformationValues(valuesArr: string[]): boolean {
+  console.log("valuesArr", valuesArr);
   for (let i = 0; i < valuesArr.length; i++) {
-    if (evaluate(valuesArr[i]) === Infinity || isObject(evaluate(valuesArr[i])))
+    try {
+      if (
+        evaluate(valuesArr[i]) === Infinity || // checks if it's a valid expression
+        isObject(evaluate(valuesArr[i]))       // checks if it's a object (e.g. a imaginary number object)
+      )
+        return false;
+    } catch (error) {
       return false;
+    }
   }
   return true;
 }
