@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import { ITransformationFormProps } from "../../../interfaces/interfaces";
-import styles from "../../../styles/modules/ui/vectorbox.module.css"
+import styles from "../../../styles/modules/ui/vectorbox.module.css";
 
 const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
   onSubmit,
@@ -23,12 +23,7 @@ const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
       })}
 
       <br />
-      <input
-        className={styles.inptrn}
-        type="text"
-        id="name"
-        name="name"
-      />
+      <input className={styles.inptrn} type="text" id="name" name="name" />
 
       <button
         className="border-2 border-slate-400 rounded-md w-14"

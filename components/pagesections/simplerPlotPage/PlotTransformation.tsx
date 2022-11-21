@@ -118,7 +118,15 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
               ? handleTransformationUpdate
               : handleTransfromationSubmit
           }
-          matrixArr={transformation.e1.concat(transformation.e2)}
+          matrixArr={transformation.e1
+            .map((e1Vec, i) => {
+              return e1Vec.value;
+            })
+            .concat(
+              transformation.e2.map((e2Vec, i) => {
+                return e2Vec.value;
+              })
+            )}
         />
       )}
     </>

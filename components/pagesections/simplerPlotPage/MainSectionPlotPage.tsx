@@ -110,17 +110,17 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
                       </aside>
                     </ArcherElement>
                   </div>
-                  {i !== stateVecArr.vectorArr.length - 1 ? (
+                  {i !== stateVecArr.vectorArr.length - 1 && (
                     <TransformationBar transformationNum={i + 1} />
-                  ) : null}
+                  )}
                 </React.Fragment>
               );
             })}
           </div>
         </ArcherContainer>
-        {stateVecArr.transformationArr.length === 1 ? (
+        {stateVecArr.transformationArr.length === 1 && (
           <TransformationBar />
-        ) : null}
+        )}
       </section>
 
       <section
