@@ -118,7 +118,7 @@ const ConfigPopup = () => {
           <div className={stylesconfig.configicon}>
             <MathSymbolIcon />
           </div>
-          <p>Mostrar Símbolos Matemáticos</p>
+          <p>Mostrar Expressões Matemáticos</p>
           <div className={stylesconfig.configcontrol}>
             <input
               type="checkbox"
