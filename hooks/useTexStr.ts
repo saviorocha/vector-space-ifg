@@ -23,6 +23,7 @@ const useTexStr = () => {
   const matrixStrings = (transformationIndex?: number) => {
     const transformation: Transformation =
       stateVecArr.transformationArr[transformationIndex || currentPlot];
+      // console.log("transformation tex", transformation)
     const a = transformationVars[0];
     const b = transformationVars[1];
     return [

@@ -58,7 +58,9 @@ interface IMainSectionProps {
 }
 
 interface IPlotTransformation {
+  /** Transformation object */
   transformation: Transformation;
+  /** Index of the transformation on the stateVecArr */
   trnIndex: number;
 }
 interface ISideBarProps {

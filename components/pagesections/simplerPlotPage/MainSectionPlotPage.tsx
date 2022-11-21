@@ -7,6 +7,7 @@ import { IMainSectionProps } from "../../../interfaces/interfaces";
 import stylesplot from "../../../styles/modules/pages/editartransformacoes.module.css";
 import D3Plot from "../../d3/D3plot";
 import RenderTex from "../../tex/RenderTex";
+import InfoBox from "../../ui/dataDisplay/InfoBox";
 import ConfigPopup from "../../ui/inputs/ConfigPopup";
 import PlotVectors from "./PlotVectors";
 import TransformationBar from "./TransformationBar";
@@ -22,15 +23,11 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
   mainStyle,
   children,
 }) => {
-  const router = useRouter();
   const { theme } = useTheme();
   const { stateVecArr } = useListContext();
   const [trnNum, setTrnNum] = useState(stateVecArr.vectorArr.length);
-  // const [stateVecArr, setStateVecArr] = useState<Vector[][]>(list.toArray());
 
-  useEffect(() => {
-    // console.log("stateVecArr", stateVecArr);
-  }, [stateVecArr]);
+  useEffect(() => {}, [stateVecArr]);
 
   useEffect(() => {
     setTrnNum(stateVecArr.vectorArr.length);
@@ -39,7 +36,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
   return (
     <main
       className={`
-        mx-auto absolute right-0 ${trnNum > 1 ? "" : "mt-5"}
+        mx-auto absolute right-0 ${trnNum > 1 ? "mt-5" : ""}
         flex justify-center items-center
       `}
       id={stylesplot.main}
@@ -54,17 +51,13 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
 
       <section
         id={stylesplot.middlesection}
-        // className="h-full flex items-center justify-center"
         className={`
           relative gap-1 overflow-x-scroll overflow-y-hidden
-          flex items-center justify-${trnNum > 1 ? "start" : "around"} flex-row 
+          flex items-center justify-${trnNum > 1 ? "start" : "around"} flex-col 
         `}
-        // h-full overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0
       >
         <ArcherContainer>
-          <div
-            className={`flex flex-row items-center mb-20`} // mb-20
-          >
+          <div className={`flex flex-row items-center`}>
             {stateVecArr.vectorArr.map((vectors, i) => {
               return (
                 <React.Fragment key={i}>
@@ -117,7 +110,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
                       </aside>
                     </ArcherElement>
                   </div>
-                  {i === 0 || i !== stateVecArr.vectorArr.length - 1 ? (
+                  {i !== stateVecArr.vectorArr.length - 1 ? (
                     <TransformationBar transformationNum={i + 1} />
                   ) : null}
                 </React.Fragment>
@@ -125,6 +118,9 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
             })}
           </div>
         </ArcherContainer>
+        {stateVecArr.transformationArr.length === 1 ? (
+          <TransformationBar />
+        ) : null}
       </section>
 
       <section

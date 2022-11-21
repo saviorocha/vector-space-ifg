@@ -31,7 +31,7 @@ const TransformationBar = ({ transformationNum = 0 }) => {
   return (
     <section
       id="transformation-box"
-      className={`mt-3 ${
+      className={`${
         stateVecArr.transformationArr.length > 1 ? "self-end" : ""
       }`}
     >
@@ -46,7 +46,7 @@ const TransformationBar = ({ transformationNum = 0 }) => {
           )}
         </InfoBox>
       ) : (
-        <InfoBox customStyles="w-32 h-24">
+        <InfoBox customStyles="w-32 h-20">
           {toggleTrnInput ? (
             <TransformationForm onSubmit={handleTransfromationSubmit} />
           ) : (
@@ -55,7 +55,7 @@ const TransformationBar = ({ transformationNum = 0 }) => {
                 setToggleTrnInput(true);
               }}
             >
-              Adicionar Transformação Linear
+              Adicionar Transformação
             </button>
           )}
         </InfoBox>

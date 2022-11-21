@@ -85,6 +85,7 @@ const useListEvents = () => {
       alert("transformação inválida");
       return;
     }
+    
     const newHead = addTransformation(
       new Transformation(
         [
@@ -124,6 +125,7 @@ const useListEvents = () => {
     // updates the list context
     setList(newList);
     setStateVecArr(list.toArray());
+    console.log(list.toArray())
     setTransformationNameCounter(() => transformationNameCounter + 1);
   };
 
