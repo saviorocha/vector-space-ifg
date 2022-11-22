@@ -6,6 +6,7 @@ import useListEvents from "../../../hooks/useListEvents";
 import useTexStr from "../../../hooks/useTexStr";
 import { IPlotTransformation } from "../../../interfaces/interfaces";
 import RenderTex from "../../tex/RenderTex";
+import InfoBox from "../../ui/dataDisplay/InfoBox";
 import TransformationForm from "../../ui/inputs/TransformationForm";
 
 const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
@@ -30,13 +31,13 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
 
   const handleTransfromationSubmit = (event: any) => {
     const created = transformationSubmitHandler(event, transformation);
-    setHideAlert(created)
+    setHideAlert(created);
     setToggleTrnInput(false);
   };
 
   const handleTransformationUpdate = (event: any) => {
     const updated = transformationUpdateHandler(event, transformation);
-    setHideAlert(updated)
+    setHideAlert(updated);
   };
 
   const handleTransformationDelete = () => {
@@ -60,82 +61,84 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
 
   return (
     <>
-      <aside>
-        {toggleUpdateCreate === "create" && (
-          <>
-            <RenderTex
-              mathExpression={`${transformation.name}\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}`}
-              title="Transformação de R² em R²"
-            />
-            <RenderTex
-              mathExpression={currentTrnExpression}
-              title="Matriz de transformação"
-            />
-          </>
-        )}
-      </aside>
-      <button
-        className="absolute top-1 left-1"
-        onClick={() => {
-          setToggleTrnInput(!toggleTrnInput && trnIndex !== 0);
-          setToggleUpdateCreate(
-            toggleUpdateCreate === "update" ? "create" : "update"
-          );
-        }}
-        disabled={trnIndex === 0}
-      >
-        <Tooltip title="Editar matriz da transformação">
-          <Edit3 />
-        </Tooltip>
-      </button>
-      <button
-        className="absolute bottom-1 left-1"
-        onClick={() => {
-          setToggleTrnInput(!toggleTrnInput);
-          setToggleUpdateCreate("create");
-        }}
-        disabled={stateVecArr.transformationArr.length > 2}
-      >
-        <Tooltip title="Adicionar Transformação Linear">
-          <Plus />
-        </Tooltip>
-      </button>
-      <button
-        disabled={trnIndex === 0}
-        className="absolute bottom-1 right-1"
-        onClick={handleTransformationDelete}
-      >
-        <Tooltip title="Excluir transformação">
-          <Trash2 />
-        </Tooltip>
-      </button>
-      <button className="absolute top-1 right-1" onClick={changeDefinition}>
-        <Tooltip title="Trocar definição">
-          <RotateCcw />
-        </Tooltip>
-      </button>
-      {toggleTrnInput && (
-        <TransformationForm
-          onSubmit={
-            toggleUpdateCreate === "update"
-              ? handleTransformationUpdate
-              : handleTransfromationSubmit
-          }
-          matrixArr={transformation.e1
-            .map((e1Vec, i) => {
-              return e1Vec.value;
-            })
-            .concat(
-              transformation.e2.map((e2Vec, i) => {
-                return e2Vec.value;
+      <InfoBox customStyles="w-60 h-32">
+        <aside>
+          {toggleUpdateCreate === "create" && (
+            <>
+              <RenderTex
+                mathExpression={`${transformation.name}\\colon \\mathbb{R}^{2} \\to \\mathbb{R}^{2}`}
+                title="Transformação de R² em R²"
+              />
+              <RenderTex
+                mathExpression={currentTrnExpression}
+                title="Matriz de transformação"
+              />
+            </>
+          )}
+        </aside>
+        <button
+          className="absolute top-1 left-1"
+          onClick={() => {
+            setToggleTrnInput(!toggleTrnInput && trnIndex !== 0);
+            setToggleUpdateCreate(
+              toggleUpdateCreate === "update" ? "create" : "update"
+            );
+          }}
+          disabled={trnIndex === 0}
+        >
+          <Tooltip title="Editar matriz da transformação">
+            <Edit3 />
+          </Tooltip>
+        </button>
+        <button
+          className="absolute bottom-1 left-1"
+          onClick={() => {
+            setToggleTrnInput(!toggleTrnInput);
+            setToggleUpdateCreate("create");
+          }}
+          disabled={stateVecArr.transformationArr.length > 2}
+        >
+          <Tooltip title="Adicionar Transformação Linear">
+            <Plus />
+          </Tooltip>
+        </button>
+        <button
+          disabled={trnIndex === 0}
+          className="absolute bottom-1 right-1"
+          onClick={handleTransformationDelete}
+        >
+          <Tooltip title="Excluir transformação">
+            <Trash2 />
+          </Tooltip>
+        </button>
+        <button className="absolute top-1 right-1" onClick={changeDefinition}>
+          <Tooltip title="Trocar definição">
+            <RotateCcw />
+          </Tooltip>
+        </button>
+        {toggleTrnInput && (
+          <TransformationForm
+            onSubmit={
+              toggleUpdateCreate === "update"
+                ? handleTransformationUpdate
+                : handleTransfromationSubmit
+            }
+            matrixArr={transformation.e1
+              .map((e1Vec, i) => {
+                return e1Vec.value;
               })
-            )}
-        />
-      )}
+              .concat(
+                transformation.e2.map((e2Vec, i) => {
+                  return e2Vec.value;
+                })
+              )}
+          />
+        )}
+      </InfoBox>
       {!hideAlert && (
         <Alert
           severity="error"
-          className="absolute mx-0 top-0"
+          className="absolute mx-0 top-0 z-50"
           action={
             <Button
               color="inherit"
@@ -148,7 +151,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
             </Button>
           }
         >
-          Expressão inválida! Tente novamente.
+          Valores inválidos! Tente novamente.
         </Alert>
       )}
     </>

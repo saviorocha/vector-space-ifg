@@ -18,8 +18,8 @@ const TransformationBar = ({ transformationNum = 0 }) => {
 
   const handleTransfromationSubmit = (event: any) => {
     const created = transformationSubmitHandler(event, transformation);
-    console.log("fjalfaj");
-    
+    // console.log("fjalfaj");
+
     setHideAlert(created);
     setToggleTrnInput(false);
   };
@@ -42,7 +42,7 @@ const TransformationBar = ({ transformationNum = 0 }) => {
       }`}
     >
       {stateVecArr.transformationArr.length > 1 ? (
-        <InfoBox customStyles="w-60 h-32">
+        <div>
           <PlotTransformation
             transformation={stateVecArr.transformationArr[transformationNum]}
             trnIndex={transformationNum}
@@ -50,9 +50,9 @@ const TransformationBar = ({ transformationNum = 0 }) => {
           {toggleTrnInput && (
             <TransformationForm onSubmit={handleTransfromationSubmit} />
           )}
-        </InfoBox>
+        </div>
       ) : (
-        <InfoBox customStyles="w-32 h-20">
+        <div>
           {toggleTrnInput ? (
             <TransformationForm onSubmit={handleTransfromationSubmit} />
           ) : (
@@ -64,7 +64,7 @@ const TransformationBar = ({ transformationNum = 0 }) => {
               Adicionar Transformação
             </button>
           )}
-        </InfoBox>
+        </div>
       )}
       {!hideAlert && (
         <Alert
