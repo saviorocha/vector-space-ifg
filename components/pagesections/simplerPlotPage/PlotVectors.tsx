@@ -1,6 +1,6 @@
-import { Tooltip } from "@mui/material";
+import { Alert, Button, Tooltip } from "@mui/material";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
-import { Plus } from "react-feather";
+import { Plus, X } from "react-feather";
 import Vector from "../../../classes/vector";
 import { useListContext } from "../../../context";
 import useListEvents from "../../../hooks/useListEvents";
@@ -17,24 +17,26 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
 }) => {
   const inputRef = useRef<null | HTMLInputElement>(null);
   const [vectorRender, setVectorRender] = useState(vectors);
+  const [hideAlert, setHideAlert] = useState(true);
   const { showBasisVectors, showMathSymbols } = useConfigContext();
   const { vectorSubmitHandler } = useListEvents();
   const { vectorMatrixMultiplication } = useTexStr();
   const { stateVecArr } = useListContext();
 
-  const handleVectorInputSubmit = (event: any) => {
-    if (event.key === "Enter") {
-      vectorSubmitHandler(event.target.value);
-      event.target.value = "";
-    }
+  const handleVectorInputSubmit = (value: any) => {
+    const created = vectorSubmitHandler(value);
+    setHideAlert(created);
   };
 
   const handleVectorBtnSubmit = () => {
-    if (inputRef.current) {
-      vectorSubmitHandler(inputRef.current.value);
-      inputRef.current.value = "";
-    }
+    const created = vectorSubmitHandler(inputRef.current!.value);
+    setHideAlert(created);
+    inputRef.current!.value = "";
   };
+
+  useEffect(() => {
+    // console.log("hideAlert create", hideAlert);
+  }, [hideAlert]);
 
   useEffect(() => {
     setVectorRender(
@@ -58,7 +60,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
         {vectorRender.map((vec: Vector, i: number) => {
           return (
             <li key={i}>
-              {plotIndex !== 0 ? ( 
+              {plotIndex !== 0 ? (
                 <HoverableComponent
                   hoverTexExpression={vectorMatrixMultiplication(
                     stateVecArr.transformationArr[plotIndex],
@@ -68,20 +70,17 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
                   <VectorTex
                     vectorExpression={`${vec.name}=(${
                       showMathSymbols ? vec.xTex : vec.x
-                    },${
-                      showMathSymbols ? vec.yTex : vec.y
-                    })`}
+                    },${showMathSymbols ? vec.yTex : vec.y})`}
                     vectorName={vec.name}
                     currentPlot={plotIndex}
                   />
                 </HoverableComponent>
-              ) : ( // don't hover on vectors of the first plot
+              ) : (
+                // don't hover on vectors of the first plot
                 <VectorTex
                   vectorExpression={`${vec.name}=(${
                     showMathSymbols ? vec.xTex : vec.x
-                  },${
-                    showMathSymbols ? vec.yTex : vec.y
-                  })`}
+                  },${showMathSymbols ? vec.yTex : vec.y})`}
                   vectorName={vec.name}
                   currentPlot={plotIndex}
                 />
@@ -96,7 +95,12 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
             placeholder="Inserir vetor"
             ref={inputRef}
             className={styles.inpvec}
-            onKeyDown={handleVectorInputSubmit}
+            onKeyDown={(event: any) => {
+              if (event.key === "Enter") {
+                handleVectorInputSubmit(event.target.value);
+                event.target.value = "";
+              }
+            }}
             //   value={input}
             //   onChange={(e) => onChangeInput(e)}
           />
@@ -106,6 +110,25 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
             </button>
           </Tooltip>
         </footer>
+      )}
+      {!hideAlert && (
+        <Alert
+          severity="error"
+          className="absolute mx-0 top-0"
+          action={
+            <Button
+              color="inherit"
+              size="small"
+              onClick={() => {
+                setHideAlert(true);
+              }}
+            >
+              <X />
+            </Button>
+          }
+        >
+          Expressão inválida! Tente novamente.
+        </Alert>
       )}
     </div>
   );

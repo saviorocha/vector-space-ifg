@@ -1,6 +1,6 @@
-import { Tooltip } from "@mui/material";
+import { Alert, Button, Tooltip } from "@mui/material";
 import { FunctionComponent, useEffect, useState } from "react";
-import { Edit3, Plus, RotateCcw, Trash2 } from "react-feather";
+import { Edit3, Plus, RotateCcw, Trash2, X } from "react-feather";
 import { useListContext } from "../../../context";
 import useListEvents from "../../../hooks/useListEvents";
 import useTexStr from "../../../hooks/useTexStr";
@@ -16,6 +16,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
   const [currentTrnExpression, setCurrentTrnExpression] = useState(
     matrixStrings(trnIndex)[0]
   );
+  const [hideAlert, setHideAlert] = useState(true);
   const [currentPosition, setCurrentPosition] = useState(0);
   const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
   const [toggleUpdateCreate, setToggleUpdateCreate] =
@@ -28,12 +29,14 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
   } = useListEvents();
 
   const handleTransfromationSubmit = (event: any) => {
-    transformationSubmitHandler(event, transformation);
+    const created = transformationSubmitHandler(event, transformation);
+    setHideAlert(created)
     setToggleTrnInput(false);
   };
 
   const handleTransformationUpdate = (event: any) => {
-    transformationUpdateHandler(event, transformation);
+    const updated = transformationUpdateHandler(event, transformation);
+    setHideAlert(updated)
   };
 
   const handleTransformationDelete = () => {
@@ -128,6 +131,25 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
               })
             )}
         />
+      )}
+      {!hideAlert && (
+        <Alert
+          severity="error"
+          className="absolute mx-0 top-0"
+          action={
+            <Button
+              color="inherit"
+              size="small"
+              onClick={() => {
+                setHideAlert(true);
+              }}
+            >
+              <X />
+            </Button>
+          }
+        >
+          Expressão inválida! Tente novamente.
+        </Alert>
       )}
     </>
   );

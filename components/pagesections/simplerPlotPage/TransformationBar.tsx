@@ -1,4 +1,6 @@
+import { Alert, Button } from "@mui/material";
 import { useEffect, useState } from "react";
+import { X } from "react-feather";
 import { useListContext } from "../../../context";
 import useListEvents from "../../../hooks/useListEvents";
 import InfoBox from "../../ui/dataDisplay/InfoBox";
@@ -7,6 +9,7 @@ import PlotTransformation from "./PlotTransformation";
 
 const TransformationBar = ({ transformationNum = 0 }) => {
   const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
+  const [hideAlert, setHideAlert] = useState(true);
   const { transformationSubmitHandler } = useListEvents();
   const { stateVecArr } = useListContext();
   const [transformation, setTransformation] = useState(
@@ -14,7 +17,10 @@ const TransformationBar = ({ transformationNum = 0 }) => {
   );
 
   const handleTransfromationSubmit = (event: any) => {
-    transformationSubmitHandler(event, transformation);
+    const created = transformationSubmitHandler(event, transformation);
+    console.log("fjalfaj");
+    
+    setHideAlert(created);
     setToggleTrnInput(false);
   };
 
@@ -59,6 +65,25 @@ const TransformationBar = ({ transformationNum = 0 }) => {
             </button>
           )}
         </InfoBox>
+      )}
+      {!hideAlert && (
+        <Alert
+          severity="error"
+          className="absolute mx-0 top-0"
+          action={
+            <Button
+              color="inherit"
+              size="small"
+              onClick={() => {
+                setHideAlert(true);
+              }}
+            >
+              <X />
+            </Button>
+          }
+        >
+          Expressão inválida! Tente novamente.
+        </Alert>
       )}
     </section>
   );

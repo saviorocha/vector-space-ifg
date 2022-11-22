@@ -1,4 +1,4 @@
-import { evaluate, parse } from "mathjs";
+import { evaluate, isNumber, parse } from "mathjs";
 import Transformation from "../classes/transformation";
 import Vector from "../classes/vector";
 import { useListContext, useNameContext } from "../context";
@@ -23,9 +23,17 @@ const useTexStr = () => {
   const matrixStrings = (transformationIndex?: number) => {
     const transformation: Transformation =
       stateVecArr.transformationArr[transformationIndex || currentPlot];
-      // console.log("transformation tex", transformation)
     const a = transformationVars[0];
     const b = transformationVars[1];
+    // console.log(
+    //   "defString",
+    //   defString(
+    //     transformation.e1[0].value,
+    //     transformation.e2[0].value,
+    //     transformationVars
+    //   )
+    // );
+
     return [
       // matrix representation
       String.raw`
@@ -71,11 +79,18 @@ const useTexStr = () => {
     ];
   };
 
+  const defString2 = (
+    num1: string,
+    num2: string,
+    names: [string, string]
+  ) => {
+  }
+
   /**
    * Creates a Tex string for the transformation algebraic definition expression
    * @param {number} num1 - e1's coeficient
    * @param {number} num2 - e2's coeficient
-   * @param {Array} names - variable names ()
+   * @param {Array} names - variable names
    * @returns
    */
   const defString = (
@@ -169,8 +184,8 @@ const useTexStr = () => {
         : transformation.e2[1].value
     } \cdot ${multiplyY})
         \end{bmatrix} = \begin{bmatrix}
-          ${vec.x}\\
-          ${vec.y}
+          ${showMathSymbols ? vec.xTex : vec.x}\\
+          ${showMathSymbols ? vec.yTex : vec.y}\\
         \end{bmatrix}
     `;
   };
@@ -218,7 +233,6 @@ const useTexStr = () => {
         expression.includes("=") ? expression.split("=")[1] : expression
       )
     ) {
-      alert("expressão inválida");
       return;
     }
     // gonna improve this later, sorry

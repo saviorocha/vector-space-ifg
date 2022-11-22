@@ -1,5 +1,6 @@
+import { Alert, Button } from "@mui/material";
 import { FunctionComponent, useEffect, useState } from "react";
-import { Edit2, Trash2 } from "react-feather";
+import { Edit2, Trash2, X } from "react-feather";
 import useListEvents from "../../hooks/useListEvents";
 import { IVectorTexProps } from "../../interfaces/interfaces";
 import RenderTex from "./RenderTex";
@@ -14,6 +15,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
 }) => {
   const [expression, setExpression] = useState(vectorExpression);
   const [showTex, setShowTex] = useState(true);
+  const [hideAlert, setHideAlert] = useState(true);
 
   // const { currentPlot } = useNameContext();
   const { vectorDeleteHandler, vectorUpdateHandler } = useListEvents();
@@ -22,7 +24,8 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
     // console.log("vectorName", vectorName);
     // console.log("vectorExpression", vectorExpression);
     // console.log("expression", expression);
-  }, [expression]);
+    // console.log("alert update", hideAlert);
+  }, [expression, hideAlert]);
 
   useEffect(() => {
     setExpression(vectorExpression);
@@ -36,12 +39,12 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
   };
 
   const handleVectorUpdate = (event: any) => {
-    if (event.key === "Enter") {
-      vectorUpdateHandler(vectorExpression, event);
+    const updated = vectorUpdateHandler(vectorExpression, event);
+    setHideAlert(updated);
+    if (updated) {
       setShowTex(true);
     }
-    if (event.target.value) {
-      // checks for empty strings
+    if (event.target.value) {// checks for empty strings
       setExpression(event.target.value);
     }
   };
@@ -74,7 +77,11 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
       !showTex ? (
         <input
           className="border border-slate-400 w-24"
-          onKeyDown={handleVectorUpdate}
+          onKeyDown={(event: any) => {
+            if (event.key === "Enter") {
+              handleVectorUpdate(event);
+            }
+          }}
           onChange={handleOnChange}
           value={expression}
         />
@@ -83,6 +90,25 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
           mathExpression={expression}
           handleDoubleClick={handleDoubleClick}
         />
+      )}
+      {!hideAlert && (
+        <Alert
+          severity="error"
+          className="absolute mx-0 top-0"
+          action={
+            <Button
+              color="inherit"
+              size="small"
+              onClick={() => {
+                setHideAlert(true);
+              }}
+            >
+              <X />
+            </Button>
+          }
+        >
+          Expressão inválida! Tente novamente.
+        </Alert>
       )}
     </div>
   );

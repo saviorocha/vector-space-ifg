@@ -39,7 +39,6 @@ export function validateTransformationName(name: string): boolean {
 }
 
 export function validateTransformationValues(valuesArr: string[]): boolean {
-  console.log("valuesArr", valuesArr);
   for (let i = 0; i < valuesArr.length; i++) {
     try {
       if (

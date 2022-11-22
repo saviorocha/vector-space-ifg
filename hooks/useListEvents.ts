@@ -23,12 +23,11 @@ const useListEvents = () => {
   /**
    * Adds a new vector to the list
    */
-  const vectorSubmitHandler = (vectorStr: string) => {
+  const vectorSubmitHandler = (vectorStr: string): boolean => {
     const newVector = vectorFromTex(vectorStr);
 
     if (!newVector) {
-      alert("nome ou valores do vetor inválidos");
-      return;
+      return false;
     }
     const newHead = addVector(newVector);
     const newList = new StateList(newHead);
@@ -36,6 +35,7 @@ const useListEvents = () => {
     // updates list
     setList(newList);
     setStateVecArr(newList.toArray());
+    return true;
   };
 
   const vectorDeleteHandler = (vectorName: string) => {
@@ -45,12 +45,11 @@ const useListEvents = () => {
     setStateVecArr(list.toArray());
   };
 
-  const vectorUpdateHandler = (vectorExpression: string, event: any) => {
+  const vectorUpdateHandler = (vectorExpression: string, event: any): boolean => {
     const newVector = vectorFromTex(event.target.value);
     const prevVectorName = vectorFromTex(vectorExpression)?.name;
     if (!newVector || !prevVectorName) {
-      alert("Expressão inválida");
-      return;
+      return false;
     }
     const newHead = updateVector(newVector, prevVectorName);
     const newList = new StateList(newHead);
@@ -58,6 +57,7 @@ const useListEvents = () => {
     setStateVecArr(newList.toArray());
 
     event.target.value = "";
+    return true;
   };
 
   /**
@@ -66,7 +66,7 @@ const useListEvents = () => {
   const transformationSubmitHandler = (
     event: any,
     transformation: Transformation
-  ) => {
+  ): boolean => {
     event.preventDefault();
     const name = event.target.name.value
       ? event.target.name.value
@@ -82,8 +82,7 @@ const useListEvents = () => {
         event.target.t3.value,
       ])
     ) {
-      alert("transformação inválida");
-      return;
+      return false;
     }
     
     const newHead = addTransformation(
@@ -126,6 +125,7 @@ const useListEvents = () => {
     setList(newList);
     setStateVecArr(list.toArray());
     setTransformationNameCounter(() => transformationNameCounter + 1);
+    return true;
   };
 
   /**
@@ -134,7 +134,7 @@ const useListEvents = () => {
   const transformationUpdateHandler = (
     event: any,
     transformation: Transformation
-  ) => {
+  ): boolean => {
     event.preventDefault();
     const name = event.target.name.value
       ? event.target.name.value
@@ -150,8 +150,7 @@ const useListEvents = () => {
         event.target.t3.value,
       ])
     ) {
-      alert("nome de transformação inválido");
-      return;
+      return false;
     }
 
     const newHead = updateTransformation(
@@ -190,14 +189,14 @@ const useListEvents = () => {
     );
 
     if (!newHead) {
-      alert("erro ao encontrar a transformação");
-      return;
+      return false;
     }
     const newList = new StateList(newHead);
 
     // updates the list context
     setList(newList);
     setStateVecArr(list.toArray());
+    return true;
   };
 
   /**
