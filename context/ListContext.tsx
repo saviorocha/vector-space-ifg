@@ -13,8 +13,7 @@ import { useConfigContext } from "./ConfigContext";
 const ListContext = createContext<IContextList>({} as IContextList);
 
 const ListContextProvider: FunctionComponent<PropsChildren> = ({ children }) => {
-  const { decimalPoint } = useConfigContext()
-  const [list, setList] = useState(new StateList(new StateNode(undefined, undefined, decimalPoint)));
+  const [list, setList] = useState(new StateList(new StateNode(undefined, undefined)));
   const [stateVecArr, setStateVecArr] = useState<StateObj>(list.toArray());
 
   const providerList = useMemo(

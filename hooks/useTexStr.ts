@@ -21,66 +21,44 @@ const useTexStr = () => {
    * @returns KaTeX string array
    */
   const matrixStrings = (transformationIndex?: number) => {
+    // transformation object
     const transformation: Transformation =
       stateVecArr.transformationArr[transformationIndex || currentPlot];
+    // definition variables
     const a = transformationVars[0];
     const b = transformationVars[1];
-    // console.log(
-    //   "defString",
-    //   defString(
-    //     transformation.e1[0].value,
-    //     transformation.e2[0].value,
-    //     transformationVars
-    //   )
-    // );
+    // basis vectors
+    const e1 = showMathSymbols
+      ? [transformation.e1[0].texExpression, transformation.e1[1].texExpression]
+      : [
+          parseFloat(transformation.e1[0].value.toFixed(decimalPoint)),
+          parseFloat(transformation.e1[1].value.toFixed(decimalPoint)),
+        ];
+    const e2 = showMathSymbols
+      ? [transformation.e2[0].texExpression, transformation.e2[1].texExpression]
+      : [
+          parseFloat(transformation.e2[0].value.toFixed(decimalPoint)),
+          parseFloat(transformation.e2[1].value.toFixed(decimalPoint)),
+        ];
 
     return [
       // matrix representation
       String.raw`
         ${transformation.name}(${a}, ${b}) = \begin{bmatrix}
-        ${
-          showMathSymbols
-            ? transformation.e1[0].texExpression
-            : parseFloat(transformation.e1[0].value.toFixed(decimalPoint))
-        } & ${
-        showMathSymbols
-          ? transformation.e2[0].texExpression
-          : parseFloat(transformation.e2[0].value.toFixed(decimalPoint))
-      }\\
-        ${
-          showMathSymbols
-            ? transformation.e1[1].texExpression
-            : parseFloat(transformation.e1[1].value.toFixed(decimalPoint))
-        } & ${
-        showMathSymbols
-          ? transformation.e2[1].texExpression
-          : parseFloat(transformation.e2[1].value.toFixed(decimalPoint))
-      }
+        ${e1[0]} & ${e2[0]}\\
+        ${e1[1]} & ${e2[1]}
           \end{bmatrix}\begin{bmatrix}
             ${a}\\
             ${b}
           \end{bmatrix}
         `,
       // algebraic definition
-      `${transformation.name}(${a}, ${b}) = 
-            (${defString(
-              transformation.e1[0].value,
-              transformation.e2[0].value,
-              transformationVars
-            )}, ${defString(
-        transformation.e1[1].value,
-        transformation.e2[1].value,
-        transformationVars
-      )})`
-        .split(" ")
-        .join("")
+      String.raw`${transformation.name}(${a}, ${b}) = 
+            (${defString(e1[0], e2[0], transformationVars)}, 
+             ${defString(e1[1], e2[1], transformationVars)})`
         .trim()
         .replace(/\n/g, ""),
     ];
-  };
-
-  const defString2 = (num1: string, num2: string, names: [string, string]) => {
-    return `${num1}${names[0]}${num2}${names[1]}`;
   };
 
   /**
@@ -91,17 +69,17 @@ const useTexStr = () => {
    * @returns
    */
   const defString = (
-    num1: number,
-    num2: number,
+    num1: number | string,
+    num2: number | string,
     names: [string, string]
   ): string => {
-    if (num1 === 0 && num2 === 0) {
+    if (num1 == "0" && num2 == "0") {
       return "0";
     }
 
-    return `${validation(num1, names[0])}${
-      num1 === 0 || num2 === 0 ? "" : "+"
-    }${validation(num2, names[1])}`;
+    return `${validation(num1, names[0])} ${
+      num1 == "0" || num2 == "0" ? "" : "+"
+    } ${validation(num2, names[1])}`;
   };
 
   /**
@@ -110,13 +88,13 @@ const useTexStr = () => {
    * @param name
    * @returns
    */
-  const validation = (num: number, name: string) => {
-    if (num === 1) {
+  const validation = (num: number | string, name: string) => {
+    if (num == "1") {
       return name;
-    } else if (num === 0) {
+    } else if (num == "0") {
       return "";
     } else {
-      return `${num}${name}`;
+      return `${num} ${name}`;
     }
   };
 

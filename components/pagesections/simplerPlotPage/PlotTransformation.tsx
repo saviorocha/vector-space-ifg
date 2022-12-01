@@ -55,6 +55,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
 
   useEffect(() => {
     // console.log("list", stateVecArr, list)
+    // console.log("exp", currentTrnExpression)
     setToggleTrnInput(false);
     setToggleUpdateCreate("create");
   }, [stateVecArr]);
