@@ -2,6 +2,7 @@ import { Alert, Button, Tooltip } from "@mui/material";
 import { FunctionComponent, useEffect, useState } from "react";
 import { Edit3, Plus, RotateCcw, Trash2, X } from "react-feather";
 import { useListContext } from "../../../context";
+import { useConfigContext } from "../../../context/ConfigContext";
 import useListEvents from "../../../hooks/useListEvents";
 import useTexStr from "../../../hooks/useTexStr";
 import { IPlotTransformation } from "../../../interfaces/interfaces";
@@ -28,6 +29,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
     transformationUpdateHandler,
     transformationDeleteHandler,
   } = useListEvents();
+  const { showMathSymbols } = useConfigContext();
 
   const handleTransfromationSubmit = (event: any) => {
     const created = transformationSubmitHandler(event, transformation);
@@ -126,11 +128,11 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
             }
             matrixArr={transformation.e1
               .map((e1Vec, i) => {
-                return e1Vec.value;
+                return showMathSymbols ? e1Vec.texExpression : e1Vec.value;
               })
               .concat(
                 transformation.e2.map((e2Vec, i) => {
-                  return e2Vec.value;
+                  return showMathSymbols ? e2Vec.texExpression : e2Vec.value;
                 })
               )}
           />

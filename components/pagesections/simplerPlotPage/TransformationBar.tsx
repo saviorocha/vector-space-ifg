@@ -18,8 +18,6 @@ const TransformationBar = ({ transformationNum = 0 }) => {
 
   const handleTransfromationSubmit = (event: any) => {
     const created = transformationSubmitHandler(event, transformation);
-    // console.log("fjalfaj");
-
     setHideAlert(created);
     setToggleTrnInput(false);
   };
