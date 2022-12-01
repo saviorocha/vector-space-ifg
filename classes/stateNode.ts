@@ -10,12 +10,11 @@ class StateNode {
   constructor(
     _transformation: Transformation = new Transformation(),
     _previous: StateNode | null = null,
-    decimalPoint: number
   ) {
     this._previous = _previous;
     this._transformation = _transformation;
 
-    this._vectors = this.updateVectors(decimalPoint);
+    this._vectors = this.updateVectors();
     this._next = null;
   }
 
@@ -35,10 +34,10 @@ class StateNode {
     this._vectors = _vectors;
   }
 
-  updateVectors(decimalPoint: number): Vector[] {
+  updateVectors(): Vector[] {
     return this._previous
       ? this._previous._vectors.map((vec) => {
-          return this._transformation.applyTransformation(vec, decimalPoint);
+          return this._transformation.applyTransformation(vec);
         })
       : [this._transformation.e1Vector, this._transformation.e2Vector];
   }

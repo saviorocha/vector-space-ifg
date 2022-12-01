@@ -14,7 +14,6 @@ const useListEvents = () => {
   const { vectorFromTex } = useTexStr();
   const { addVector, removeVector, updateVector } = useList();
   const { list, setList, setStateVecArr } = useListContext();
-  const { decimalPoint } = useConfigContext();
   const { transformationNameCounter, setTransformationNameCounter } =
     useNameContext();
   const { addTransformation, updateTransformation, removeTransformation } =
@@ -89,29 +88,21 @@ const useListEvents = () => {
       new Transformation(
         [
           {
-            value: parseFloat(
-              evaluate(event.target.t0.value).toFixed(decimalPoint)
-            ),
+            value: evaluate(event.target.t0.value),
             texExpression: parse(event.target.t0.value).toTex(),
           },
           {
-            value: parseFloat(
-              evaluate(event.target.t2.value).toFixed(decimalPoint)
-            ),
+            value: evaluate(event.target.t2.value),
             texExpression: parse(event.target.t2.value).toTex(),
           },
         ],
         [
           {
-            value: parseFloat(
-              evaluate(event.target.t1.value).toFixed(decimalPoint)
-            ),
+            value: evaluate(event.target.t1.value),
             texExpression: parse(event.target.t1.value).toTex(),
           },
           {
-            value: parseFloat(
-              evaluate(event.target.t3.value).toFixed(decimalPoint)
-            ),
+            value: evaluate(event.target.t3.value),
             texExpression: parse(event.target.t3.value).toTex(),
           },
         ],
@@ -157,29 +148,21 @@ const useListEvents = () => {
       new Transformation(
         [
           {
-            value: parseFloat(
-              evaluate(event.target.t0.value).toFixed(decimalPoint)
-            ),
+            value: evaluate(event.target.t0.value),
             texExpression: parse(event.target.t0.value).toTex(),
           },
           {
-            value: parseFloat(
-              evaluate(event.target.t2.value).toFixed(decimalPoint)
-            ),
+            value: evaluate(event.target.t2.value),
             texExpression: parse(event.target.t2.value).toTex(),
           },
         ],
         [
           {
-            value: parseFloat(
-              evaluate(event.target.t1.value).toFixed(decimalPoint)
-            ),
+            value: evaluate(event.target.t1.value),
             texExpression: parse(event.target.t1.value).toTex(),
           },
           {
-            value: parseFloat(
-              evaluate(event.target.t3.value).toFixed(decimalPoint)
-            ),
+            value: evaluate(event.target.t3.value),
             texExpression: parse(event.target.t3.value).toTex(),
           },
         ],

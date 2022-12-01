@@ -18,7 +18,8 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   const inputRef = useRef<null | HTMLInputElement>(null);
   const [vectorRender, setVectorRender] = useState(vectors);
   const [hideAlert, setHideAlert] = useState(true);
-  const { showBasisVectors, showMathSymbols } = useConfigContext();
+  const { showBasisVectors, showMathSymbols, decimalPoint } =
+    useConfigContext();
   const { vectorSubmitHandler } = useListEvents();
   const { vectorMatrixMultiplication } = useTexStr();
   const { stateVecArr } = useListContext();
@@ -69,8 +70,14 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
                 >
                   <VectorTex
                     vectorExpression={`${vec.name}=(${
-                      showMathSymbols ? vec.xTex : vec.x
-                    },${showMathSymbols ? vec.yTex : vec.y})`}
+                      showMathSymbols
+                        ? vec.xTex
+                        : parseFloat(vec.x.toFixed(decimalPoint))
+                    },${
+                      showMathSymbols
+                        ? vec.yTex
+                        : parseFloat(vec.y.toFixed(decimalPoint))
+                    })`}
                     vectorName={vec.name}
                     currentPlot={plotIndex}
                   />
@@ -79,8 +86,14 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
                 // don't hover on vectors of the first plot
                 <VectorTex
                   vectorExpression={`${vec.name}=(${
-                    showMathSymbols ? vec.xTex : vec.x
-                  },${showMathSymbols ? vec.yTex : vec.y})`}
+                    showMathSymbols
+                      ? vec.xTex
+                      : parseFloat(vec.x.toFixed(decimalPoint))
+                  },${
+                    showMathSymbols
+                      ? vec.yTex
+                      : parseFloat(vec.y.toFixed(decimalPoint))
+                  })`}
                   vectorName={vec.name}
                   currentPlot={plotIndex}
                 />

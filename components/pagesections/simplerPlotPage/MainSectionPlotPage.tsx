@@ -48,7 +48,6 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
       >
         {children}
       </section>
-
       <section
         id={stylesplot.middlesection}
         className={`

@@ -11,7 +11,7 @@ import { validateVectorName, validateVectorValues } from "../utils";
 const useTexStr = () => {
   const { stateVecArr } = useListContext();
   const { currentPlot } = useNameContext();
-  const { decimalPoint, showMathSymbols } = useConfigContext();
+  const { showMathSymbols, decimalPoint } = useConfigContext();
   const { vectorNameCounter, setVectorNameCounter, transformationVars } =
     useNameContext();
 
@@ -41,20 +41,20 @@ const useTexStr = () => {
         ${
           showMathSymbols
             ? transformation.e1[0].texExpression
-            : transformation.e1[0].value
+            : parseFloat(transformation.e1[0].value.toFixed(decimalPoint))
         } & ${
         showMathSymbols
           ? transformation.e2[0].texExpression
-          : transformation.e2[0].value
+          : parseFloat(transformation.e2[0].value.toFixed(decimalPoint))
       }\\
         ${
           showMathSymbols
             ? transformation.e1[1].texExpression
-            : transformation.e1[1].value
+            : parseFloat(transformation.e1[1].value.toFixed(decimalPoint))
         } & ${
         showMathSymbols
           ? transformation.e2[1].texExpression
-          : transformation.e2[1].value
+          : parseFloat(transformation.e2[1].value.toFixed(decimalPoint))
       }
           \end{bmatrix}\begin{bmatrix}
             ${a}\\
@@ -79,12 +79,9 @@ const useTexStr = () => {
     ];
   };
 
-  const defString2 = (
-    num1: string,
-    num2: string,
-    names: [string, string]
-  ) => {
-  }
+  const defString2 = (num1: string, num2: string, names: [string, string]) => {
+    return `${num1}${names[0]}${num2}${names[1]}`;
+  };
 
   /**
    * Creates a Tex string for the transformation algebraic definition expression
@@ -242,11 +239,11 @@ const useTexStr = () => {
     return new Vector(
       [
         {
-          value: parseFloat(evaluate(values[0]).toFixed(decimalPoint)),
+          value: evaluate(values[0]),
           texExpression: parse(values[0]).toTex(),
         },
         {
-          value: parseFloat(evaluate(values[1]).toFixed(decimalPoint)),
+          value: evaluate(values[1]),
           texExpression: parse(values[1]).toTex(),
         },
       ],

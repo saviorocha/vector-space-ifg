@@ -89,7 +89,7 @@ class StateList {
     };
   }
 
-  updateNodes(decimalPoint: number) {
+  updateNodes() {
     let currentNode: StateNode | null = this.head._next;
     
     if (!currentNode) {
@@ -97,7 +97,7 @@ class StateList {
     }
 
     while (currentNode) {
-      currentNode.vectors = currentNode.updateVectors(decimalPoint);
+      currentNode.vectors = currentNode.updateVectors();
       currentNode = currentNode._next;
     }
 

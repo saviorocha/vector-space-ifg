@@ -52,7 +52,7 @@ const TransformationBar = ({ transformationNum = 0 }) => {
           )}
         </div>
       ) : (
-        <div>
+        <InfoBox customStyles="w-32 h-20">
           {toggleTrnInput ? (
             <TransformationForm onSubmit={handleTransfromationSubmit} />
           ) : (
@@ -64,7 +64,7 @@ const TransformationBar = ({ transformationNum = 0 }) => {
               Adicionar Transformação
             </button>
           )}
-        </div>
+        </InfoBox>
       )}
       {!hideAlert && (
         <Alert

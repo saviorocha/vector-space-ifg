@@ -10,7 +10,6 @@ import { useConfigContext } from "../context/ConfigContext";
  */
 const useList = () => {
   const { list } = useListContext();
-  const { decimalPoint } = useConfigContext()
 
   /**
    * Adds a new vector to the list
@@ -20,7 +19,7 @@ const useList = () => {
   const addVector = (newVector: Vector): StateNode => {
     let newHead = list.head;
     newHead.vectors.push(newVector);
-    list.updateNodes(decimalPoint);
+    list.updateNodes();
 
     return newHead;
   };
@@ -47,7 +46,7 @@ const useList = () => {
     newHead.vectors = newHead.vectors.filter((vec) => {
       return vec.name !== vectorName;
     });
-    list.updateNodes(decimalPoint);
+    list.updateNodes();
     return newHead;
   };
 
@@ -67,7 +66,7 @@ const useList = () => {
       return list.head;
     }
 
-    let newNode = new StateNode(transformation, previousNode, decimalPoint);
+    let newNode = new StateNode(transformation, previousNode, );
 
     if (!previousNode._next) {
       previousNode._next = newNode;
@@ -79,7 +78,7 @@ const useList = () => {
       nextNode._previous = newNode;
 
       while (nextNode) {
-        nextNode.vectors = nextNode.updateVectors(decimalPoint);
+        nextNode.vectors = nextNode.updateVectors();
         nextNode = nextNode._next!;
       }
     }
@@ -106,7 +105,7 @@ const useList = () => {
 
     let nextState = transformationNode;
     while (nextState) {
-      nextState.vectors = nextState.updateVectors(decimalPoint);
+      nextState.vectors = nextState.updateVectors();
       nextState = nextState._next!;
     }
 
@@ -127,7 +126,7 @@ const useList = () => {
 
     if (next) next._previous = previous;
     if (previous) previous._next = next;
-    list.updateNodes(decimalPoint);
+    list.updateNodes();
     return newHead;
   };
 

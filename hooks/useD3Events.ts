@@ -10,7 +10,6 @@ const useD3Events = () => {
   const { addVector } = useList();
   const { setList, setStateVecArr } = useListContext();
   const { vectorNameCounter, setVectorNameCounter } = useNameContext();
-  const { decimalPoint } = useConfigContext();
   const { dimension } = useD3Context();
   const { width, height } = dimension;
 
@@ -39,12 +38,9 @@ const useD3Events = () => {
 
         // (Math.round(num * 100) / 100).toFixed(2); - 1.34252 -> 1.34
 
-        const valueX = parseFloat(
-          clickX(d3.pointer(event)[0]).toFixed(decimalPoint)
-        );
-        const valueY = parseFloat(
-          clickY(d3.pointer(event)[1]).toFixed(decimalPoint)
-        );
+        const valueX = clickX(d3.pointer(event)[0]);
+        const valueY = clickY(d3.pointer(event)[1]);
+
         const newHead = addVector(
           new Vector(
             [

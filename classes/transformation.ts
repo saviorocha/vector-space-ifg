@@ -31,22 +31,18 @@ class Transformation {
     );
   }
 
-  applyTransformation(vector: Vector, decimalPoint: number): Vector {
+  applyTransformation(vector: Vector): Vector {
     const value1 = parseFloat(
       multiply(
         this._matrixTransformation,
         vector.array.map((el, i) => el.value)
-      )
-        .get([0])
-        .toFixed(decimalPoint)
+      ).get([0])
     );
     const value2 = parseFloat(
       multiply(
         this._matrixTransformation,
         vector.array.map((el, i) => el.value)
-      )
-        .get([1])
-        .toFixed(decimalPoint)
+      ).get([1])
     );
     const coordinates: [ExpressionType, ExpressionType] = [
       {
