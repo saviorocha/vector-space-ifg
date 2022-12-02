@@ -64,7 +64,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
 
   useEffect(() => {
     setCurrentTrnExpression(matrixStrings(trnIndex)[currentPosition]);
-  }, [showMathSymbols, decimalPoint]);
+  }, [showMathSymbols, decimalPoint, currentPosition]);
 
   return (
     <>
@@ -132,11 +132,11 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
             }
             matrixArr={transformation.e1
               .map((e1Vec, i) => {
-                return showMathSymbols ? e1Vec.texExpression : e1Vec.value;
+                return e1Vec.value;
               })
               .concat(
                 transformation.e2.map((e2Vec, i) => {
-                  return showMathSymbols ? e2Vec.texExpression : e2Vec.value;
+                  return e2Vec.value;
                 })
               )}
           />

@@ -270,7 +270,19 @@ class PlotComponent {
       .attr("fill", "none")
       .attr("stroke", "steelblue")
       .attr("stroke-width", 2)
-      .attr("marker-end", "url(#arrow)");
+      .attr("marker-end", "url(#arrow)")
+      // .call(
+      //   d3.drag().on("drag", function (e,d: any) {
+      //     var dx = e.dx;
+      //     var dy = e.dy;
+      //     var x2New = parseFloat(d[1].coord1) + dx;
+      //     var y2New = parseFloat(d[1].coord2) + dy;
+      //     console.log("new",x2New, y2New)
+      //     d3.select("#myPlane")
+      //       .selectAll(".lineVector")
+      //       .attr("d", d3.line<any>().x(2).y(2) as any);
+      //   }) as any
+      // );
   };
 
   /**

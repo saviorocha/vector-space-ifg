@@ -27,12 +27,15 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   const handleVectorInputSubmit = (value: any) => {
     const created = vectorSubmitHandler(value);
     setHideAlert(created);
+    inputRef.current!.value = value;
   };
 
   const handleVectorBtnSubmit = () => {
     const created = vectorSubmitHandler(inputRef.current!.value);
     setHideAlert(created);
-    inputRef.current!.value = "";
+    if (created) {  
+      inputRef.current!.value = "";
+    }
   };
 
   useEffect(() => {
@@ -105,7 +108,6 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
             onKeyDown={(event: any) => {
               if (event.key === "Enter") {
                 handleVectorInputSubmit(event.target.value);
-                event.target.value = "";
               }
             }}
             //   value={input}

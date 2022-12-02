@@ -65,7 +65,9 @@ const useD3Events = () => {
     setVectorNameCounter(vectorNameCounter + 1);
   };
 
-  return { addVectorOnClick };
+  const dragVector = () => {};
+
+  return { addVectorOnClick, dragVector };
 };
 
 export default useD3Events;
