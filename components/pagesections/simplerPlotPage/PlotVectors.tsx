@@ -69,15 +69,9 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
                   )}
                 >
                   <VectorTex
-                    vectorExpression={`${vec.name}=(${
-                      showMathSymbols
-                        ? vec.xTex
-                        : parseFloat(vec.x.toFixed(decimalPoint))
-                    },${
-                      showMathSymbols
-                        ? vec.yTex
-                        : parseFloat(vec.y.toFixed(decimalPoint))
-                    })`}
+                    vectorExpression={`${vec.name}=(${parseFloat(
+                      vec.x.toFixed(decimalPoint)
+                    )},${parseFloat(vec.y.toFixed(decimalPoint))})`}
                     vectorName={vec.name}
                     currentPlot={plotIndex}
                   />

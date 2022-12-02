@@ -109,58 +109,42 @@ const useTexStr = () => {
     transformation: Transformation,
     vec: Vector
   ): string => {
+    const vecX = parseFloat(vec.x.toFixed(decimalPoint));
+    const vecY = parseFloat(vec.y.toFixed(decimalPoint));
     const multiplyX = showMathSymbols
-      ? vec.prevVector?.xTex || vec.xTex
-      : vec.prevVector?.x || vec.x;
+      ? vec.prevVector!.xTex || vec.xTex
+      : parseFloat(vec.prevVector!.x.toFixed(decimalPoint)) ||
+        vecX;
     const multiplyY = showMathSymbols
-      ? vec.prevVector?.yTex || vec.yTex
-      : vec.prevVector?.y || vec.y;
+      ? vec.prevVector!.yTex || vec.yTex
+      : parseFloat(vec.prevVector!.y.toFixed(decimalPoint)) ||
+        vecY;
 
+    const e1 = showMathSymbols
+      ? [transformation.e1[0].texExpression, transformation.e1[1].texExpression]
+      : [
+          parseFloat(transformation.e1[0].value.toFixed(decimalPoint)),
+          parseFloat(transformation.e1[1].value.toFixed(decimalPoint)),
+        ];
+    const e2 = showMathSymbols
+      ? [transformation.e2[0].texExpression, transformation.e2[1].texExpression]
+      : [
+          parseFloat(transformation.e2[0].value.toFixed(decimalPoint)),
+          parseFloat(transformation.e2[1].value.toFixed(decimalPoint)),
+        ];
     return String.raw`
       ${vec.name} = \begin{bmatrix}
-          ${
-            showMathSymbols
-              ? transformation.e1[0].texExpression
-              : transformation.e1[0].value
-          } & ${
-      showMathSymbols
-        ? transformation.e2[0].texExpression
-        : transformation.e2[0].value
-    }\\
-          ${
-            showMathSymbols
-              ? transformation.e1[1].texExpression
-              : transformation.e1[1].value
-          } & ${
-      showMathSymbols
-        ? transformation.e2[1].texExpression
-        : transformation.e2[1].value
-    }
+          ${e1[0]} & ${e2[0]}\\
+          ${e1[1]} & ${e2[1]}
         \end{bmatrix}\begin{bmatrix}
           ${multiplyX}\\
           ${multiplyY}
         \end{bmatrix} = \begin{bmatrix}
-          (${
-            showMathSymbols
-              ? transformation.e1[0].texExpression
-              : transformation.e1[0].value
-          } \cdot ${multiplyX}) + (${
-      showMathSymbols
-        ? transformation.e2[0].texExpression
-        : transformation.e2[0].value
-    } \cdot ${multiplyY})\\
-          (${
-            showMathSymbols
-              ? transformation.e1[1].texExpression
-              : transformation.e1[1].value
-          } \cdot ${multiplyX}) + (${
-      showMathSymbols
-        ? transformation.e2[1].texExpression
-        : transformation.e2[1].value
-    } \cdot ${multiplyY})
+          (${e1[0]} \cdot ${multiplyX}) + (${e2[0]} \cdot ${multiplyY})\\
+          (${e1[1]} \cdot ${multiplyX}) + (${e2[1]} \cdot ${multiplyY})
         \end{bmatrix} = \begin{bmatrix}
-          ${showMathSymbols ? vec.xTex : vec.x}\\
-          ${showMathSymbols ? vec.yTex : vec.y}\\
+          ${vecX}\\
+          ${vecY}\\
         \end{bmatrix}
     `;
   };

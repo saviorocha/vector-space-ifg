@@ -29,7 +29,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
     transformationUpdateHandler,
     transformationDeleteHandler,
   } = useListEvents();
-  const { showMathSymbols } = useConfigContext();
+  const { showMathSymbols, decimalPoint } = useConfigContext();
 
   const handleTransfromationSubmit = (event: any) => {
     const created = transformationSubmitHandler(event, transformation);
@@ -61,6 +61,10 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
     setToggleTrnInput(false);
     setToggleUpdateCreate("create");
   }, [stateVecArr]);
+
+  useEffect(() => {
+    setCurrentTrnExpression(matrixStrings(trnIndex)[currentPosition]);
+  }, [showMathSymbols, decimalPoint]);
 
   return (
     <>
