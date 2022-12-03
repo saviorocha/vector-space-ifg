@@ -38,7 +38,7 @@ const BottomVectors = () => {
           return (
             <li key={i}>
               <VectorTex
-                vectorExpression={`${vec.name}=(${vec.x},${vec.y})`}
+                // vectorExpression={`${vec.name}=(${vec.x},${vec.y})`}
                 vector={vec}
                 currentPlot={currentPlot}
               />
