@@ -203,10 +203,13 @@ const useTexStr = () => {
         {
           value: evaluate(values[0]),
           texExpression: parse(values[0]).toTex(),
+          mathExpression: values[0]
+
         },
         {
           value: evaluate(values[1]),
           texExpression: parse(values[1]).toTex(),
+          mathExpression: values[1],
         },
       ],
       `${name}`

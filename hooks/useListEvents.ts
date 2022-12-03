@@ -2,7 +2,6 @@ import { evaluate, parse } from "mathjs";
 import StateList from "../classes/stateList";
 import Transformation from "../classes/transformation";
 import { useListContext, useNameContext } from "../context";
-import { useConfigContext } from "../context/ConfigContext";
 import {
   validateTransformationName,
   validateTransformationValues,
@@ -10,6 +9,9 @@ import {
 import useList from "./useList";
 import useTexStr from "./useTexStr";
 
+/**
+ * Custom hook for providing handlers for list opertions 
+ */
 const useListEvents = () => {
   const { vectorFromTex } = useTexStr();
   const { addVector, removeVector, updateVector } = useList();
@@ -21,6 +23,8 @@ const useListEvents = () => {
 
   /**
    * Adds a new vector to the list
+   * @param {string} vectorStr
+   * @returns {boolean}
    */
   const vectorSubmitHandler = (vectorStr: string): boolean => {
     const newVector = vectorFromTex(vectorStr);
@@ -37,6 +41,10 @@ const useListEvents = () => {
     return true;
   };
 
+  /**
+   * Deletes a vector from the list
+   * @param {string} vectorName 
+   */
   const vectorDeleteHandler = (vectorName: string) => {
     const newHead = removeVector(vectorName);
     const newList = new StateList(newHead);
@@ -44,9 +52,20 @@ const useListEvents = () => {
     setStateVecArr(list.toArray());
   };
 
-  const vectorUpdateHandler = (vectorExpression: string, event: any): boolean => {
+  /**
+   * Updates a vector
+   * @param {string} vectorExpression 
+   * @param event 
+   * @returns {boolean}
+   */
+  const vectorUpdateHandler = (
+    vectorExpression: string,
+    event: any
+  ): boolean => {
+    console.log("vectorExpression", vectorExpression)
     const newVector = vectorFromTex(event.target.value);
     const prevVectorName = vectorFromTex(vectorExpression)?.name;
+    // console.log("aaa", newVector, prevVectorName);
     if (!newVector || !prevVectorName) {
       return false;
     }
@@ -61,6 +80,9 @@ const useListEvents = () => {
 
   /**
    * Adds a new transformation to the list based on the matrix and name submited
+   * @param event 
+   * @param {Transformation} transformation 
+   * @returns {boolean}
    */
   const transformationSubmitHandler = (
     event: any,
@@ -83,27 +105,31 @@ const useListEvents = () => {
     ) {
       return false;
     }
-    
+
     const newHead = addTransformation(
       new Transformation(
         [
           {
             value: evaluate(event.target.t0.value),
             texExpression: parse(event.target.t0.value).toTex(),
+            mathExpression: event.target.t0.value,
           },
           {
             value: evaluate(event.target.t2.value),
             texExpression: parse(event.target.t2.value).toTex(),
+            mathExpression: event.target.t2.value,
           },
         ],
         [
           {
             value: evaluate(event.target.t1.value),
             texExpression: parse(event.target.t1.value).toTex(),
+            mathExpression: event.target.t1.value,
           },
           {
             value: evaluate(event.target.t3.value),
             texExpression: parse(event.target.t3.value).toTex(),
+            mathExpression: event.target.t3.value,
           },
         ],
         name
@@ -121,6 +147,9 @@ const useListEvents = () => {
 
   /**
    * Updates the current transformation matrix and name
+   * @param event 
+   * @param {Transformation} transformation 
+   * @returns {boolean}
    */
   const transformationUpdateHandler = (
     event: any,
@@ -150,20 +179,24 @@ const useListEvents = () => {
           {
             value: evaluate(event.target.t0.value),
             texExpression: parse(event.target.t0.value).toTex(),
+            mathExpression: event.target.t0.value,
           },
           {
             value: evaluate(event.target.t2.value),
             texExpression: parse(event.target.t2.value).toTex(),
+            mathExpression: event.target.t2.value,
           },
         ],
         [
           {
             value: evaluate(event.target.t1.value),
             texExpression: parse(event.target.t1.value).toTex(),
+            mathExpression: event.target.t1.value,
           },
           {
             value: evaluate(event.target.t3.value),
             texExpression: parse(event.target.t3.value).toTex(),
+            mathExpression: event.target.t3.value,
           },
         ],
         name

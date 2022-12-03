@@ -11,12 +11,12 @@ class Transformation {
 
   constructor(
     _e1: [ExpressionType, ExpressionType] = [
-      { value: 1, texExpression: "1" },
-      { value: 0, texExpression: "0" },
+      { value: 1, texExpression: "1", mathExpression: "1" },
+      { value: 0, texExpression: "0", mathExpression: "0" },
     ],
     _e2: [ExpressionType, ExpressionType] = [
-      { value: 0, texExpression: "0" },
-      { value: 1, texExpression: "1" },
+      { value: 0, texExpression: "0", mathExpression: "0" },
+      { value: 1, texExpression: "1", mathExpression: "1" },
     ],
     _name: string = "T"
   ) {
@@ -48,10 +48,12 @@ class Transformation {
       {
         value: value1,
         texExpression: value1.toString(),
+        mathExpression: value1.toString(),
       },
       {
         value: value2,
         texExpression: value2.toString(),
+        mathExpression: value2.toString(),
       },
     ];
     return new Vector(

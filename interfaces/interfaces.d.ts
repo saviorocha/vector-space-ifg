@@ -146,10 +146,8 @@ interface IRenderTexProps {
 }
 
 interface IVectorTexProps {
-  /** Tex vector expression */
-  vectorExpression: string;
-  /** Name of the vector being rendered; used in the component logic */
-  vectorName: string;
+  /** Vector being rendered */
+  vector: Vector;
   currentPlot: number;
 }
 

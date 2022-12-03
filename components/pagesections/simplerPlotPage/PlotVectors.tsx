@@ -33,7 +33,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   const handleVectorBtnSubmit = () => {
     const created = vectorSubmitHandler(inputRef.current!.value);
     setHideAlert(created);
-    if (created) {  
+    if (created) {
       inputRef.current!.value = "";
     }
   };
@@ -72,26 +72,27 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
                   )}
                 >
                   <VectorTex
-                    vectorExpression={`${vec.name}=(${parseFloat(
-                      vec.x.toFixed(decimalPoint)
-                    )},${parseFloat(vec.y.toFixed(decimalPoint))})`}
-                    vectorName={vec.name}
+                    // vectorExpression={`${vec.name}=(
+                    //  ${parseFloat(vec.x.toFixed(decimalPoint))},
+                    //  ${parseFloat(vec.y.toFixed(decimalPoint))}
+                    // )`}
+                    vector={vec}
                     currentPlot={plotIndex}
                   />
                 </HoverableComponent>
               ) : (
                 // don't hover on vectors of the first plot
                 <VectorTex
-                  vectorExpression={`${vec.name}=(${
-                    showMathSymbols
-                      ? vec.xTex
-                      : parseFloat(vec.x.toFixed(decimalPoint))
-                  },${
-                    showMathSymbols
-                      ? vec.yTex
-                      : parseFloat(vec.y.toFixed(decimalPoint))
-                  })`}
-                  vectorName={vec.name}
+                  // vectorExpression={`${vec.name}=(${
+                  //   showMathSymbols
+                  //     ? vec.xTex
+                  //     : parseFloat(vec.x.toFixed(decimalPoint))
+                  // },${
+                  //   showMathSymbols
+                  //     ? vec.yTex
+                  //     : parseFloat(vec.y.toFixed(decimalPoint))
+                  // })`}
+                  vector={vec}
                   currentPlot={plotIndex}
                 />
               )}

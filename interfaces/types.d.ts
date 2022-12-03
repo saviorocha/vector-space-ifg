@@ -23,6 +23,7 @@ type VectorData = {
 
 type ExpressionType = {
   texExpression: string;
+  mathExpression: string;
   value: number;
 };
 

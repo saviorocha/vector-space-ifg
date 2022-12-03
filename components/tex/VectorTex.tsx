@@ -1,23 +1,36 @@
 import { Alert, Button } from "@mui/material";
 import { FunctionComponent, useEffect, useState } from "react";
 import { Edit2, Trash2, X } from "react-feather";
+import { useListContext } from "../../context";
+import { useConfigContext } from "../../context/ConfigContext";
 import useListEvents from "../../hooks/useListEvents";
 import { IVectorTexProps } from "../../interfaces/interfaces";
 import RenderTex from "./RenderTex";
 
 /**
- * This component handles vector criacao, update and deletion
+ * This component handles vector creation, update and deletion
  */
 const VectorTex: FunctionComponent<IVectorTexProps> = ({
-  vectorExpression,
-  vectorName,
+  vector,
   currentPlot,
 }) => {
-  const [expression, setExpression] = useState(vectorExpression);
+  const { showMathSymbols } = useConfigContext()
+  const [texExpression, setTexExpression] = useState(`${vector.name}=(${
+    showMathSymbols
+      ? vector.xTex
+      : parseFloat(vector.x.toFixed(2))
+  },${
+    showMathSymbols
+      ? vector.yTex
+      : parseFloat(vector.y.toFixed(2))
+  })`);
+  const [mathExpression, setMathExpression] = useState(
+    `${vector.name}=(${vector.xExp},${vector.yExp})`
+  );
   const [showTex, setShowTex] = useState(true);
   const [hideAlert, setHideAlert] = useState(true);
 
-  // const { currentPlot } = useNameContext();
+  const { stateVecArr } = useListContext();
   const { vectorDeleteHandler, vectorUpdateHandler } = useListEvents();
 
   useEffect(() => {
@@ -25,27 +38,33 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
     // console.log("vectorExpression", vectorExpression);
     // console.log("expression", expression);
     // console.log("alert update", hideAlert);
-  }, [expression, hideAlert]);
+    // console.log("mathExpression", mathExpression);
+    console.log("texExpression", texExpression)
+    // console.log("stateVecArr", stateVecArr);
+  }, [texExpression, mathExpression, hideAlert, stateVecArr]);
 
-  useEffect(() => {
-    setExpression(vectorExpression);
-    // console.log("vectorExpression", vectorExpression);
-  }, [vectorExpression]);
+  // useEffect(() => {
+  //   setTexExpression(vectorExpression);
+  //   // console.log("vectorExpression", vectorExpression);
+  // }, [vectorExpression]);
 
   const handleOnChange = (event: any) => {
     if (event.target.value) {
-      setExpression(event.target.value);
+      setTexExpression(event.target.value);
+      setMathExpression(event.target.value);
     }
   };
 
   const handleVectorUpdate = (event: any) => {
-    const updated = vectorUpdateHandler(vectorExpression, event);
+    const updated = vectorUpdateHandler(mathExpression, event);
     setHideAlert(updated);
     if (updated) {
       setShowTex(true);
     }
-    if (event.target.value) {// checks for empty strings
-      setExpression(event.target.value);
+    if (event.target.value) {
+      // checks for empty strings
+      setTexExpression(event.target.value);
+      setMathExpression(event.target.value);
     }
   };
 
@@ -55,25 +74,29 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
     }
   };
 
+  const handleEditBtn = (event: any) => {
+    setShowTex(!showTex);
+  };
+
   return (
     <div className="flex">
-      {!vectorName.includes("e_{1}") &&
-      !vectorName.includes("e_{2}") &&
+      {!vector.name.includes("e_{1}") &&
+      !vector.name.includes("e_{2}") &&
       currentPlot === 0 ? (
         <>
           <button
-            onClick={() => vectorDeleteHandler(vectorName)}
+            onClick={() => vectorDeleteHandler(vector.name)}
             className="ml-1"
           >
             <Trash2 size={19} />
           </button>
-          <button onClick={() => {}} className="ml-1">
+          <button onClick={handleEditBtn} className="ml-1">
             <Edit2 size={19} />
           </button>
         </>
       ) : null}
-      {!vectorName.includes("e_{1}") &&
-      !vectorName.includes("e_{2}") &&
+      {!vector.name.includes("e_{1}") &&
+      !vector.name.includes("e_{2}") &&
       !showTex ? (
         <input
           className="border border-slate-400 w-24"
@@ -83,11 +106,11 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
             }
           }}
           onChange={handleOnChange}
-          value={expression}
+          value={mathExpression}
         />
       ) : (
         <RenderTex
-          mathExpression={expression}
+          mathExpression={texExpression}
           handleDoubleClick={handleDoubleClick}
         />
       )}

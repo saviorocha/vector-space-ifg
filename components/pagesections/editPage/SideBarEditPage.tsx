@@ -83,12 +83,12 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
               handleItemOnClick: () =>
                 transfromationSubmitHandler(
                   [
-                    { value: -1, texExpression: "-1" },
-                    { value: 0, texExpression: "0" },
+                    { value: -1, texExpression: "-1", mathExpression: "-1" },
+                    { value: 0, texExpression: "0" , mathExpression: "0" },
                   ],
                   [
-                    { value: 0, texExpression: "0" },
-                    { value: 1, texExpression: "1" },
+                    { value: 0, texExpression: "0" , mathExpression: "0" },
+                    { value: 1, texExpression: "1" , mathExpression: "1" },
                   ]
                 ),
             },
@@ -98,12 +98,12 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
               handleItemOnClick: () =>
                 transfromationSubmitHandler(
                   [
-                    { value: 1, texExpression: "1" },
-                    { value: 0, texExpression: "0" },
+                    { value: 1, texExpression: "1" , mathExpression: "1" },
+                    { value: 0, texExpression: "0" , mathExpression: "0" },
                   ],
                   [
-                    { value: 2, texExpression: "2" },
-                    { value: 1, texExpression: "1" },
+                    { value: 2, texExpression: "2" , mathExpression: "2" },
+                    { value: 1, texExpression: "1" , mathExpression: "1" },
                   ]
                 ),
             },
@@ -113,12 +113,12 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
               handleItemOnClick: () =>
                 transfromationSubmitHandler(
                   [
-                    { value: 1 / 2, texExpression: "\\frac{1}{2}" },
-                    { value: 0, texExpression: "0" },
+                    { value: 1 / 2, texExpression: "\\frac{1}{2}", mathExpression: "1/2" },
+                    { value: 0, texExpression: "0" , mathExpression: "0"},
                   ],
                   [
-                    { value: 0, texExpression: "0" },
-                    { value: 1 / 2, texExpression: "\\frac{1}{2}" },
+                    { value: 0, texExpression: "0", mathExpression: "0" },
+                    { value: 1 / 2, texExpression: "\\frac{1}{2}", mathExpression: "1/2" },
                   ]
                 ),
             },
@@ -128,12 +128,12 @@ const SideBarEditPage: FunctionComponent<ISideBarProps> = ({
               handleItemOnClick: () =>
                 transfromationSubmitHandler(
                   [
-                    { value: 2, texExpression: "2" },
-                    { value: 0, texExpression: "0" },
+                    { value: 2, texExpression: "2", mathExpression: "2" },
+                    { value: 0, texExpression: "0", mathExpression: "0" },
                   ],
                   [
-                    { value: 0, texExpression: "0" },
-                    { value: 2, texExpression: "2" },
+                    { value: 0, texExpression: "0", mathExpression: "0" },
+                    { value: 2, texExpression: "2", mathExpression: "2" },
                   ]
                 ),
             },

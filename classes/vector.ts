@@ -3,6 +3,8 @@ class Vector {
   y: number;
   private _xTex: string;
   private _yTex: string;
+  private _xExp: string;
+  private _yExp: string;
   private _name: string;
   private _array: [ExpressionType, ExpressionType];
   private color: string;
@@ -21,6 +23,8 @@ class Vector {
     this.y = array[1].value;
     this._xTex = array[0].texExpression;
     this._yTex = array[1].texExpression;
+    this._xExp = array[0].mathExpression;
+    this._yExp = array[1].mathExpression;
     this._name = _name;
     this._prevVector = _prevVector || undefined;
     this.color = color;
@@ -53,6 +57,14 @@ class Vector {
 
   get yTex(): string {
     return this._yTex;
+  }
+
+  get xExp(): string {
+    return this._xExp;
+  }
+
+  get yExp(): string {
+    return this._yExp;
   }
 
   /**

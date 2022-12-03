@@ -39,7 +39,7 @@ const BottomVectors = () => {
             <li key={i}>
               <VectorTex
                 vectorExpression={`${vec.name}=(${vec.x},${vec.y})`}
-                vectorName={vec.name}
+                vector={vec}
                 currentPlot={currentPlot}
               />
             </li>

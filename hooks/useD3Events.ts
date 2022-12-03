@@ -47,10 +47,12 @@ const useD3Events = () => {
               {
                 value: valueX,
                 texExpression: valueX.toString(),
+                mathExpression: valueX.toString(),
               },
               {
                 value: valueY,
                 texExpression: valueY.toString(),
+                mathExpression: valueY.toString(),
               },
             ],
             `v_{${vectorNameCounter}}`
