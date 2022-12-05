@@ -16,13 +16,32 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   plotIndex,
 }) => {
   const inputRef = useRef<null | HTMLInputElement>(null);
-  const [vectorRender, setVectorRender] = useState(vectors);
+  const [vectorRender, setVectorRender] = useState<Vector[]>(vectors);
   const [hideAlert, setHideAlert] = useState(true);
   const { showBasisVectors, showMathSymbols, decimalPoint } =
     useConfigContext();
   const { vectorSubmitHandler } = useListEvents();
   const { vectorMatrixMultiplication } = useTexStr();
   const { stateVecArr } = useListContext();
+
+  /**
+   * Sorts the vectorRender state by the vector names (to avoid update bugs...)
+   * @param vectorArr 
+   */
+  const sortObjArr = (vectorArr: Vector[]) => {
+    vectorArr.sort((a, b) => {
+      let fa = a.name,
+        fb = b.name;
+
+      if (fa < fb) {
+        return -1;
+      }
+      if (fa > fb) {
+        return 1;
+      }
+      return 0;
+    });
+  };
 
   const handleVectorInputSubmit = (value: any) => {
     const created = vectorSubmitHandler(value);
@@ -46,12 +65,13 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   }, [hideAlert]);
 
   useEffect(() => {
-    setVectorRender(
-      vectors.filter((vector: Vector) => {
-        // filter basis vectors
-        return showBasisVectors ? vector : !vector.isBasisVector;
-      })
-    );
+    const newVectors = vectors.filter((vector: Vector) => {
+      // filter basis vectors
+      return showBasisVectors ? vector : !vector.isBasisVector;
+    });
+    sortObjArr(newVectors);
+    setVectorRender(newVectors);
+    // console.log("vectorRender", vectorRender);
   }, [showBasisVectors, vectors]);
 
   return (
@@ -64,7 +84,9 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
       "
     >
       <ul className="overflow-scroll" id={styles.vectorlist}>
-        {vectorRender.map((vec: Vector, i: number) => {
+        {vectorRender.sort().map((vec: Vector, i: number) => {
+          // console.log(vec.name, vec);
+
           return (
             <li key={i}>
               {plotIndex !== 0 ? (
@@ -75,10 +97,10 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
                   )}
                 >
                   <VectorTex
-                    // vectorExpression={`${vec.name}=(
-                    //  ${parseFloat(vec.x.toFixed(decimalPoint))},
-                    //  ${parseFloat(vec.y.toFixed(decimalPoint))}
-                    // )`}
+                    expression={`${vec.name}=(
+                     ${parseFloat(vec.x.toFixed(decimalPoint))},
+                     ${parseFloat(vec.y.toFixed(decimalPoint))}
+                    )`}
                     vector={vec}
                     currentPlot={plotIndex}
                   />
@@ -86,15 +108,15 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
               ) : (
                 // don't hover on vectors of the first plot
                 <VectorTex
-                  // vectorExpression={`${vec.name}=(${
-                  //   showMathSymbols
-                  //     ? vec.xTex
-                  //     : parseFloat(vec.x.toFixed(decimalPoint))
-                  // },${
-                  //   showMathSymbols
-                  //     ? vec.yTex
-                  //     : parseFloat(vec.y.toFixed(decimalPoint))
-                  // })`}
+                  expression={`${vec.name}=(${
+                    showMathSymbols
+                      ? vec.xTex
+                      : parseFloat(vec.x.toFixed(decimalPoint))
+                  },${
+                    showMathSymbols
+                      ? vec.yTex
+                      : parseFloat(vec.y.toFixed(decimalPoint))
+                  })`}
                   vector={vec}
                   currentPlot={plotIndex}
                 />

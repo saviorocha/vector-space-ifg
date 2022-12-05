@@ -62,13 +62,12 @@ const useListEvents = () => {
     vectorExpression: string,
     event: any
   ): boolean => {
-    console.log("vectorExpression", vectorExpression)
     const newVector = vectorFromTex(event.target.value);
     const prevVectorName = vectorFromTex(vectorExpression)?.name;
-    // console.log("aaa", newVector, prevVectorName);
     if (!newVector || !prevVectorName) {
       return false;
     }
+    
     const newHead = updateVector(newVector, prevVectorName);
     const newList = new StateList(newHead);
     setList(newList);

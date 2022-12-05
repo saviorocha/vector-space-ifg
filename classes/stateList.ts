@@ -1,8 +1,5 @@
 import StateNode from "./stateNode";
 
-/**
- * Created based on the post: https://codeburst.io/linked-lists-in-javascript-es6-code-part-1-6dd349c3dcc3
- */
 class StateList {
   head: StateNode;
 
@@ -69,6 +66,10 @@ class StateList {
     return null;
   }
 
+  /**
+   * Converts the list nodes to an obecto of arrays
+   * @returns {StateObj}
+   */
   toArray(): StateObj {
     let nextNode: StateNode | null = this.head;
     let vecArr = [];

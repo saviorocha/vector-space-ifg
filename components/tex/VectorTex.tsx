@@ -11,19 +11,11 @@ import RenderTex from "./RenderTex";
  * This component handles vector creation, update and deletion
  */
 const VectorTex: FunctionComponent<IVectorTexProps> = ({
+  expression,
   vector,
   currentPlot,
 }) => {
-  const { showMathSymbols } = useConfigContext()
-  const [texExpression, setTexExpression] = useState(`${vector.name}=(${
-    showMathSymbols
-      ? vector.xTex
-      : parseFloat(vector.x.toFixed(2))
-  },${
-    showMathSymbols
-      ? vector.yTex
-      : parseFloat(vector.y.toFixed(2))
-  })`);
+  const [texExpression, setTexExpression] = useState(expression);
   const [mathExpression, setMathExpression] = useState(
     `${vector.name}=(${vector.xExp},${vector.yExp})`
   );
@@ -33,6 +25,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
   const { stateVecArr } = useListContext();
   const { vectorDeleteHandler, vectorUpdateHandler } = useListEvents();
 
+
   useEffect(() => {
     // console.log("vectorName", vectorName);
     // console.log("vectorExpression", vectorExpression);
@@ -41,12 +34,13 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
     // console.log("mathExpression", mathExpression);
     // console.log("texExpression", texExpression)
     // console.log("stateVecArr", stateVecArr);
+    // console.log(vector.name, vector);
   }, [texExpression, mathExpression, hideAlert, stateVecArr]);
 
-  // useEffect(() => {
-  //   setTexExpression(vectorExpression);
-  //   // console.log("vectorExpression", vectorExpression);
-  // }, [vectorExpression]);
+  useEffect(() => {
+    setTexExpression(expression);
+    // console.log("vectorExpression", vectorExpression);
+  }, [expression]);
 
   const handleOnChange = (event: any) => {
     if (event.target.value) {
@@ -57,6 +51,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
 
   const handleVectorUpdate = (event: any) => {
     const updated = vectorUpdateHandler(mathExpression, event);
+
     setHideAlert(updated);
     if (updated) {
       setShowTex(true);
@@ -74,7 +69,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
     }
   };
 
-  const handleEditBtn = (event: any) => {
+  const handleEditBtn = () => {
     setShowTex(!showTex);
   };
 

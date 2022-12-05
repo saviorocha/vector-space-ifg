@@ -148,6 +148,8 @@ interface IRenderTexProps {
 interface IVectorTexProps {
   /** Vector being rendered */
   vector: Vector;
+  /** Tex expression to be rendered */
+  expression: string;
   currentPlot: number;
 }
 
