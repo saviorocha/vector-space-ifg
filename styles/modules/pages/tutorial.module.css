@@ -49,7 +49,6 @@
   width: 45px;
 }
 
-
 .darkmodetoggle {
   margin-right: 30px;
 }
@@ -156,4 +155,16 @@
   .tutorialcontent > p {
     margin: 10px 0;
   }
+}
+
+#commandtable {
+  margin: 0 auto;
+  border-collapse: collapse;
+  border: 2px solid rgb(200,200,200);
+  font-size: 0.9rem;
+}
+
+.tableitems {
+  border: 1px solid rgb(190,190,190);
+  padding: 5px 15px;
 }

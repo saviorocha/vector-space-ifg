@@ -17,7 +17,7 @@ const RenderTex: FunctionComponent<IRenderTexProps> = ({
   const { currentPlot } = useNameContext();
 
   useEffect(() => {
-    // console.log(mathExpression)
+    console.log(mathExpression)
   }, [])
 
   return (

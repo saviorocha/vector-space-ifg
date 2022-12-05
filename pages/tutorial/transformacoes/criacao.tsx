@@ -54,186 +54,196 @@ const Creation = () => {
         A tabela a seguir ilustra os comandos que podem ser utilizados para se
         criar uma dada expressão matemática como coordenadas do vetor:
       </p>
-      <table>
+      <table id={styles.commandtable}>
         <tr>
-          <td>Tipo de Expressão</td>
-          <td>Exemplo</td>
-          <td>Comando</td>
+          <td className={styles.tableitems}>
+            <strong>Tipo de Expressão</strong>
+          </td>
+          <td className={styles.tableitems}>
+            <strong>Exemplo</strong>
+          </td>
+          <td className={styles.tableitems}>
+            <strong>Comando</strong>
+          </td>
         </tr>
         <tr>
-          <td>Frações</td>
-          <td>
+          <td className={styles.tableitems}>Fração</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`\frac{1}{2}`} />
           </td>
-          <td>1/2</td>
+          <td className={styles.tableitems}>1/2</td>
         </tr>
         <tr>
-          <td>Fatorial</td>
-          <td>
+          <td className={styles.tableitems}>Fatorial</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`3!`} />
           </td>
-          <td>3!</td>
+          <td className={styles.tableitems}>3!</td>
         </tr>
         <tr>
-          <td>Módulo</td>
-          <td>
+          <td className={styles.tableitems}>Módulo</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`\left|-1\right|`} />
           </td>
-          <td>abs(-1)</td>
+          <td className={styles.tableitems}>abs(-1)</td>
         </tr>
         <tr>
-          <td>Raíz Quadrada</td>
-          <td>
+          <td className={styles.tableitems}>Raíz Quadrada</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`\sqrt{2}`} />
           </td>
-          <td>sqrt(2)</td>
+          <td className={styles.tableitems}>sqrt(2)</td>
         </tr>
         <tr>
-          <td>Raíz Cúbica</td>
-          <td>
+          <td className={styles.tableitems}>Raíz Cúbica</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`\sqrt[3]{27}`} />
           </td>
-          <td>cbrt(27)</td>
+          <td className={styles.tableitems}>cbrt(27)</td>
         </tr>
         <tr>
-          <td>Raíz Enésima</td>
-          <td>
+          <td className={styles.tableitems}>Raíz Enésima</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`\sqrt[5]{32}`} />
           </td>
-          <td>nthRoot(32,5)</td>
+          <td className={styles.tableitems}>nthRoot(32,5)</td>
         </tr>
         <tr>
-          <td>Logaritmo</td>
-          <td>
+          <td className={styles.tableitems}>Logaritmo</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`\log_{2}\left(4\right)`} />
           </td>
-          <td>log(4, 2)</td>
+          <td className={styles.tableitems}>log(4, 2)</td>
         </tr>
         <tr>
-          <td>Logaritmo de Base 2</td>
-          <td>
+          <td className={styles.tableitems}>Logaritmo de Base 2</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`\log_{2}\left(4\right)`} />
           </td>
-          <td>log2(4)</td>
+          <td className={styles.tableitems}>log2(4)</td>
         </tr>
         <tr>
-          <td>Logaritmo de Base 10</td>
-          <td>
+          <td className={styles.tableitems}>Logaritmo de Base 10</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`\log_{10}\left(10000\right)`} />
           </td>
-          <td>log10(10000)</td>
+          <td className={styles.tableitems}>log10(10000)</td>
         </tr>
         <tr>
-          <td>Logaritmo Base Natural</td>
-          <td>
+          <td className={styles.tableitems}>Logaritmo Base Natural</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`\ln\left(2\right)`} />
           </td>
-          <td>log(2)</td>
+          <td className={styles.tableitems}>log(2)</td>
         </tr>
         <tr>
-          <td>Potência</td>
-          <td>
+          <td className={styles.tableitems}>Potência</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`{3}^{2}`} />
           </td>
-          <td>3^2 ou pow(3,2)</td>
+          <td className={styles.tableitems}>3^2 ou pow(3,2)</td>
         </tr>
         <tr>
-          <td>Seno</td>
-          <td>
+          <td className={styles.tableitems}>Seno</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`\sin\left(2\right)`} />
           </td>
-          <td>sin(2)</td>
+          <td className={styles.tableitems}>sin(2)</td>
         </tr>
         <tr>
-          <td>Cosseno</td>
-          <td>
-            <InlineMath math={String.raw`\cos\left(\left(\left(180\right)  ^\circ\right)\right)`} />
+          <td className={styles.tableitems}>Cosseno</td>
+          <td className={styles.tableitems}>
+            <InlineMath
+              math={String.raw`\cos\left(\left(\left(180\right)  ^\circ\right)\right)`}
+            />
           </td>
-          <td>cos(unit(180, deg))</td>
+          <td className={styles.tableitems}>cos(unit(180, deg))</td>
         </tr>
         <tr>
-          <td>Tangente</td>
-          <td>
-            <InlineMath math={String.raw`\tan\left(2\right)`} />
+          <td className={styles.tableitems}>Tangente</td>
+          <td className={styles.tableitems}>
+            <InlineMath math={String.raw`\tan\left(\frac{\pi}{4}\right)`} />
           </td>
-          <td>tan(2)</td>
+          <td className={styles.tableitems}>tan(pi/4)</td>
         </tr>
         <tr>
-          <td>Inversa do Seno</td>
-          <td>
+          <td className={styles.tableitems}>Inversa do Seno</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`\sin^{-1}\left(2\right)`} />
           </td>
-          <td>asin(2)</td>
+          <td className={styles.tableitems}>asin(2)</td>
         </tr>
         <tr>
-          <td>Inversa do Cosseno</td>
-          <td>
+          <td className={styles.tableitems}>Inversa do Cosseno</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`\cos^{-1}\left(2\right)`} />
           </td>
-          <td>acos(2)</td>
+          <td className={styles.tableitems}>acos(2)</td>
         </tr>
         <tr>
-          <td>Inversa da Tangente</td>
-          <td>
-            <InlineMath math={String.raw`\tan^{-1}\left(2\right)`} />
+          <td className={styles.tableitems}>Inversa da Tangente</td>
+          <td className={styles.tableitems}>
+            <InlineMath math={String.raw`\tan^{-1}\left(\tan\left(1.5\right)\right)`} />
           </td>
-          <td>atan(2)</td>
+          <td className={styles.tableitems}>atan(tan(1.5))</td>
         </tr>
         <tr>
-          <td>Secante</td>
-          <td>
+          <td className={styles.tableitems}>Secante</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`\sec\left(2\right)`} />
           </td>
-          <td>sec(2)</td>
+          <td className={styles.tableitems}>sec(3)</td>
         </tr>
         <tr>
-          <td>Cotangente</td>
-          <td>
-            <InlineMath math={String.raw`\cot\left(2\right)`} />
+          <td className={styles.tableitems}>Cotangente</td>
+          <td className={styles.tableitems}>
+            <InlineMath math={String.raw`\cot\left(\frac{1}{2}\right)`} />
           </td>
-          <td>cot(2)</td>
+          <td className={styles.tableitems}>cot(1/2)</td>
         </tr>
-         <tr>
-          <td>Cosecante</td>
-          <td>
+        <tr>
+          <td className={styles.tableitems}>Cosecante</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`\csc\left(2\right)`} />
           </td>
-          <td>csc(2)</td>
+          <td className={styles.tableitems}>csc(2)</td>
         </tr>
         <tr>
-          <td>Inverso da Secante</td>
-          <td>
+          <td className={styles.tableitems}>Inverso da Secante</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`\sec^{-1}\left(2\right)`} />
           </td>
-          <td>asec(2)</td>
+          <td className={styles.tableitems}>asec(5)</td>
         </tr>
         <tr>
-          <td>Inverso da Cotangente</td>
-          <td>
+          <td className={styles.tableitems}>Inverso da Cotangente</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`\cot^{-1}\left(2\right)`} />
           </td>
-          <td>acot(2)</td>
+          <td className={styles.tableitems}>acot(2)</td>
         </tr>
         <tr>
-          <td>Pi</td>
-          <td>
+          <td className={styles.tableitems}>Pi</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`\pi`} />
           </td>
-          <td>pi</td>
+          <td className={styles.tableitems}>pi</td>
         </tr>
         <tr>
-          <td>Número de Euler</td>
-          <td>
+          <td className={styles.tableitems}>Número de Euler</td>
+          <td className={styles.tableitems}>
             <InlineMath math={String.raw`e`} />
           </td>
-          <td>e</td>
+          <td className={styles.tableitems}>e</td>
         </tr>
         <tr>
-          <td>Combinações de Expressões</td>
-          <td>
-            <InlineMath math={String.raw`\frac{\left(\sin\left(\frac{\pi}{2}\right)-1\right)}{4}`} />
+          <td className={styles.tableitems}>Combinações de Expressões</td>
+          <td className={styles.tableitems}>
+            <InlineMath
+              math={String.raw`\frac{\left(\sin\left(\frac{\pi}{2}\right)-1\right)}{4}`}
+            />
           </td>
-          <td>(sin(pi/2)-1)/4</td>
+          <td className={styles.tableitems}>(sin(pi/2)-1)/4</td>
         </tr>
       </table>
       <p>
