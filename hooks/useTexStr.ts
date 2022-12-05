@@ -113,12 +113,10 @@ const useTexStr = () => {
     const vecY = parseFloat(vec.y.toFixed(decimalPoint));
     const multiplyX = showMathSymbols
       ? vec.prevVector!.xTex || vec.xTex
-      : parseFloat(vec.prevVector!.x.toFixed(decimalPoint)) ||
-        vecX;
+      : parseFloat(vec.prevVector!.x.toFixed(decimalPoint)) || vecX;
     const multiplyY = showMathSymbols
       ? vec.prevVector!.yTex || vec.yTex
-      : parseFloat(vec.prevVector!.y.toFixed(decimalPoint)) ||
-        vecY;
+      : parseFloat(vec.prevVector!.y.toFixed(decimalPoint)) || vecY;
 
     const e1 = showMathSymbols
       ? [transformation.e1[0].texExpression, transformation.e1[1].texExpression]
@@ -158,38 +156,38 @@ const useTexStr = () => {
   const vectorFromTex = (vectorStr: string): Vector | undefined => {
     vectorStr = vectorStr.replace(/\s/g, ""); // removes white spaces
 
-    const expression: string = vectorStr
-      .replace("π", "pi")
-      .replace("√", "sqrt")
-      .replace("²", "^2")
-      .replace("³", "^3")
-      .replace("×", "*")
-      .replace("₀", "_{0}")
-      .replace("₁", "_{1}")
-      .replace("₂", "_{2}")
-      .replace("₃", "_{3}")
-      .replace("₄", "_{4}")
-      .replace("₅", "_{5}")
-      .replace("₆", "_{6}")
-      .replace("₇", "_{7}")
-      .replace("₈", "_{8}")
-      .replace("₉", "_{9}");
+    // const expression: string = vectorStr
+    //   .replace("π", "pi")
+    //   .replace("√", "sqrt")
+    //   .replace("²", "^2")
+    //   .replace("³", "^3")
+    //   .replace("×", "*")
+    //   .replace("₀", "_{0}")
+    //   .replace("₁", "_{1}")
+    //   .replace("₂", "_{2}")
+    //   .replace("₃", "_{3}")
+    //   .replace("₄", "_{4}")
+    //   .replace("₅", "_{5}")
+    //   .replace("₆", "_{6}")
+    //   .replace("₇", "_{7}")
+    //   .replace("₈", "_{8}")
+    //   .replace("₉", "_{9}");
 
-    const name = expression.includes("=")
-      ? expression.split("=")[0]
+    const name = vectorStr.includes("=")
+      ? vectorStr.split("=")[0]
       : `v_{${vectorNameCounter}}`;
 
-    const values = expression.includes("=")
-      ? expression
+    const values = vectorStr.includes("=")
+      ? vectorStr
           .split("=")[1]
           .slice(1, self.length - 1)
-          .split(",")
-      : expression.slice(1, self.length - 1).split(",");
-
-    if (
+          .split(/\,\s?(?![^\(]*\))/)
+      : vectorStr.slice(1, self.length - 1).split(/\,\s?(?![^\(]*\))/);
+    
+      if (
       !validateVectorName(name) ||
       !validateVectorValues(
-        expression.includes("=") ? expression.split("=")[1] : expression
+        vectorStr.includes("=") ? vectorStr.split("=")[1] : vectorStr
       )
     ) {
       return;
@@ -203,8 +201,7 @@ const useTexStr = () => {
         {
           value: evaluate(values[0]),
           texExpression: parse(values[0]).toTex(),
-          mathExpression: values[0]
-
+          mathExpression: values[0],
         },
         {
           value: evaluate(values[1]),

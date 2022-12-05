@@ -11,8 +11,9 @@ export function validateVectorName(name: string): boolean {
 export function validateVectorValues(values: string): boolean {
   const valuesArr = values
     .slice(1, self.length - 1)
-    .split(",")
+    .split(/\,\s?(?![^\(]*\))/)
     .filter(Boolean);
+
   try {
     evaluate(valuesArr[0]);
     evaluate(valuesArr[1]);
@@ -43,7 +44,7 @@ export function validateTransformationValues(valuesArr: string[]): boolean {
     try {
       if (
         evaluate(valuesArr[i]) === Infinity || // checks if it's a valid expression
-        isObject(evaluate(valuesArr[i]))       // checks if it's a object (e.g. a imaginary number object)
+        isObject(evaluate(valuesArr[i])) // checks if it's a object (e.g. a imaginary number object)
       )
         return false;
     } catch (error) {
