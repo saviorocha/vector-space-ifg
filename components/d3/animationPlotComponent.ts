@@ -91,7 +91,7 @@ class AnimationPlotComponent {
   /**
    * Recreates the lines with new vector values
    */
-  updateData = (vecData: CoordinateData[][]) => {
+  updateData = (vecData: CoordinateData[][]) => { 
     const defaultMax = 5;
     const defaultMin = -5;
 
