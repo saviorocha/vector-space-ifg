@@ -39,7 +39,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
     // console.log("expression", expression);
     // console.log("alert update", hideAlert);
     // console.log("mathExpression", mathExpression);
-    console.log("texExpression", texExpression)
+    // console.log("texExpression", texExpression)
     // console.log("stateVecArr", stateVecArr);
   }, [texExpression, mathExpression, hideAlert, stateVecArr]);
 

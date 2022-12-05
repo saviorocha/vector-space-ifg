@@ -70,24 +70,16 @@ class Vector {
   /**
    * Returns a object to be used in the d3 plot
    */
-  d3VectorFormat = (): VectorData[] => {
-    return [
-      { coord1: 0, coord2: 0 },
-      { coord1: this.x, coord2: this.y },
-    ];
+   d3VectorFormatTeste = (): VectorData => {
+    return {
+      coordinates: [
+        { coord1: 0, coord2: 0 },
+        { coord1: this.x, coord2: this.y },
+      ],
+      name: this._name,
+      color: this.color,
+    };
   };
-
-  // d3VectorFormat = (): VectorData[] => {
-  //   return [{
-  //     coordinates: [
-  //       { coord1: 0, coord2: 0 },
-  //       { coord1: this.x, coord2: this.y },
-  //     ],
-  //     color: this.color,
-  //     name: this._name,
-
-  //   }];
-  // };
 }
 
 export default Vector;

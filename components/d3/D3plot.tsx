@@ -31,15 +31,16 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index }) => {
       });
     }
 
-    const vectors = vectorsMap.map((vector) => {
-      return vector.d3VectorFormat();
+
+    const data = vectorsMap.map((vector: Vector) => {
+      return vector.d3VectorFormatTeste();
     });
 
     setD3Component(
       new PlotComponent(
         refElement.current,
         dimension,
-        vectors,
+        data,
         hideNumbers,
         events,
         currentPlot

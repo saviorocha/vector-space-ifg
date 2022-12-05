@@ -16,25 +16,21 @@ type Margin = {
   left: number;
 };
 
-type VectorData = {
+type CoordinateData = {
   coord1: number;
   coord2: number;
 };
+
+type VectorData = {
+  coordinates: CoordinateData[];
+  name: string;
+  color: string;
+}
 
 type ExpressionType = {
   texExpression: string;
   mathExpression: string;
   value: number;
 };
-
-// type VectorData = {
-//   coordinates: {
-//     coord1: number;
-//     coord2: number;
-//   }[];
-
-//   color: string;
-//   name: string;
-// };
 
 type EventFunction = () => any;

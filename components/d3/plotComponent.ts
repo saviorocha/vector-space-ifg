@@ -2,7 +2,8 @@ import * as d3 from "d3";
 import { ScaleLinear, ZoomBehavior } from "d3";
 class PlotComponent {
   svg;
-  vectors: VectorData[][];
+  data: VectorData[];
+  vectors: CoordinateData[][]
   margin: Margin;
   width: number;
   height: number;
@@ -21,13 +22,16 @@ class PlotComponent {
   constructor(
     refComponent: null | HTMLDivElement,
     dimensions: Dimesion,
-    vectors: VectorData[][],
+    data: VectorData[],
     hideNumbers: boolean,
     eventsArr: EventFunction[],
     currentPlot: number
   ) {
     const { margin, width, height } = dimensions;
-    this.vectors = vectors;
+    this.data = data;
+    this.vectors = data.map((el, i) => {
+      return el.coordinates
+    });
     this.margin = margin;
     this.width = width;
     this.height = height;

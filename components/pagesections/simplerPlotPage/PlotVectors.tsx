@@ -28,6 +28,9 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
     const created = vectorSubmitHandler(value);
     setHideAlert(created);
     inputRef.current!.value = value;
+    if (created) {
+      inputRef.current!.value = "";
+    }
   };
 
   const handleVectorBtnSubmit = () => {
