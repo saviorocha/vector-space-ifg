@@ -2,7 +2,8 @@ import * as d3 from "d3";
 import { ScaleLinear, ZoomBehavior } from "d3";
 class AnimationPlotComponent {
   svg;
-  vectors: VectorData[][];
+  data: VectorData[];
+  vectors: CoordinateData[][];
   margin: Margin;
   width: number;
   height: number;
@@ -20,10 +21,13 @@ class AnimationPlotComponent {
     refComponent: null | HTMLDivElement,
     dimensions: Dimesion,
     hideNumbers: boolean,
-    vectors: VectorData[][]
+    data: VectorData[]
   ) {
     const { margin, width, height } = dimensions;
-    this.vectors = vectors;
+    this.data = data;
+    this.vectors = data.map((el, i) => {
+      return el.coordinates
+    });
     this.margin = margin;
     this.width = width;
     this.height = height;
@@ -87,7 +91,7 @@ class AnimationPlotComponent {
   /**
    * Recreates the lines with new vector values
    */
-  updateData = (vecData: VectorData[][]) => {
+  updateData = (vecData: CoordinateData[][]) => {
     const defaultMax = 5;
     const defaultMin = -5;
 

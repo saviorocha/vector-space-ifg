@@ -2,6 +2,7 @@ import { Tooltip } from "@mui/material";
 import * as d3 from "d3";
 import React, { useEffect, useRef, useState } from "react";
 import { Pause, Play, RotateCcw } from "react-feather";
+import Vector from "../../classes/vector";
 import { useD3Context, useListContext } from "../../context";
 import { useConfigContext } from "../../context/ConfigContext";
 import useTexStr from "../../hooks/useTexStr";
@@ -107,7 +108,7 @@ const D3PlotAnimation = () => {
       });
     }
 
-    return vectorsMap.map((vector) => {
+    return vectorsMap.map((vector: Vector) => {
       return vector.d3VectorFormat();
     });
   };
@@ -126,7 +127,11 @@ const D3PlotAnimation = () => {
     setIsPlaying(true);
     let run = 1;
     const interval = setInterval(() => {
-      d3Component.updateData(vectors(run));
+      d3Component.updateData(
+        vectors(run).map((el, i) => {
+          return el.coordinates;
+        })
+      );
       run++;
       if (run === stateVecArr.transformationArr.length) {
         clearInterval(interval);

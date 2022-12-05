@@ -31,9 +31,8 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index }) => {
       });
     }
 
-
     const data = vectorsMap.map((vector: Vector) => {
-      return vector.d3VectorFormatTeste();
+      return vector.d3VectorFormat();
     });
 
     setD3Component(
