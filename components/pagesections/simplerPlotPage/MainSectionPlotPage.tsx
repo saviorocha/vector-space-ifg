@@ -1,5 +1,4 @@
 import { useTheme } from "next-themes";
-import { useRouter } from "next/router";
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { ArcherContainer, ArcherElement } from "react-archer";
 import { useListContext } from "../../../context";
@@ -7,27 +6,19 @@ import { IMainSectionProps } from "../../../interfaces/interfaces";
 import stylesplot from "../../../styles/modules/pages/editartransformacoes.module.css";
 import D3Plot from "../../d3/D3plot";
 import RenderTex from "../../tex/RenderTex";
-import InfoBox from "../../ui/dataDisplay/InfoBox";
 import ConfigPopup from "../../ui/inputs/ConfigPopup";
 import PlotVectors from "./PlotVectors";
 import TransformationBar from "./TransformationBar";
 
-const btnClassName = `rounded-full h-10 w-10 right-0
-flex items-center justify-center 
-bg-gray-50 bg-opacity-75 border border-gray-200`;
-
 /**
  * Central part of the edit page; it's divided in left, middle and right sections
  */
-const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
-  mainStyle,
-  children,
-}) => {
+const MainSectionPlotPage = () => {
   const { theme } = useTheme();
   const { stateVecArr } = useListContext();
   const [trnNum, setTrnNum] = useState(stateVecArr.vectorArr.length);
 
-  useEffect(() => {}, [stateVecArr]);
+  // useEffect(() => {}, [stateVecArr]);
 
   useEffect(() => {
     setTrnNum(stateVecArr.vectorArr.length);
@@ -36,18 +27,10 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
   return (
     <main
       className={`
-        mx-auto absolute right-0 ${trnNum > 1 ? "mt-5" : ""}
+        mx-auto ${trnNum > 1 ? "mt-5" : ""}
         flex justify-center items-center
       `}
-      id={stylesplot.main}
-      style={mainStyle}
     >
-      <section
-        id={stylesplot.leftsection}
-        className="h-full flex items-center justify-around flex-col"
-      >
-        {children}
-      </section>
       <section
         id={stylesplot.middlesection}
         className={`
@@ -117,9 +100,7 @@ const MainSectionPlotPage: FunctionComponent<IMainSectionProps> = ({
             })}
           </div>
         </ArcherContainer>
-        {stateVecArr.transformationArr.length === 1 && (
-          <TransformationBar />
-        )}
+        {/* {stateVecArr.transformationArr.length === 1 && <TransformationBar />} */}
       </section>
 
       <section
