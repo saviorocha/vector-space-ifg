@@ -70,6 +70,12 @@ interface ISideBarProps {
   sideBarRef?: LegacyRef<HTMLElement> | undefined;
 }
 
+interface IBottomItemProps {
+  title: string;
+  icon: ReactElement;
+  handleOnClick: React.MouseEventHandler<HTMLAnchorElement>;
+}
+
 interface IHoverableDivProp {
   children: ReactNode;
   hoverText?: string;

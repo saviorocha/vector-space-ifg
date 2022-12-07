@@ -1,4 +1,5 @@
 import { useTheme } from "next-themes";
+import Link from "next/link";
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { ArcherContainer, ArcherElement } from "react-archer";
 import { useListContext } from "../../../context";
@@ -9,6 +10,8 @@ import RenderTex from "../../tex/RenderTex";
 import ConfigPopup from "../../ui/inputs/ConfigPopup";
 import PlotVectors from "./PlotVectors";
 import TransformationBar from "./TransformationBar";
+import tutorialstyles from "../../../styles/modules/pages/tutorial.module.css";
+import Logo from "../../icons/Logo";
 
 /**
  * Central part of the edit page; it's divided in left, middle and right sections
@@ -31,6 +34,15 @@ const MainSectionPlotPage = () => {
         flex justify-center items-center
       `}
     >
+      <section className="absolute top-0 left-0">
+        <Link href="/">
+          <a className={tutorialstyles.logo}>
+            <Logo className={tutorialstyles.headerlogo} />
+            <p className={tutorialstyles.logotext}>VectorSpace</p>
+          </a>
+        </Link>
+      </section>
+
       <section
         id={stylesplot.middlesection}
         className={`

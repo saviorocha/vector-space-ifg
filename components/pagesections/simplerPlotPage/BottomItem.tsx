@@ -1,28 +1,44 @@
-import React, { useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { IBottomItemProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/pages/editartransformacoes.module.css";
 
-const BottomItem = ({ title, icon }) => {
-  const [itemDisplay, setItemDisplay] = useState("none");
+const BottomItem: FunctionComponent<IBottomItemProps> = ({
+  title,
+  icon,
+  handleOnClick,
+}) => {
+  const [itemDisplay, setItemDisplay] = useState<string>("hidden");
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    // console.log("isActive", isActive);
+  }, [isActive]);
 
   return (
     <section
       onMouseEnter={() => {
-        setItemDisplay("block");
+        setItemDisplay("visible");
+        setIsActive(true);
       }}
       onMouseLeave={() => {
-        setItemDisplay("none");
+        setItemDisplay("hidden");
+        setIsActive(false);
       }}
       className={styles.itembox}
+      onClick={handleOnClick}
     >
-      {icon}
-      <p
-        style={{
-          display: itemDisplay,
-        }}
-        className={styles.title}
-      >
-        {title}
-      </p>
+      <div className={styles.items}>
+        {icon}
+        <p
+          style={{
+            display: isActive ? "flex" : "none",
+            // visibility: itemDisplay,
+          }}
+          className={styles.title}
+        >
+          {title}
+        </p>
+      </div>
     </section>
   );
 };
