@@ -41,7 +41,7 @@ const TutorialContainer: FunctionComponent<PropsChildren> = ({ children }) => {
       <header className={styles.header}>
         <Link href="/">
           <a className={styles.logo}>
-            <Logo className={styles.headerlogo} />
+            <Logo className={styles.headerlogo} logoColor="#fff" />
             <p className={styles.logotext}>VectorSpace</p>
           </a>
         </Link>

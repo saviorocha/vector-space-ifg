@@ -10,7 +10,7 @@ import RenderTex from "../../tex/RenderTex";
 import ConfigPopup from "../../ui/inputs/ConfigPopup";
 import PlotVectors from "./PlotVectors";
 import TransformationBar from "./TransformationBar";
-import tutorialstyles from "../../../styles/modules/pages/tutorial.module.css";
+import styles from "../../../styles/modules/pages/editartransformacoes.module.css";
 import Logo from "../../icons/Logo";
 
 /**
@@ -34,14 +34,12 @@ const MainSectionPlotPage = () => {
         flex justify-center items-center
       `}
     >
-      <section className="absolute top-0 left-0">
         <Link href="/">
-          <a className={tutorialstyles.logo}>
-            <Logo className={tutorialstyles.headerlogo} />
-            <p className={tutorialstyles.logotext}>VectorSpace</p>
+          <a className={styles.logo}>
+            <Logo className={styles.headerlogo} />
+            <p className={styles.logotext}>VectorSpace</p>
           </a>
         </Link>
-      </section>
 
       <section
         id={stylesplot.middlesection}

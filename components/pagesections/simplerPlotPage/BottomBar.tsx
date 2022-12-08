@@ -44,39 +44,42 @@ const BottomBar = () => {
   }, [stateVecArr]);
 
   return (
-    <section id={styles.bottombar}>
-      {toggleTrnInput && (
-        <div id={styles.formcontainer}>
-          <TransformationForm onSubmit={handleTransfromationSubmit} />
-        </div>
-      )}
-      <section id={styles.itemslist}>
-        <BottomItem
-          title={"Adicionar Transformação"}
-          icon={<Plus />}
-          handleOnClick={() => {
-            setToggleTrnInput(!toggleTrnInput);
-          }}
-        />
-        <BottomItem
-          title={"Inserir Vetor"}
-          icon={<VectorIcon />}
-          handleOnClick={vectorSubmitHandler}
-        />
-        <BottomItem
-          title={"Transformações Predefinidas"}
-          icon={<Type />}
-          handleOnClick={() => {}}
-        />
-        <BottomItem
-          title={"Executar Transformações"}
-          icon={<Play />}
-          handleOnClick={() => {
-            router.push("/transformacaolinear/animartransformacoes");
-          }}
-        />
+    <footer className="relative">
+      <section id={styles.bottombar}>
+        {toggleTrnInput && (
+          <div id={styles.formcontainer}>
+            <TransformationForm onSubmit={handleTransfromationSubmit} />
+          </div>
+        )}
+        <section id={styles.itemslist}>
+          <BottomItem
+            title={"Adicionar Transformação"}
+            icon={<Plus />}
+            handleOnClick={() => {
+              setToggleTrnInput(!toggleTrnInput);
+            }}
+          />
+          <BottomItem
+            title={"Inserir Vetor"}
+            icon={<VectorIcon />}
+            handleOnClick={vectorSubmitHandler}
+          />
+          <BottomItem
+            title={"Transformações Predefinidas"}
+            icon={<Type />}
+            handleOnClick={() => {}}
+          />
+          <BottomItem
+            title={"Executar Transformações"}
+            icon={<Play />}
+            handleOnClick={() => {
+              router.push("/transformacaolinear/animartransformacoes");
+            }}
+          />
+        </section>
       </section>
-    </section>
+      <button className="absolute right-0">fasdfsa</button>
+    </footer>
   );
 };
 

@@ -5,41 +5,52 @@ import styles from "../../../styles/modules/pages/editartransformacoes.module.cs
 const BottomItem: FunctionComponent<IBottomItemProps> = ({
   title,
   icon,
-  handleOnClick,
+  handleOnClick = undefined,
+  children = null,
 }) => {
   const [itemDisplay, setItemDisplay] = useState<string>("hidden");
   const [isActive, setIsActive] = useState(false);
+  const [showChildren, setShowChildren] = useState(false);
 
   useEffect(() => {
     // console.log("isActive", isActive);
   }, [isActive]);
 
   return (
-    <section
-      onMouseEnter={() => {
-        setItemDisplay("visible");
-        setIsActive(true);
-      }}
-      onMouseLeave={() => {
-        setItemDisplay("hidden");
-        setIsActive(false);
-      }}
-      className={styles.itembox}
-      onClick={handleOnClick}
-    >
-      <div className={styles.items}>
-        {icon}
-        <p
-          style={{
-            display: isActive ? "flex" : "none",
-            // visibility: itemDisplay,
-          }}
-          className={styles.title}
-        >
-          {title}
-        </p>
-      </div>
-    </section>
+    <>
+      <section
+        onMouseEnter={() => {
+          setItemDisplay("visible");
+          setIsActive(true);
+        }}
+        onMouseLeave={() => {
+          setItemDisplay("hidden");
+          setIsActive(false);
+        }}
+        className={styles.itembox}
+        onClick={
+          handleOnClick
+            ? handleOnClick
+            : () => {
+                setShowChildren(!showChildren);
+              }
+        }
+      >
+        <div className={styles.items}>
+          {icon}
+          <p
+            style={{
+              display: isActive ? "flex" : "none",
+              // visibility: itemDisplay,
+            }}
+            className={styles.title}
+          >
+            {title}
+          </p>
+        </div>
+      </section>
+      {showChildren && { children }}
+    </>
   );
 };
 

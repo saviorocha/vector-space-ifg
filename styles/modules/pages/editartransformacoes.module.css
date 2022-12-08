@@ -47,6 +47,11 @@
   justify-content: center;
   bottom: 0;
   width: 100%;
+
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  cursor: pointer;
+  transition: 0.25s all ease-in-out;
 }
 
 #itemslist {
@@ -109,4 +114,27 @@
 .title:hover {
   opacity: 1;
   transform: translate3d(0, 0, 0);
+}
+
+.logo {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  margin-left: 10px;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.logotext {
+  font-family: "Prompt", sans-serif;
+  font-weight: 300;
+  font-size: 22px;
+  margin-left: 5px;
+}
+
+.headerlogo {
+  width: 45px;
 }
