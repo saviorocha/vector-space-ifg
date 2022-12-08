@@ -47,11 +47,20 @@
   justify-content: center;
   bottom: 0;
   width: 100%;
-
-  opacity: 0;
-  transform: translate3d(0, 20px, 0);
-  cursor: pointer;
   transition: 0.25s all ease-in-out;
+}
+
+#bottombutton {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0.5rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(217, 217, 217);
 }
 
 #itemslist {

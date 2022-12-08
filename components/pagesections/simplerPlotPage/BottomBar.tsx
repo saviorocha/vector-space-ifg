@@ -1,6 +1,7 @@
+import { Tooltip } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Play, Plus, Type } from "react-feather";
+import { ChevronDown, ChevronUp, Play, Plus, Type } from "react-feather";
 import { useD3Context, useListContext } from "../../../context";
 import useD3Events from "../../../hooks/useD3Events";
 import useListEvents from "../../../hooks/useListEvents";
@@ -17,6 +18,7 @@ const BottomBar = () => {
   const [transformation, setTransformation] = useState(
     stateVecArr.transformationArr[0]
   );
+  const [isActive, setIsActive] = useState(false);
 
   const { setEvents } = useD3Context();
   const { addVectorOnClick } = useD3Events();
@@ -44,8 +46,16 @@ const BottomBar = () => {
   }, [stateVecArr]);
 
   return (
-    <footer className="relative">
-      <section id={styles.bottombar}>
+    <footer>
+      <section
+        id={styles.bottombar}
+        style={{
+          opacity: isActive ? 1 : 0,
+          transform: isActive
+            ? "translate3d(0, 0, 0)"
+            : "translate3d(0, 20px, 0)",
+        }}
+      >
         {toggleTrnInput && (
           <div id={styles.formcontainer}>
             <TransformationForm onSubmit={handleTransfromationSubmit} />
@@ -78,7 +88,16 @@ const BottomBar = () => {
           />
         </section>
       </section>
-      <button className="absolute right-0">fasdfsa</button>
+      <Tooltip title={`${isActive ? "Esconder" : "Mostrar"} barra de funções`}>
+        <button
+          id={styles.bottombutton}
+          onClick={() => {
+            setIsActive(!isActive);
+          }}
+        >
+          {isActive ? <ChevronDown /> : <ChevronUp />}
+        </button>
+      </Tooltip>
     </footer>
   );
 };
