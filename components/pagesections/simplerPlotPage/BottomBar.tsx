@@ -17,14 +17,14 @@ const BottomBar = () => {
   const router = useRouter();
   const { transformationSubmitHandler } = useListEvents();
   const { list, setList, stateVecArr, setStateVecArr } = useListContext();
+  const { setEvents } = useD3Context();
+  const { addVectorOnClick } = useD3Events();
+  const { addTransformation } = useList();
   const [transformation, setTransformation] = useState(
     stateVecArr.transformationArr[0]
   );
   const [isActive, setIsActive] = useState(false);
 
-  const { setEvents } = useD3Context();
-  const { addVectorOnClick } = useD3Events();
-  const { addTransformation } = useList();
 
   const handleTransfromationSubmit = (event: any) => {
     transformationSubmitHandler(event, transformation);

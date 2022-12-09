@@ -8,6 +8,7 @@ import useList from "./useList";
 
 const useD3Events = () => {
   const { addVector } = useList();
+  const { decimalPoint } = useConfigContext();
   const { setList, setStateVecArr } = useListContext();
   const { vectorNameCounter, setVectorNameCounter } = useNameContext();
   const { dimension } = useD3Context();
@@ -46,13 +47,21 @@ const useD3Events = () => {
             [
               {
                 value: valueX,
-                texExpression: valueX.toString(),
-                mathExpression: valueX.toString(),
+                texExpression: parseFloat(
+                  valueX.toFixed(decimalPoint)
+                ).toString(),
+                mathExpression: parseFloat(
+                  valueX.toFixed(decimalPoint)
+                ).toString(),
               },
               {
                 value: valueY,
-                texExpression: valueY.toString(),
-                mathExpression: valueY.toString(),
+                texExpression: parseFloat(
+                  valueY.toFixed(decimalPoint)
+                ).toString(),
+                mathExpression: parseFloat(
+                  valueY.toFixed(decimalPoint)
+                ).toString(),
               },
             ],
             `v_{${vectorNameCounter}}`

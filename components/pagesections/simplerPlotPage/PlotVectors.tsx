@@ -26,7 +26,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
 
   /**
    * Sorts the vectorRender state by the vector names (to avoid update bugs...)
-   * @param vectorArr 
+   * @param vectorArr
    */
   const sortObjArr = (vectorArr: Vector[]) => {
     vectorArr.sort((a, b) => {
@@ -85,8 +85,6 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
     >
       <ul className="overflow-scroll" id={styles.vectorlist}>
         {vectorRender.sort().map((vec: Vector, i: number) => {
-          // console.log(vec.name, vec);
-
           return (
             <li key={i}>
               {plotIndex !== 0 ? (
