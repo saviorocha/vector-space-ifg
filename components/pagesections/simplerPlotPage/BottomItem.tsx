@@ -28,6 +28,9 @@ const BottomItem: FunctionComponent<IBottomItemProps> = ({
           setIsActive(false);
         }}
         className={styles.itembox}
+        style={{
+          height: showChildren ? "fit-content" : "60px",
+        }}
         onClick={
           handleOnClick
             ? handleOnClick
@@ -38,18 +41,32 @@ const BottomItem: FunctionComponent<IBottomItemProps> = ({
       >
         <div className={styles.items}>
           {icon}
-          <p
-            style={{
-              display: isActive ? "flex" : "none",
-              // visibility: itemDisplay,
-            }}
-            className={styles.title}
-          >
-            {title}
-          </p>
+          {showChildren ? (
+            <p className={styles.title}>{title}</p>
+          ) : (
+            <p
+              style={{
+                display: isActive ? "flex" : "none",
+                // visibility: itemDisplay,
+              }}
+              className={styles.titlehov}
+            >
+              {title}
+            </p>
+          )}
+        </div>
+
+        <div
+          className={styles.hiddencontent}
+          style={{
+            display: showChildren ? "block" : "none",
+            // visibility: showChildren ? "visible" : "hidden",
+            height: showChildren ? "fit-content" : "0",
+          }}
+        >
+          {children}
         </div>
       </section>
-      {showChildren && { children }}
     </>
   );
 };

@@ -73,8 +73,8 @@ interface ISideBarProps {
 interface IBottomItemProps {
   title: string;
   icon: ReactElement;
-  handleOnClick: React.MouseEventHandler<HTMLAnchorElement> | undefined;
-  children: ReactNode | null;
+  handleOnClick?: React.MouseEventHandler<HTMLAnchorElement>;
+  children?: ReactNode;
 }
 
 interface IHoverableDivProp {
