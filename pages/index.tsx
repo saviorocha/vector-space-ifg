@@ -11,7 +11,7 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <section className={styles.greetings}>
         <div className={styles.logo}>
-          <Logo className={logostyle.logo}></Logo>
+          <Logo className={logostyle.logo} logoColor="#fff"></Logo>
           <p className={styles.logotext}>VectorSpace</p>
         </div>
         <h1 className={styles.greetingstext}>
