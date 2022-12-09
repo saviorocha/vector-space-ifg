@@ -39,17 +39,17 @@ const TransformationBar = ({ transformationNum = 0 }) => {
         stateVecArr.transformationArr.length > 1 ? "self-end" : ""
       }`}
     >
-      {stateVecArr.transformationArr.length > 1 ? (
-        <div>
-          <PlotTransformation
-            transformation={stateVecArr.transformationArr[transformationNum]}
-            trnIndex={transformationNum}
-          />
-          {toggleTrnInput && (
-            <TransformationForm onSubmit={handleTransfromationSubmit} />
-          )}
-        </div>
-      ) : (
+      {/* {stateVecArr.transformationArr.length > 1 ? ( */}
+      <div>
+        <PlotTransformation
+          transformation={stateVecArr.transformationArr[transformationNum]}
+          trnIndex={transformationNum}
+        />
+        {toggleTrnInput && (
+          <TransformationForm onSubmit={handleTransfromationSubmit} />
+        )}
+      </div>
+      {/* ) : (
         <InfoBox customStyles="w-32 h-20">
           {toggleTrnInput ? (
             <TransformationForm onSubmit={handleTransfromationSubmit} />
@@ -63,7 +63,7 @@ const TransformationBar = ({ transformationNum = 0 }) => {
             </button>
           )}
         </InfoBox>
-      )}
+      )} */}
       {!hideAlert && (
         <Alert
           severity="error"

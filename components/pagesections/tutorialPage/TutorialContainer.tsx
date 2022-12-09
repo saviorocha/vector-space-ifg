@@ -2,7 +2,6 @@ import { DarkModeToggle, Mode } from "@anatoliygatt/dark-mode-toggle";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { FunctionComponent, useState } from "react";
-import { Aperture } from "react-feather";
 import { PropsChildren } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/pages/tutorial.module.css";
 import Logo from "../../icons/Logo";
@@ -42,7 +41,7 @@ const TutorialContainer: FunctionComponent<PropsChildren> = ({ children }) => {
       <header className={styles.header}>
         <Link href="/">
           <a className={styles.logo}>
-            <Logo className={styles.headerlogo} />
+            <Logo className={styles.headerlogo} logoColor="#fff" />
             <p className={styles.logotext}>VectorSpace</p>
           </a>
         </Link>

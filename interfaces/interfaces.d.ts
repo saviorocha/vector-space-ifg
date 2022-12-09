@@ -70,6 +70,13 @@ interface ISideBarProps {
   sideBarRef?: LegacyRef<HTMLElement> | undefined;
 }
 
+interface IBottomItemProps {
+  title: string;
+  icon: ReactElement;
+  handleOnClick?: React.MouseEventHandler<HTMLAnchorElement>;
+  children?: ReactNode;
+}
+
 interface IHoverableDivProp {
   children: ReactNode;
   hoverText?: string;
@@ -100,6 +107,7 @@ interface ListItemProps {
 
 interface LogoProps {
   className: CSSProperties;
+  logoColor?: string;
 }
 
 interface IBarItemProps {
