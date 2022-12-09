@@ -17,7 +17,6 @@ const BottomBar = () => {
   const router = useRouter();
   const { transformationSubmitHandler } = useListEvents();
   const { list, setList, stateVecArr, setStateVecArr } = useListContext();
-  const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
   const [transformation, setTransformation] = useState(
     stateVecArr.transformationArr[0]
   );
@@ -28,9 +27,7 @@ const BottomBar = () => {
   const { addTransformation } = useList();
 
   const handleTransfromationSubmit = (event: any) => {
-    const created = transformationSubmitHandler(event, transformation);
-    // setHideAlert(created);
-    setToggleTrnInput(false);
+    transformationSubmitHandler(event, transformation);
   };
 
   /**
@@ -147,7 +144,13 @@ const BottomBar = () => {
         }}
       >
         <section id={styles.itemslist}>
-          <BottomItem title={"Adicionar Transformação"} icon={<Plus />}>
+          <BottomItem
+            title={"Adicionar Transformação"}
+            icon={<Plus />}
+            // handleOnClick={() => {
+            //   console.log("aaa");
+            // }}
+          >
             <div id={styles.formcontainer}>
               <TransformationForm onSubmit={handleTransfromationSubmit} />
             </div>
@@ -157,7 +160,10 @@ const BottomBar = () => {
             icon={<VectorIcon />}
             handleOnClick={vectorSubmitHandler}
           />
-          <BottomItem title={"Transformações Predefinidas"} icon={<Type />}>
+          <BottomItem
+            title={"Transformações Predefinidas"}
+            icon={<Type />}
+          >
             <ul className="relative accordion-collapse collapse w-44">
               <li className="relative">
                 {subItems.map(({ title, handleItemOnClick }, i) => {

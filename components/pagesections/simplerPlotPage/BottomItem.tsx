@@ -16,6 +16,11 @@ const BottomItem: FunctionComponent<IBottomItemProps> = ({
     // console.log("isActive", isActive);
   }, [isActive]);
 
+  useEffect(() => {
+    // console.log("showChildren", showChildren);
+    // console.log("onClick", handleOnClick);
+  }, [showChildren]);
+
   return (
     <>
       <section
@@ -31,15 +36,17 @@ const BottomItem: FunctionComponent<IBottomItemProps> = ({
         style={{
           height: showChildren ? "fit-content" : "60px",
         }}
-        onClick={
-          handleOnClick
-            ? handleOnClick
-            : () => {
-                setShowChildren(!showChildren);
-              }
-        }
       >
-        <div className={styles.items}>
+        <div
+          className={styles.items}
+          onClick={
+            handleOnClick
+              ? handleOnClick
+              : () => {
+                  setShowChildren(!showChildren);
+                }
+          }
+        >
           {icon}
           {showChildren ? (
             <p className={styles.title}>{title}</p>
@@ -47,7 +54,6 @@ const BottomItem: FunctionComponent<IBottomItemProps> = ({
             <p
               style={{
                 display: isActive ? "flex" : "none",
-                // visibility: itemDisplay,
               }}
               className={styles.titlehov}
             >
@@ -55,12 +61,10 @@ const BottomItem: FunctionComponent<IBottomItemProps> = ({
             </p>
           )}
         </div>
-
         <div
           className={styles.hiddencontent}
           style={{
             display: showChildren ? "block" : "none",
-            // visibility: showChildren ? "visible" : "hidden",
             height: showChildren ? "fit-content" : "0",
           }}
         >
