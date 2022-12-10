@@ -161,7 +161,7 @@ const D3PlotAnimation = () => {
     );
   };
 
-  useEffect(createPlane, [stateVecArr, hideNumbers, showBasisVectors]);
+  useEffect(createPlane, [stateVecArr, hideNumbers, showBasisVectors, dimension]);
 
   useEffect(() => {
     if (isPlaying) {
