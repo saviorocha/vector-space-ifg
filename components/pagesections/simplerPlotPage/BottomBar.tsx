@@ -138,6 +138,7 @@ const BottomBar = () => {
         id={styles.bottombar}
         style={{
           opacity: isActive ? 1 : 0,
+          visibility: isActive ? "visible" : "hidden",
           transform: isActive
             ? "translate3d(0, 0, 0)"
             : "translate3d(0, 20px, 0)",

@@ -40,7 +40,7 @@ const MainSectionPlotPage = () => {
         id={stylesplot.middlesection}
         className={`
           relative gap-1 overflow-x-scroll overflow-y-hidden
-          flex items-center justify-center flex-col 
+          flex items-center justify-${trnNum > 1 ? "start" : "around"} flex-row 
         `}
       >
         <ArcherContainer>
