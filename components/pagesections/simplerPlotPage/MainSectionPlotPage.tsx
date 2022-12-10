@@ -28,24 +28,19 @@ const MainSectionPlotPage = () => {
   }, [stateVecArr]);
 
   return (
-    <main
-      className={`
-        mx-auto ${trnNum > 1 ? "mt-5" : ""}
-        flex justify-center items-center
-      `}
-    >
-        <Link href="/">
-          <a className={styles.logo}>
-            <Logo className={styles.headerlogo} />
-            <p className={styles.logotext}>VectorSpace</p>
-          </a>
-        </Link>
+    <main className="mx-auto flex justify-center items-center">
+      <Link href="/">
+        <a className={styles.logo}>
+          <Logo className={styles.headerlogo} />
+          <p className={styles.logotext}>VectorSpace</p>
+        </a>
+      </Link>
 
       <section
         id={stylesplot.middlesection}
         className={`
           relative gap-1 overflow-x-scroll overflow-y-hidden
-          flex items-center justify-${trnNum > 1 ? "start" : "around"} flex-col 
+          flex items-center justify-center flex-col 
         `}
       >
         <ArcherContainer>

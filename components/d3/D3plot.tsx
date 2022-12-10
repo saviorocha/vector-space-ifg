@@ -18,7 +18,7 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index }) => {
   const { stateVecArr } = useListContext();
   const { currentPlot } = useNameContext();
 
-  useEffect(initD3, [stateVecArr, events, hideNumbers, showBasisVectors]);
+  useEffect(initD3, [stateVecArr, events, hideNumbers, showBasisVectors, dimension]);
 
 
   function initD3() {
