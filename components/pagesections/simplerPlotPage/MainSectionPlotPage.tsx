@@ -1,6 +1,6 @@
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import { ArcherContainer, ArcherElement } from "react-archer";
 import { useListContext } from "../../../context";
 import { IMainSectionProps } from "../../../interfaces/interfaces";
@@ -12,16 +12,22 @@ import PlotVectors from "./PlotVectors";
 import TransformationBar from "./TransformationBar";
 import styles from "../../../styles/modules/pages/editartransformacoes.module.css";
 import Logo from "../../icons/Logo";
+import { useIsOverflow } from "../../../hooks/useIsOverflow";
 
 /**
  * Central part of the edit page; it's divided in left, middle and right sections
  */
 const MainSectionPlotPage = () => {
+  const ref = useRef<null | HTMLDivElement>();
+  const isOverflow = useIsOverflow(ref);
+
   const { theme } = useTheme();
   const { stateVecArr } = useListContext();
   const [trnNum, setTrnNum] = useState(stateVecArr.vectorArr.length);
 
-  // useEffect(() => {}, [stateVecArr]);
+  useEffect(() => {
+    console.log("isOverflow", isOverflow);
+  }, [isOverflow]);
 
   useEffect(() => {
     setTrnNum(stateVecArr.vectorArr.length);
@@ -38,9 +44,10 @@ const MainSectionPlotPage = () => {
 
       <section
         id={stylesplot.middlesection}
+        ref={ref}
         className={`
-          relative gap-1 overflow-x-scroll overflow-y-hidden
-          flex items-center justify-${trnNum > 1 ? "start" : "around"} flex-row 
+          relative gap-1 overflow-x-scroll 
+          flex items-center justify-${isOverflow ? "start" : "around"} flex-row 
         `}
       >
         <ArcherContainer>
