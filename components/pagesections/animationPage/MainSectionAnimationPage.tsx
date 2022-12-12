@@ -28,7 +28,7 @@ const MainSectionAnimationPage = () => {
       <section>
         <ConfigPopup />
       </section>
-      <section id={styles.return} className="absolute top-16 right-5 z-10">
+      <section id={styles.return}>
         <Tooltip title="Voltar para criação de transformações">
           <Link href="/transformacaolinear/editartransformacoes">
             <a id={styles.returnbtn}>

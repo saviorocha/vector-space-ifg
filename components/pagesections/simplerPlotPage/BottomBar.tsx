@@ -138,6 +138,7 @@ const BottomBar = () => {
         id={styles.bottombar}
         style={{
           opacity: isActive ? 1 : 0,
+          visibility: isActive ? "visible" : "hidden",
           transform: isActive
             ? "translate3d(0, 0, 0)"
             : "translate3d(0, 20px, 0)",
@@ -164,7 +165,9 @@ const BottomBar = () => {
             title={"Transformações Predefinidas"}
             icon={<Type />}
           >
-            <ul className="relative accordion-collapse collapse w-44">
+            <ul
+            className={styles.transformations} 
+            >
               <li className="relative">
                 {subItems.map(({ title, handleItemOnClick }, i) => {
                   return (

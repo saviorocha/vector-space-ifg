@@ -3,7 +3,7 @@ import { ScaleLinear, ZoomBehavior } from "d3";
 class PlotComponent {
   svg;
   data: VectorData[];
-  vectors: CoordinateData[][]
+  vectors: CoordinateData[][];
   margin: Margin;
   width: number;
   height: number;
@@ -30,7 +30,7 @@ class PlotComponent {
     const { margin, width, height } = dimensions;
     this.data = data;
     this.vectors = data.map((el, i) => {
-      return el.coordinates
+      return el.coordinates;
     });
     this.margin = margin;
     this.width = width;
@@ -42,13 +42,28 @@ class PlotComponent {
       .select(refComponent)
       .attr("id", "myPlane")
       .append("svg:svg")
-      .attr("id", "svgPlot")
+      // Responsive SVG needs these 2 attributes and no width and height attr.
+      // .attr("preserveAspectRatio", "xMinYMin meet")
+      // .attr(
+      //   "viewBox",
+      //   `0 0 ${this.width + this.margin.left + this.margin.right} ${
+      //     height + this.margin.top + this.margin.bottom
+      //   }`
+      // )
+      // .attr("id", "svgPlot")
+      // .style("display", "inline-block")
+      // .style("position", "relative")
+      // .style("width", "100%")
+      // .style("padding-bottom", "100%")
+      // .style("vertical-align", "top")
+      // .style("overflow", "hidden")
       .attr("width", this.width + this.margin.left + this.margin.right)
       .attr("height", height + this.margin.top + this.margin.bottom)
       .append("g")
       .attr("id", "plane")
       .attr("transform", `translate(${this.margin.left},${this.margin.top})`);
 
+    // this.responsiveDesign();
     this.createAxis();
 
     // that's not how I wanted to deal with events
@@ -274,19 +289,19 @@ class PlotComponent {
       .attr("fill", "none")
       .attr("stroke", "steelblue")
       .attr("stroke-width", 2)
-      .attr("marker-end", "url(#arrow)")
-      // .call(
-      //   d3.drag().on("drag", function (e,d: any) {
-      //     var dx = e.dx;
-      //     var dy = e.dy;
-      //     var x2New = parseFloat(d[1].coord1) + dx;
-      //     var y2New = parseFloat(d[1].coord2) + dy;
-      //     console.log("new",x2New, y2New)
-      //     d3.select("#myPlane")
-      //       .selectAll(".lineVector")
-      //       .attr("d", d3.line<any>().x(2).y(2) as any);
-      //   }) as any
-      // );
+      .attr("marker-end", "url(#arrow)");
+    // .call(
+    //   d3.drag().on("drag", function (e,d: any) {
+    //     var dx = e.dx;
+    //     var dy = e.dy;
+    //     var x2New = parseFloat(d[1].coord1) + dx;
+    //     var y2New = parseFloat(d[1].coord2) + dy;
+    //     console.log("new",x2New, y2New)
+    //     d3.select("#myPlane")
+    //       .selectAll(".lineVector")
+    //       .attr("d", d3.line<any>().x(2).y(2) as any);
+    //   }) as any
+    // );
   };
 
   /**
@@ -308,6 +323,29 @@ class PlotComponent {
       .append("path")
       .attr("d", "M2,2 L10,6 L2,10 L6,6 L2,2")
       .style("fill", "steelblue");
+  };
+
+  responsiveDesign = () => {
+    this.svg
+      .append("div")
+      .attr("id", "resposnfsnf")
+      // Container class to make it responsive.
+      .style("display", "inline-block")
+      .style("position", "relative")
+      .style("width", "100%")
+      .style("padding-bottom", "100%")
+      .style("vertical-align", "top")
+      .style("overflow", "hidden")
+      .append("svg")
+      // Responsive SVG needs these 2 attributes and no width and height attr.
+      .attr("preserveAspectRatio", "xMinYMin meet")
+      .attr("viewBox", "0 0 600 400")
+      // Class to make it responsive.
+      .classed("svg-content-responsive", true)
+      .style("display", "inline-block")
+      .style("position", "absolute")
+      .style("top", "10px")
+      .style("left", "0");
   };
 }
 

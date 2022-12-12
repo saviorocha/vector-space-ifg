@@ -3,9 +3,32 @@ import MainSectionAnimationPage from "../../components/pagesections/animationPag
 import { useD3Context } from "../../context";
 
 const AnimationPlane = () => {
-  const { setEvents } = useD3Context();
+  const { setEvents, margin, setDimension } = useD3Context();
+
+  const handleResize = () => {
+    if (window.innerWidth < 500) {
+      setDimension({
+        margin: margin,
+        width: 360 - margin.left - margin.right,
+        height: 300 - margin.top - margin.bottom,
+      });
+    }
+    if (window.innerWidth > 500) {
+      setDimension({
+        margin: margin,
+        width: 460 - margin.left - margin.right,
+        height: 400 - margin.top - margin.bottom,
+      });
+    }
+  };
 
   useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
     setEvents([]);
   }, []);
 
