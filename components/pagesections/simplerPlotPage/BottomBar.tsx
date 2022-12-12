@@ -165,7 +165,9 @@ const BottomBar = () => {
             title={"Transformações Predefinidas"}
             icon={<Type />}
           >
-            <ul className="relative accordion-collapse collapse w-44">
+            <ul
+            className={styles.transformations} 
+            >
               <li className="relative">
                 {subItems.map(({ title, handleItemOnClick }, i) => {
                   return (

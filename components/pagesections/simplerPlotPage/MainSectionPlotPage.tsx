@@ -18,7 +18,7 @@ import { useIsOverflow } from "../../../hooks/useIsOverflow";
  * Central part of the edit page; it's divided in left, middle and right sections
  */
 const MainSectionPlotPage = () => {
-  const ref = useRef<null | HTMLDivElement>();
+  const ref = useRef<null | HTMLDivElement>(null);
   const isOverflow = useIsOverflow(ref);
 
   const { theme } = useTheme();

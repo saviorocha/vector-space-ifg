@@ -79,6 +79,11 @@
   border-radius: 0.375rem;
 }
 
+.transformations {
+  position: relative;
+  width: 160px;
+}
+
 .transformationlist {
   align-self: flex-end;
   cursor: pointer;
@@ -103,10 +108,10 @@
   align-items: center;
   border: 1px solid rgb(156 163 175);
   border-bottom: 0;
-  /* width: 200px; */
+  /* width: 50px; */
   width: fit-content;
   height: 60px;
-  margin: 0 10px;
+  margin: 0;
 
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -126,6 +131,9 @@
   align-items: center;
   cursor: pointer;
   height: 40px;
+  margin-left: 8px;
+  font-size: 14px;
+  line-height: 15px;
 }
 
 .titlehov {
@@ -171,4 +179,23 @@
 
 .hiddencontent {
   transition: height 300ms ease-in-out;
+}
+
+/* desktop */
+@media only screen and (min-width: 768px) {
+  .itembox {
+    margin: 0 10px;
+  }
+
+  .title {
+    font-size: medium;
+    line-height: 0;
+  }
+  .transformations {
+    position: relative;
+    width: 208px;
+  }
+  .transformationlist {
+
+  }
 }

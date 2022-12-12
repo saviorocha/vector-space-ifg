@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export const useIsOverflow = (ref, callback?) => {
+export const useIsOverflow = (ref: any) => {
   const [isOverflow, setIsOverflow] = React.useState<boolean | undefined>(
     undefined
   );
@@ -12,8 +12,6 @@ export const useIsOverflow = (ref, callback?) => {
       const hasOverflow = current.scrollWidth > current.clientWidth;
 
       setIsOverflow(hasOverflow);
-
-      if (callback) callback(hasOverflow);
     };
 
     if (current) {
@@ -22,7 +20,7 @@ export const useIsOverflow = (ref, callback?) => {
       }
       trigger();
     }
-  }, [callback, ref]);
+  }, [ref]);
 
   return isOverflow;
 };
