@@ -1,18 +1,16 @@
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import React, { FunctionComponent, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ArcherContainer, ArcherElement } from "react-archer";
 import { useListContext } from "../../../context";
-import { IMainSectionProps } from "../../../interfaces/interfaces";
-import stylesplot from "../../../styles/modules/pages/editartransformacoes.module.css";
+import { useIsOverflow } from "../../../hooks/useIsOverflow";
+import styles from "../../../styles/modules/pages/editartransformacoes.module.css";
 import D3Plot from "../../d3/D3plot";
+import Logo from "../../icons/Logo";
 import RenderTex from "../../tex/RenderTex";
 import ConfigPopup from "../../ui/inputs/ConfigPopup";
 import PlotVectors from "./PlotVectors";
 import TransformationBar from "./TransformationBar";
-import styles from "../../../styles/modules/pages/editartransformacoes.module.css";
-import Logo from "../../icons/Logo";
-import { useIsOverflow } from "../../../hooks/useIsOverflow";
 
 /**
  * Central part of the edit page; it's divided in left, middle and right sections
@@ -26,7 +24,7 @@ const MainSectionPlotPage = () => {
   const [trnNum, setTrnNum] = useState(stateVecArr.vectorArr.length);
 
   useEffect(() => {
-    console.log("isOverflow", isOverflow);
+    // console.log("isOverflow", isOverflow);
   }, [isOverflow]);
 
   useEffect(() => {
@@ -43,7 +41,7 @@ const MainSectionPlotPage = () => {
       </Link>
 
       <section
-        id={stylesplot.middlesection}
+        id={styles.middlesection}
         ref={ref}
         className={`
           relative gap-1 overflow-x-scroll 
@@ -76,7 +74,7 @@ const MainSectionPlotPage = () => {
                                     mathExpression={`${
                                       stateVecArr.transformationArr[i + 1].name
                                     }`}
-                                    classStyle={stylesplot.transformationarrow}
+                                    classStyle={styles.transformationarrow}
                                   />
                                 ),
                               },
@@ -84,7 +82,6 @@ const MainSectionPlotPage = () => {
                       }
                     >
                       <aside
-                        id="plot-aside"
                         className="flex items-center justify-center"
                       >
                         <aside
@@ -116,7 +113,7 @@ const MainSectionPlotPage = () => {
       </section>
 
       <section
-        id={stylesplot.rightsection}
+        id={styles.rightsection}
         className="h-screen flex items-start flex-col"
       >
         <ConfigPopup />

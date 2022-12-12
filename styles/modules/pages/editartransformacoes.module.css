@@ -37,6 +37,8 @@
   margin-top: -30px;
 }
 
+
+
 #bottombar {
   /* background-color: #333; */
   overflow: hidden;
@@ -181,8 +183,11 @@
   transition: height 300ms ease-in-out;
 }
 
+
+
 /* desktop */
 @media only screen and (min-width: 768px) {
+
   .itembox {
     margin: 0 10px;
   }
@@ -191,11 +196,10 @@
     font-size: medium;
     line-height: 0;
   }
+
   .transformations {
     position: relative;
     width: 208px;
   }
-  .transformationlist {
-
-  }
+  .transformationlist {}
 }

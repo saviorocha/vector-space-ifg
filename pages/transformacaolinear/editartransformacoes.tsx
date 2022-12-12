@@ -6,14 +6,14 @@ import { useD3Context } from "../../context";
 const SimplePlot = () => {
   const { margin, setDimension } = useD3Context();
   const handleResize = () => {
-    if (window.innerWidth < 500) {
+    if (window.innerWidth < 500 || window.innerHeight < 500) {
       setDimension({
         margin: margin,
         width: 360 - margin.left - margin.right,
         height: 300 - margin.top - margin.bottom,
       });
     }
-    if (window.innerWidth > 500) {
+    if (window.innerWidth > 500 && window.innerHeight > 500) {
       setDimension({
         margin: margin,
         width: 460 - margin.left - margin.right,
