@@ -10,12 +10,14 @@ import VectorTex from "../../tex/VectorTex";
 import HoverableComponent from "../../ui/dataDisplay/HoverableComponent";
 import styles from "../../../styles/modules/ui/vectorbox.module.css";
 import { useConfigContext } from "../../../context/ConfigContext";
+import { useTheme } from "next-themes";
 
 const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   vectors,
   plotIndex,
 }) => {
   const inputRef = useRef<null | HTMLInputElement>(null);
+  const [focus, setFocus] = useState(false);
   const [vectorRender, setVectorRender] = useState<Vector[]>(vectors);
   const [hideAlert, setHideAlert] = useState(true);
   const { showBasisVectors, showMathSymbols, decimalPoint } =
@@ -23,7 +25,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   const { vectorSubmitHandler } = useListEvents();
   const { vectorMatrixMultiplication } = useTexStr();
   const { stateVecArr } = useListContext();
-
+  const { theme } = useTheme();
   /**
    * Sorts the vectorRender state by the vector names (to avoid update bugs...)
    * @param vectorArr
@@ -62,7 +64,8 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
 
   useEffect(() => {
     // console.log("hideAlert create", hideAlert);
-  }, [hideAlert]);
+    console.log("focus", focus);
+  }, [focus]);
 
   useEffect(() => {
     const newVectors = vectors.filter((vector: Vector) => {
@@ -124,11 +127,26 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
         })}
       </ul>
       {plotIndex === 0 && (
-        <footer className={styles.inputcontainer}>
+        <footer id={styles.inputcontainer}>
           <input
             placeholder="Inserir vetor"
             ref={inputRef}
+            onBlur={() => {
+              setFocus(false);
+            }}
+            onFocus={() => {
+              setFocus(true);
+            }}
             className={styles.inpvec}
+            style={{
+              borderColor: theme === "dark" ? "#515151" : "#9a9a9a",
+              color: theme === "dark" ? "#fff" : "#000",
+              backgroundColor: focus
+                ? theme === "dark"
+                  ? "#1a1a1a"
+                  : "#ececec"
+                : "",
+            }}
             onKeyDown={(event: any) => {
               if (event.key === "Enter") {
                 handleVectorInputSubmit(event.target.value);
@@ -139,7 +157,13 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
           />
           <Tooltip title="Adicionar um novo vetor">
             <button onClick={handleVectorBtnSubmit}>
-              <Plus size={24} className={styles.btn} />
+              <Plus
+                size={24}
+                className={styles.btn}
+                style={{
+                  color: theme === "dark" ? "#c5c5c5" : "#373837",
+                }}
+              />
             </button>
           </Tooltip>
         </footer>

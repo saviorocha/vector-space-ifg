@@ -1,3 +1,4 @@
+import { useTheme } from "next-themes";
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { IBottomItemProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/pages/editartransformacoes.module.css";
@@ -8,6 +9,7 @@ const BottomItem: FunctionComponent<IBottomItemProps> = ({
   handleOnClick = undefined,
   children = null,
 }) => {
+  const { theme } = useTheme();
   const [itemDisplay, setItemDisplay] = useState<string>("hidden");
   const [isActive, setIsActive] = useState(false);
   const [showChildren, setShowChildren] = useState(false);
@@ -35,6 +37,11 @@ const BottomItem: FunctionComponent<IBottomItemProps> = ({
         className={styles.itembox}
         style={{
           height: showChildren ? "fit-content" : "60px",
+          backgroundColor:
+            theme === "dark"
+              ? "hsla(0, 0%, 0%, 0.772)"
+              : "hsla(208, 100%, 97%, 0.772)",
+          borderColor: theme === "dark" ? "rgb(106, 106, 106)" : "rgb(156 163 175)",
         }}
       >
         <div

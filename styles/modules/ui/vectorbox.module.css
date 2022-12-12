@@ -5,14 +5,11 @@
   appearance: none;
   width: 100%;
   height: 100%;
-  border: 0.9px solid #9a9a9a;
+  border: 0.9px solid;
   font-family: 'PT Serif', serif;
-  /* padding: 16px 12px 0 12px; */
   font-size: 16px;
   font-weight: 400;
-  background: rgba(#000, 0.02);
   box-shadow: inset 0 -1px 0 rgba(#000, 0.3);
-  color: #000;
   transition: all 0.15s linear;
   outline: none;
 }
@@ -22,41 +19,40 @@
   appearance: none;
   width: 2.5em;
   height: 1.5em;
-  border: 0.9px solid #9a9a9a;
   font-family: 'PT Serif', serif;
-  /* padding: 16px 12px 0 12px; */
   font-size: 16px;
   font-weight: 400;
   background: rgba(#000, 0.02);
   box-shadow: inset 0 -1px 0 rgba(#000, 0.3);
-  color: #000;
   transition: all 0.15s linear;
   outline: none;
 }
 
-.inpvec:focus, .inptrn:focus {
-  border: 1px solid #5b5b5b;
-  background-color: #f9f9f9;
+.inptrn:focus {
+  border-bottom: 1px solid rgb(127.5, 127.5, 127.5);
+  /* background-color: black; */
+}
+
+.submit {
+  margin-top: 10px;
 }
 
 .btn {
-  color: #373837;
   height: 100%;
 }
 
 .btn:hover {
   border: 1px solid #626262;
-  color: black;
 }
 
-.inputcontainer {
+#inputcontainer {
   width: 100%;
   height: 25px;
   display: flex;
   /* justify-content: flex-end; */
   margin: 0 10px;
   /* padding-bottom: 10px; */
-  border-top: 1px solid #b5b5b5;
+  border-top: 1px solid #939393;
 }
 
 #vectorlist {

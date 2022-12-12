@@ -25,7 +25,6 @@ const BottomBar = () => {
   );
   const [isActive, setIsActive] = useState(false);
 
-
   const handleTransfromationSubmit = (event: any) => {
     transformationSubmitHandler(event, transformation);
   };
@@ -145,14 +144,14 @@ const BottomBar = () => {
         }}
       >
         <section id={styles.itemslist}>
-          <BottomItem
-            title={"Adicionar Transformação"}
-            icon={<Plus />}
-            // handleOnClick={() => {
-            //   console.log("aaa");
-            // }}
-          >
-            <div id={styles.formcontainer}>
+          <BottomItem title={"Adicionar Transformação"} icon={<Plus />}>
+            <div
+              id={styles.formcontainer}
+              className="
+                bg-zinc-200 border border-zinc-400 
+                dark:bg-darkbg dark:border-zinc-700
+              "
+            >
               <TransformationForm onSubmit={handleTransfromationSubmit} />
             </div>
           </BottomItem>
@@ -161,13 +160,8 @@ const BottomBar = () => {
             icon={<VectorIcon />}
             handleOnClick={vectorSubmitHandler}
           />
-          <BottomItem
-            title={"Transformações Predefinidas"}
-            icon={<Type />}
-          >
-            <ul
-            className={styles.transformations} 
-            >
+          <BottomItem title={"Transformações Predefinidas"} icon={<Type />}>
+            <ul className={styles.transformations}>
               <li className="relative">
                 {subItems.map(({ title, handleItemOnClick }, i) => {
                   return (
@@ -195,6 +189,7 @@ const BottomBar = () => {
       <Tooltip title={`${isActive ? "Esconder" : "Mostrar"} barra de funções`}>
         <button
           id={styles.bottombutton}
+          className="bg-zinc-300 dark:bg-black"
           onClick={() => {
             setIsActive(!isActive);
           }}

@@ -162,7 +162,9 @@ interface IVectorTexProps {
 }
 
 interface ITransformationFormProps {
+  /** Form's onSubmit (for creating or updating transformations) */
   onSubmit: React.FormEventHandler<HTMLFormElement> | undefined;
+  /** Array with the matrix transformation */
   matrixArr?: number[4];
 }
 
