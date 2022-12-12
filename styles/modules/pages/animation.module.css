@@ -40,12 +40,7 @@
   height: fit-content;
 }
 
-/* desktop */
-@media only screen and (min-width: 768px) {
-  .plotcontainer {
-    margin-top: 30px;
-  }
-}
+
 
 .transformationarrow {
   margin-top: -30px;
@@ -58,7 +53,7 @@
   padding: 3px;
   border-radius: 3em;
   border: 1px solid #737373;
-  width: 60%;
+  width: 80%;
 }
 
 .playerbtn,
@@ -178,4 +173,14 @@
 
 .playerbar:focus::-ms-fill-upper {
   background: #dbdbdb;
+}
+
+/* desktop */
+@media only screen and (min-width: 768px) {
+  .plotcontainer {
+    margin-top: 30px;
+  }
+  .playercontainer {
+    width: 50%;
+  }
 }
