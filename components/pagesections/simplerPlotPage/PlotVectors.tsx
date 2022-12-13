@@ -64,7 +64,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
 
   useEffect(() => {
     // console.log("hideAlert create", hideAlert);
-    console.log("focus", focus);
+    // console.log("focus", focus);
   }, [focus]);
 
   useEffect(() => {

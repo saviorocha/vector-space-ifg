@@ -38,6 +38,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
   };
 
   const handleTransformationUpdate = (event: any) => {
+    console.log("transformation", transformation)
     const updated = transformationUpdateHandler(event, transformation);
     setHideAlert(updated);
   };
@@ -56,7 +57,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
   };
 
   useEffect(() => {
-    // console.log("list", stateVecArr, list)
+    // console.log("list", stateVecArr)
     // console.log("exp", currentTrnExpression)
     setToggleTrnInput(false);
     setToggleUpdateCreate("create");

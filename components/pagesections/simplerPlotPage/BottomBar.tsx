@@ -37,7 +37,7 @@ const BottomBar = () => {
     e2: [ExpressionType, ExpressionType]
   ) => {
     const newHead = addTransformation(
-      new Transformation(e1, e2, `T_${stateVecArr.vectorArr.length}`)
+      new Transformation(e1, e2, `T_{${stateVecArr.vectorArr.length}}`)
     );
     const newList = new StateList(newHead);
     // console.log("newList", newList);

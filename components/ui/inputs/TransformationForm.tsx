@@ -18,50 +18,44 @@ const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
   return (
     <>
       <form onSubmit={onSubmit}>
-        {/* <InlineMath
-          math={String.raw`
-      \Biggr[
-    `}
-        /> */}
-        {[matrixArr[0], matrixArr[2], matrixArr[1], matrixArr[3]].map(
-          (el, i) => {
-            return (
-              <React.Fragment key={i}>
-                <input
-                  onBlur={() => {
-                    setFocus(false);
-                  }}
-                  onFocus={() => {
-                    setFocus(true);
-                  }}
-                  className={styles.inptrn}
-                  style={{
-                    color: theme === "dark" ? "#fff" : "#000",
-                  }}
-                  // type="number"
-                  id={`t${i}`}
-                  defaultValue={el}
-                />
-                {i === 1 && <br />}
-              </React.Fragment>
-            );
-          }
-        )}
-        {/* <InlineMath
-          math={String.raw`
-      \Biggr]
-    `}
-        /> */}
-
-        <br />
+        <div className="flex flex-row">
+          <InlineMath math={String.raw`\Biggr[`} />
+          <div className="mt-1 ml-4">
+            {[matrixArr[0], matrixArr[2], matrixArr[1], matrixArr[3]].map(
+              (el, i) => {
+                return (
+                  <React.Fragment key={i}>
+                    <input
+                      onBlur={() => {
+                        setFocus(false);
+                      }}
+                      onFocus={() => {
+                        setFocus(true);
+                      }}
+                      className={styles.inptrn}
+                      style={{
+                        color: theme === "dark" ? "#fff" : "#000",
+                      }}
+                      // type="number"
+                      id={`t${i}`}
+                      defaultValue={el}
+                    />
+                    {i === 1 && <br />}
+                  </React.Fragment>
+                );
+              }
+            )}
+          </div>
+          <InlineMath math={String.raw`\Biggr]`} />
+        </div>
         <div className={styles.submit}>
-          <input className={styles.inptrn} type="text" id="name" name="name" />
+          <input className={styles.inptrnname} type="text" id="name" name="name" placeholder="Nome" />
 
           <button
             className="border-2 border-slate-400 rounded-md w-14"
             type="submit"
           >
-            Submit
+            Enviar
           </button>
         </div>
       </form>

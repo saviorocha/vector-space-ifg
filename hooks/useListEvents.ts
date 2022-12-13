@@ -159,18 +159,6 @@ const useListEvents = () => {
       ? event.target.name.value
       : transformation.name;
 
-    console.log(
-      "validateTransformationName",
-      validateTransformationName(name),
-      "validateTransformationValues",
-      !validateTransformationValues([
-        event.target.t0.value,
-        event.target.t2.value,
-        event.target.t1.value,
-        event.target.t3.value,
-      ])
-    );
-
     // validate submited data
     if (
       !validateTransformationName(name) ||

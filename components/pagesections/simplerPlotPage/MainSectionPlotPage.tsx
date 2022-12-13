@@ -24,7 +24,7 @@ const MainSectionPlotPage = () => {
   const [trnNum, setTrnNum] = useState(stateVecArr.vectorArr.length);
 
   useEffect(() => {
-    // console.log("isOverflow", isOverflow);
+    console.log("isOverflow", isOverflow);
   }, [isOverflow]);
 
   useEffect(() => {
