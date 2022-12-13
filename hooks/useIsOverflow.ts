@@ -1,6 +1,8 @@
 import * as React from "react";
+import { useListContext } from "../context";
 
 export const useIsOverflow = (ref: any) => {
+  const { stateVecArr } = useListContext()
   const [isOverflow, setIsOverflow] = React.useState<boolean | undefined>(
     undefined
   );
@@ -20,7 +22,7 @@ export const useIsOverflow = (ref: any) => {
       }
       trigger();
     }
-  }, [ref]);
+  }, [ref, stateVecArr]);
 
   return isOverflow;
 };

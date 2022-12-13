@@ -183,8 +183,8 @@ const useTexStr = () => {
           .slice(1, self.length - 1)
           .split(/\,\s?(?![^\(]*\))/)
       : vectorStr.slice(1, self.length - 1).split(/\,\s?(?![^\(]*\))/);
-    
-      if (
+
+    if (
       !validateVectorName(name) ||
       !validateVectorValues(
         vectorStr.includes("=") ? vectorStr.split("=")[1] : vectorStr
@@ -192,10 +192,11 @@ const useTexStr = () => {
     ) {
       return;
     }
-    // gonna improve this later, sorry
+
     if (name === `v_{${vectorNameCounter}}`) {
       setVectorNameCounter(vectorNameCounter + 1);
     }
+
     return new Vector(
       [
         {

@@ -24,6 +24,7 @@ export function validateVectorValues(values: string): boolean {
   return (
     //prettier-ignore
     valuesArr.length === 2 &&
+    (!isNaN(evaluate(valuesArr[0])) && !isNaN(evaluate(valuesArr[1]))) &&
     (evaluate(valuesArr[0]) !== Infinity || evaluate(valuesArr[1]) !== Infinity) &&
     (!isObject(evaluate(valuesArr[0])) || !isObject(evaluate(valuesArr[1]))) &&
     values[0] === "(" &&
@@ -44,7 +45,8 @@ export function validateTransformationValues(valuesArr: string[]): boolean {
     try {
       if (
         evaluate(valuesArr[i]) === Infinity || // checks if it's a valid expression
-        isObject(evaluate(valuesArr[i])) // checks if it's a object (e.g. a imaginary number object)
+        (isObject(evaluate(valuesArr[i])) || // checks if it's a object (e.g. a imaginary number object)
+          isNaN(evaluate(valuesArr[i])))
       )
         return false;
     } catch (error) {
