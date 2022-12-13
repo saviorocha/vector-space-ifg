@@ -10,9 +10,18 @@ const BottomItem: FunctionComponent<IBottomItemProps> = ({
   children = null,
 }) => {
   const { theme } = useTheme();
+  const [itemColor, setItemColor] = useState("hsla(0, 0%, 0%, 0.772)");
   const [itemDisplay, setItemDisplay] = useState<string>("hidden");
   const [isActive, setIsActive] = useState(false);
   const [showChildren, setShowChildren] = useState(false);
+
+  useEffect(() => {
+    setItemColor(
+      theme === "dark"
+        ? "hsla(0, 0%,f 0%, 0.772)"
+        : "hsla(208, 100%, 97%, 0.772)"
+    );
+  }, [theme]);
 
   useEffect(() => {
     // console.log("isActive", isActive);
@@ -37,11 +46,10 @@ const BottomItem: FunctionComponent<IBottomItemProps> = ({
         className={styles.itembox}
         style={{
           height: showChildren ? "fit-content" : "60px",
-          backgroundColor:
-            theme === "dark"
-              ? "hsla(0, 0%, 0%, 0.772)"
-              : "hsla(208, 100%, 97%, 0.772)",
-          borderColor: theme === "dark" ? "rgb(106, 106, 106)" : "rgb(156 163 175)",
+          backgroundColor: itemColor,
+
+          borderColor:
+            theme === "dark" ? "rgb(106, 106, 106)" : "rgb(156 163 175)",
         }}
       >
         <div

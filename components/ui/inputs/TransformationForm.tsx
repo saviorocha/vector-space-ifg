@@ -18,11 +18,11 @@ const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
   return (
     <>
       <form onSubmit={onSubmit}>
-        <InlineMath
+        {/* <InlineMath
           math={String.raw`
       \Biggr[
     `}
-        />
+        /> */}
         {[matrixArr[0], matrixArr[2], matrixArr[1], matrixArr[3]].map(
           (el, i) => {
             return (
@@ -47,11 +47,11 @@ const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
             );
           }
         )}
-        <InlineMath
+        {/* <InlineMath
           math={String.raw`
       \Biggr]
     `}
-        />
+        /> */}
 
         <br />
         <div className={styles.submit}>

@@ -10,7 +10,7 @@ import useList from "./useList";
 import useTexStr from "./useTexStr";
 
 /**
- * Custom hook for providing handlers for list opertions 
+ * Custom hook for providing handlers for list opertions
  */
 const useListEvents = () => {
   const { vectorFromTex } = useTexStr();
@@ -43,7 +43,7 @@ const useListEvents = () => {
 
   /**
    * Deletes a vector from the list
-   * @param {string} vectorName 
+   * @param {string} vectorName
    */
   const vectorDeleteHandler = (vectorName: string) => {
     const newHead = removeVector(vectorName);
@@ -54,8 +54,8 @@ const useListEvents = () => {
 
   /**
    * Updates a vector
-   * @param {string} vectorExpression 
-   * @param event 
+   * @param {string} vectorExpression
+   * @param event
    * @returns {boolean}
    */
   const vectorUpdateHandler = (
@@ -67,7 +67,7 @@ const useListEvents = () => {
     if (!newVector || !prevVectorName) {
       return false;
     }
-    
+
     const newHead = updateVector(newVector, prevVectorName);
     const newList = new StateList(newHead);
     setList(newList);
@@ -79,8 +79,8 @@ const useListEvents = () => {
 
   /**
    * Adds a new transformation to the list based on the matrix and name submited
-   * @param event 
-   * @param {Transformation} transformation 
+   * @param event
+   * @param {Transformation} transformation
    * @returns {boolean}
    */
   const transformationSubmitHandler = (
@@ -146,8 +146,8 @@ const useListEvents = () => {
 
   /**
    * Updates the current transformation matrix and name
-   * @param event 
-   * @param {Transformation} transformation 
+   * @param event
+   * @param {Transformation} transformation
    * @returns {boolean}
    */
   const transformationUpdateHandler = (
@@ -158,6 +158,18 @@ const useListEvents = () => {
     const name = event.target.name.value
       ? event.target.name.value
       : transformation.name;
+
+    console.log(
+      "validateTransformationName",
+      validateTransformationName(name),
+      "validateTransformationValues",
+      !validateTransformationValues([
+        event.target.t0.value,
+        event.target.t2.value,
+        event.target.t1.value,
+        event.target.t3.value,
+      ])
+    );
 
     // validate submited data
     if (
