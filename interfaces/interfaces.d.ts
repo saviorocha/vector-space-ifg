@@ -105,8 +105,8 @@ interface ListItemProps {
   isSubItem?: boolean;
 }
 
-interface LogoProps {
-  className: CSSProperties;
+interface CustomIconProps {
+  className?: CSSProperties;
   logoColor?: string;
 }
 

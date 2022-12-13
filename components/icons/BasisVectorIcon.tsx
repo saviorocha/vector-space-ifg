@@ -1,6 +1,17 @@
-import React from "react";
+import { useTheme } from "next-themes";
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { CustomIconProps } from "../../interfaces/interfaces";
 
-const BasisVectorIcon = () => {
+const BasisVectorIcon: FunctionComponent<CustomIconProps> = ({
+  className,
+  logoColor = undefined,
+}) => {
+  const { theme } = useTheme();
+  const [logoTheme, setLogoTheme] = useState("#ffffff");
+
+  useEffect(() => {
+    setLogoTheme(theme === "dark" ? "#fff" : "#000");
+  }, [theme]);
   return (
     <svg
       width="24"
@@ -25,7 +36,7 @@ const BasisVectorIcon = () => {
           whiteSpace: "pre",
           inlineSize: 2.10498,
           display: "inline",
-          fill: "#ff0000",
+          fill: logoColor ? logoColor : logoTheme,
         }}
         x="3.9922631"
         y="10.444874"
@@ -39,7 +50,7 @@ const BasisVectorIcon = () => {
           fontSize: "28.5912px",
           lineHeight: 0,
           fontFamily: "Cambria Math",
-          fill: "#ffffff",
+          fill: logoColor ? logoColor : logoTheme,
           strokeWidth: 0.518327,
         }}
       >
@@ -47,7 +58,7 @@ const BasisVectorIcon = () => {
           d="M 16.595462,12.512705 H 5.1059316 q 0,1.437936 0.432777,2.512898 0.4327769,1.061002 1.1866464,1.745068 0.7259485,0.670107 1.7171473,1.00516 1.0051594,0.335053 2.2057667,0.335053 1.591502,0 3.196965,-0.628225 1.619423,-0.642185 2.30349,-1.256449 h 0.139606 v 2.861912 q -1.326252,0.558422 -2.708346,0.935357 -1.382095,0.376935 -2.903794,0.376935 -3.8810322,0 -6.0588775,-2.094082 -2.1778453,-2.108043 -2.1778453,-5.975114 0,-3.8251903 2.0801214,-6.0728384 2.0940821,-2.247648 5.5004554,-2.247648 3.155084,0 4.85827,1.8427922 1.717148,1.8427922 1.717148,5.2352052 z m -2.55478,-2.010319 Q 14.026721,8.4362249 12.993641,7.3054207 11.974521,6.1746164 9.8804386,6.1746164 q -2.1080425,0 -3.3644918,1.2424886 -1.2424886,1.2424887 -1.4100152,3.085281 z"
           style={{
             fontFamily: "Verdana",
-            fill: "#000000",
+            fill: logoColor ? logoColor : logoTheme,
           }}
           id="path1759"
         />
@@ -59,7 +70,7 @@ const BasisVectorIcon = () => {
           fontSize: "10.5682px",
           lineHeight: 0,
           fontFamily: "Verdana",
-          fill: "#000000",
+          fill: logoColor ? logoColor : logoTheme,
           strokeWidth: 0.183476,
         }}
       >

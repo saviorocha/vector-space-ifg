@@ -3,6 +3,9 @@ import { Settings, X } from "react-feather";
 import { PropsChildren } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/ui/config.module.css";
 
+/**
+ * Creates a window in the center of the screen, with the children content inside
+ */
 const PopupWindow: FunctionComponent<PropsChildren> = ({ children }) => {
   const [isActive, setIsActive] = useState(false);
   return (
@@ -19,9 +22,12 @@ const PopupWindow: FunctionComponent<PropsChildren> = ({ children }) => {
         }}
       >
         <section className={styles.top}>
-          <button className={styles.x} onClick={() => {
-            setIsActive(false)
-          }}>
+          <button
+            className={styles.x}
+            onClick={() => {
+              setIsActive(false);
+            }}
+          >
             <X />
           </button>
         </section>

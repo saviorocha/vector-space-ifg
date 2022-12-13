@@ -1,12 +1,12 @@
 import { useTheme } from "next-themes";
-import React, { FunctionComponent, useEffect, useState } from "react";
-import { LogoProps } from "../../interfaces/interfaces";
+import { FunctionComponent, useEffect, useState } from "react";
+import { CustomIconProps } from "../../interfaces/interfaces";
 
-const Logo: FunctionComponent<LogoProps> = ({
+const Logo: FunctionComponent<CustomIconProps> = ({
   className,
   logoColor = undefined,
 }) => {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const [logoTheme, setLogoTheme] = useState("#ffffff");
 
   useEffect(() => {

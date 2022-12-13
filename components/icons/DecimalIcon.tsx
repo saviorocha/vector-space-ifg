@@ -1,6 +1,17 @@
-import React from "react";
+import { useTheme } from "next-themes";
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { CustomIconProps } from "../../interfaces/interfaces";
 
-const DecimalIcon = () => {
+const DecimalIcon: FunctionComponent<CustomIconProps> = ({
+  className,
+  logoColor = undefined,
+}) => {
+  const { theme } = useTheme();
+  const [logoTheme, setLogoTheme] = useState("#ffffff");
+
+  useEffect(() => {
+    setLogoTheme(theme === "dark" ? "#fff" : "#000");
+  }, [theme]);
   return (
     <svg
       width="24"
@@ -23,7 +34,7 @@ const DecimalIcon = () => {
           whiteSpace: "pre",
           inlineSize: 2.10498,
           display: "inline",
-          fill: "#ff0000",
+          fill: logoColor ? logoColor : logoTheme,
         }}
         x="3.9922631"
         y="10.444874"
@@ -36,7 +47,7 @@ const DecimalIcon = () => {
           fontSize: "42.5835px",
           lineHeight: 0,
           fontFamily: "SymbolPi",
-          fill: "#000000",
+          fill: logoColor ? logoColor : logoTheme,
           strokeWidth: 0.739295,
         }}
       >
