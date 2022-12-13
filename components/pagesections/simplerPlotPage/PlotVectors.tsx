@@ -139,7 +139,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
             }}
             className={styles.inpvec}
             style={{
-              borderColor: theme === "dark" ? "#515151" : "#9a9a9a",
+              borderColor: theme === "dark" ? "#333333" : "#9a9a9a",
               color: theme === "dark" ? "#fff" : "#000",
               backgroundColor: focus
                 ? theme === "dark"
@@ -161,7 +161,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
                 size={24}
                 className={styles.btn}
                 style={{
-                  color: theme === "dark" ? "#c5c5c5" : "#373837",
+                  color: theme === "dark" ? "#f1f1f1" : "#373837",
                 }}
               />
             </button>

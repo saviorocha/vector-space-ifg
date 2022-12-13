@@ -39,7 +39,6 @@ const TransformationBar = ({ transformationNum = 0 }) => {
         stateVecArr.transformationArr.length > 1 ? "self-end" : ""
       }`}
     >
-      {/* {stateVecArr.transformationArr.length > 1 ? ( */}
       <div>
         <PlotTransformation
           transformation={stateVecArr.transformationArr[transformationNum]}
@@ -49,21 +48,6 @@ const TransformationBar = ({ transformationNum = 0 }) => {
           <TransformationForm onSubmit={handleTransfromationSubmit} />
         )}
       </div>
-      {/* ) : (
-        <InfoBox customStyles="w-32 h-20">
-          {toggleTrnInput ? (
-            <TransformationForm onSubmit={handleTransfromationSubmit} />
-          ) : (
-            <button
-              onClick={() => {
-                setToggleTrnInput(true);
-              }}
-            >
-              Adicionar Transformação
-            </button>
-          )}
-        </InfoBox>
-      )} */}
       {!hideAlert && (
         <Alert
           severity="error"

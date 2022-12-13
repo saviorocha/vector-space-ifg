@@ -1,6 +1,6 @@
 import { Tooltip } from "@mui/material";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronUp, Play, Plus, Type } from "react-feather";
 import StateList from "../../../classes/stateList";
 import Transformation from "../../../classes/transformation";
