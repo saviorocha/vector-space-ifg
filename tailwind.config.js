@@ -9,9 +9,9 @@ module.exports = {
     typography: (theme) => ({}),
     extend: {
       colors: {
-        "darkbg":"#090909"
-      }
-
+        darkbg: "#090909",
+        formblack: "#18181b",
+      },
     },
   },
   plugins: [],

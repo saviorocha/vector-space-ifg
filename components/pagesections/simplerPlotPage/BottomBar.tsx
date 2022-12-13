@@ -148,8 +148,8 @@ const BottomBar = () => {
             <div
               id={styles.formcontainer}
               className="
-                bg-zinc-200 border border-zinc-400 
-                dark:bg-darkbg dark:border-zinc-700
+                bg-white border border-zinc-400 
+                dark:bg-formblack dark:border-zinc-700
               "
             >
               <TransformationForm onSubmit={handleTransfromationSubmit} />
