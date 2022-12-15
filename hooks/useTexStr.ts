@@ -12,8 +12,13 @@ const useTexStr = () => {
   const { stateVecArr } = useListContext();
   const { currentPlot } = useNameContext();
   const { showMathSymbols, decimalPoint } = useConfigContext();
-  const { vectorNameCounter, setVectorNameCounter, transformationVars } =
-    useNameContext();
+  const {
+    vectorNameCounter,
+    setVectorNameCounter,
+    transformationVars,
+    vectorNameArr,
+    setVectorNameArr,
+  } = useNameContext();
 
   /**
    * Returns a array with different string representations for a transformation
@@ -153,7 +158,7 @@ const useTexStr = () => {
    * @param {string} vectorStr - in the format "[name]_{[number]} = ([xcoordinate], [ycoordinate])"
    * @returns {Vector} New vector object
    */
-  const vectorFromTex = (vectorStr: string): Vector | undefined => {
+  const vectorFromTex = (vectorStr: string): SubmissionFormat => {
     vectorStr = vectorStr.replace(/\s/g, ""); // removes white spaces
 
     const name = vectorStr.includes("=")
@@ -173,28 +178,41 @@ const useTexStr = () => {
         vectorStr.includes("=") ? vectorStr.split("=")[1] : vectorStr
       )
     ) {
-      return;
+      return {
+        successful: false,
+        message: "Valores inválidos! Tente novamente.",
+      };
+    }
+
+    if (vectorNameArr.includes(name)) {
+      return {
+        successful: false,
+        message: "Já existe um vetor com este nome!",
+      };
     }
 
     if (name === `v_{${vectorNameCounter}}`) {
       setVectorNameCounter(vectorNameCounter + 1);
     }
 
-    return new Vector(
-      [
-        {
-          value: evaluate(values[0]),
-          texExpression: parse(values[0]).toTex(),
-          mathExpression: values[0],
-        },
-        {
-          value: evaluate(values[1]),
-          texExpression: parse(values[1]).toTex(),
-          mathExpression: values[1],
-        },
-      ],
-      `${name}`
-    );
+    return {
+      successful: true,
+      data: new Vector(
+        [
+          {
+            value: evaluate(values[0]),
+            texExpression: parse(values[0]).toTex(),
+            mathExpression: values[0],
+          },
+          {
+            value: evaluate(values[1]),
+            texExpression: parse(values[1]).toTex(),
+            mathExpression: values[1],
+          },
+        ],
+        `${name}`
+      ),
+    };
   };
   return { matrixStrings, vectorFromTex, vectorMatrixMultiplication };
 };

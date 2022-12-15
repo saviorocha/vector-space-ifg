@@ -19,6 +19,8 @@ const useListEvents = () => {
   const {
     transformationNameCounter,
     setTransformationNameCounter,
+    vectorNameArr,
+    setVectorNameArr,
     transformationNameArr,
     setTransformationNameArr,
   } = useNameContext();
@@ -30,30 +32,23 @@ const useListEvents = () => {
    * @param {string} vectorStr
    * @returns {boolean}
    */
-  const vectorSubmitHandler = (vectorStr: string): boolean => {
-    const newVector = vectorFromTex(vectorStr);
+  const vectorSubmitHandler = (vectorStr: string): SubmissionFormat => {
+    const vectorRes = vectorFromTex(vectorStr);
 
-    if (!newVector) {
-      return false;
+    if (!vectorRes.successful) {
+      return vectorRes;
     }
-    const newHead = addVector(newVector);
-    const newList = new StateList(newHead);
 
-    // updates list
+    const newHead = addVector(vectorRes.data);
+    const newList = new StateList(newHead);
+    const vecNameArr = vectorNameArr;
+    vecNameArr.push(vectorRes.data.name);
+
+    // updates the list context
     setList(newList);
     setStateVecArr(newList.toArray());
-    return true;
-  };
-
-  /**
-   * Deletes a vector from the list
-   * @param {string} vectorName
-   */
-  const vectorDeleteHandler = (vectorName: string) => {
-    const newHead = removeVector(vectorName);
-    const newList = new StateList(newHead);
-    setList(newList);
-    setStateVecArr(list.toArray());
+    setVectorNameArr(vecNameArr);
+    return vectorRes;
   };
 
   /**
@@ -65,21 +60,43 @@ const useListEvents = () => {
   const vectorUpdateHandler = (
     vectorExpression: string,
     event: any
-  ): boolean => {
-    const newVector = vectorFromTex(event.target.value);
-    const prevVectorName = vectorFromTex(vectorExpression)?.name;
+  ): SubmissionFormat => {
+    const vectorRes = vectorFromTex(event.target.value);
+    const prevVectorName = vectorFromTex(vectorExpression).data?.name;
 
-    if (!newVector || !prevVectorName) {
-      return false;
+    console.log("names", vectorExpression);
+    
+    if (!vectorRes.data || !prevVectorName) {
+      return vectorRes;
     }
 
-    const newHead = updateVector(newVector, prevVectorName);
+    return {
+      successful: false,
+    };
+
+    const newHead = updateVector(vectorRes.data, prevVectorName);
     const newList = new StateList(newHead);
     setList(newList);
     setStateVecArr(newList.toArray());
 
     event.target.value = "";
-    return true;
+    return vectorRes;
+  };
+
+  /**
+   * Deletes a vector from the list
+   * @param {string} vectorName
+   */
+  const vectorDeleteHandler = (vectorName: string) => {
+    const newHead = removeVector(vectorName);
+    const newList = new StateList(newHead);
+    const vecNameArr = vectorNameArr.filter(
+      (vecName) => vecName !== vectorName
+    );
+
+    setList(newList);
+    setStateVecArr(list.toArray());
+    setVectorNameArr(vecNameArr);
   };
 
   /**

@@ -20,6 +20,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   const [focus, setFocus] = useState(false);
   const [vectorRender, setVectorRender] = useState<Vector[]>(vectors);
   const [hideAlert, setHideAlert] = useState(true);
+  const [alertMsg, setAlertMsg] = useState<string | undefined>("");
   const { showBasisVectors, showMathSymbols, decimalPoint } =
     useConfigContext();
   const { vectorSubmitHandler } = useListEvents();
@@ -46,18 +47,20 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   };
 
   const handleVectorInputSubmit = (value: any) => {
-    const created = vectorSubmitHandler(value);
-    setHideAlert(created);
+    const { successful, message } = vectorSubmitHandler(value);
+    setHideAlert(successful);
+    setAlertMsg(message)
     inputRef.current!.value = value;
-    if (created) {
+    if (successful) {
       inputRef.current!.value = "";
     }
   };
 
   const handleVectorBtnSubmit = () => {
-    const created = vectorSubmitHandler(inputRef.current!.value);
-    setHideAlert(created);
-    if (created) {
+    const { successful, message } = vectorSubmitHandler(inputRef.current!.value);
+    setHideAlert(successful);
+    setAlertMsg(message)
+    if (successful) {
       inputRef.current!.value = "";
     }
   };
@@ -184,7 +187,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
             </Button>
           }
         >
-          Expressão inválida! Tente novamente.
+          {alertMsg}
         </Alert>
       )}
     </div>

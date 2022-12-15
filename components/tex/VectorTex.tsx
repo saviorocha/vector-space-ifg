@@ -2,13 +2,12 @@ import { Alert, Button } from "@mui/material";
 import { FunctionComponent, useEffect, useState } from "react";
 import { Edit2, Trash2, X } from "react-feather";
 import { useListContext } from "../../context";
-import { useConfigContext } from "../../context/ConfigContext";
 import useListEvents from "../../hooks/useListEvents";
 import { IVectorTexProps } from "../../interfaces/interfaces";
 import RenderTex from "./RenderTex";
 
 /**
- * This component handles vector creation, update and deletion
+ * This component handles vector create, update and delete
  */
 const VectorTex: FunctionComponent<IVectorTexProps> = ({
   expression,
@@ -21,10 +20,10 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
   );
   const [showTex, setShowTex] = useState(true);
   const [hideAlert, setHideAlert] = useState(true);
+  const [alertMsg, setAlertMsg] = useState<string | undefined>("");
 
   const { stateVecArr } = useListContext();
   const { vectorDeleteHandler, vectorUpdateHandler } = useListEvents();
-
 
   useEffect(() => {
     // console.log("vectorName", vectorName);
@@ -50,10 +49,12 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
   };
 
   const handleVectorUpdate = (event: any) => {
-    const updated = vectorUpdateHandler(mathExpression, event);
+    const { successful, message } = vectorUpdateHandler(mathExpression, event);
 
-    setHideAlert(updated);
-    if (updated) {
+    setHideAlert(successful);
+    setAlertMsg(message);
+
+    if (successful) {
       setShowTex(true);
     }
     if (event.target.value) {
@@ -125,7 +126,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
             </Button>
           }
         >
-          Expressão inválida! Tente novamente.
+          {alertMsg}
         </Alert>
       )}
     </div>

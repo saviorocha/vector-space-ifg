@@ -36,6 +36,7 @@ type ExpressionType = {
 type SubmissionFormat = {
   successful: boolean;
   message?: string;
+  data?: any;
 }
 
 type EventFunction = () => any;
