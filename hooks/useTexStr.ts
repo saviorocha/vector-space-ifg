@@ -156,23 +156,6 @@ const useTexStr = () => {
   const vectorFromTex = (vectorStr: string): Vector | undefined => {
     vectorStr = vectorStr.replace(/\s/g, ""); // removes white spaces
 
-    // const expression: string = vectorStr
-    //   .replace("π", "pi")
-    //   .replace("√", "sqrt")
-    //   .replace("²", "^2")
-    //   .replace("³", "^3")
-    //   .replace("×", "*")
-    //   .replace("₀", "_{0}")
-    //   .replace("₁", "_{1}")
-    //   .replace("₂", "_{2}")
-    //   .replace("₃", "_{3}")
-    //   .replace("₄", "_{4}")
-    //   .replace("₅", "_{5}")
-    //   .replace("₆", "_{6}")
-    //   .replace("₇", "_{7}")
-    //   .replace("₈", "_{8}")
-    //   .replace("₉", "_{9}");
-
     const name = vectorStr.includes("=")
       ? vectorStr.split("=")[0]
       : `v_{${vectorNameCounter}}`;

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronUp, Play, Plus, Type } from "react-feather";
 import StateList from "../../../classes/stateList";
 import Transformation from "../../../classes/transformation";
-import { useD3Context, useListContext } from "../../../context";
+import { useD3Context, useListContext, useNameContext } from "../../../context";
 import useD3Events from "../../../hooks/useD3Events";
 import useList from "../../../hooks/useList";
 import useListEvents from "../../../hooks/useListEvents";
@@ -20,6 +20,12 @@ const BottomBar = () => {
   const { setEvents } = useD3Context();
   const { addVectorOnClick } = useD3Events();
   const { addTransformation } = useList();
+  const {
+    transformationNameCounter,
+    setTransformationNameCounter,
+    transformationNameArr,
+    setTransformationNameArr,
+  } = useNameContext();
   const [transformation, setTransformation] = useState(
     stateVecArr.transformationArr[0]
   );
@@ -36,11 +42,17 @@ const BottomBar = () => {
     e1: [ExpressionType, ExpressionType],
     e2: [ExpressionType, ExpressionType]
   ) => {
+    const name = `T_{${transformationNameCounter}}`
     const newHead = addTransformation(
-      new Transformation(e1, e2, `T_{${stateVecArr.vectorArr.length}}`)
+      new Transformation(e1, e2, name)
     );
     const newList = new StateList(newHead);
-    // console.log("newList", newList);
+    const trnNameArr = transformationNameArr;
+    trnNameArr.push(name);
+    
+    // updates context values
+    setTransformationNameArr(trnNameArr);
+    setTransformationNameCounter(() => transformationNameCounter + 1);
     setList(newList);
     setStateVecArr(list.toArray());
   };

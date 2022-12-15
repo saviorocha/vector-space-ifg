@@ -16,8 +16,12 @@ const useListEvents = () => {
   const { vectorFromTex } = useTexStr();
   const { addVector, removeVector, updateVector } = useList();
   const { list, setList, setStateVecArr } = useListContext();
-  const { transformationNameCounter, setTransformationNameCounter } =
-    useNameContext();
+  const {
+    transformationNameCounter,
+    setTransformationNameCounter,
+    transformationNameArr,
+    setTransformationNameArr,
+  } = useNameContext();
   const { addTransformation, updateTransformation, removeTransformation } =
     useList();
 
@@ -64,6 +68,7 @@ const useListEvents = () => {
   ): boolean => {
     const newVector = vectorFromTex(event.target.value);
     const prevVectorName = vectorFromTex(vectorExpression)?.name;
+
     if (!newVector || !prevVectorName) {
       return false;
     }
@@ -86,7 +91,7 @@ const useListEvents = () => {
   const transformationSubmitHandler = (
     event: any,
     transformation: Transformation
-  ): boolean => {
+  ): SubmissionFormat => {
     event.preventDefault();
     const name = event.target.name.value
       ? event.target.name.value
@@ -102,7 +107,17 @@ const useListEvents = () => {
         event.target.t3.value,
       ])
     ) {
-      return false;
+      return {
+        successful: false,
+        message: "Valores inválidos! Tente novamente.",
+      };
+    }
+
+    if (transformationNameArr.includes(name)) {
+      return {
+        successful: false,
+        message: "Já existe uma transformação com este nome!",
+      };
     }
 
     const newHead = addTransformation(
@@ -136,12 +151,16 @@ const useListEvents = () => {
       transformation.name
     );
     const newList = new StateList(newHead);
+    const trnNameArr = transformationNameArr;
+    trnNameArr.push(name);
 
-    // updates the list context
+    // updates context values
     setList(newList);
     setStateVecArr(list.toArray());
     setTransformationNameCounter(() => transformationNameCounter + 1);
-    return true;
+    setTransformationNameArr(trnNameArr);
+
+    return { successful: true };
   };
 
   /**
@@ -153,7 +172,7 @@ const useListEvents = () => {
   const transformationUpdateHandler = (
     event: any,
     transformation: Transformation
-  ): boolean => {
+  ): SubmissionFormat => {
     event.preventDefault();
     const name = event.target.name.value
       ? event.target.name.value
@@ -169,10 +188,18 @@ const useListEvents = () => {
         event.target.t3.value,
       ])
     ) {
-      return false;
+      return {
+        successful: false,
+        message: "Valores inválidos! Tente novamente.",
+      };
     }
 
-    
+    if (transformationNameArr.includes(name) && name !== transformation.name) {
+      return {
+        successful: false,
+        message: "Já existe uma transformação com este nome!",
+      };
+    }
 
     const newHead = updateTransformation(
       new Transformation(
@@ -206,14 +233,21 @@ const useListEvents = () => {
     );
 
     if (!newHead) {
-      return false;
+      return {
+        successful: false,
+        message:
+          "Não foi possível criar a transformação! Tente novamente mais tarde.",
+      };
     }
     const newList = new StateList(newHead);
+    const trnNameArr = transformationNameArr;
+    trnNameArr[trnNameArr.indexOf(transformation.name)] = name;
 
     // updates the list context
     setList(newList);
     setStateVecArr(list.toArray());
-    return true;
+    setTransformationNameArr(trnNameArr);
+    return { successful: true };
   };
 
   /**
@@ -223,9 +257,15 @@ const useListEvents = () => {
   const transformationDeleteHandler = (transformationName: string) => {
     const newHead = removeTransformation(transformationName);
     const newList = new StateList(newHead);
+    const trnNameArr = transformationNameArr.filter(
+      (trnName) => trnName !== transformationName
+    );
+
     setList(newList);
     setStateVecArr(list.toArray());
+    setTransformationNameArr(trnNameArr);
   };
+
   return {
     vectorSubmitHandler,
     vectorDeleteHandler,

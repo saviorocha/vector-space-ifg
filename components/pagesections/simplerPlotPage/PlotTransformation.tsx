@@ -1,7 +1,7 @@
 import { Alert, Button, Tooltip } from "@mui/material";
 import { FunctionComponent, useEffect, useState } from "react";
 import { Edit3, Plus, RotateCcw, Trash2, X } from "react-feather";
-import { useListContext } from "../../../context";
+import { useListContext, useNameContext } from "../../../context";
 import { useConfigContext } from "../../../context/ConfigContext";
 import useListEvents from "../../../hooks/useListEvents";
 import useTexStr from "../../../hooks/useTexStr";
@@ -19,6 +19,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
     matrixStrings(trnIndex)[0]
   );
   const [hideAlert, setHideAlert] = useState(true);
+  const [alertMsg, setAlertMsg] = useState<string | undefined>("");
   const [currentPosition, setCurrentPosition] = useState(0);
   const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
   const [toggleUpdateCreate, setToggleUpdateCreate] =
@@ -29,18 +30,26 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
     transformationUpdateHandler,
     transformationDeleteHandler,
   } = useListEvents();
+  const { transformationNameArr } = useNameContext();
   const { showMathSymbols, decimalPoint } = useConfigContext();
 
   const handleTransfromationSubmit = (event: any) => {
-    const created = transformationSubmitHandler(event, transformation);
-    setHideAlert(created);
+    const { successful, message } = transformationSubmitHandler(
+      event,
+      transformation
+    );
+    setHideAlert(successful);
+    setAlertMsg(message);
     setToggleTrnInput(false);
   };
 
   const handleTransformationUpdate = (event: any) => {
-    console.log("transformation", transformation)
-    const updated = transformationUpdateHandler(event, transformation);
-    setHideAlert(updated);
+    const { successful, message } = transformationUpdateHandler(
+      event,
+      transformation
+    );
+    setAlertMsg(message);
+    setHideAlert(successful);
   };
 
   const handleTransformationDelete = () => {
@@ -61,6 +70,8 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
     // console.log("exp", currentTrnExpression)
     setToggleTrnInput(false);
     setToggleUpdateCreate("create");
+    console.log("transformationNameArr", transformationNameArr);
+    
   }, [stateVecArr]);
 
   useEffect(() => {
@@ -159,7 +170,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
             </Button>
           }
         >
-          Valores inválidos! Tente novamente.
+          {alertMsg}
         </Alert>
       )}
     </>

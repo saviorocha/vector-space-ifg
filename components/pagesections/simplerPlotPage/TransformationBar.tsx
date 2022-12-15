@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { X } from "react-feather";
 import { useListContext } from "../../../context";
 import useListEvents from "../../../hooks/useListEvents";
-import InfoBox from "../../ui/dataDisplay/InfoBox";
 import TransformationForm from "../../ui/inputs/TransformationForm";
 import PlotTransformation from "./PlotTransformation";
 
 const TransformationBar = ({ transformationNum = 0 }) => {
   const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
   const [hideAlert, setHideAlert] = useState(true);
+  const [alertMsg, setAlertMsg] = useState<string | undefined>("");
   const { transformationSubmitHandler } = useListEvents();
   const { stateVecArr } = useListContext();
   const [transformation, setTransformation] = useState(
@@ -17,8 +17,12 @@ const TransformationBar = ({ transformationNum = 0 }) => {
   );
 
   const handleTransfromationSubmit = (event: any) => {
-    const created = transformationSubmitHandler(event, transformation);
-    setHideAlert(created);
+    const { successful, message } = transformationSubmitHandler(
+      event,
+      transformation
+    );
+    setHideAlert(successful);
+    setAlertMsg(message);
     setToggleTrnInput(false);
   };
 
@@ -64,7 +68,7 @@ const TransformationBar = ({ transformationNum = 0 }) => {
             </Button>
           }
         >
-          Expressão inválida! Tente novamente.
+          {alertMsg}
         </Alert>
       )}
     </section>

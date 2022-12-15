@@ -43,9 +43,7 @@ const useList = () => {
    */
   const removeVector = (vectorName: string): StateNode => {
     const newHead = list.head;
-    newHead.vectors = newHead.vectors.filter((vec) => {
-      return vec.name !== vectorName;
-    });
+    newHead.vectors = newHead.vectors.filter((vec) => vec.name !== vectorName);
     list.updateNodes();
     return newHead;
   };
@@ -66,7 +64,7 @@ const useList = () => {
       return list.head;
     }
 
-    let newNode = new StateNode(transformation, previousNode, );
+    let newNode = new StateNode(transformation, previousNode);
 
     if (!previousNode._next) {
       previousNode._next = newNode;
@@ -132,7 +130,7 @@ const useList = () => {
 
   /**
    * Finds the list node given a transformation name
-   * @param {string} transformationName 
+   * @param {string} transformationName
    * @returns {StateNode}
    */
   const getNodeByName = (transformationName: string): StateNode | null => {

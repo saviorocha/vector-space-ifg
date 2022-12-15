@@ -33,4 +33,9 @@ type ExpressionType = {
   value: number;
 };
 
+type SubmissionFormat = {
+  successful: boolean;
+  message?: string;
+}
+
 type EventFunction = () => any;

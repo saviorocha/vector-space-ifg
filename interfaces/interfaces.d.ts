@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode, SetStateAction } from "react";
 import StateList from "../classes/stateList";
 import Transformation from "../classes/transformation";
 import Vector from "../classes/vector";
@@ -31,6 +31,10 @@ interface IContextName {
   setTransformationNameCounter: Dispatch<SetStateAction<number>>;
   transformationVars: [string, string];
   setTransformationVars: Dispatch<SetStateAction<[string, string]>>;
+  vectorNameArr: string[];
+  setVectorNameArr: Dispatch<SetStateAction<string[]>>;
+  transformationNameArr: string[];
+  setTransformationNameArr: Dispatch<SetStateAction<string[]>>;
 }
 
 interface IContextConfig {
