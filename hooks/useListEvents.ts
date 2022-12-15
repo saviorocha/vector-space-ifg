@@ -30,7 +30,7 @@ const useListEvents = () => {
   /**
    * Adds a new vector to the list
    * @param {string} vectorStr
-   * @returns {boolean}
+   * @returns {SubmissionFormat}
    */
   const vectorSubmitHandler = (vectorStr: string): SubmissionFormat => {
     const vectorRes = vectorFromTex(vectorStr);
@@ -55,29 +55,34 @@ const useListEvents = () => {
    * Updates a vector
    * @param {string} vectorExpression
    * @param event
-   * @returns {boolean}
+   * @returns {SubmissionFormat}
    */
   const vectorUpdateHandler = (
     vectorExpression: string,
     event: any
   ): SubmissionFormat => {
-    const vectorRes = vectorFromTex(event.target.value);
-    const prevVectorName = vectorFromTex(vectorExpression).data?.name;
+    const prevVectorName = vectorExpression.split("=")[0];
+    const vectorRes = vectorFromTex(event.target.value, prevVectorName);
 
-    console.log("names", vectorExpression);
-    
-    if (!vectorRes.data || !prevVectorName) {
+    if (!prevVectorName) {
+      return {
+        successful: false,
+        message: "Não foi possível criar o vetor. Tente novamente mais tarde.",
+      };
+    }
+
+    if (!vectorRes.data) {
       return vectorRes;
     }
 
-    return {
-      successful: false,
-    };
-
     const newHead = updateVector(vectorRes.data, prevVectorName);
     const newList = new StateList(newHead);
+    const vecNameArr = vectorNameArr;
+    vecNameArr[vecNameArr.indexOf(prevVectorName)] = vectorRes.data.name;
+
     setList(newList);
     setStateVecArr(newList.toArray());
+    setVectorNameArr(vecNameArr);
 
     event.target.value = "";
     return vectorRes;
@@ -103,7 +108,7 @@ const useListEvents = () => {
    * Adds a new transformation to the list based on the matrix and name submited
    * @param event
    * @param {Transformation} transformation
-   * @returns {boolean}
+   * @returns {SubmissionFormat}
    */
   const transformationSubmitHandler = (
     event: any,
@@ -184,7 +189,7 @@ const useListEvents = () => {
    * Updates the current transformation matrix and name
    * @param event
    * @param {Transformation} transformation
-   * @returns {boolean}
+   * @returns {SubmissionFormat}
    */
   const transformationUpdateHandler = (
     event: any,
@@ -256,6 +261,7 @@ const useListEvents = () => {
           "Não foi possível criar a transformação! Tente novamente mais tarde.",
       };
     }
+
     const newList = new StateList(newHead);
     const trnNameArr = transformationNameArr;
     trnNameArr[trnNameArr.indexOf(transformation.name)] = name;

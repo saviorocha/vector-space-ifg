@@ -19,7 +19,7 @@ import { evaluate } from "mathjs";
 
 const Creation = () => {
   useEffect(() => {
-    console.log("eval", evaluate("log(1,1)"));
+    // console.log("eval", evaluate("log(1,1)"));
   }, []);
   return (
     <TutorialContainer>

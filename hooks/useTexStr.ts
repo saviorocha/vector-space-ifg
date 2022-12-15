@@ -158,7 +158,10 @@ const useTexStr = () => {
    * @param {string} vectorStr - in the format "[name]_{[number]} = ([xcoordinate], [ycoordinate])"
    * @returns {Vector} New vector object
    */
-  const vectorFromTex = (vectorStr: string): SubmissionFormat => {
+  const vectorFromTex = (
+    vectorStr: string,
+    prevName?: string
+  ): SubmissionFormat => {
     vectorStr = vectorStr.replace(/\s/g, ""); // removes white spaces
 
     const name = vectorStr.includes("=")
@@ -184,7 +187,15 @@ const useTexStr = () => {
       };
     }
 
-    if (vectorNameArr.includes(name)) {
+    // gonna improve later, sorry...
+    if (prevName) {
+      if (vectorNameArr.includes(name) && prevName !== name) {
+        return {
+          successful: false,
+          message: "Já existe um vetor com este nome!",
+        };
+      }
+    } else if (vectorNameArr.includes(name)) {
       return {
         successful: false,
         message: "Já existe um vetor com este nome!",

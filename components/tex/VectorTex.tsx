@@ -32,14 +32,18 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
     // console.log("alert update", hideAlert);
     // console.log("mathExpression", mathExpression);
     // console.log("texExpression", texExpression)
-    // console.log("stateVecArr", stateVecArr);
     // console.log(vector.name, vector);
   }, [texExpression, mathExpression, hideAlert, stateVecArr]);
-
+  
   useEffect(() => {
-    setTexExpression(expression);
-    // console.log("vectorExpression", vectorExpression);
-  }, [expression]);
+    console.log("stateVecArr", stateVecArr);
+
+  }, [stateVecArr])
+
+  // useEffect(() => {
+  //   setTexExpression(expression);
+  //   // console.log("vectorExpression", vectorExpression);
+  // }, [expression]);
 
   const handleOnChange = (event: any) => {
     if (event.target.value) {
@@ -49,7 +53,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
   };
 
   const handleVectorUpdate = (event: any) => {
-    const { successful, message } = vectorUpdateHandler(mathExpression, event);
+    const { successful, message } = vectorUpdateHandler(expression, event);
 
     setHideAlert(successful);
     setAlertMsg(message);
