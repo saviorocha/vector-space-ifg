@@ -161,7 +161,13 @@ const D3PlotAnimation = () => {
     );
   };
 
-  useEffect(createPlane, [stateVecArr, hideNumbers, showBasisVectors, dimension]);
+  // eslint-disable-next-line
+  useEffect(createPlane, [
+    stateVecArr,
+    hideNumbers,
+    showBasisVectors,
+    dimension,
+  ]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -183,7 +189,13 @@ const D3PlotAnimation = () => {
 
   return (
     <>
-      <div className={styles.plotcontainer}>
+      <div
+        id={styles.plotcontainer}
+        className="
+        bg-gray-100 dark:bg-darkbg
+        border border-gray-300 dark:border-gray-500
+        "
+      >
         <section id={styles.plot} ref={refElement}></section>
         <InfoBox customStyles="h-32" flexDirection="row">
           {stateVecArr.transformationArr.length > 1 ? (
