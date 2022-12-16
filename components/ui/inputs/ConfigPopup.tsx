@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Hash, Moon } from "react-feather";
 import { useConfigContext } from "../../../context/ConfigContext";
 import stylesconfig from "../../../styles/modules/ui/config.module.css";
+import { validateTransformationVar } from "../../../utils";
+import AbcIcon from "../../icons/AbcIcon";
 import BasisVectorIcon from "../../icons/BasisVectorIcon";
 import ColorIcon from "../../icons/ColorIcon";
 import DecimalIcon from "../../icons/DecimalIcon";
@@ -22,9 +24,25 @@ const ConfigPopup = () => {
     setShowMathSymbols,
     vectorColor,
     setVectorColor,
+    transformationVars,
+    setTransformationVars,
   } = useConfigContext();
   const { theme, setTheme } = useTheme();
   const [mode, setMode] = useState<Mode>("dark");
+
+  const handleVarSubmit = (event: any) => {
+    event.preventDefault();
+
+    if (
+      !validateTransformationVar(event.target.value) ||
+      event.target.a.value === event.target.b.value
+    ) {
+      alert("Nome inválido");
+      return;
+    }
+
+    setTransformationVars([event.target.a.value, event.target.b.value]);
+  };
 
   return (
     <PopupWindow>
@@ -33,7 +51,7 @@ const ConfigPopup = () => {
           <div className={stylesconfig.configicon}>
             <Moon />
           </div>
-          <p>Tema</p>
+          <p className={stylesconfig.itemtext}>Tema</p>
           <div className={stylesconfig.configcontrol}>
             <DarkModeToggle
               mode={mode}
@@ -57,7 +75,7 @@ const ConfigPopup = () => {
           <div className={stylesconfig.configicon}>
             <Globe />
           </div>
-          <p>Mostrar linhas grid</p>
+          <p className={stylesconfig.itemtext}>Mostrar linhas grid</p>
           <div className={stylesconfig.configcontrol}>
             <input
               type="checkbox"
@@ -72,7 +90,7 @@ const ConfigPopup = () => {
           <div className={stylesconfig.configicon}>
             <Hash />
           </div>
-          <p>Esconder números do gráfico</p>
+          <p className={stylesconfig.itemtext}>Esconder números do gráfico</p>
           <div className={stylesconfig.configcontrol}>
             <input
               type="checkbox"
@@ -87,7 +105,7 @@ const ConfigPopup = () => {
           <div className={stylesconfig.configicon}>
             <DecimalIcon />
           </div>
-          <p>Configurar casas decimais</p>
+          <p className={stylesconfig.itemtext}>Configurar casas decimais</p>
           <div className={stylesconfig.configcontrol}>
             <input
               type="number"
@@ -104,7 +122,7 @@ const ConfigPopup = () => {
           <div className={stylesconfig.configicon}>
             <BasisVectorIcon />
           </div>
-          <p>Incluir vetores canônicos</p>
+          <p className={stylesconfig.itemtext}>Incluir vetores canônicos</p>
           <div className={stylesconfig.configcontrol}>
             <input
               type="checkbox"
@@ -119,7 +137,9 @@ const ConfigPopup = () => {
           <div className={stylesconfig.configicon}>
             <MathSymbolIcon />
           </div>
-          <p>Mostrar Expressões Matemáticos</p>
+          <p className={stylesconfig.itemtext}>
+            Mostrar Expressões Matemáticas
+          </p>
           <div className={stylesconfig.configcontrol}>
             <input
               type="checkbox"
@@ -134,12 +154,15 @@ const ConfigPopup = () => {
           <div className={stylesconfig.configicon}>
             <ColorIcon />
           </div>
-          <p>Alterar cor padrão dos vetores</p>
+          <p className={stylesconfig.itemtext}>
+            Alterar cor padrão dos vetores
+          </p>
           <div className={stylesconfig.configcontrol}>
             <input
               type="color"
               value={vectorColor}
               onChange={(event) => {
+                event.preventDefault();
                 setVectorColor(event.target.value);
               }}
               className="w-10 h-5 mt-2"
@@ -148,21 +171,49 @@ const ConfigPopup = () => {
         </li>
         <li className={stylesconfig.popupitem}>
           <div className={stylesconfig.configicon}>
-            <MathSymbolIcon />
+            <AbcIcon />
           </div>
-          <p>Alterar nome das variáveis das transformações</p>
+          <p className={stylesconfig.itemtext}>
+            Alterar nome das variáveis das transformações
+          </p>
           <div className={stylesconfig.configcontrol}>
             <input
               type="text"
-              value={""}
-              onChange={() => {}}
-              className="w-10 h-5 mt-2"
+              value={transformationVars[0]}
+              onChange={(event) => {
+                if (
+                  !validateTransformationVar(event.target.value) ||
+                  event.target.value === transformationVars[1]
+                ) {
+                  alert("Nome inválido");
+                  return;
+                }
+
+                setTransformationVars([
+                  event.target.value,
+                  transformationVars[1],
+                ]);
+              }}
+              className="w-10 h-5 mt-2 border border-gray-200"
             />
             <input
               type="text"
-              value={""}
-              onChange={() => {}}
-              className="w-10 h-5 mt-2"
+              value={transformationVars[1]}
+              onChange={(event) => {
+                if (
+                  !validateTransformationVar(event.target.value) ||
+                  event.target.value === transformationVars[0]
+                ) {
+                  alert("Nome inválido");
+                  return;
+                }
+
+                setTransformationVars([
+                  event.target.value,
+                  transformationVars[0],
+                ]);
+              }}
+              className="w-10 h-5 mt-2 mr-2 border border-gray-200"
             />
           </div>
         </li>

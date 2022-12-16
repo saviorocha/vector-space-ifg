@@ -24,12 +24,12 @@ const MathSymbolIcon: FunctionComponent<CustomIconProps> = ({
       viewBox="0 0 143.73 143.73"
       xmlSpace="preserve"
     >
-      <g style={{
-        fill: logoColor ? logoColor : logoTheme
-      }}>
-        <g style={{
-          fill: logoColor ? logoColor : logoTheme
-        }}>
+      <g style={{ fill: logoColor ? logoColor : logoTheme }}>
+        <g
+          style={{
+            fill: logoColor ? logoColor : logoTheme,
+          }}
+        >
           <path
             d="M7.309,74.912h5.946l29.487,41.961c1.384,1.969,3.629,3.105,5.98,3.105c0.463,0,0.933-0.045,1.398-0.137
 			c2.831-0.553,5.072-2.716,5.722-5.527L73.411,38.37h63.01c4.036,0,7.31-3.271,7.31-7.309c0-4.036-3.272-7.309-7.31-7.309h-68.82
@@ -45,51 +45,81 @@ const MathSymbolIcon: FunctionComponent<CustomIconProps> = ({
           />
         </g>
       </g>
-      <g style={{
-        fill: logoColor ? logoColor : logoTheme
-      }}></g>
-      <g style={{
-        fill: logoColor ? logoColor : logoTheme
-      }}></g>
-      <g style={{
-        fill: logoColor ? logoColor : logoTheme
-      }}></g>
-      <g style={{
-        fill: logoColor ? logoColor : logoTheme
-      }}></g>
-      <g style={{
-        fill: logoColor ? logoColor : logoTheme
-      }}></g>
-      <g style={{
-        fill: logoColor ? logoColor : logoTheme
-      }}></g>
-      <g style={{
-        fill: logoColor ? logoColor : logoTheme
-      }}></g>
-      <g style={{
-        fill: logoColor ? logoColor : logoTheme
-      }}></g>
-      <g style={{
-        fill: logoColor ? logoColor : logoTheme
-      }}></g>
-      <g style={{
-        fill: logoColor ? logoColor : logoTheme
-      }}></g>
-      <g style={{
-        fill: logoColor ? logoColor : logoTheme
-      }}></g>
-      <g style={{
-        fill: logoColor ? logoColor : logoTheme
-      }}></g>
-      <g style={{
-        fill: logoColor ? logoColor : logoTheme
-      }}></g>
-      <g style={{
-        fill: logoColor ? logoColor : logoTheme
-      }}></g>
-      <g style={{
-        fill: logoColor ? logoColor : logoTheme
-      }}></g>
+      <g
+        style={{
+          fill: logoColor ? logoColor : logoTheme,
+        }}
+      ></g>
+      <g
+        style={{
+          fill: logoColor ? logoColor : logoTheme,
+        }}
+      ></g>
+      <g
+        style={{
+          fill: logoColor ? logoColor : logoTheme,
+        }}
+      ></g>
+      <g
+        style={{
+          fill: logoColor ? logoColor : logoTheme,
+        }}
+      ></g>
+      <g
+        style={{
+          fill: logoColor ? logoColor : logoTheme,
+        }}
+      ></g>
+      <g
+        style={{
+          fill: logoColor ? logoColor : logoTheme,
+        }}
+      ></g>
+      <g
+        style={{
+          fill: logoColor ? logoColor : logoTheme,
+        }}
+      ></g>
+      <g
+        style={{
+          fill: logoColor ? logoColor : logoTheme,
+        }}
+      ></g>
+      <g
+        style={{
+          fill: logoColor ? logoColor : logoTheme,
+        }}
+      ></g>
+      <g
+        style={{
+          fill: logoColor ? logoColor : logoTheme,
+        }}
+      ></g>
+      <g
+        style={{
+          fill: logoColor ? logoColor : logoTheme,
+        }}
+      ></g>
+      <g
+        style={{
+          fill: logoColor ? logoColor : logoTheme,
+        }}
+      ></g>
+      <g
+        style={{
+          fill: logoColor ? logoColor : logoTheme,
+        }}
+      ></g>
+      <g
+        style={{
+          fill: logoColor ? logoColor : logoTheme,
+        }}
+      ></g>
+      <g
+        style={{
+          fill: logoColor ? logoColor : logoTheme,
+        }}
+      ></g>
     </svg>
   );
 };

@@ -11,11 +11,10 @@ import { validateVectorName, validateVectorValues } from "../utils";
 const useTexStr = () => {
   const { stateVecArr } = useListContext();
   const { currentPlot } = useNameContext();
-  const { showMathSymbols, decimalPoint } = useConfigContext();
+  const { showMathSymbols, decimalPoint, transformationVars } = useConfigContext();
   const {
     vectorNameCounter,
     setVectorNameCounter,
-    transformationVars,
     vectorNameArr,
     setVectorNameArr,
   } = useNameContext();

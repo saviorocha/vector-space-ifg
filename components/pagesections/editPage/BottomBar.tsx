@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Check, Globe, Hash, Settings } from "react-feather";
 import { Transition } from "react-transition-group";
 import { useListContext, useNameContext } from "../../../context";
+import { useConfigContext } from "../../../context/ConfigContext";
 import useTexStr from "../../../hooks/useTexStr";
 import styles from "../../../styles/modules/pages/bottombar.module.css";
 import { validateTransformationVar } from "../../../utils";
@@ -37,7 +38,8 @@ const keyboardTransitionStyles: any = {
  */
 const BottomBar = () => {
   const { matrixStrings } = useTexStr();
-  const { currentPlot, setTransformationVars } = useNameContext();
+  const { currentPlot } = useNameContext();
+  const { setTransformationVars } = useConfigContext();
   const { stateVecArr } = useListContext();
 
   const [currentPosition, setCurrentPosition] = useState(0);

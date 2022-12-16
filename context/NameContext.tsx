@@ -19,9 +19,6 @@ const NameContextProvider: FunctionComponent<PropsChildren> = ({
   const [transformationNameArr, setTransformationNameArr] = useState<string[]>(
     []
   );
-  const [transformationVars, setTransformationVars] = useState<
-    [string, string]
-  >(["a", "b"]);
   const [currentPlot, setCurrentPlot] = useState<number>(0);
 
   const nameProvider = useMemo(
@@ -32,8 +29,6 @@ const NameContextProvider: FunctionComponent<PropsChildren> = ({
       setVectorNameCounter,
       transformationNameCounter,
       setTransformationNameCounter,
-      transformationVars,
-      setTransformationVars,
       vectorNameArr,
       setVectorNameArr,
       transformationNameArr,
@@ -46,8 +41,6 @@ const NameContextProvider: FunctionComponent<PropsChildren> = ({
       setVectorNameCounter,
       transformationNameCounter,
       setTransformationNameCounter,
-      transformationVars,
-      setTransformationVars,
       vectorNameArr,
       setVectorNameArr,
       transformationNameArr,

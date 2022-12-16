@@ -29,8 +29,6 @@ interface IContextName {
   setVectorNameCounter: Dispatch<SetStateAction<number>>;
   transformationNameCounter: number;
   setTransformationNameCounter: Dispatch<SetStateAction<number>>;
-  transformationVars: [string, string];
-  setTransformationVars: Dispatch<SetStateAction<[string, string]>>;
   vectorNameArr: string[];
   setVectorNameArr: Dispatch<SetStateAction<string[]>>;
   transformationNameArr: string[];
@@ -46,8 +44,10 @@ interface IContextConfig {
   setShowBasisVectors: Dispatch<SetStateAction<boolean>>;
   showMathSymbols: boolean;
   setShowMathSymbols: Dispatch<SetStateAction<boolean>>;
-  vectorColor: string,
-  setVectorColor: Dispatch<SetStateAction<string>>,
+  vectorColor: string;
+  setVectorColor: Dispatch<SetStateAction<string>>;
+  transformationVars: [string, string];
+  setTransformationVars: Dispatch<SetStateAction<[string, string]>>
 }
 
 interface IPlotProps {
