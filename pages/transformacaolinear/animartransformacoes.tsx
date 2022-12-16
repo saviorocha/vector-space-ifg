@@ -25,11 +25,11 @@ const AnimationPlane = () => {
   useEffect(() => {
     handleResize();
     window.addEventListener("resize", handleResize);
+    setEvents([]);
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-    setEvents([]);
   }, []);
 
   return (

@@ -49,7 +49,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   const handleVectorInputSubmit = (value: any) => {
     const { successful, message } = vectorSubmitHandler(value);
     setHideAlert(successful);
-    setAlertMsg(message)
+    setAlertMsg(message);
     inputRef.current!.value = value;
     if (successful) {
       inputRef.current!.value = "";
@@ -57,9 +57,11 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   };
 
   const handleVectorBtnSubmit = () => {
-    const { successful, message } = vectorSubmitHandler(inputRef.current!.value);
+    const { successful, message } = vectorSubmitHandler(
+      inputRef.current!.value
+    );
     setHideAlert(successful);
-    setAlertMsg(message)
+    setAlertMsg(message);
     if (successful) {
       inputRef.current!.value = "";
     }
@@ -68,7 +70,8 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   useEffect(() => {
     // console.log("hideAlert create", hideAlert);
     // console.log("focus", focus);
-  }, [focus]);
+    // console.log("vectorRender", vectorRender);
+  }, [vectorRender]);
 
   useEffect(() => {
     const newVectors = vectors.filter((vector: Vector) => {
@@ -83,14 +86,14 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   return (
     <div
       className="
-        rounded-md w-11/12 h-36
+        rounded-md w-11/12 h-36 text-sm shadow-md 
         flex flex-col items-center justify-between
         bg-white border border-gray-400
-        text-sm shadow-md dark:bg-zinc-900 dark:border-neutral-600
+        dark:bg-zinc-900 dark:border-neutral-600
       "
     >
       <ul className="overflow-scroll" id={styles.vectorlist}>
-        {vectorRender.sort().map((vec: Vector, i: number) => {
+        {vectorRender.map((vec: Vector, i: number) => {
           return (
             <li key={i}>
               {plotIndex !== 0 ? (
@@ -105,7 +108,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
                      ${parseFloat(vec.x.toFixed(decimalPoint))},
                      ${parseFloat(vec.y.toFixed(decimalPoint))}
                     )`}
-                    vector={vec}
+                    vector={`${vector.name}=(${vector.xExp},${vector.yExp})`}
                     currentPlot={plotIndex}
                   />
                 </HoverableComponent>
