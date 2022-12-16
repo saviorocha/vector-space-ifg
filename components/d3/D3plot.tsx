@@ -13,19 +13,27 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index }) => {
     {} as PlotComponent
   );
 
-  const { hideNumbers, showBasisVectors } = useConfigContext();
+  const { hideNumbers, showBasisVectors, vectorColor } = useConfigContext();
   const { dimension, events } = useD3Context();
   const { stateVecArr } = useListContext();
   const { currentPlot } = useNameContext();
 
-  useEffect(initD3, [stateVecArr, events, hideNumbers, showBasisVectors, dimension]);
-
+  // eslint-disable-next-line
+  useEffect(initD3, [
+    stateVecArr,
+    events,
+    hideNumbers,
+    showBasisVectors,
+    dimension,
+    vectorColor,
+  ]);
 
   function initD3() {
     const section = d3.select(refElement.current);
 
     let vectorsMap = stateVecArr.vectorArr[index];
-    if (!showBasisVectors) { // filter out the basis vectors
+    if (!showBasisVectors) {
+      // filter out the basis vectors
       vectorsMap = vectorsMap.filter((vector: Vector) => {
         return !vector.isBasisVector;
       });
@@ -42,7 +50,8 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index }) => {
         data,
         hideNumbers,
         events,
-        currentPlot
+        currentPlot,
+        vectorColor
       )
     );
 

@@ -5,6 +5,7 @@ import { Hash, Moon } from "react-feather";
 import { useConfigContext } from "../../../context/ConfigContext";
 import stylesconfig from "../../../styles/modules/ui/config.module.css";
 import BasisVectorIcon from "../../icons/BasisVectorIcon";
+import ColorIcon from "../../icons/ColorIcon";
 import DecimalIcon from "../../icons/DecimalIcon";
 import MathSymbolIcon from "../../icons/MathSymbolIcon";
 import PopupWindow from "./PopupWindow";
@@ -17,10 +18,10 @@ const ConfigPopup = () => {
     setShowBasisVectors,
     decimalPoint,
     setDecimalPoint,
-    showGridLines,
-    setShowGridLines,
     showMathSymbols,
     setShowMathSymbols,
+    vectorColor,
+    setVectorColor,
   } = useConfigContext();
   const { theme, setTheme } = useTheme();
   const [mode, setMode] = useState<Mode>("dark");
@@ -116,7 +117,7 @@ const ConfigPopup = () => {
         </li>
         <li className={stylesconfig.popupitem}>
           <div className={stylesconfig.configicon}>
-            <MathSymbolIcon  />
+            <MathSymbolIcon />
           </div>
           <p>Mostrar Expressões Matemáticos</p>
           <div className={stylesconfig.configcontrol}>
@@ -126,6 +127,42 @@ const ConfigPopup = () => {
               onChange={() => {
                 setShowMathSymbols(!showMathSymbols);
               }}
+            />
+          </div>
+        </li>
+        <li className={stylesconfig.popupitem}>
+          <div className={stylesconfig.configicon}>
+            <ColorIcon />
+          </div>
+          <p>Alterar cor padrão dos vetores</p>
+          <div className={stylesconfig.configcontrol}>
+            <input
+              type="color"
+              value={vectorColor}
+              onChange={(event) => {
+                setVectorColor(event.target.value);
+              }}
+              className="w-10 h-5 mt-2"
+            />
+          </div>
+        </li>
+        <li className={stylesconfig.popupitem}>
+          <div className={stylesconfig.configicon}>
+            <MathSymbolIcon />
+          </div>
+          <p>Alterar nome das variáveis das transformações</p>
+          <div className={stylesconfig.configcontrol}>
+            <input
+              type="text"
+              value={""}
+              onChange={() => {}}
+              className="w-10 h-5 mt-2"
+            />
+            <input
+              type="text"
+              value={""}
+              onChange={() => {}}
+              className="w-10 h-5 mt-2"
             />
           </div>
         </li>

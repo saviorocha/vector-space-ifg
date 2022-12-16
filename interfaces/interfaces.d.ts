@@ -38,8 +38,6 @@ interface IContextName {
 }
 
 interface IContextConfig {
-  showGridLines: boolean;
-  setShowGridLines: Dispatch<SetStateAction<boolean>>;
   hideNumbers: boolean;
   setHideNumbers: Dispatch<SetStateAction<boolean>>;
   decimalPoint: number;
@@ -48,6 +46,8 @@ interface IContextConfig {
   setShowBasisVectors: Dispatch<SetStateAction<boolean>>;
   showMathSymbols: boolean;
   setShowMathSymbols: Dispatch<SetStateAction<boolean>>;
+  vectorColor: string,
+  setVectorColor: Dispatch<SetStateAction<string>>,
 }
 
 interface IPlotProps {

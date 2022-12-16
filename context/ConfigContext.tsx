@@ -13,10 +13,11 @@ const ConfigContextProvider: FunctionComponent<PropsChildren> = ({
   children,
 }) => {
   const [showBasisVectors, setShowBasisVectors] = useState(false);
-  const [showGridLines, setShowGridLines] = useState(true);
   const [hideNumbers, setHideNumbers] = useState(false);
   const [decimalPoint, setDecimalPoint] = useState(2);
   const [showMathSymbols, setShowMathSymbols] = useState(true);
+  const [vectorColor, setVectorColor] = useState("#4682b4");
+  const [transformationVars, setTransformationVars] = useState(["a", "b"]);
 
   const configProvider = useMemo(
     () => ({
@@ -24,24 +25,24 @@ const ConfigContextProvider: FunctionComponent<PropsChildren> = ({
       setShowBasisVectors,
       hideNumbers,
       setHideNumbers,
-      showGridLines,
-      setShowGridLines,
       decimalPoint,
       setDecimalPoint,
       showMathSymbols,
       setShowMathSymbols,
+      vectorColor,
+      setVectorColor,
     }),
     [
       showBasisVectors,
       setShowBasisVectors,
       hideNumbers,
       setHideNumbers,
-      showGridLines,
-      setShowGridLines,
       decimalPoint,
       setDecimalPoint,
       showMathSymbols,
       setShowMathSymbols,
+      vectorColor,
+      setVectorColor,
     ]
   );
 

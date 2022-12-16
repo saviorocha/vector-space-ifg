@@ -36,7 +36,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
   }, [texExpression, mathExpression, hideAlert, stateVecArr]);
   
   useEffect(() => {
-    console.log("stateVecArr", stateVecArr);
+    // console.log("stateVecArr", stateVecArr);
 
   }, [stateVecArr])
 

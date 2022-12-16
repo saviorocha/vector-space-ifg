@@ -9,6 +9,7 @@ class PlotComponent {
   height: number;
   hideNumbers: boolean;
   currentPlot: number;
+  vectorColor: string;
 
   // @ts-ignore
   x: ScaleLinear<number, number>;
@@ -25,7 +26,8 @@ class PlotComponent {
     data: VectorData[],
     hideNumbers: boolean,
     eventsArr: EventFunction[],
-    currentPlot: number
+    currentPlot: number,
+    vectorColor: string
   ) {
     const { margin, width, height } = dimensions;
     this.data = data;
@@ -37,33 +39,18 @@ class PlotComponent {
     this.height = height;
     this.hideNumbers = hideNumbers;
     this.currentPlot = currentPlot;
+    this.vectorColor = vectorColor;
 
     this.svg = d3
       .select(refComponent)
       .attr("id", "myPlane")
       .append("svg:svg")
-      // Responsive SVG needs these 2 attributes and no width and height attr.
-      // .attr("preserveAspectRatio", "xMinYMin meet")
-      // .attr(
-      //   "viewBox",
-      //   `0 0 ${this.width + this.margin.left + this.margin.right} ${
-      //     height + this.margin.top + this.margin.bottom
-      //   }`
-      // )
-      // .attr("id", "svgPlot")
-      // .style("display", "inline-block")
-      // .style("position", "relative")
-      // .style("width", "100%")
-      // .style("padding-bottom", "100%")
-      // .style("vertical-align", "top")
-      // .style("overflow", "hidden")
       .attr("width", this.width + this.margin.left + this.margin.right)
       .attr("height", height + this.margin.top + this.margin.bottom)
       .append("g")
       .attr("id", "plane")
       .attr("transform", `translate(${this.margin.left},${this.margin.top})`);
 
-    // this.responsiveDesign();
     this.createAxis();
 
     // that's not how I wanted to deal with events
@@ -287,7 +274,7 @@ class PlotComponent {
       // clip-path: everything outside this area won't be drawn
       .attr("clip-path", "url(#chart-area)")
       .attr("fill", "none")
-      .attr("stroke", "steelblue")
+      .attr("stroke", this.vectorColor)
       .attr("stroke-width", 2)
       .attr("marker-end", "url(#arrow)");
     // .call(
@@ -322,30 +309,7 @@ class PlotComponent {
     def
       .append("path")
       .attr("d", "M2,2 L10,6 L2,10 L6,6 L2,2")
-      .style("fill", "steelblue");
-  };
-
-  responsiveDesign = () => {
-    this.svg
-      .append("div")
-      .attr("id", "resposnfsnf")
-      // Container class to make it responsive.
-      .style("display", "inline-block")
-      .style("position", "relative")
-      .style("width", "100%")
-      .style("padding-bottom", "100%")
-      .style("vertical-align", "top")
-      .style("overflow", "hidden")
-      .append("svg")
-      // Responsive SVG needs these 2 attributes and no width and height attr.
-      .attr("preserveAspectRatio", "xMinYMin meet")
-      .attr("viewBox", "0 0 600 400")
-      // Class to make it responsive.
-      .classed("svg-content-responsive", true)
-      .style("display", "inline-block")
-      .style("position", "absolute")
-      .style("top", "10px")
-      .style("left", "0");
+      .style("fill", this.vectorColor);
   };
 }
 
