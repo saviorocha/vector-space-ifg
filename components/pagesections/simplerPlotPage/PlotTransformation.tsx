@@ -1,4 +1,5 @@
 import { Alert, Button, Tooltip } from "@mui/material";
+import { useTheme } from "next-themes";
 import { FunctionComponent, useEffect, useState } from "react";
 import { Edit3, Plus, RotateCcw, Trash2, X } from "react-feather";
 import { useListContext, useNameContext } from "../../../context";
@@ -15,6 +16,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
   trnIndex,
 }) => {
   const { matrixStrings } = useTexStr();
+  const { theme } = useTheme();
   const [currentTrnExpression, setCurrentTrnExpression] = useState(
     matrixStrings(trnIndex)[0]
   );
@@ -71,11 +73,11 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
     // console.log("transformationNameArr", transformationNameArr);
     setToggleTrnInput(false);
     setToggleUpdateCreate("create");
-    
   }, [stateVecArr]);
 
   useEffect(() => {
     setCurrentTrnExpression(matrixStrings(trnIndex)[currentPosition]);
+    // eslint-disable-next-line
   }, [showMathSymbols, decimalPoint, currentPosition]);
 
   return (
@@ -118,7 +120,15 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
           disabled={stateVecArr.transformationArr.length > 2}
         >
           <Tooltip title="Adicionar Transformação Linear">
-            <Plus />
+            <Plus
+              color={
+                stateVecArr.transformationArr.length > 2
+                  ? "#7f7f7f"
+                  : theme === "dark"
+                  ? "#fff"
+                  : "#000"
+              }
+            />
           </Tooltip>
         </button>
         <button

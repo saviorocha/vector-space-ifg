@@ -32,6 +32,10 @@ const BottomBar = () => {
   const [isActive, setIsActive] = useState(false);
 
   const handleTransfromationSubmit = (event: any) => {
+    if (stateVecArr.transformationArr.length > 2) {
+      return alert("número máximo de transformações atingido");
+    }
+
     transformationSubmitHandler(event, transformation);
   };
 
@@ -42,14 +46,16 @@ const BottomBar = () => {
     e1: [ExpressionType, ExpressionType],
     e2: [ExpressionType, ExpressionType]
   ) => {
-    const name = `T_{${transformationNameCounter}}`
-    const newHead = addTransformation(
-      new Transformation(e1, e2, name)
-    );
+    if (stateVecArr.transformationArr.length > 2) {
+      return alert("número máximo de transformações atingido");
+    }
+
+    const name = `T_{${transformationNameCounter}}`;
+    const newHead = addTransformation(new Transformation(e1, e2, name));
     const newList = new StateList(newHead);
     const trnNameArr = transformationNameArr;
     trnNameArr.push(name);
-    
+
     // updates context values
     setTransformationNameArr(trnNameArr);
     setTransformationNameCounter(() => transformationNameCounter + 1);
