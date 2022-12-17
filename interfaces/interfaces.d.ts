@@ -47,7 +47,7 @@ interface IContextConfig {
   vectorColor: string;
   setVectorColor: Dispatch<SetStateAction<string>>;
   transformationVars: [string, string];
-  setTransformationVars: Dispatch<SetStateAction<[string, string]>>
+  setTransformationVars: Dispatch<SetStateAction<[string, string]>>;
 }
 
 interface IPlotProps {
@@ -176,4 +176,10 @@ interface IKeyboardProps {
   onChange: (input: string) => void;
   // @ts-ignore
   keyboardRef: MutableRefObject<Keyboard>;
+}
+
+interface IConfigItemProp {
+  children: ReactNode;
+  icon: ReactElement;
+  title: string;
 }
