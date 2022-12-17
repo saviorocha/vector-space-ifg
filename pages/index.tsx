@@ -15,7 +15,7 @@ const Home: NextPage = () => {
           <p className={styles.logotext}>VectorSpace</p>
         </div>
         <h1 className={styles.greetingstext}>
-          Bem-vindo ao VectorSpace, um sistema de visualização e manipualação de
+          Bem-vindo ao VectorSpace, um sistema de visualização e manipulação de
           conceitos de Álgebra Linear!
         </h1>
       </section>
