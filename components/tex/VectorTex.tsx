@@ -32,18 +32,17 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
     // console.log("alert update", hideAlert);
     // console.log("mathExpression", mathExpression);
     // console.log("texExpression", texExpression)
-    // console.log(vector.name, vector);
+    // console.log("VectorTex", vector.name, vector);
   }, [texExpression, mathExpression, hideAlert, stateVecArr]);
-  
+
   useEffect(() => {
     // console.log("stateVecArr", stateVecArr);
+  }, [stateVecArr]);
 
-  }, [stateVecArr])
-
-  // useEffect(() => {
-  //   setTexExpression(expression);
-  //   // console.log("vectorExpression", vectorExpression);
-  // }, [expression]);
+  useEffect(() => {
+    setTexExpression(expression);
+    setMathExpression(`${vector.name}=(${vector.xExp},${vector.yExp})`);
+  }, [expression, vector]);
 
   const handleOnChange = (event: any) => {
     if (event.target.value) {
@@ -52,19 +51,14 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
     }
   };
 
-  const handleVectorUpdate = (event: any) => {
-    const { successful, message } = vectorUpdateHandler(expression, event);
+  const handleVectorUpdate = (vectorStr: string) => {
+    const { successful, message } = vectorUpdateHandler(expression, vectorStr);
 
     setHideAlert(successful);
     setAlertMsg(message);
 
     if (successful) {
       setShowTex(true);
-    }
-    if (event.target.value) {
-      // checks for empty strings
-      setTexExpression(event.target.value);
-      setMathExpression(event.target.value);
     }
   };
 
@@ -76,6 +70,9 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
 
   const handleEditBtn = () => {
     setShowTex(!showTex);
+    if (!showTex) {
+      handleVectorUpdate(mathExpression);
+    }
   };
 
   return (
@@ -102,7 +99,14 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
           className="border border-slate-400 w-24"
           onKeyDown={(event: any) => {
             if (event.key === "Enter") {
-              handleVectorUpdate(event);
+              handleVectorUpdate(event.target.value);
+              event.target.value = "";
+
+              if (event.target.value) {
+                // checks for empty strings
+                setTexExpression(event.target.value);
+                setMathExpression(event.target.value);
+              }
             }
           }}
           onChange={handleOnChange}

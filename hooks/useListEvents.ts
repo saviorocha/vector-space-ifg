@@ -59,10 +59,10 @@ const useListEvents = () => {
    */
   const vectorUpdateHandler = (
     vectorExpression: string,
-    event: any
+    vectorStr: string
   ): SubmissionFormat => {
     const prevVectorName = vectorExpression.split("=")[0];
-    const vectorRes = vectorFromTex(event.target.value, prevVectorName);
+    const vectorRes = vectorFromTex(vectorStr, prevVectorName);
 
     if (!prevVectorName) {
       return {
@@ -84,7 +84,7 @@ const useListEvents = () => {
     setStateVecArr(newList.toArray());
     setVectorNameArr(vecNameArr);
 
-    event.target.value = "";
+    // event.target.value = "";
     return vectorRes;
   };
 

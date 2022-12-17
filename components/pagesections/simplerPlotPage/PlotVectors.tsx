@@ -108,7 +108,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
                      ${parseFloat(vec.x.toFixed(decimalPoint))},
                      ${parseFloat(vec.y.toFixed(decimalPoint))}
                     )`}
-                    vector={`${vector.name}=(${vector.xExp},${vector.yExp})`}
+                    vector={vec}
                     currentPlot={plotIndex}
                   />
                 </HoverableComponent>
