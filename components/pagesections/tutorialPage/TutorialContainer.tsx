@@ -5,44 +5,16 @@ import { FunctionComponent, useState } from "react";
 import { PropsChildren } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/pages/tutorial.module.css";
 import Logo from "../../icons/Logo";
+import BottomNavigation from "./BottomNavigation";
 import ListItem from "./ListItem";
-
-const listItems = [
-  {
-    href: "/tutorial",
-    linkText: "O que é o VectorSpace?",
-  },
-  {
-    href: "/tutorial/transformacoes",
-    linkText: "Transformações Lineares",
-  },
-  {
-    href: "/tutorial/transformacoes/criacaovetores",
-    linkText: "Criação de vetores",
-    isSubItem: true,
-  },
-  {
-    href: "/tutorial/transformacoes/criacaotransformacoes",
-    linkText: "Criação de transformações",
-    isSubItem: true,
-  },
-  {
-    href: "/tutorial/transformacoes/animacao",
-    linkText: "Animação de transformações",
-    isSubItem: true,
-  },
-  {
-    href: "/tutorial/configs",
-    linkText: "Configurações variadas",
-  },
-];
+import { pagesItems } from "../../../utils";
 
 const TutorialContainer: FunctionComponent<PropsChildren> = ({ children }) => {
   const [mode, setMode] = useState<Mode>("dark");
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <header className={styles.header}>
         <Link href="/">
           <a className={styles.logo}>
@@ -74,7 +46,7 @@ const TutorialContainer: FunctionComponent<PropsChildren> = ({ children }) => {
         <main className={styles.pagecontent}>
           <aside className={styles.navcontent}>
             <ul>
-              {listItems.map(({ href, linkText, isSubItem }, i) => {
+              {pagesItems.map(({ href, linkText, isSubItem }, i) => {
                 return (
                   <ListItem
                     key={i}
@@ -86,10 +58,15 @@ const TutorialContainer: FunctionComponent<PropsChildren> = ({ children }) => {
               })}
             </ul>
           </aside>
-          <article className={styles.tutorialcontent}>{children}</article>
+          <article className={styles.tutorialcontent}>
+            <div className={styles.content}>{children}</div>
+            <div>
+              <BottomNavigation />
+            </div>
+          </article>
         </main>
       </div>
-    </div>
+    </section>
   );
 };
 

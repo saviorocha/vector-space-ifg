@@ -104,8 +104,11 @@ interface IInfoBox {
 }
 
 interface ListItemProps {
+  /** Link to the page */
   href: string;
+  /** Text */
   linkText: string;
+  /** Checks if it's a subitem */
   isSubItem?: boolean;
 }
 

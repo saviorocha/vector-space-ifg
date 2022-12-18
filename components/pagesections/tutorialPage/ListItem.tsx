@@ -5,6 +5,9 @@ import { ChevronRight, Minus } from "react-feather";
 import { ListItemProps } from "../../../interfaces/interfaces";
 import styles from "../../../styles/modules/pages/tutorial.module.css";
 
+/**
+ * Navigation item component
+ */
 const ListItem: FunctionComponent<ListItemProps> = ({
   href,
   linkText,
@@ -19,8 +22,17 @@ const ListItem: FunctionComponent<ListItemProps> = ({
 
   return (
     <li className={href === route ? styles.listitemcurrent : styles.listitem}>
-      {isSubItem ? <Minus size={11} /> : <ChevronRight size={15} />}
-      <Link href={href}>{linkText}</Link>
+      {isSubItem ? (
+        <div className="flex items-center flex-row ml-3">
+          <Minus size={11} />
+          <Link href={href}>{linkText}</Link>
+        </div>
+      ) : (
+        <div className="flex items-center flex-row">
+          <ChevronRight size={15} />
+          <Link href={href}>{linkText}</Link>
+        </div>
+      )}
     </li>
   );
 };

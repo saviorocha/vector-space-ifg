@@ -1,17 +1,15 @@
 import "katex/dist/katex.min.css";
 import Image from "next/image";
 import { useEffect } from "react";
+import { InlineMath } from "react-katex";
 import TutorialContainer from "../../../components/pagesections/tutorialPage/TutorialContainer";
 import calchover from "../../../public/images/calchover.png";
-import sidebar from "../../../public/images/sidebar.png";
+import predefinedtrn from "../../../public/images/predefinedtrns.png";
 import transformationbox from "../../../public/images/transformationbox.png";
 import transformationplots from "../../../public/images/transformationplots.png";
 import transformationplots2 from "../../../public/images/transformationplots2.png";
 import trnbtn from "../../../public/images/trncreation.gif";
-import predefinedtrn from "../../../public/images/predefinedtrns.png";
 import styles from "../../../styles/modules/pages/tutorial.module.css";
-import "katex/dist/katex.min.css";
-import { InlineMath } from "react-katex";
 
 const Creation = () => {
   useEffect(() => {
@@ -19,6 +17,7 @@ const Creation = () => {
   }, []);
   return (
     <TutorialContainer>
+      <h1 className={styles.heading}>Criando Transformações</h1>
       <p>
         Para adicionar uma transformação linear, clique no botão{" "}
         <b>Adicionar Transformação Linear</b> e insira os valores de sua matriz
@@ -104,19 +103,22 @@ const Creation = () => {
         seguinte forma:{" "}
       </p>
       <table id={styles.commandtable}>
-        <tr>
-          <td className={styles.tableitems}>
-            <strong>Transformação</strong>
-          </td>
-          <td className={styles.tableitems}>
-            <strong>Definição</strong>
-          </td>
-        </tr>
-        <tr>
-          <td className={styles.tableitems}>Reflexão pelo Eixo y</td>
-          <td className={styles.tableitems}>
-            <InlineMath
-              math={String.raw`
+        <thead>
+          <tr>
+            <td className={styles.tableitems}>
+              <strong>Transformação</strong>
+            </td>
+            <td className={styles.tableitems}>
+              <strong>Definição</strong>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className={styles.tableitems}>Reflexão pelo Eixo y</td>
+            <td className={styles.tableitems}>
+              <InlineMath
+                math={String.raw`
                 T(a, b) = \begin{bmatrix}
                   -1 & 0\\
                   0 & 1
@@ -124,14 +126,14 @@ const Creation = () => {
                   a\\
                   b
                 \end{bmatrix} = (-a, b)`}
-            />
-          </td>
-        </tr>
-        <tr>
-          <td className={styles.tableitems}>Cisalhamento</td>
-          <td className={styles.tableitems}>
-            <InlineMath
-              math={String.raw`
+              />
+            </td>
+          </tr>
+          <tr>
+            <td className={styles.tableitems}>Cisalhamento</td>
+            <td className={styles.tableitems}>
+              <InlineMath
+                math={String.raw`
                 T(a, b) = \begin{bmatrix}
                   1 & 2\\
                   0 & 1
@@ -140,14 +142,14 @@ const Creation = () => {
                   b
                 \end{bmatrix} = (a + 2b, b) 
               `}
-            />
-          </td>
-        </tr>
-        <tr>
-          <td className={styles.tableitems}>Contração</td>
-          <td className={styles.tableitems}>
-            <InlineMath
-              math={String.raw`
+              />
+            </td>
+          </tr>
+          <tr>
+            <td className={styles.tableitems}>Contração</td>
+            <td className={styles.tableitems}>
+              <InlineMath
+                math={String.raw`
                 T(a, b) = \begin{bmatrix}
                   \frac{1}{2} & 0\\
                   0 & \frac{1}{2}
@@ -155,14 +157,14 @@ const Creation = () => {
                   a\\
                   b
                 \end{bmatrix} = (\frac{1}{2}a, \frac{1}{2}b)`}
-            />
-          </td>
-        </tr>
-        <tr>
-          <td className={styles.tableitems}>Dilatação</td>
-          <td className={styles.tableitems}>
-            <InlineMath
-              math={String.raw`
+              />
+            </td>
+          </tr>
+          <tr>
+            <td className={styles.tableitems}>Dilatação</td>
+            <td className={styles.tableitems}>
+              <InlineMath
+                math={String.raw`
                 T(a, b) = \begin{bmatrix}
                   2 & 0\\
                   0 & 2
@@ -170,9 +172,10 @@ const Creation = () => {
                   a\\
                   b 
                 \end{bmatrix} = (2a, 2b)`}
-            />
-          </td>
-        </tr>
+              />
+            </td>
+          </tr>
+        </tbody>
       </table>
     </TutorialContainer>
   );

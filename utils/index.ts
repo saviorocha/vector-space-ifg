@@ -5,3 +5,5 @@ export {
   validateTransformationValues,
   validateTransformationVar,
 } from "./stringValidations";
+
+export { pagesItems } from "./urls";

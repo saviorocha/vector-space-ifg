@@ -3,6 +3,8 @@ import TutorialContainer from "../../components/pagesections/tutorialPage/Tutori
 import styles from "../../styles/modules/pages/tutorial.module.css";
 import Image from "next/image";
 import configbox from "../../public/images/configbox.png";
+import "katex/dist/katex.min.css";
+import { InlineMath } from "react-katex";
 
 const Configs = () => {
   return (
@@ -16,25 +18,42 @@ const Configs = () => {
         <Image
           src={configbox}
           alt="Janela de configurações"
-          width={350}
-          height={200}
+          width={400}
+          height={300}
         />
       </div>
       <br />
       <p>Essas configurações possuem as seguintes funções:</p>
       <ul className={styles.genericlist}>
-        <li>Tema: muda o esquema de cores, para escuro ou claro.</li>
         <li>
-          Mostrar números do gráfico: controla se aparecem ou não os números do
-          gráfico
+          <b>Tema</b>: muda o esquema de cores, para escuro ou claro.
         </li>
         <li>
-          Configurar casas decimais: configura o ponteiro das casas decimais a
-          ser apresentado pelo sistema.
+          <b>Mostrar números do gráfico</b>: controla se aparecem ou não os
+          números do gráfico
         </li>
         <li>
-          Incluir vetores canônicos: permite demonstrar como os vetores
+          <b>Configurar casas decimais</b>: configura o ponteiro das casas
+          decimais a ser apresentado pelo sistema.
+        </li>
+        <li>
+          <b>Incluir vetores canônicos</b>: permite demonstrar como os vetores
           canônicos são transformados.
+        </li>
+        <li>
+          <b>Mostrar Expressões Matemáticas</b>: controla se os valores aparecem
+          como expressões matemáticas (como <InlineMath math={"\\pi"} />
+          ), ou de forma numérica (como <InlineMath math={"3.14"} />
+          ).
+        </li>
+        <li>
+          <b>Alterar cor padrão dos vetores</b>: permite alterar a cor dos
+          vetores renderizados.
+        </li>
+        <li>
+          <b>Alterar nome das variáveis das transformações</b>: permite alterar
+          o nome das variáveis que aparecem nas definições das transformações
+          lineares.
         </li>
       </ul>
     </TutorialContainer>

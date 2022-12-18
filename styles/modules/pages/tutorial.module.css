@@ -4,9 +4,9 @@
 }
 
 /* .tutorialtext { */
-  /* font-family: "Raleway", sans-serif; */
-  /* font-size: 16px; */
-  /* font-weight: 500; */
+/* font-family: "Raleway", sans-serif; */
+/* font-size: 16px; */
+/* font-weight: 500; */
 /* } */
 
 .header {
@@ -51,6 +51,7 @@
 
 .darkmodetoggle {
   margin-right: 30px;
+  margin-top: 10px;
 }
 
 .page {
@@ -83,6 +84,33 @@
 
 .tutorialcontent {
   min-width: calc(100% - 300px - 1rem);
+  position: relative;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.content p {
+  margin: 20px auto;
+}
+
+.bottomnav {
+  /* position: absolute; */
+  width: 30%;
+  height: 70px;
+  /* bottom: 0;  */
+  border-top: 1px solid #cccccc;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottombtn {
+  margin-left: 5px;
+  cursor: pointer;
 }
 
 .listitem {
@@ -93,24 +121,20 @@
 }
 
 .listitemcurrent {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
   color: #7c7c7c;
+  text-decoration: underline;
 }
 
 .listsubitem {
   font-size: 14px;
   margin-left: 15px;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
   color: #a3a3a3;
 }
 
 .listitem:hover,
 .listsubitem:hover {
   color: #848484;
+  text-decoration: underline;
 }
 
 .genericlist {
@@ -127,6 +151,7 @@
 .heading {
   font-size: 1.5em;
 }
+
 
 /* desktop */
 @media only screen and (min-width: 768px) {
@@ -152,7 +177,7 @@
     min-width: calc(100% - 300px - 1rem);
   }
 
-  .tutorialcontent > p {
+  .tutorialcontent>p {
     margin: 10px 0;
   }
 }
@@ -160,11 +185,11 @@
 #commandtable {
   margin: 0 auto;
   border-collapse: collapse;
-  border: 2px solid rgb(200,200,200);
+  border: 2px solid rgb(200, 200, 200);
   font-size: 0.9rem;
 }
 
 .tableitems {
-  border: 1px solid rgb(190,190,190);
+  border: 1px solid rgb(190, 190, 190);
   padding: 5px 15px;
 }
