@@ -5,23 +5,36 @@ import TutorialContainer from "../../../components/pagesections/tutorialPage/Tut
 import styles from "../../../styles/modules/pages/tutorial.module.css";
 import animationplane from "../../../public/images/animationplane.gif";
 import animationbar from "../../../public/images/animationbar.png";
+import trnplay from "../../../public/images/trnplay.png";
 
 const Animation = () => {
   return (
     <TutorialContainer>
       <p>
-        Na{" "}
+        A{" "}
         <Link href="/transformacaolinear/animartransformacoes">
           <a className={styles.link}>tela de animação das transformações</a>
         </Link>{" "}
-        é possível obser ao centro um plano de coordenadas bidimensionais
-        contendo os vetores previamente adicionados na
-        <Link href="/tutorial/transformacoes/criacao">
+        pode ser acessada pela página inicial, ou através do botão{" "}
+        <b>Executar Transformações</b>.
+      </p>
+      <div className={styles.imgwrapper}>
+        <Image
+          src={trnplay}
+          alt="Botão Executar Transformações"
+          width={400}
+          height={50}
+        />
+      </div>
+      <p>
+        Nessa tela, é possível observar ao centro um plano de coordenadas
+        bidimensionais contendo os vetores previamente adicionados na
+        <Link href="/tutorial/transformacoes/criacaotransformacao">
           <a className={styles.link}> tela de criação das transformações</a>
         </Link>
-        . Essa página realiza uma representação visual do efeito da
-        transformação nos vetores através de uma animação, na qual os vetores
-        são deslocados de acordo com a transformação aplicada.
+        . É realizada uma representação visual do efeito da transformação nos
+        vetores através de uma animação, na qual os vetores são deslocados de
+        acordo com a transformação aplicada.
       </p>
       <div className={styles.imgwrapper}>
         <Image
@@ -32,17 +45,16 @@ const Animation = () => {
         />
       </div>
       <p>
-        Abaixo do plano de coordenadas é possível encontrar três botões e uma
-        barra de progresso. O primeiro botão retorna à tela de criação de
-        transformações. O segundo botão reinicia a animação. O terceiro botão
-        inicia/pausa a animação dos vetores.
+        Abaixo do plano de coordenadas é possível encontrar uma barra de
+        progresso da animação. O primeiro botão dessa barra reinicia a animação, ao passo
+        que o botão ao seu lado inicia/pausa a animação dos vetores.
       </p>
       <div className={styles.imgwrapper}>
         <Image
           src={animationbar}
           alt="Barra de funções de animação"
-          width={300}
-          height={40}
+          width={500}
+          height={50}
         />
       </div>
     </TutorialContainer>

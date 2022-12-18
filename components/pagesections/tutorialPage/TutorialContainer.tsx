@@ -17,7 +17,12 @@ const listItems = [
     linkText: "Transformações Lineares",
   },
   {
-    href: "/tutorial/transformacoes/criacao",
+    href: "/tutorial/transformacoes/criacaovetores",
+    linkText: "Criação de vetores",
+    isSubItem: true,
+  },
+  {
+    href: "/tutorial/transformacoes/criacaotransformacoes",
     linkText: "Criação de transformações",
     isSubItem: true,
   },
