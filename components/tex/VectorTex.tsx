@@ -5,6 +5,7 @@ import { useListContext } from "../../context";
 import useListEvents from "../../hooks/useListEvents";
 import { IVectorTexProps } from "../../interfaces/interfaces";
 import RenderTex from "./RenderTex";
+import toast, { Toaster } from "react-hot-toast";
 
 /**
  * This component handles vector create, update and delete
@@ -19,8 +20,6 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
     `${vector.name}=(${vector.xExp},${vector.yExp})`
   );
   const [showTex, setShowTex] = useState(true);
-  const [hideAlert, setHideAlert] = useState(true);
-  const [alertMsg, setAlertMsg] = useState<string | undefined>("");
 
   const { stateVecArr } = useListContext();
   const { vectorDeleteHandler, vectorUpdateHandler } = useListEvents();
@@ -33,7 +32,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
     // console.log("mathExpression", mathExpression);
     // console.log("texExpression", texExpression)
     // console.log("VectorTex", vector.name, vector);
-  }, [texExpression, mathExpression, hideAlert, stateVecArr]);
+  }, [texExpression, mathExpression, stateVecArr]);
 
   useEffect(() => {
     // console.log("stateVecArr", stateVecArr);
@@ -53,12 +52,11 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
 
   const handleVectorUpdate = (vectorStr: string) => {
     const { successful, message } = vectorUpdateHandler(expression, vectorStr);
-
-    setHideAlert(successful);
-    setAlertMsg(message);
-
+  
     if (successful) {
       setShowTex(true);
+    } else {
+      toast(message!);
     }
   };
 
@@ -117,25 +115,6 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
           mathExpression={texExpression}
           handleDoubleClick={handleDoubleClick}
         />
-      )}
-      {!hideAlert && (
-        <Alert
-          severity="error"
-          className="absolute mx-0 top-0"
-          action={
-            <Button
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setHideAlert(true);
-              }}
-            >
-              <X />
-            </Button>
-          }
-        >
-          {alertMsg}
-        </Alert>
       )}
     </div>
   );

@@ -6,6 +6,9 @@ import { ArrowLeftCircle, ArrowRightCircle } from "react-feather";
 import styles from "../../../styles/modules/pages/tutorial.module.css";
 import { pagesItems } from "../../../utils";
 
+/**
+ * Bottom navigation buttons component
+ */
 const BottomNavigation = () => {
   const { route } = useRouter();
   const [prev, setPrev] = useState("#");

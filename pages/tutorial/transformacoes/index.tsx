@@ -4,6 +4,7 @@ import TutorialContainer from "../../../components/pagesections/tutorialPage/Tut
 import styles from "../../../styles/modules/pages/tutorial.module.css";
 
 const VectorsTransformations = () => {
+
   return (
     <TutorialContainer>
       <p>

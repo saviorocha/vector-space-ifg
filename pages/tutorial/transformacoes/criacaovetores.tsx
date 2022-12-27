@@ -108,9 +108,9 @@ const VectorCreation = () => {
           <tr>
             <td className={styles.tableitems}>Logaritmo</td>
             <td className={styles.tableitems}>
-              <InlineMath math={String.raw`\log_{2}\left(4\right)`} />
+              <InlineMath math={String.raw`\log_{3}\left(9\right)`} />
             </td>
-            <td className={styles.tableitems}>log(4, 2)</td>
+            <td className={styles.tableitems}>log(9, 3)</td>
           </tr>
           <tr>
             <td className={styles.tableitems}>Logaritmo de Base 2</td>
@@ -164,27 +164,28 @@ const VectorCreation = () => {
             <td className={styles.tableitems}>tan(pi/4)</td>
           </tr>
           <tr>
-            <td className={styles.tableitems}>Inversa do Seno</td>
+            <td className={styles.tableitems}>Arco Seno</td>
             <td className={styles.tableitems}>
               <InlineMath math={String.raw`\sin^{-1}\left(2\right)`} />
             </td>
             <td className={styles.tableitems}>asin(2)</td>
           </tr>
           <tr>
-            <td className={styles.tableitems}>Inversa do Cosseno</td>
+            <td className={styles.tableitems}>Arco Cosseno</td>
             <td className={styles.tableitems}>
               <InlineMath math={String.raw`\cos^{-1}\left(2\right)`} />
             </td>
             <td className={styles.tableitems}>acos(2)</td>
           </tr>
           <tr>
-            <td className={styles.tableitems}>Inversa da Tangente</td>
+            <td className={styles.tableitems}>Arco Tangente</td>
             <td className={styles.tableitems}>
               <InlineMath
-                math={String.raw`\tan^{-1}\left(\tan\left(1.5\right)\right)`}
+                math={String.raw`\tan^{-1}\left(\tan\left(1.5\right)\right)`} 
+                // tirar tangente
               />
             </td>
-            <td className={styles.tableitems}>atan(tan(1.5))</td>
+            <td className={styles.tableitems}>atan(3)</td>
           </tr>
           <tr>
             <td className={styles.tableitems}>Secante</td>
@@ -208,14 +209,14 @@ const VectorCreation = () => {
             <td className={styles.tableitems}>csc(2)</td>
           </tr>
           <tr>
-            <td className={styles.tableitems}>Inverso da Secante</td>
+            <td className={styles.tableitems}>Arco Secante</td>
             <td className={styles.tableitems}>
               <InlineMath math={String.raw`\sec^{-1}\left(2\right)`} />
             </td>
             <td className={styles.tableitems}>asec(5)</td>
           </tr>
           <tr>
-            <td className={styles.tableitems}>Inverso da Cotangente</td>
+            <td className={styles.tableitems}>Arco Cotangente</td>
             <td className={styles.tableitems}>
               <InlineMath math={String.raw`\cot^{-1}\left(2\right)`} />
             </td>

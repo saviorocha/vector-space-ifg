@@ -1,16 +1,17 @@
-import { Alert, Button, Tooltip } from "@mui/material";
+import { Tooltip } from "@mui/material";
+import { useTheme } from "next-themes";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
-import { Plus, X } from "react-feather";
+import { Plus } from "react-feather";
+import toast from "react-hot-toast";
 import Vector from "../../../classes/vector";
 import { useListContext } from "../../../context";
+import { useConfigContext } from "../../../context/ConfigContext";
 import useListEvents from "../../../hooks/useListEvents";
 import useTexStr from "../../../hooks/useTexStr";
 import { IPlotVectorsProps } from "../../../interfaces/interfaces";
+import styles from "../../../styles/modules/ui/vectorbox.module.css";
 import VectorTex from "../../tex/VectorTex";
 import HoverableComponent from "../../ui/dataDisplay/HoverableComponent";
-import styles from "../../../styles/modules/ui/vectorbox.module.css";
-import { useConfigContext } from "../../../context/ConfigContext";
-import { useTheme } from "next-themes";
 
 const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   vectors,
@@ -19,8 +20,6 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   const inputRef = useRef<null | HTMLInputElement>(null);
   const [focus, setFocus] = useState(false);
   const [vectorRender, setVectorRender] = useState<Vector[]>(vectors);
-  const [hideAlert, setHideAlert] = useState(true);
-  const [alertMsg, setAlertMsg] = useState<string | undefined>("");
   const { showBasisVectors, showMathSymbols, decimalPoint } =
     useConfigContext();
   const { vectorSubmitHandler } = useListEvents();
@@ -48,11 +47,12 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
 
   const handleVectorInputSubmit = (value: any) => {
     const { successful, message } = vectorSubmitHandler(value);
-    setHideAlert(successful);
-    setAlertMsg(message);
+
     inputRef.current!.value = value;
     if (successful) {
       inputRef.current!.value = "";
+    } else {
+      toast(message!);
     }
   };
 
@@ -60,10 +60,10 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
     const { successful, message } = vectorSubmitHandler(
       inputRef.current!.value
     );
-    setHideAlert(successful);
-    setAlertMsg(message);
     if (successful) {
       inputRef.current!.value = "";
+    } else {
+      toast(message!);
     }
   };
 
@@ -173,25 +173,6 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
             </button>
           </Tooltip>
         </footer>
-      )}
-      {!hideAlert && (
-        <Alert
-          severity="error"
-          className="absolute mx-0 top-0"
-          action={
-            <Button
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setHideAlert(true);
-              }}
-            >
-              <X />
-            </Button>
-          }
-        >
-          {alertMsg}
-        </Alert>
       )}
     </div>
   );

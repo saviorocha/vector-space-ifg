@@ -12,6 +12,7 @@ import styles from "../../../styles/modules/pages/editartransformacoes.module.cs
 import VectorIcon from "../../icons/VectorIcon";
 import TransformationForm from "../../ui/inputs/TransformationForm";
 import BottomItem from "./BottomItem";
+import { toast } from "react-hot-toast";
 
 const BottomBar = () => {
   const router = useRouter();
@@ -32,22 +33,28 @@ const BottomBar = () => {
   const [isActive, setIsActive] = useState(false);
 
   const handleTransfromationSubmit = (event: any) => {
+    event.preventDefault();
     if (stateVecArr.transformationArr.length > 2) {
-      return alert("número máximo de transformações atingido");
+      toast("Número máximo de transformações atingido");
+      return;
     }
+    const {successful, message} = transformationSubmitHandler(event, transformation);
 
-    transformationSubmitHandler(event, transformation);
+    if (!successful) {
+      toast(message!);
+    }
   };
 
   /**
    * Predefined transformations
    */
-  const transfromationSubmitHandler = (
+  const handlePredefinedSubmit = (
     e1: [ExpressionType, ExpressionType],
     e2: [ExpressionType, ExpressionType]
   ) => {
     if (stateVecArr.transformationArr.length > 2) {
-      return alert("número máximo de transformações atingido");
+      toast("Número máximo de transformações atingido");
+      return;
     }
 
     const name = `T_{${transformationNameCounter}}`;
@@ -83,7 +90,7 @@ const BottomBar = () => {
     {
       title: "Reflexão pelo Eixo y",
       handleItemOnClick: () =>
-        transfromationSubmitHandler(
+        handlePredefinedSubmit(
           [
             { value: -1, texExpression: "-1", mathExpression: "-1" },
             { value: 0, texExpression: "0", mathExpression: "0" },
@@ -98,7 +105,7 @@ const BottomBar = () => {
     {
       title: "Cisalhamento",
       handleItemOnClick: () =>
-        transfromationSubmitHandler(
+        handlePredefinedSubmit(
           [
             { value: 1, texExpression: "1", mathExpression: "1" },
             { value: 0, texExpression: "0", mathExpression: "0" },
@@ -113,7 +120,7 @@ const BottomBar = () => {
     {
       title: "Contração",
       handleItemOnClick: () =>
-        transfromationSubmitHandler(
+        handlePredefinedSubmit(
           [
             {
               value: 1 / 2,
@@ -136,7 +143,7 @@ const BottomBar = () => {
     {
       title: "Dilatação",
       handleItemOnClick: () =>
-        transfromationSubmitHandler(
+        handlePredefinedSubmit(
           [
             { value: 2, texExpression: "2", mathExpression: "2" },
             { value: 0, texExpression: "0", mathExpression: "0" },

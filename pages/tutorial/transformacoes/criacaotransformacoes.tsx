@@ -5,18 +5,21 @@ import { InlineMath } from "react-katex";
 import TutorialContainer from "../../../components/pagesections/tutorialPage/TutorialContainer";
 import calchover from "../../../public/images/calchover.png";
 import predefinedtrn from "../../../public/images/predefinedtrns.png";
-import transformationbox from "../../../public/images/transformationbox.png";
+import transformationbox from "../../../public/images/trnbox.gif";
 import transformationplots from "../../../public/images/transformationplots.png";
 import transformationplots2 from "../../../public/images/transformationplots2.png";
 import trnbtn from "../../../public/images/trncreation.gif";
 import styles from "../../../styles/modules/pages/tutorial.module.css";
 
+// import { ToastContainer, toast } from "material-react-toastify";
+// import "material-react-toastify/dist/ReactToastify.css";
+
 const Creation = () => {
-  useEffect(() => {
-    // console.log("eval", evaluate("log(1,1)"));
-  }, []);
+  // const notify = () => toast("Wow so easy!");
+  useEffect(() => {}, []);
   return (
     <TutorialContainer>
+      {/* <button onClick={notify}>teste</button> */}
       <h1 className={styles.heading}>Criando Transformações</h1>
       <p>
         Para adicionar uma transformação linear, clique no botão{" "}
@@ -40,7 +43,7 @@ const Creation = () => {
         <Image
           src={transformationplots}
           alt="Visualização de uma transformação"
-          width={800}
+          width={850}
           height={400}
         />
       </div>

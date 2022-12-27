@@ -1,6 +1,5 @@
-import { Alert, Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import { X } from "react-feather";
+import toast from "react-hot-toast";
 import { useListContext } from "../../../context";
 import useListEvents from "../../../hooks/useListEvents";
 import TransformationForm from "../../ui/inputs/TransformationForm";
@@ -8,8 +7,6 @@ import PlotTransformation from "./PlotTransformation";
 
 const TransformationBar = ({ transformationNum = 0 }) => {
   const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
-  const [hideAlert, setHideAlert] = useState(true);
-  const [alertMsg, setAlertMsg] = useState<string | undefined>("");
   const { transformationSubmitHandler } = useListEvents();
   const { stateVecArr } = useListContext();
   const [transformation, setTransformation] = useState(
@@ -21,8 +18,11 @@ const TransformationBar = ({ transformationNum = 0 }) => {
       event,
       transformation
     );
-    setHideAlert(successful);
-    setAlertMsg(message);
+
+    if (!successful) {
+      toast(message!);
+    }
+
     setToggleTrnInput(false);
   };
 
@@ -52,25 +52,6 @@ const TransformationBar = ({ transformationNum = 0 }) => {
           <TransformationForm onSubmit={handleTransfromationSubmit} />
         )}
       </div>
-      {!hideAlert && (
-        <Alert
-          severity="error"
-          className="absolute mx-0 top-0"
-          action={
-            <Button
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setHideAlert(true);
-              }}
-            >
-              <X />
-            </Button>
-          }
-        >
-          {alertMsg}
-        </Alert>
-      )}
     </section>
   );
 };

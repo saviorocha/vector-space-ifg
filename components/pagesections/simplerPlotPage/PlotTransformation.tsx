@@ -1,7 +1,8 @@
-import { Alert, Button, Tooltip } from "@mui/material";
+import { Tooltip } from "@mui/material";
 import { useTheme } from "next-themes";
 import { FunctionComponent, useEffect, useState } from "react";
-import { Edit3, Plus, RotateCcw, Trash2, X } from "react-feather";
+import { Edit3, Plus, RotateCcw, Trash2 } from "react-feather";
+import toast from "react-hot-toast";
 import { useListContext, useNameContext } from "../../../context";
 import { useConfigContext } from "../../../context/ConfigContext";
 import useListEvents from "../../../hooks/useListEvents";
@@ -20,8 +21,6 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
   const [currentTrnExpression, setCurrentTrnExpression] = useState(
     matrixStrings(trnIndex)[0]
   );
-  const [hideAlert, setHideAlert] = useState(true);
-  const [alertMsg, setAlertMsg] = useState<string | undefined>("");
   const [currentPosition, setCurrentPosition] = useState(0);
   const [toggleTrnInput, setToggleTrnInput] = useState<boolean>(false);
   const [toggleUpdateCreate, setToggleUpdateCreate] =
@@ -40,8 +39,11 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
       event,
       transformation
     );
-    setHideAlert(successful);
-    setAlertMsg(message);
+
+    if (!successful) {
+      toast(message!);
+    }
+
     setToggleTrnInput(false);
   };
 
@@ -50,8 +52,9 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
       event,
       transformation
     );
-    setAlertMsg(message);
-    setHideAlert(successful);
+    if (!successful) {
+      toast(message!);
+    }
   };
 
   const handleTransformationDelete = () => {
@@ -164,25 +167,6 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
           />
         )}
       </InfoBox>
-      {!hideAlert && (
-        <Alert
-          severity="error"
-          className="absolute mx-0 top-0 z-50"
-          action={
-            <Button
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setHideAlert(true);
-              }}
-            >
-              <X />
-            </Button>
-          }
-        >
-          {alertMsg}
-        </Alert>
-      )}
     </>
   );
 };

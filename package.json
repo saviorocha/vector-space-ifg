@@ -19,6 +19,7 @@
     "d3-react": "^1.0.4",
     "html-entities": "^2.3.3",
     "lodash": "^4.17.21",
+    "material-react-toastify": "^2.0.1",
     "mathjax": "^3.2.2",
     "mathjs": "^11.0.1",
     "next": "^12.2.5",
@@ -27,6 +28,7 @@
     "react-archer": "^4.1.0",
     "react-dom": "18.2.0",
     "react-feather": "^2.0.10",
+    "react-hot-toast": "^2.4.0",
     "react-katex": "^3.0.1",
     "react-simple-keyboard": "^3.4.187",
     "react-transition-group": "^4.4.5"

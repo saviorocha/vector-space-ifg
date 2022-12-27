@@ -2,6 +2,8 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { ArcherContainer, ArcherElement } from "react-archer";
+import { AlertCircle } from "react-feather";
+import { Toaster } from "react-hot-toast";
 import { useListContext } from "../../../context";
 import { useIsOverflow } from "../../../hooks/useIsOverflow";
 import styles from "../../../styles/modules/pages/editartransformacoes.module.css";
@@ -48,6 +50,19 @@ const MainSectionPlotPage = () => {
           flex items-center justify-${isOverflow ? "start" : "around"} flex-row 
         `}
       >
+        <Toaster
+
+          toastOptions={{
+            // loading:
+            icon: <AlertCircle />,
+            duration: 3000,
+            style: {
+              background: "red",
+              color: "white",
+              fontSize: "15px"
+            },
+          }}
+        />
         <ArcherContainer>
           <div className={`flex flex-row items-center`}>
             {stateVecArr.vectorArr.map((vectors, i) => {
@@ -81,9 +96,7 @@ const MainSectionPlotPage = () => {
                             ]
                       }
                     >
-                      <aside
-                        className="flex items-center justify-center"
-                      >
+                      <aside className="flex items-center justify-center">
                         <aside
                           className="
                             flex flex-col items-center 

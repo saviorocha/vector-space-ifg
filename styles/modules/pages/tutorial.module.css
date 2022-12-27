@@ -111,6 +111,7 @@
 .bottombtn {
   margin-left: 5px;
   cursor: pointer;
+  outline: none;
 }
 
 .listitem {
