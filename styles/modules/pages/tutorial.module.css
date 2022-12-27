@@ -153,6 +153,19 @@
   font-size: 1.5em;
 }
 
+#commandtable {
+  margin: 0 auto;
+  border-collapse: collapse;
+  border: 2px solid rgb(200, 200, 200);
+  font-size: 10px;
+  text-align: left;
+}
+
+.tableitems {
+  border: 1px solid rgb(190, 190, 190);
+  padding: 5px 15px;
+}
+
 
 /* desktop */
 @media only screen and (min-width: 768px) {
@@ -181,16 +194,10 @@
   .tutorialcontent>p {
     margin: 10px 0;
   }
+
+  #commandtable {
+    font-size: 0.9rem;
+  }
 }
 
-#commandtable {
-  margin: 0 auto;
-  border-collapse: collapse;
-  border: 2px solid rgb(200, 200, 200);
-  font-size: 0.9rem;
-}
 
-.tableitems {
-  border: 1px solid rgb(190, 190, 190);
-  padding: 5px 15px;
-}

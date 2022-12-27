@@ -35,7 +35,11 @@ const Creation = () => {
         />
       </div>
       <p>
-        Um novo gráfico será gerado, exibindo o efeito da transformação nos
+        Caso decida escolher um nome para a transformação, o nome deve conter
+        uma única letra (como <InlineMath math={String.raw`T`} />
+        ), ou ele pode ser numerado (como{" "}
+        <InlineMath math={String.raw`T_{1}`} />
+        ). Um novo gráfico será gerado, exibindo o efeito da transformação nos
         vetores inseridos, com uma caixa contendo a definição da transformação
         criada e alguns botões.
       </p>
@@ -102,8 +106,7 @@ const Creation = () => {
         />
       </div>
       <p>
-        As transformações predefinidas disponíveis no momento são definidas da
-        seguinte forma:{" "}
+        As transformações predefinidas disponíveis no momento são as seguintes:{" "}
       </p>
       <table id={styles.commandtable}>
         <thead>
