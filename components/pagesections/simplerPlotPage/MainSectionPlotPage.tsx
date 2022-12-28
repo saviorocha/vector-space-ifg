@@ -51,7 +51,6 @@ const MainSectionPlotPage = () => {
         `}
       >
         <Toaster
-
           toastOptions={{
             // loading:
             icon: <AlertCircle />,

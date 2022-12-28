@@ -1,0 +1,15 @@
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.text404 {
+    font-size: 4rem;
+}
+
+.text {
+    font-size: 2rem;
+}
