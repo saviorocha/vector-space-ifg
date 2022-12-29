@@ -185,7 +185,7 @@ const useTexStr = () => {
     ) {
       return {
         successful: false,
-        message: "Valores inválidos! Tente novamente.",
+        message: "Expressão inválida! Tente novamente.",
       };
     }
 

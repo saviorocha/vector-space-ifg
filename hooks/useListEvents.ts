@@ -131,7 +131,7 @@ const useListEvents = () => {
     ) {
       return {
         successful: false,
-        message: "Valores inválidos! Tente novamente.",
+        message: "Expressão inválida! Tente novamente.",
       };
     }
 
@@ -212,7 +212,7 @@ const useListEvents = () => {
     ) {
       return {
         successful: false,
-        message: "Valores inválidos! Tente novamente.",
+        message: "Expressão inválida! Tente novamente.",
       };
     }
 
