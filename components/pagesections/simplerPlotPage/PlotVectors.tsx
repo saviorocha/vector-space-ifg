@@ -26,6 +26,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
   const { vectorMatrixMultiplication } = useTexStr();
   const { stateVecArr } = useListContext();
   const { theme } = useTheme();
+  
   /**
    * Sorts the vectorRender state by the vector names (to avoid update bugs...)
    * @param vectorArr

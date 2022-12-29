@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useEffect } from "react";
 import MainSectionAnimationPage from "../../components/pagesections/animationPage/MainSectionAnimationPage";
 import { useD3Context } from "../../context";
@@ -33,9 +34,14 @@ const AnimationPlane = () => {
   }, []);
 
   return (
-    <div className="h-screen">
-      <MainSectionAnimationPage />
-    </div>
+    <>
+      <Head>
+        <title>Animação de Transformações</title>
+      </Head>
+      <div className="h-screen">
+        <MainSectionAnimationPage />
+      </div>
+    </>
   );
 };
 

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useEffect } from "react";
 import BottomBar from "../../components/pagesections/simplerPlotPage/BottomBar";
 import MainSectionPlotPage from "../../components/pagesections/simplerPlotPage/MainSectionPlotPage";
@@ -38,10 +39,15 @@ const SimplePlot = () => {
   }, []);
 
   return (
-    <div className="h-screen">
-      <MainSectionPlotPage />
-      <BottomBar />
-    </div>
+    <>
+      <Head>
+        <title>Criação de Transformações</title>
+      </Head>
+      <div className="h-screen">
+        <MainSectionPlotPage />
+        <BottomBar />
+      </div>
+    </>
   );
 };
 

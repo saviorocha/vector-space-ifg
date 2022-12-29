@@ -1,11 +1,10 @@
-import { Alert, Button } from "@mui/material";
 import { FunctionComponent, useEffect, useState } from "react";
-import { Edit2, Trash2, X } from "react-feather";
+import { Edit2, Trash2 } from "react-feather";
+import toast from "react-hot-toast";
 import { useListContext } from "../../context";
 import useListEvents from "../../hooks/useListEvents";
 import { IVectorTexProps } from "../../interfaces/interfaces";
 import RenderTex from "./RenderTex";
-import toast, { Toaster } from "react-hot-toast";
 
 /**
  * This component handles vector create, update and delete
@@ -58,6 +57,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
     } else {
       toast(message!);
     }
+    return successful;
   };
 
   const handleDoubleClick = (event: any) => {
@@ -67,9 +67,11 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
   };
 
   const handleEditBtn = () => {
-    setShowTex(!showTex);
     if (!showTex) {
-      handleVectorUpdate(mathExpression);
+      const successful = handleVectorUpdate(mathExpression);
+      setShowTex(successful);
+    } else {
+      setShowTex(false)
     }
   };
 
@@ -98,7 +100,7 @@ const VectorTex: FunctionComponent<IVectorTexProps> = ({
           onKeyDown={(event: any) => {
             if (event.key === "Enter") {
               handleVectorUpdate(event.target.value);
-              event.target.value = "";
+              // event.target.value = "";
 
               if (event.target.value) {
                 // checks for empty strings
