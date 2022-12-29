@@ -49,7 +49,7 @@
   padding: 3px;
   border-radius: 3em;
   border: 1px solid #737373;
-  width: 80%;
+  width: 25rem;
 }
 
 .playerbtn,
@@ -177,6 +177,6 @@
     margin-top: 30px;
   }
   .playercontainer {
-    width: 50%;
+    width: 30rem;
   }
 }

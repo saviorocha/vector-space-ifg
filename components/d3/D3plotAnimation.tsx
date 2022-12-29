@@ -28,7 +28,7 @@ const D3PlotAnimation = () => {
   const { dimension } = useD3Context();
   const { stateVecArr } = useListContext();
 
-  const teste = (event: any) => {
+  const dragBarTest = (event: any) => {
     event.preventDefault();
     const vecArr = stateVecArr.vectorArr;
     const maxInput = 100;

@@ -9,7 +9,7 @@ import ConfigPopup from "../../ui/inputs/ConfigPopup";
 
 const MainSectionAnimationPage = () => {
   return (
-    <main className="mx-auto" id={styles.main}>
+    <main className="h-screen w-screen flex items-center justify-center" id={styles.main}>
       <Link href="/">
         <a className={logostyles.logo}>
           <Logo className={logostyles.headerlogo} />

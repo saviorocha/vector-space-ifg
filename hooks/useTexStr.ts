@@ -1,4 +1,4 @@
-import { evaluate, isNumber, parse } from "mathjs";
+import { evaluate, parse } from "mathjs";
 import Transformation from "../classes/transformation";
 import Vector from "../classes/vector";
 import { useListContext, useNameContext } from "../context";
@@ -11,7 +11,8 @@ import { validateVectorName, validateVectorValues } from "../utils";
 const useTexStr = () => {
   const { stateVecArr } = useListContext();
   const { currentPlot } = useNameContext();
-  const { showMathSymbols, decimalPoint, transformationVars } = useConfigContext();
+  const { showMathSymbols, decimalPoint, transformationVars } =
+    useConfigContext();
   const {
     vectorNameCounter,
     setVectorNameCounter,
@@ -116,10 +117,12 @@ const useTexStr = () => {
     const vecX = parseFloat(vec.x.toFixed(decimalPoint));
     const vecY = parseFloat(vec.y.toFixed(decimalPoint));
     const multiplyX = showMathSymbols
-      ? vec.prevVector!.xTex || vec.xTex
+      ? parseFloat(vec.prevVector!.xTex).toFixed(decimalPoint) ||
+        parseFloat(vec.xTex).toFixed(decimalPoint)
       : parseFloat(vec.prevVector!.x.toFixed(decimalPoint)) || vecX;
     const multiplyY = showMathSymbols
-      ? vec.prevVector!.yTex || vec.yTex
+      ? parseFloat(vec.prevVector!.yTex).toFixed(decimalPoint) ||
+        parseFloat(vec.yTex).toFixed(decimalPoint)
       : parseFloat(vec.prevVector!.y.toFixed(decimalPoint)) || vecY;
 
     const e1 = showMathSymbols
