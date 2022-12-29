@@ -21,15 +21,22 @@ const SimplePlot = () => {
       });
     }
   };
+
+  const alertUser = (e: any) => {
+    e.preventDefault();
+    e.returnValue = "";
+  };
+
   useEffect(() => {
     handleResize();
     window.addEventListener("resize", handleResize);
-
+    window.addEventListener("beforeunload", alertUser);
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("beforeunload", alertUser);
     };
-  }, []); 
-  
+  }, []);
+
   return (
     <div className="h-screen">
       <MainSectionPlotPage />

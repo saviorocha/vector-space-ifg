@@ -7,7 +7,7 @@ export const useIsOverflow = (ref: any) => {
     undefined
   );
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     const { current } = ref;
 
     const trigger = () => {
