@@ -1,3 +1,4 @@
+import { useTheme } from "next-themes";
 import Head from "next/head";
 import { useEffect } from "react";
 import BottomBar from "../../components/pagesections/simplerPlotPage/BottomBar";
@@ -6,6 +7,7 @@ import { useD3Context } from "../../context";
 
 const SimplePlot = () => {
   const { margin, setDimension } = useD3Context();
+  const {setTheme} = useTheme();
   const handleResize = () => {
     if (window.innerWidth < 500 || window.innerHeight < 500) {
       setDimension({
@@ -26,6 +28,7 @@ const SimplePlot = () => {
   const alertUser = (e: any) => {
     e.preventDefault();
     e.returnValue = "";
+    setTheme("light") 
   };
 
   useEffect(() => {

@@ -10,14 +10,8 @@ const BottomItem: FunctionComponent<IBottomItemProps> = ({
   children = null,
 }) => {
   const { theme } = useTheme();
-  const [itemColor, setItemColor] = useState("#000000c5");
-  const [itemDisplay, setItemDisplay] = useState<string>("hidden");
   const [isActive, setIsActive] = useState(false);
   const [showChildren, setShowChildren] = useState(false);
-
-  useEffect(() => {
-    setItemColor(theme === "dark" ? "#000000c5" : "#f0f8ffc5");
-  }, [theme]);
 
   useEffect(() => {
     // console.log("isActive", isActive);
@@ -32,17 +26,15 @@ const BottomItem: FunctionComponent<IBottomItemProps> = ({
     <>
       <section
         onMouseEnter={() => {
-          setItemDisplay("visible");
           setIsActive(true);
         }}
         onMouseLeave={() => {
-          setItemDisplay("hidden");
           setIsActive(false);
         }}
         className={styles.itembox}
         style={{
           height: showChildren ? "fit-content" : "60px",
-          backgroundColor: itemColor,
+          backgroundColor: theme === "dark" ? "#000000c5" : "#f0f8ffc5",
           borderColor: theme === "dark" ? "#6a6a6a" : "#9ca3af",
         }}
       >

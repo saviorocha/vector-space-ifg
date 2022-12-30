@@ -1,11 +1,9 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
-import { ITransformationFormProps } from "../../../interfaces/interfaces";
-import styles from "../../../styles/modules/ui/vectorbox.module.css";
-import { InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { useTheme } from "next-themes";
-import { Button } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React, { FunctionComponent, useState } from "react";
+import { InlineMath } from "react-katex";
+import { ITransformationFormProps } from "../../../interfaces/interfaces";
+import styles from "../../../styles/modules/ui/vectorbox.module.css";
 
 /**
  * Form for creating linear transformation by its matrix

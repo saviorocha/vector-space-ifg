@@ -38,7 +38,10 @@ const BottomBar = () => {
       toast("Número máximo de transformações atingido");
       return;
     }
-    const {successful, message} = transformationSubmitHandler(event, transformation);
+    const { successful, message } = transformationSubmitHandler(
+      event,
+      transformation
+    );
 
     if (!successful) {
       toast(message!);
