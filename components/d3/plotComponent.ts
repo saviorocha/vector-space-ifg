@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { ScaleLinear, ZoomBehavior } from "d3";
+import { D3DragEvent, ScaleLinear, ZoomBehavior } from "d3";
 class PlotComponent {
   svg;
   data: VectorData[];
@@ -58,7 +58,7 @@ class PlotComponent {
     if (eventsArr.length) {
       this.addEvents(eventsArr);
     } else {
-      this.createZoom();
+      // this.createZoom();
     }
     // @ts-ignore
     this.createLine(this.x, this.y);
@@ -252,6 +252,7 @@ class PlotComponent {
     x: ScaleLinear<number, number>,
     y: ScaleLinear<number, number>
   ) => {
+    // console.log("vecs", this.vectors);
     // console.log("line", line.x);
     this.svg
       .selectAll(".lineVector")
@@ -277,18 +278,50 @@ class PlotComponent {
       .attr("stroke", this.vectorColor)
       .attr("stroke-width", 2)
       .attr("marker-end", "url(#arrow)");
-    // .call(
-    //   d3.drag().on("drag", function (e,d: any) {
-    //     var dx = e.dx;
-    //     var dy = e.dy;
-    //     var x2New = parseFloat(d[1].coord1) + dx;
-    //     var y2New = parseFloat(d[1].coord2) + dy;
-    //     console.log("new",x2New, y2New)
-    //     d3.select("#myPlane")
-    //       .selectAll(".lineVector")
-    //       .attr("d", d3.line<any>().x(2).y(2) as any);
-    //   }) as any
-    // );
+      // .call(
+      //   d3.drag().on("drag", function (e, d: any) {
+      //     // var dx = e.dx;
+      //     // // var dy = e.dy;
+      //     // // var x2New = parseFloat(d[1].coord1) + dx;
+      //     // // var y2New = parseFloat(d[1].coord2) + dy;
+
+      //     const newVectorData = d;
+      //     newVectorData[1].coord1 = parseFloat(d[1].coord1) + e.dx;
+      //     newVectorData[1].coord2 = parseFloat(d[1].coord2) + e.dy;
+
+      //     // // console.log("new", x2New, y2New);
+      //     // // console.log("old", d[1].coord1, d[1].coord2);
+      //     // // console.log("event", e);
+
+      //     // https://stackoverflow.com/questions/15490079/updating-a-lines-data-with-d3-js-in-response-to-a-drag-event
+      //     d3.select(this)
+      //       .data(newVectorData)
+      //       .join("path")
+      //       .attr(
+      //         "d",
+      //         d3
+      //           .line<any>()
+      //           .x(function () {
+      //             // console.log("dragx",x(data.coord1))
+      //             return x(d.coord1);
+      //           })
+      //           .y(function () {
+      //             // console.log("dragy",y(data.coord2))
+      //             return y(d.coord2);
+      //           }) as any
+      //       )
+      //       .attr("clip-path", "url(#chart-area)")
+      //       .attr("fill", "none")
+      //       .attr("stroke", "#4682b4")
+      //       .attr("stroke-width", 2)
+      //       .attr("marker-end", "url(#arrow)");
+      //   }) as any
+      //   // .on("end", function (e, d: any) {
+      //   //   d3.select(this).attr("stroke", null);
+      //   // })
+      //   // M266,144L266,144
+      //   //
+      // );
   };
 
   /**
