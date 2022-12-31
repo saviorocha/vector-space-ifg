@@ -10,7 +10,7 @@ class PlotComponent {
   hideNumbers: boolean;
   currentPlot: number;
   vectorColor: string;
-
+  dragFunction: any
   // @ts-ignore
   x: ScaleLinear<number, number>;
   // @ts-ignore
@@ -27,7 +27,8 @@ class PlotComponent {
     hideNumbers: boolean,
     eventsArr: EventFunction[],
     currentPlot: number,
-    vectorColor: string
+    vectorColor: string,
+    dragFunction: any
   ) {
     const { margin, width, height } = dimensions;
     this.data = data;
@@ -40,6 +41,7 @@ class PlotComponent {
     this.hideNumbers = hideNumbers;
     this.currentPlot = currentPlot;
     this.vectorColor = vectorColor;
+    this.dragFunction = dragFunction;
 
     this.svg = d3
       .select(refComponent)
@@ -252,8 +254,6 @@ class PlotComponent {
     x: ScaleLinear<number, number>,
     y: ScaleLinear<number, number>
   ) => {
-    // console.log("vecs", this.vectors);
-    // console.log("line", line.x);
     this.svg
       .selectAll(".lineVector")
       .data(this.vectors, function (data: any) {
@@ -266,9 +266,11 @@ class PlotComponent {
         d3
           .line<any>()
           .x(function (data) {
+            // console.log("datax", data.coord1);
             return x(data.coord1);
           })
           .y(function (data) {
+            // console.log("datay", data.coord2);
             return y(data.coord2);
           })
       )
@@ -276,53 +278,12 @@ class PlotComponent {
       .attr("clip-path", "url(#chart-area)")
       .attr("fill", "none")
       .attr("stroke", this.vectorColor)
-      .attr("stroke-width", 2)
-      .attr("marker-end", "url(#arrow)");
-      // .call(
-      //   d3.drag().on("drag", function (e, d: any) {
-      //     // var dx = e.dx;
-      //     // // var dy = e.dy;
-      //     // // var x2New = parseFloat(d[1].coord1) + dx;
-      //     // // var y2New = parseFloat(d[1].coord2) + dy;
-
-      //     const newVectorData = d;
-      //     newVectorData[1].coord1 = parseFloat(d[1].coord1) + e.dx;
-      //     newVectorData[1].coord2 = parseFloat(d[1].coord2) + e.dy;
-
-      //     // // console.log("new", x2New, y2New);
-      //     // // console.log("old", d[1].coord1, d[1].coord2);
-      //     // // console.log("event", e);
-
-      //     // https://stackoverflow.com/questions/15490079/updating-a-lines-data-with-d3-js-in-response-to-a-drag-event
-      //     d3.select(this)
-      //       .data(newVectorData)
-      //       .join("path")
-      //       .attr(
-      //         "d",
-      //         d3
-      //           .line<any>()
-      //           .x(function () {
-      //             // console.log("dragx",x(data.coord1))
-      //             return x(d.coord1);
-      //           })
-      //           .y(function () {
-      //             // console.log("dragy",y(data.coord2))
-      //             return y(d.coord2);
-      //           }) as any
-      //       )
-      //       .attr("clip-path", "url(#chart-area)")
-      //       .attr("fill", "none")
-      //       .attr("stroke", "#4682b4")
-      //       .attr("stroke-width", 2)
-      //       .attr("marker-end", "url(#arrow)");
-      //   }) as any
-      //   // .on("end", function (e, d: any) {
-      //   //   d3.select(this).attr("stroke", null);
-      //   // })
-      //   // M266,144L266,144
-      //   //
-      // );
+      .attr("stroke-width", 5)
+      .attr("marker-end", "url(#arrow)")
+      // .call(this.dragFunction(x,y, "v_{1}"))
+       
   };
+
 
   /**
    * Adds the vector's arrow to the line element

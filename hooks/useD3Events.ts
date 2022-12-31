@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { ZoomBehavior } from "d3";
+import { ScaleLinear, ZoomBehavior } from "d3";
 import StateList from "../classes/stateList";
 import Vector from "../classes/vector";
 import { useD3Context, useListContext, useNameContext } from "../context";
@@ -7,7 +7,7 @@ import { useConfigContext } from "../context/ConfigContext";
 import useList from "./useList";
 
 const useD3Events = () => {
-  const { addVector } = useList();
+  const { addVector, updateVector } = useList();
   const { decimalPoint } = useConfigContext();
   const { setList, setStateVecArr } = useListContext();
   const { vectorNameCounter, setVectorNameCounter } = useNameContext();
@@ -76,7 +76,71 @@ const useD3Events = () => {
     setVectorNameCounter(vectorNameCounter + 1);
   };
 
-  const dragVector = () => {};
+  const dragVector = (
+    x: ScaleLinear<number, number>,
+    y: ScaleLinear<number, number>,
+    vecData: string
+  ) => {
+    return d3.drag().on("drag", function (e, d: any) {
+      // calculate new data coordinates
+      d[1].coord1 = x.invert(e.x);
+      d[1].coord2 = y.invert(e.y);
+
+      updateVector(
+        new Vector(
+          [
+            {
+              value: x.invert(e.x),
+              texExpression: parseFloat(
+                x.invert(e.x).toFixed(decimalPoint)
+              ).toString(),
+              mathExpression: parseFloat(
+                x.invert(e.x).toFixed(decimalPoint)
+              ).toString(),
+            },
+            {
+              value: y.invert(e.y),
+              texExpression: parseFloat(
+                y.invert(e.y).toFixed(decimalPoint)
+              ).toString(),
+              mathExpression: parseFloat(
+                y.invert(e.y).toFixed(decimalPoint)
+              ).toString(),
+            },
+          ],
+          vecData
+        ),
+        vecData
+      );
+
+      // update line
+      d3.select(this)
+        // .data(newVectorData)
+        .join("path")
+        .attr(
+          "d",
+          d3
+            .line<any>()
+            .x(function (data) {
+              // console.log("dragx", data.coord1);
+              return x(data.coord1);
+            })
+            .y(function (data) {
+              // console.log("dragy", data.coord2);
+              return y(data.coord2);
+            }) as any
+        )
+        .attr("clip-path", "url(#chart-area)")
+        .attr("fill", "none")
+        .attr("stroke", "#4682b4")
+        .attr("stroke-width", 5)
+        .attr("marker-end", "url(#arrow)");
+    }) as any;
+        // .on("end", function (e, d: any) {
+        //   d3.select(this).attr("stroke", null);
+        // })
+      // );
+  };
 
   return { addVectorOnClick, dragVector };
 };
