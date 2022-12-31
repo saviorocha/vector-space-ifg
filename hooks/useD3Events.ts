@@ -86,32 +86,28 @@ const useD3Events = () => {
       d[1].coord1 = x.invert(e.x);
       d[1].coord2 = y.invert(e.y);
 
-      updateVector(
+      const newHead = updateVector(
         new Vector(
           [
             {
               value: x.invert(e.x),
-              texExpression: parseFloat(
-                x.invert(e.x).toFixed(decimalPoint)
-              ).toString(),
-              mathExpression: parseFloat(
-                x.invert(e.x).toFixed(decimalPoint)
-              ).toString(),
+              texExpression: x.invert(e.x).toString(),
+              mathExpression: x.invert(e.x).toString(),
             },
             {
               value: y.invert(e.y),
-              texExpression: parseFloat(
-                y.invert(e.y).toFixed(decimalPoint)
-              ).toString(),
-              mathExpression: parseFloat(
-                y.invert(e.y).toFixed(decimalPoint)
-              ).toString(),
+              texExpression: y.invert(e.y).toString(),
+              mathExpression: y.invert(e.y).toString(),
             },
           ],
           vecData
         ),
         vecData
       );
+
+      const newList = new StateList(newHead);
+      setList(newList);
+      setStateVecArr(newList.toArray());
 
       // update line
       d3.select(this)
@@ -133,7 +129,7 @@ const useD3Events = () => {
         .attr("clip-path", "url(#chart-area)")
         .attr("fill", "none")
         .attr("stroke", "#4682b4")
-        .attr("stroke-width", 5)
+        .attr("stroke-width", 2)
         .attr("marker-end", "url(#arrow)");
     }) as any;
         // .on("end", function (e, d: any) {

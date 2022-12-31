@@ -256,6 +256,7 @@ class PlotComponent {
   ) => {
     this.svg
       .selectAll(".lineVector")
+      .raise()
       .data(this.vectors, function (data: any) {
         return data.coord1;
       })
@@ -278,9 +279,9 @@ class PlotComponent {
       .attr("clip-path", "url(#chart-area)")
       .attr("fill", "none")
       .attr("stroke", this.vectorColor)
-      .attr("stroke-width", 5)
+      .attr("stroke-width", 2)
       .attr("marker-end", "url(#arrow)")
-      // .call(this.dragFunction(x,y, "v_{1}"))
+      .call(this.dragFunction(x, y, "v_{1}"))
        
   };
 
