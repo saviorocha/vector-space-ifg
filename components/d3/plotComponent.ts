@@ -58,7 +58,7 @@ class PlotComponent {
     if (eventsArr.length) {
       this.addEvents(eventsArr);
     } else {
-      // this.createZoom();
+      this.createZoom();
     }
     // @ts-ignore
     this.createLine(this.x, this.y);
