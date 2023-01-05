@@ -79,7 +79,7 @@ const useD3Events = () => {
 
   const dragVector = (
     x: ScaleLinear<number, number>,
-    y: ScaleLinear<number, number>,
+    y: ScaleLinear<number, number>
   ) => {
     return d3
       .drag()
@@ -87,45 +87,47 @@ const useD3Events = () => {
         d3.select(this).attr("stroke-width", 3);
       })
       .on("drag", function (e, d: any) {
-        console.log("data", d)
+        // console.log(x.invert(e.x), y.invert(e.y));
+        
         // style the mouse cursor
         d3.select("#main-page").style("cursor", "grabbing");
-
+       
         // calculate new data coordinates
         d[1].coord1 = x.invert(e.x);
         d[1].coord2 = y.invert(e.y);
 
         // update vector
-        const newHead = updateVector(
-          new Vector(
-            [
-              {
-                value: x.invert(e.x),
-                texExpression: parseFloat(
-                  x.invert(e.x).toFixed(decimalPoint)
-                ).toString(),
-                mathExpression: parseFloat(
-                  x.invert(e.x).toFixed(decimalPoint)
-                ).toString(),
-              },
-              {
-                value: y.invert(e.y),
-                texExpression: parseFloat(
-                  y.invert(e.y).toFixed(decimalPoint)
-                ).toString(),
-                mathExpression: parseFloat(
-                  y.invert(e.y).toFixed(decimalPoint)
-                ).toString(),
-              },
-            ],
-            d[0].name
-          ),
-          d[0].name
-        );
+        // const newHead = updateVector(
+        //   new Vector(
+        //     [
+        //       {
+        //         value: x.invert(e.x),
+        //         texExpression: parseFloat(
+        //           x.invert(e.x).toFixed(decimalPoint)
+        //         ).toString(),
+        //         mathExpression: parseFloat(
+        //           x.invert(e.x).toFixed(decimalPoint)
+        //         ).toString(),
+        //       },
+        //       {
+        //         value: y.invert(e.y),
+        //         texExpression: parseFloat(
+        //           y.invert(e.y).toFixed(decimalPoint)
+        //         ).toString(),
+        //         mathExpression: parseFloat(
+        //           y.invert(e.y).toFixed(decimalPoint)
+        //         ).toString(),
+        //       },
+        //     ],
+        //     d[0].name
+        //   ),
+        //   d[0].name
+        // );
 
-        const newList = new StateList(newHead);
-        setList(newList);
-        setStateVecArr(newList.toArray());
+        // const newList = new StateList(newHead);
+        // setList(newList);
+        // setStateVecArr(newList.toArray());
+
 
         // update line
         d3.select(this)
