@@ -70,13 +70,12 @@ class Vector {
   /**
    * Returns a object to be used in the d3 plot
    */
-   d3VectorFormat = (): VectorData => {
+  d3VectorFormat = (): VectorData => {
     return {
       coordinates: [
-        { coord1: 0, coord2: 0 },
+        { coord1: 0, coord2: 0, name: this._name },
         { coord1: this.x, coord2: this.y },
       ],
-      name: this._name,
       color: this.color,
     };
   };

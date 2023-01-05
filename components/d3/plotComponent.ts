@@ -254,12 +254,11 @@ class PlotComponent {
     x: ScaleLinear<number, number>,
     y: ScaleLinear<number, number>
   ) => {
+    // console.log("data", this.data)
     this.svg
       .selectAll(".lineVector")
       .raise()
-      .data(this.vectors, function (data: any) {
-        return data.coord1;
-      })
+      .data(this.vectors)
       .join("path")
       .attr("class", "lineVector")
       .attr(
@@ -284,8 +283,7 @@ class PlotComponent {
       .on("mouseover", function (d) {
         d3.select(this).style("cursor", "grab")
       })
-      .call(this.dragFunction(x, y, "v_{1}"))
-       
+      .call(this.dragFunction(x, y))
   };
 
 

@@ -19,11 +19,11 @@ type Margin = {
 type CoordinateData = {
   coord1: number;
   coord2: number;
+  name?: string;
 };
 
 type VectorData = {
   coordinates: CoordinateData[];
-  name: string;
   color: string;
 }
 

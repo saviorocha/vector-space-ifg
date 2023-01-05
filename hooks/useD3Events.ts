@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import { ScaleLinear, ZoomBehavior } from "d3";
+import { on } from "events";
 import StateList from "../classes/stateList";
 import Vector from "../classes/vector";
 import { useD3Context, useListContext, useNameContext } from "../context";
@@ -79,76 +80,76 @@ const useD3Events = () => {
   const dragVector = (
     x: ScaleLinear<number, number>,
     y: ScaleLinear<number, number>,
-    vecData: string
-    // teste: any
   ) => {
-    return d3.drag().on("drag", function (e, d: any) {
-      // console.log("data", d);
-      d3.select("#main-page").style("cursor", "grabbing");
-      
-      // calculate new data coordinates
-      d[1].coord1 = x.invert(e.x);
-      d[1].coord2 = y.invert(e.y);
+    return d3
+      .drag()
+      .on("start", function (d) {
+        d3.select(this).attr("stroke-width", 3);
+      })
+      .on("drag", function (e, d: any) {
+        console.log("data", d)
+        // style the mouse cursor
+        d3.select("#main-page").style("cursor", "grabbing");
 
-      // update vector
-      const newHead = updateVector(
-        new Vector(
-          [
-            {
-              value: x.invert(e.x),
-              texExpression: parseFloat(
-                x.invert(e.x).toFixed(decimalPoint)
-              ).toString(),
-              mathExpression: parseFloat(
-                x.invert(e.x).toFixed(decimalPoint)
-              ).toString(),
-            },
-            {
-              value: y.invert(e.y),
-              texExpression: parseFloat(
-                y.invert(e.y).toFixed(decimalPoint)
-              ).toString(),
-              mathExpression: parseFloat(
-                y.invert(e.y).toFixed(decimalPoint)
-              ).toString(),
-            },
-          ],
-          vecData
-        ),
-        vecData
-      );
+        // calculate new data coordinates
+        d[1].coord1 = x.invert(e.x);
+        d[1].coord2 = y.invert(e.y);
 
-      const newList = new StateList(newHead);
-      setList(newList);
-      setStateVecArr(newList.toArray());
+        // update vector
+        const newHead = updateVector(
+          new Vector(
+            [
+              {
+                value: x.invert(e.x),
+                texExpression: parseFloat(
+                  x.invert(e.x).toFixed(decimalPoint)
+                ).toString(),
+                mathExpression: parseFloat(
+                  x.invert(e.x).toFixed(decimalPoint)
+                ).toString(),
+              },
+              {
+                value: y.invert(e.y),
+                texExpression: parseFloat(
+                  y.invert(e.y).toFixed(decimalPoint)
+                ).toString(),
+                mathExpression: parseFloat(
+                  y.invert(e.y).toFixed(decimalPoint)
+                ).toString(),
+              },
+            ],
+            d[0].name
+          ),
+          d[0].name
+        );
 
-      // update line
-      d3.select(this)
-        // .data(newVectorData)
-        .join("path")
-        .attr(
-          "d",
-          d3
-            .line<any>()
-            .x(function (data) {
-              // console.log("dragx", data.coord1);
-              return x(data.coord1);
-            })
-            .y(function (data) {
-              // console.log("dragy", data.coord2);
-              return y(data.coord2);
-            }) as any
-        )
-        .attr("clip-path", "url(#chart-area)")
-        .attr("fill", "none")
-        .attr("stroke", "#4682b4")
-        .attr("stroke-width", 2)
-        .attr("marker-end", "url(#arrow)");
+        const newList = new StateList(newHead);
+        setList(newList);
+        setStateVecArr(newList.toArray());
 
-    })
-    .on("end", function (d) {
-      d3.select("#main-page").style("cursor", "default");
-    })
+        // update line
+        d3.select(this)
+          .join("path")
+          .attr(
+            "d",
+            d3
+              .line<any>()
+              .x(function (data) {
+                return x(data.coord1);
+              })
+              .y(function (data) {
+                return y(data.coord2);
+              }) as any
+          )
+          .attr("clip-path", "url(#chart-area)")
+          .attr("fill", "none")
+          .attr("stroke", "#4682b4")
+          .attr("stroke-width", 2)
+          .attr("marker-end", "url(#arrow)");
+      })
+      .on("end", function (d) {
+        d3.select("#main-page").style("cursor", "default");
+      });
   };
 
   return { addVectorOnClick, dragVector };
