@@ -86,6 +86,7 @@ const useD3Events = () => {
       d[1].coord1 = x.invert(e.x);
       d[1].coord2 = y.invert(e.y);
 
+      // update vector
       const newHead = updateVector(
         new Vector(
           [

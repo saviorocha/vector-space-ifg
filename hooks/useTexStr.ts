@@ -145,8 +145,10 @@ const useTexStr = () => {
           ${multiplyX}\\
           ${multiplyY}
         \end{bmatrix} = \begin{bmatrix}
-          (${e1[0]} \cdot ${multiplyX}) + (${e2[0]} \cdot ${multiplyY})\\
-          (${e1[1]} \cdot ${multiplyX}) + (${e2[1]} \cdot ${multiplyY})
+          (${e1[0]} \cdot ${multiplyX > 0 ? multiplyX : `(${multiplyX})`}) + 
+          (${e2[0]} \cdot ${multiplyY > 0 ? multiplyY : `(${multiplyY})`})\\
+          (${e1[1]} \cdot ${multiplyX > 0 ? multiplyX : `(${multiplyX})`}) + 
+          (${e2[1]} \cdot ${multiplyY > 0 ? multiplyY : `(${multiplyY})`})
         \end{bmatrix} = \begin{bmatrix}
           ${vecX}\\
           ${vecY}\\

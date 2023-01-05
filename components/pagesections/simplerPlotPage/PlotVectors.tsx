@@ -145,15 +145,15 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
               setFocus(true);
             }}
             className={styles.inpvec}
-            // style={{
-            //   borderColor: theme === "dark" ? "#333333" : "#9a9a9a",
-            //   color: theme === "dark" ? "#fff" : "#000",
-            //   backgroundColor: focus
-            //     ? theme === "dark"
-            //       ? "#1a1a1a"
-            //       : "#ececec"
-            //     : "",
-            // }}
+            style={{
+              borderColor: theme === "dark" ? "#333333" : "#9a9a9a",
+              color: theme === "dark" ? "#fff" : "#000",
+              backgroundColor: focus
+                ? theme === "dark"
+                  ? "#1a1a1a"
+                  : "#ececec"
+                : "",
+            }}
             onKeyDown={(event: any) => {
               if (event.key === "Enter") {
                 handleVectorInputSubmit(event.target.value);
