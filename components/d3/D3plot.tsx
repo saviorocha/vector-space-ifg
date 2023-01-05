@@ -31,7 +31,7 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index }) => {
   ]);
 
   useEffect(() => {
-    console.log("stateVecArr", stateVecArr)
+    // console.log("stateVecArr", stateVecArr)
   }, [stateVecArr])
 
   function initD3() {
@@ -70,7 +70,7 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index }) => {
 
   return (
     <aside
-      className="text-center relative snap-start cursor-move "
+      className="text-center relative snap-start"
       id={styles.plot}
       ref={refElement}
     ></aside>

@@ -34,7 +34,7 @@ const MainSectionPlotPage = () => {
   }, [stateVecArr]);
 
   return (
-    <main className="mx-auto flex justify-center items-center">
+    <main className="mx-auto flex justify-center items-center" id="main-page">
       <Link href="/">
         <a className={styles.logo}>
           <Logo className={styles.headerlogo} />

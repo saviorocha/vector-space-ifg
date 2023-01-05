@@ -80,8 +80,12 @@ const useD3Events = () => {
     x: ScaleLinear<number, number>,
     y: ScaleLinear<number, number>,
     vecData: string
+    // teste: any
   ) => {
     return d3.drag().on("drag", function (e, d: any) {
+      // console.log("data", d);
+      d3.select("#main-page").style("cursor", "grabbing");
+      
       // calculate new data coordinates
       d[1].coord1 = x.invert(e.x);
       d[1].coord2 = y.invert(e.y);
@@ -92,13 +96,21 @@ const useD3Events = () => {
           [
             {
               value: x.invert(e.x),
-              texExpression: x.invert(e.x).toString(),
-              mathExpression: x.invert(e.x).toString(),
+              texExpression: parseFloat(
+                x.invert(e.x).toFixed(decimalPoint)
+              ).toString(),
+              mathExpression: parseFloat(
+                x.invert(e.x).toFixed(decimalPoint)
+              ).toString(),
             },
             {
               value: y.invert(e.y),
-              texExpression: y.invert(e.y).toString(),
-              mathExpression: y.invert(e.y).toString(),
+              texExpression: parseFloat(
+                y.invert(e.y).toFixed(decimalPoint)
+              ).toString(),
+              mathExpression: parseFloat(
+                y.invert(e.y).toFixed(decimalPoint)
+              ).toString(),
             },
           ],
           vecData
@@ -132,11 +144,11 @@ const useD3Events = () => {
         .attr("stroke", "#4682b4")
         .attr("stroke-width", 2)
         .attr("marker-end", "url(#arrow)");
-    }) as any;
-        // .on("end", function (e, d: any) {
-        //   d3.select(this).attr("stroke", null);
-        // })
-      // );
+
+    })
+    .on("end", function (d) {
+      d3.select("#main-page").style("cursor", "default");
+    })
   };
 
   return { addVectorOnClick, dragVector };

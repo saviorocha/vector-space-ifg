@@ -281,6 +281,9 @@ class PlotComponent {
       .attr("stroke", this.vectorColor)
       .attr("stroke-width", 2)
       .attr("marker-end", "url(#arrow)")
+      .on("mouseover", function (d) {
+        d3.select(this).style("cursor", "grab")
+      })
       .call(this.dragFunction(x, y, "v_{1}"))
        
   };
