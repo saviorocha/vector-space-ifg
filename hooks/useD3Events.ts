@@ -19,11 +19,12 @@ const useD3Events = () => {
     // d3.select("#zoom-rect").remove();
     d3.select("#plane")
       .append("rect")
-      .attr("id", "clicktest")
+      .attr("id", "vectorclick")
       .attr("width", width)
       .attr("height", height)
       .attr("fill", "none")
       .style("pointer-events", "all")
+      .style("cursor", "crosshair")
       .on("click", (event: any) => {
         // (doesn't change with screen resize!)
         // domainX: svg-width  -> 380
@@ -73,6 +74,7 @@ const useD3Events = () => {
         const newList = new StateList(newHead);
         setList(newList);
         setStateVecArr(newList.toArray());
+        d3.select("#plane").style("cursor", "default");
       });
     setVectorNameCounter(vectorNameCounter + 1);
   };
