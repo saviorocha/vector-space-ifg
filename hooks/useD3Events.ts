@@ -87,47 +87,18 @@ const useD3Events = () => {
         d3.select(this).attr("stroke-width", 3);
       })
       .on("drag", function (e, d: any) {
-        // console.log(x.invert(e.x), y.invert(e.y));
-        
+        if (d[0].name === "e_{1}" || d[0].name === "e_{2}") {
+          return;
+        }
+
         // style the mouse cursor
         d3.select("#main-page").style("cursor", "grabbing");
-       
+
         // calculate new data coordinates
-        d[1].coord1 = x.invert(e.x);
-        d[1].coord2 = y.invert(e.y);
-
-        // update vector
-        // const newHead = updateVector(
-        //   new Vector(
-        //     [
-        //       {
-        //         value: x.invert(e.x),
-        //         texExpression: parseFloat(
-        //           x.invert(e.x).toFixed(decimalPoint)
-        //         ).toString(),
-        //         mathExpression: parseFloat(
-        //           x.invert(e.x).toFixed(decimalPoint)
-        //         ).toString(),
-        //       },
-        //       {
-        //         value: y.invert(e.y),
-        //         texExpression: parseFloat(
-        //           y.invert(e.y).toFixed(decimalPoint)
-        //         ).toString(),
-        //         mathExpression: parseFloat(
-        //           y.invert(e.y).toFixed(decimalPoint)
-        //         ).toString(),
-        //       },
-        //     ],
-        //     d[0].name
-        //   ),
-        //   d[0].name
-        // );
-
-        // const newList = new StateList(newHead);
-        // setList(newList);
-        // setStateVecArr(newList.toArray());
-
+        const newX = x.invert(e.x);
+        const newY = y.invert(e.y);
+        d[1].coord1 = newX;
+        d[1].coord2 = newY;
 
         // update line
         d3.select(this)
@@ -149,7 +120,41 @@ const useD3Events = () => {
           .attr("stroke-width", 2)
           .attr("marker-end", "url(#arrow)");
       })
-      .on("end", function (d) {
+      .on("end", function (e, d: any) {
+        const newX = x.invert(e.x);
+        const newY = y.invert(e.y);
+
+        // update vector
+        const newHead = updateVector(
+          new Vector(
+            [
+              {
+                value: newX,
+                texExpression: parseFloat(
+                  newX.toFixed(decimalPoint)
+                ).toString(),
+                mathExpression: parseFloat(
+                  newX.toFixed(decimalPoint)
+                ).toString(),
+              },
+              {
+                value: newY,
+                texExpression: parseFloat(
+                  newY.toFixed(decimalPoint)
+                ).toString(),
+                mathExpression: parseFloat(
+                  newY.toFixed(decimalPoint)
+                ).toString(),
+              },
+            ],
+            d[0].name
+          ),
+          d[0].name
+        );
+
+        const newList = new StateList(newHead);
+        setList(newList);
+        setStateVecArr(newList.toArray());
         d3.select("#main-page").style("cursor", "default");
       });
   };
