@@ -82,8 +82,10 @@ const useTexStr = () => {
       return "0";
     }
 
+    // console.log("texstr", num1 == "0" || num2 == "0" || num2 > 0)
+
     return `${validation(num1, names[0])} ${
-      num1 == "0" || num2 == "0" ? "" : "+"
+      (num1 == "0" || num2 == "0" || num2 < 0) ? "" : "+"
     } ${validation(num2, names[1])}`;
   };
 
@@ -102,6 +104,8 @@ const useTexStr = () => {
       return `${num} ${name}`;
     }
   };
+
+  // const operator 
 
   /**
    * Returns a Tex string with the multiplication of the vector times

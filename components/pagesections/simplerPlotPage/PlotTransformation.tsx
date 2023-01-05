@@ -85,7 +85,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
 
   return (
     <>
-      <InfoBox customStyles="w-60 h-32">
+      <InfoBox customStyles="w-64 h-32">
         <aside>
           {toggleUpdateCreate === "create" && (
             <>
