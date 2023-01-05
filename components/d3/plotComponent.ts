@@ -154,7 +154,10 @@ class PlotComponent {
         [0, 0],
         [this.width, this.height],
       ])
-      .on("zoom", this.handleVectorZoom);
+      .on("zoom", this.handleVectorZoom)
+      .on("end", function(e) {
+        d3.select("#plane").style("cursor", "default")
+      });
 
     this.createLine(this.x, this.y);
 
@@ -179,6 +182,8 @@ class PlotComponent {
    *  Updates the chart values when the user zoom and thus new boundaries are available
    */
   handleVectorZoom = (event: any) => {
+    d3.select("#plane").style("cursor", "move")
+    
     // recover the new scale
     const newX = event.transform.rescaleX(this.x);
     const newY = event.transform.rescaleY(this.y);
