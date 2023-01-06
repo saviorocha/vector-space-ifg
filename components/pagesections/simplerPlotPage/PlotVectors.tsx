@@ -93,7 +93,7 @@ const PlotVectors: FunctionComponent<IPlotVectorsProps> = ({
         dark:bg-zinc-900 dark:border-neutral-600
       "
     >
-      <ul className="overflow-scroll" id={styles.vectorlist}>
+      <ul className="overflow-y-scroll" id={styles.vectorlist}>
         {vectorRender.map((vec: Vector, i: number) => {
           return (
             <li key={i}>

@@ -34,7 +34,10 @@ const MainSectionPlotPage = () => {
   }, [stateVecArr]);
 
   return (
-    <main className="mx-auto flex justify-center items-center" id="main-page">
+    <main
+      className="mx-auto flex justify-center items-center relative"
+      id="main-page"
+    >
       <Link href="/">
         <a className={styles.logo}>
           <Logo className={styles.headerlogo} />
@@ -58,7 +61,7 @@ const MainSectionPlotPage = () => {
             style: {
               background: "red",
               color: "white",
-              fontSize: "15px"
+              fontSize: "15px",
             },
           }}
         />
@@ -124,12 +127,12 @@ const MainSectionPlotPage = () => {
         {/* {stateVecArr.transformationArr.length === 1 && <TransformationBar />} */}
       </section>
 
-      <section
-        id={styles.rightsection}
-        className="h-screen flex items-start flex-col"
-      >
-        <ConfigPopup />
-      </section>
+      {/* <section */}
+      {/* id={styles.rightsection} */}
+      {/* className="h-screen flex items-start flex-col relative" */}
+      {/* > */}
+      <ConfigPopup />
+      {/* </section> */}
     </main>
   );
 };

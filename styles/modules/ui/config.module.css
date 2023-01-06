@@ -1,5 +1,5 @@
 #configpopup {
-  width: 30rem;
+  width: 25rem;
   border-radius: 1em;
   position: absolute;
   top: 50%;
@@ -46,7 +46,7 @@
 
 .itemtext {
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
   width: 60%;
 }
 
@@ -67,4 +67,14 @@
   width: 50px;
   display: flex;
   justify-content: center;
+}
+
+/* desktop */
+@media only screen and (min-width: 768px) {
+  #configpopup {
+    width: 30rem;
+  }
+  .itemtext {
+    font-size: 15px;
+  }
 }
