@@ -154,6 +154,7 @@
 }
 
 #commandtable {
+  /* overflow: hidden; */
   margin: 0 auto;
   border-collapse: collapse;
   border: 2px solid rgb(200, 200, 200);
@@ -165,7 +166,6 @@
   border: 1px solid rgb(190, 190, 190);
   padding: 5px 15px;
 }
-
 
 /* desktop */
 @media only screen and (min-width: 768px) {

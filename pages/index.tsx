@@ -36,7 +36,7 @@ const Home: NextPage = () => {
               <button className="">
                 <HelpCircle />
               </button>
-              <p>Tela de tutorial</p>
+              <p>Página de tutorial</p>
             </div>
           </fieldset>
           <fieldset className={styles.textborder}>

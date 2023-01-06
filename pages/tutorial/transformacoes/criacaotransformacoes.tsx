@@ -23,7 +23,7 @@ const Creation = () => {
       <h1 className={styles.heading}>Criando Transformações</h1>
       <p>
         Para adicionar uma transformação linear, clique no botão{" "}
-        <b>Adicionar Transformação Linear</b> e insira os valores de sua matriz
+        <b>Adicionar Transformação</b> e insira os valores de sua matriz
         de transformação.
       </p>
       <div className={styles.imgwrapper}>
