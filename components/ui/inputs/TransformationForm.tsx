@@ -11,8 +11,8 @@ import styles from "../../../styles/modules/ui/vectorbox.module.css";
 const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
   onSubmit,
   matrixArr = [1, 0, 0, 1],
+  transformationName = "",
 }) => {
-  const [focus, setFocus] = useState(false);
   const { theme } = useTheme();
 
   return (
@@ -26,12 +26,6 @@ const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
                 return (
                   <React.Fragment key={i}>
                     <input
-                      onBlur={() => {
-                        setFocus(false);
-                      }}
-                      onFocus={() => {
-                        setFocus(true);
-                      }}
                       className={styles.inptrn}
                       style={{
                         backgroundColor: theme === "dark" ? "#18181b" : "#fff",
@@ -60,6 +54,7 @@ const TransformationForm: FunctionComponent<ITransformationFormProps> = ({
             id="name"
             name="name"
             placeholder="Nome"
+            defaultValue={transformationName}
           />
           <button
             className="border border-slate-400 dark:border-slate-500 rounded-sm w-14 ml-1 text-sm"

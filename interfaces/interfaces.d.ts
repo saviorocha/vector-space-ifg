@@ -174,6 +174,8 @@ interface ITransformationFormProps {
   onSubmit: React.FormEventHandler<HTMLFormElement> | undefined;
   /** Array with the matrix transformation */
   matrixArr?: number[4];
+  /** Name of the transformation */
+  transformationName: string;
 }
 
 interface IKeyboardProps {

@@ -1,12 +1,14 @@
 import * as d3 from "d3";
-import { DragBehavior, ScaleLinear, ZoomBehavior } from "d3";
-import { on } from "events";
+import { DragBehavior, ScaleLinear } from "d3";
 import StateList from "../classes/stateList";
 import Vector from "../classes/vector";
 import { useD3Context, useListContext, useNameContext } from "../context";
 import { useConfigContext } from "../context/ConfigContext";
 import useList from "./useList";
 
+/**
+ * Custom hook for d3 events that changes the transformation list
+ */
 const useD3Events = () => {
   const { addVector, updateVector } = useList();
   const { decimalPoint } = useConfigContext();
@@ -43,35 +45,30 @@ const useD3Events = () => {
         const clickX = d3.scaleLinear().domain([0, width]).range([-5, 5]);
         const clickY = d3.scaleLinear().domain([0, height]).range([5, -5]);
 
-        // const xCoord = clickX(d3.pointer(event)[0]);
-        // const yCoord = clickY(d3.pointer(event)[1]);
-
-        // (Math.round(num * 100) / 100).toFixed(2); - 1.34252 -> 1.34
-
         // calculate the coordinates
-        const valueX = clickX(d3.pointer(event)[0]);
-        const valueY = clickY(d3.pointer(event)[1]);
+        const xCoord = clickX(d3.pointer(event)[0]);
+        const yCoord = clickY(d3.pointer(event)[1]);
 
         // adds the vector to the list
         const newHead = addVector(
           new Vector(
             [
               {
-                value: valueX,
+                value: xCoord,
                 texExpression: parseFloat(
-                  valueX.toFixed(decimalPoint)
+                  xCoord.toFixed(decimalPoint)
                 ).toString(),
                 mathExpression: parseFloat(
-                  valueX.toFixed(decimalPoint)
+                  xCoord.toFixed(decimalPoint)
                 ).toString(),
               },
               {
-                value: valueY,
+                value: yCoord,
                 texExpression: parseFloat(
-                  valueY.toFixed(decimalPoint)
+                  yCoord.toFixed(decimalPoint)
                 ).toString(),
                 mathExpression: parseFloat(
-                  valueY.toFixed(decimalPoint)
+                  yCoord.toFixed(decimalPoint)
                 ).toString(),
               },
             ],

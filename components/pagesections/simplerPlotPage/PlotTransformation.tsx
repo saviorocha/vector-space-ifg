@@ -164,6 +164,7 @@ const PlotTransformation: FunctionComponent<IPlotTransformation> = ({
                   return showMathSymbols ? e2Vec.mathExpression : e2Vec.value;
                 })
               )}
+              transformationName={transformation.name}
           />
         )}
       </InfoBox>
