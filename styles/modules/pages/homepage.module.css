@@ -71,20 +71,31 @@
   cursor: pointer;
   width: fit-content;
   padding: 10px;
-  margin: 1px;
+  margin: 3px 0;
+
   border: 1px solid whitesmoke;
   border-radius: 0.5rem;
 }
 
+.pagecard p {
+  margin-left: 5px;
+}
+
 /* desktop */
 @media only screen and (min-width: 768px) {
+  .pagecard {
+    margin: 0 3px;
+  }
+
   .transformationpages {
     flex-direction: row;
   }
+
   .logotext {
     font-size: 50px;
   }
+
   .greetingstext {
-    font-size: 18px;  
+    font-size: 18px;
   }
 }

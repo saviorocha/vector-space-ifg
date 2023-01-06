@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { Aperture, HelpCircle, PlayCircle, PlusCircle } from "react-feather";
+import { HelpCircle, PlayCircle, PlusCircle } from "react-feather";
 import Logo from "../components/icons/Logo";
 import styles from "../styles/modules/pages/homepage.module.css";
 import logostyle from "../styles/modules/ui/logo.module.css";
@@ -51,7 +51,7 @@ const Home: NextPage = () => {
                 <button>
                   <PlusCircle />
                 </button>
-                <p>Criar Transformações</p>
+                <p>Criação de Transformações</p>
               </div>
               <div
                 className={styles.pagecard}
@@ -62,7 +62,7 @@ const Home: NextPage = () => {
                 <button>
                   <PlayCircle />
                 </button>
-                <p>Animar Transformações</p>
+                <p>Animação de Transformações</p>
               </div>
             </div>
           </fieldset>
