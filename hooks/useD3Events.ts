@@ -115,12 +115,7 @@ const useD3Events = () => {
               .y(function (data) {
                 return y(data.coord2);
               }) as any
-          )
-          .attr("clip-path", "url(#chart-area)")
-          .attr("fill", "none")
-          .attr("stroke", "#4682b4")
-          .attr("stroke-width", 2)
-          .attr("marker-end", "url(#arrow)");
+          );
       })
       .on("end", function (e, d: any) {
         const newX = x.invert(e.x);
