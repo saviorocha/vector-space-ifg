@@ -16,7 +16,7 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index }) => {
 
   const { hideNumbers, showBasisVectors, vectorColor } = useConfigContext();
   const { dimension, events } = useD3Context();
-  const { dragVector } = useD3Events()
+  const { dragVector } = useD3Events();
   const { stateVecArr } = useListContext();
   const { currentPlot } = useNameContext();
 
@@ -32,7 +32,7 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index }) => {
 
   useEffect(() => {
     // console.log("stateVecArr", stateVecArr)
-  }, [stateVecArr])
+  }, [stateVecArr]);
 
   function initD3() {
     const section = d3.select(refElement.current);
@@ -58,7 +58,8 @@ const D3Plot: FunctionComponent<IPlotProps> = ({ index }) => {
         events,
         currentPlot,
         vectorColor,
-        dragVector
+        dragVector,
+        index + 1
       )
     );
 

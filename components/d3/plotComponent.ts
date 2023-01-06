@@ -10,7 +10,8 @@ class PlotComponent {
   hideNumbers: boolean;
   currentPlot: number;
   vectorColor: string;
-  dragFunction: any
+  dragFunction: any;
+  planeIndex: number;
   // @ts-ignore
   x: ScaleLinear<number, number>;
   // @ts-ignore
@@ -28,7 +29,8 @@ class PlotComponent {
     eventsArr: EventFunction[],
     currentPlot: number,
     vectorColor: string,
-    dragFunction: any
+    dragFunction: any,
+    planeIndex: number,
   ) {
     const { margin, width, height } = dimensions;
     this.data = data;
@@ -42,6 +44,7 @@ class PlotComponent {
     this.currentPlot = currentPlot;
     this.vectorColor = vectorColor;
     this.dragFunction = dragFunction;
+    this.planeIndex = planeIndex;
 
     this.svg = d3
       .select(refComponent)
@@ -50,7 +53,8 @@ class PlotComponent {
       .attr("width", this.width + this.margin.left + this.margin.right)
       .attr("height", height + this.margin.top + this.margin.bottom)
       .append("g")
-      .attr("id", "plane")
+      .attr("id", `plane-${planeIndex}`)
+      .attr("class", "plane")
       .attr("transform", `translate(${this.margin.left},${this.margin.top})`);
 
     this.createAxis();
@@ -155,8 +159,8 @@ class PlotComponent {
         [this.width, this.height],
       ])
       .on("zoom", this.handleVectorZoom)
-      .on("end", function(e) {
-        d3.select("#plane").style("cursor", "default")
+      .on("end", function (e) {
+        d3.selectAll(".plane").style("cursor", "default");
       });
 
     this.createLine(this.x, this.y);
@@ -182,8 +186,8 @@ class PlotComponent {
    *  Updates the chart values when the user zoom and thus new boundaries are available
    */
   handleVectorZoom = (event: any) => {
-    d3.select("#plane").style("cursor", "move")
-    
+    d3.selectAll(".plane").style("cursor", "move");
+
     // recover the new scale
     const newX = event.transform.rescaleX(this.x);
     const newY = event.transform.rescaleY(this.y);
@@ -286,11 +290,10 @@ class PlotComponent {
       .attr("stroke-width", 2)
       .attr("marker-end", "url(#arrow)")
       .on("mouseover", function (d) {
-        d3.select(this).style("cursor", "grab")
+        d3.select(this).style("cursor", "grab");
       })
-      .call(this.dragFunction(x, y))
+      .call(this.dragFunction(x, y, this.planeIndex));
   };
-
 
   /**
    * Adds the vector's arrow to the line element

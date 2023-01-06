@@ -51,6 +51,7 @@ interface IContextConfig {
 }
 
 interface IPlotProps {
+  /** Plane index on the page */
   index: number;
 }
 

@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { ScaleLinear, ZoomBehavior } from "d3";
+import { DragBehavior, ScaleLinear, ZoomBehavior } from "d3";
 import { on } from "events";
 import StateList from "../classes/stateList";
 import Vector from "../classes/vector";
@@ -15,9 +15,14 @@ const useD3Events = () => {
   const { dimension } = useD3Context();
   const { width, height } = dimension;
 
+  /**
+   * Event to add a vector by clicking on the plane
+   */
   const addVectorOnClick = () => {
     // d3.select("#zoom-rect").remove();
-    d3.select("#plane")
+
+    // container for click event 
+    d3.select("#plane-1")
       .append("rect")
       .attr("id", "vectorclick")
       .attr("width", width)
@@ -33,6 +38,8 @@ const useD3Events = () => {
         // (changes with zoom in and zoom out)
         // rangeX: xAxis.scale().range() -> [-5, 5]
         // rangeY: yAxis.scale().range() -> [5, -5]
+
+        // scales to calculate x,y values
         const clickX = d3.scaleLinear().domain([0, width]).range([-5, 5]);
         const clickY = d3.scaleLinear().domain([0, height]).range([5, -5]);
 
@@ -41,9 +48,11 @@ const useD3Events = () => {
 
         // (Math.round(num * 100) / 100).toFixed(2); - 1.34252 -> 1.34
 
+        // calculate the coordinates
         const valueX = clickX(d3.pointer(event)[0]);
         const valueY = clickY(d3.pointer(event)[1]);
 
+        // adds the vector to the list
         const newHead = addVector(
           new Vector(
             [
@@ -74,15 +83,29 @@ const useD3Events = () => {
         const newList = new StateList(newHead);
         setList(newList);
         setStateVecArr(newList.toArray());
-        d3.select("#plane").style("cursor", "default");
+        d3.select(".plane").style("cursor", "default");
       });
     setVectorNameCounter(vectorNameCounter + 1);
   };
 
+  /**
+   * Drag and drop event for vectors of the first plane
+   * @param x 
+   * @param y 
+   * @param {number} planeIndex 
+   * @returns 
+   */
   const dragVector = (
     x: ScaleLinear<number, number>,
-    y: ScaleLinear<number, number>
-  ) => {
+    y: ScaleLinear<number, number>,
+    planeIndex: number
+  ): (() => void) | DragBehavior<Element, unknown, unknown> => {
+
+    // only allows drag on the first plane
+    if (planeIndex !== 1) {
+      return () => {};
+    }
+
     return d3
       .drag()
       .on("start", function (d) {
