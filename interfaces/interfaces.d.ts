@@ -175,7 +175,7 @@ interface ITransformationFormProps {
   /** Array with the matrix transformation */
   matrixArr?: number[4];
   /** Name of the transformation */
-  transformationName: string;
+  transformationName?: string;
 }
 
 interface IKeyboardProps {
