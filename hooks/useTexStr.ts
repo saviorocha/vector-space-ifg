@@ -17,7 +17,6 @@ const useTexStr = () => {
     vectorNameCounter,
     setVectorNameCounter,
     vectorNameArr,
-    setVectorNameArr,
   } = useNameContext();
 
   /**
@@ -85,7 +84,7 @@ const useTexStr = () => {
     // console.log("texstr", num1 == "0" || num2 == "0" || num2 > 0)
 
     return `${validation(num1, names[0])} ${
-      (num1 == "0" || num2 == "0" || num2 < 0) ? "" : "+"
+      num1 == "0" || num2 == "0" || num2 < 0 ? "" : "+"
     } ${validation(num2, names[1])}`;
   };
 
@@ -105,7 +104,7 @@ const useTexStr = () => {
     }
   };
 
-  // const operator 
+  // const operator
 
   /**
    * Returns a Tex string with the multiplication of the vector times
@@ -121,12 +120,10 @@ const useTexStr = () => {
     const vecX = parseFloat(vec.x.toFixed(decimalPoint));
     const vecY = parseFloat(vec.y.toFixed(decimalPoint));
     const multiplyX = showMathSymbols
-      ? parseFloat(vec.prevVector!.xTex).toFixed(decimalPoint) ||
-        parseFloat(vec.xTex).toFixed(decimalPoint)
+      ? vec.prevVector!.xTex || vec.xTex
       : parseFloat(vec.prevVector!.x.toFixed(decimalPoint)) || vecX;
     const multiplyY = showMathSymbols
-      ? parseFloat(vec.prevVector!.yTex).toFixed(decimalPoint) ||
-        parseFloat(vec.yTex).toFixed(decimalPoint)
+      ? vec.prevVector!.yTex || vec.yTex
       : parseFloat(vec.prevVector!.y.toFixed(decimalPoint)) || vecY;
 
     const e1 = showMathSymbols
