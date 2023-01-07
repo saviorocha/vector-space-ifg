@@ -18,7 +18,7 @@ class Transformation {
       { value: 0, texExpression: "0", mathExpression: "0" },
       { value: 1, texExpression: "1", mathExpression: "1" },
     ],
-    _name: string = "T"
+    _name: string = "T0"
   ) {
     this._e1 = _e1;
     this._e2 = _e2;
