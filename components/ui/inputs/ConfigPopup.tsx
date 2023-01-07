@@ -11,6 +11,7 @@ import DecimalIcon from "../../icons/DecimalIcon";
 import MathSymbolIcon from "../../icons/MathSymbolIcon";
 import ConfigListItem from "./ConfigListItem";
 import PopupWindow from "./PopupWindow";
+import { toast } from "react-hot-toast";
 
 const ConfigPopup = () => {
   const {
@@ -129,7 +130,7 @@ const ConfigPopup = () => {
                 !validateTransformationVar(event.target.value) ||
                 event.target.value === transformationVars[1]
               ) {
-                alert("Nome inválido");
+                toast("Nome inválido!");
                 return;
               }
 
@@ -148,13 +149,13 @@ const ConfigPopup = () => {
                 !validateTransformationVar(event.target.value) ||
                 event.target.value === transformationVars[0]
               ) {
-                alert("Nome inválido");
+                toast("Nome inválido!");
                 return;
               }
 
               setTransformationVars([
-                event.target.value,
                 transformationVars[0],
+                event.target.value,
               ]);
             }}
             className="w-10 h-5 mt-2 mr-2 border border-gray-200"

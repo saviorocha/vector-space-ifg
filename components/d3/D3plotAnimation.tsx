@@ -2,6 +2,7 @@ import { Tooltip } from "@mui/material";
 import * as d3 from "d3";
 import React, { useEffect, useRef, useState } from "react";
 import { Pause, Play, RotateCcw } from "react-feather";
+import { toast } from "react-hot-toast";
 import Vector from "../../classes/vector";
 import { useD3Context, useListContext } from "../../context";
 import { useConfigContext } from "../../context/ConfigContext";
@@ -23,7 +24,7 @@ const D3PlotAnimation = () => {
     {} as AnimationPlotComponent
   );
 
-  const { hideNumbers, showBasisVectors } = useConfigContext();
+  const { hideNumbers, showBasisVectors, vectorColor } = useConfigContext();
   const { matrixStrings } = useTexStr();
   const { dimension } = useD3Context();
   const { stateVecArr } = useListContext();
@@ -120,7 +121,7 @@ const D3PlotAnimation = () => {
 
   const handlePlayAnimation = () => {
     if (stateVecArr.transformationArr.length < 2) {
-      alert("Nenhuma transformação adicionada ainda!");
+      toast("Nenhuma transformação adicionada ainda!");
       return;
     }
 
@@ -156,7 +157,8 @@ const D3PlotAnimation = () => {
         refElement.current,
         dimension,
         hideNumbers,
-        vectors(0)
+        vectors(0),
+        vectorColor,
       )
     );
   };
@@ -167,6 +169,7 @@ const D3PlotAnimation = () => {
     hideNumbers,
     showBasisVectors,
     dimension,
+    vectorColor,
   ]);
 
   useEffect(() => {

@@ -7,6 +7,7 @@ class AnimationPlotComponent {
   margin: Margin;
   width: number;
   height: number;
+  vectorColor: string;
 
   // @ts-ignore
   x: ScaleLinear<number, number>;
@@ -21,13 +22,15 @@ class AnimationPlotComponent {
     refComponent: null | HTMLDivElement,
     dimensions: Dimesion,
     hideNumbers: boolean,
-    data: VectorData[]
+    data: VectorData[],
+    vectorColor: string,
   ) {
     const { margin, width, height } = dimensions;
     this.data = data;
     this.vectors = data.map((el, i) => {
       return el.coordinates
     });
+    this.vectorColor = vectorColor;
     this.margin = margin;
     this.width = width;
     this.height = height;
@@ -160,7 +163,7 @@ class AnimationPlotComponent {
       // clip-path: everything outside this area won't be drawn
       .attr("clip-path", "url(#chart-area)")
       .attr("fill", "none")
-      .attr("stroke", "steelblue")
+      .attr("stroke", this.vectorColor)
       .attr("stroke-width", 2)
       .attr("marker-end", "url(#arrow)");
   };
@@ -183,7 +186,7 @@ class AnimationPlotComponent {
     def
       .append("path")
       .attr("d", "M2,2 L10,6 L2,10 L6,6 L2,2")
-      .style("fill", "steelblue");
+      .style("fill", this.vectorColor);
   };
 }
 

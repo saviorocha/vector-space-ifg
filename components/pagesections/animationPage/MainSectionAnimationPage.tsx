@@ -1,6 +1,7 @@
 import { Tooltip } from "@mui/material";
 import Link from "next/link";
-import { CornerUpLeft } from "react-feather";
+import { AlertCircle, CornerUpLeft } from "react-feather";
+import { Toaster } from "react-hot-toast";
 import styles from "../../../styles/modules/pages/animation.module.css";
 import logostyles from "../../../styles/modules/pages/editartransformacoes.module.css"
 import D3PlotAnimation from "../../d3/D3plotAnimation";
@@ -23,6 +24,18 @@ const MainSectionAnimationPage = () => {
           flex items-center justify-center flex-col 
         "
       >
+        <Toaster
+          toastOptions={{
+            // loading:
+            icon: <AlertCircle />,
+            duration: 3000,
+            style: {
+              background: "red",
+              color: "white",
+              fontSize: "15px",
+            },
+          }}
+        />
         <D3PlotAnimation />
       </section>
       <section>
