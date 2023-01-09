@@ -138,6 +138,9 @@ const useD3Events = () => {
           );
       })
       .on("end", function (e, d: any) {
+        if (d[0].name === "e_{1}" || d[0].name === "e_{2}") {
+          return;
+        }
         const newX = x.invert(e.x);
         const newY = y.invert(e.y);
 
