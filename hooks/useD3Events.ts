@@ -115,6 +115,7 @@ const useD3Events = () => {
 
         // style the mouse cursor
         d3.select("#main-page").style("cursor", "grabbing");
+        // console.log(d3.select("#main-page"))
 
         // calculate new data coordinates
         const newX = x.invert(e.x);
